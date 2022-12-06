@@ -26,6 +26,11 @@ class HomeActivity : AppCompatActivity() {
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
             }
+            else if(it.itemId==R.id.menu_profile){
+                val fragment = ProfileFragment()
+                fragment.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+            }
             return@setOnItemSelectedListener true
         }
     }
