@@ -37,6 +37,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
             android:text="Pelatihan dan Sertifikasi"
             android:textColor="@color/white"
             android:textSize="42sp"
@@ -46,8 +47,8 @@
 
     <LinearLayout
         android:layout_width="392dp"
-        android:layout_height="530dp"
-        android:layout_marginTop="184dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="160dp"
         android:background="@drawable/rounded_bg"
         android:orientation="vertical"
         android:paddingLeft="40dp"
