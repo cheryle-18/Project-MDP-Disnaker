@@ -19,5 +19,14 @@ class HomeActivity : AppCompatActivity() {
         val frag = PelatihanFragment()
         frag.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, frag).commit()
+
+        binding.bottomNav.setOnItemSelectedListener {
+            if(it.itemId==R.id.menu_pelatihan){
+                val fragment = PelatihanFragment()
+                fragment.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+            }
+            return@setOnItemSelectedListener true
+        }
     }
 }

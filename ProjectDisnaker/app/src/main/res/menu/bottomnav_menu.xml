@@ -9,9 +9,9 @@
         android:icon="@drawable/ic_baseline_work_24"
         android:title="Peluang Kerja" />
     <item
-        android:id="@+id/menu_history"
+        android:id="@+id/menu_pendaftaran"
         android:icon="@drawable/ic_baseline_history_24"
-        android:title="Riwayat" />
+        android:title="Pendaftaran" />
     <item
         android:id="@+id/menu_profile"
         android:icon="@drawable/ic_baseline_person_24"
