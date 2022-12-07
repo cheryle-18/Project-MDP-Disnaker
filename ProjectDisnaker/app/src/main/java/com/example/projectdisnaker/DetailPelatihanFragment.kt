@@ -23,7 +23,7 @@ class DetailPelatihanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ivBack.setOnClickListener {
+        binding.ivBackPelatihan.setOnClickListener {
             val fragment = PelatihanFragment()
             val bundle = Bundle()
             fragment.arguments = bundle

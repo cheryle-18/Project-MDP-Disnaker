@@ -2,6 +2,8 @@ package com.example.projectdisnaker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.projectdisnaker.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -26,6 +28,16 @@ class HomeActivity : AppCompatActivity() {
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
             }
+            else if(it.itemId==R.id.menu_kerja){
+                val fragment = KerjaFragment()
+                fragment.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+            }
+            else if(it.itemId==R.id.menu_pendaftaran){
+                val fragment = PendaftaranFragment()
+                fragment.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+            }
             else if(it.itemId==R.id.menu_profile){
                 val fragment = ProfileFragment()
                 fragment.arguments = bundle
@@ -33,5 +45,19 @@ class HomeActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.opt_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_logout->{
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
