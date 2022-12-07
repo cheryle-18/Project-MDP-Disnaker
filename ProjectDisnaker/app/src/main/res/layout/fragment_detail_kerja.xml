@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".DetailPelatihanFragment">
+    tools:context=".DetailKerjaFragment" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="200dp"
@@ -38,80 +37,58 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.491">
 
         <ImageView
-            android:id="@+id/ivBackPelatihan"
+            android:id="@+id/ivBackKerja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:src="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/textView33"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Detail Pelatihan"
+            android:text="Detail Pekerjaan"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvNamaDetail"
+            android:id="@+id/tvNamaKerja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Administrasi Perkantoran"
+            android:layout_marginBottom="15dp"
+            android:text="Administrasi Kantor"
             android:textColor="@color/green_900"
             android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvKuotaDetail"
+            android:id="@+id/tvNamaPerusahaan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Kuota Tersedia: 16 peserta"
+            android:text="Perusahaan: PT ABC"
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/tvDurasiDetail"
+            android:id="@+id/textView36"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Durasi Pelatihan: 20 hari"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Syarat Pelatihan:"
+            android:text="Spesifikasi Pekerjaan:"
             android:textColor="@color/black" />
 
         <ListView
-            android:id="@+id/lvSyarat"
+            android:id="@+id/lvSpesifikasiKerja"
             android:layout_width="match_parent"
-            android:layout_height="85dp" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Peluang Kerja:"
-            android:textColor="@color/black" />
-
-        <ListView
-            android:id="@+id/lvPeluang"
-            android:layout_width="match_parent"
-            android:layout_height="141dp" />
+            android:layout_height="310dp" />
 
         <Button
-            android:id="@+id/btnDaftar"
+            android:id="@+id/btnDaftarKerja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:text="daftar" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
