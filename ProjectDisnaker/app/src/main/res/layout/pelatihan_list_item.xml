@@ -23,8 +23,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
@@ -39,32 +40,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvKuotaPelatihan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Kuota: 16" />
+                android:text="Kuota: 16 peserta" />
 
             <TextView
                 android:id="@+id/tvDurasiPelatihan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:text="Durasi: 20 hari" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvDetailPelatihan"
+            android:id="@+id/tvDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detail »"
-            android:textColor="@color/green_900"
-            android:textStyle="bold" />
+            android:text="Lihat selengkapnya..."
+            android:textColor="@color/green_900" />
 
     </LinearLayout>
 
