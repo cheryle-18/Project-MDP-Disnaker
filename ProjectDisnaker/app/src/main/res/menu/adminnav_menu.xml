@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_pelatihan_admin"
+        android:icon="@drawable/ic_baseline_library_books_24"
+        android:title="Pelatihan" />
+    <item
+        android:id="@+id/menu_kerja_admin"
+        android:icon="@drawable/ic_baseline_work_24"
+        android:title="Pekerjaan" />
+    <item
+        android:id="@+id/menu_peserta"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Peserta" />
+    <item
+        android:id="@+id/menu_perusahaan"
+        android:icon="@drawable/ic_baseline_factory_24"
+        android:title="Perusahaan" />
+</menu>

@@ -89,129 +89,186 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="500dp"
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout3"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="500dp"-->
+    <!--        android:layout_marginTop="124dp"-->
+    <!--        android:background="@drawable/rounded_bg"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:padding="30dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="124dp"
-        android:background="@drawable/rounded_bg"
-        android:orientation="vertical"
-        android:padding="30dp"
+        android:background="@drawable/profile_shape"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email" />
-
-        <EditText
-            android:id="@+id/etEmailProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Nomor Telepon" />
-
-        <EditText
-            android:id="@+id/etTelpProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date" />
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Tanggal Lahir" />
-
-        <EditText
-            android:id="@+id/etTglLahirProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Nomor KTP" />
-
-        <EditText
-            android:id="@+id/etKtpProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
-
-        <Button
-            android:id="@+id/btnEditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="simpan perubahan" />
-
         <LinearLayout
-            android:id="@+id/layoutUbahPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:layout_margin="30dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical"
+            android:paddingBottom="40dp">
 
             <TextView
-                android:id="@+id/textView23"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView37"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Ubah Password"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutPendidikan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:padding="5dp">
+                android:layout_marginBottom="25dp"
+                android:text="Profile"
+                android:textColor="@color/green_900"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Riwayat Pendidikan"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:text="Email" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            <EditText
+                android:id="@+id/etEmailProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Nomor Telepon" />
+
+            <EditText
+                android:id="@+id/etTelpProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Tanggal Lahir" />
+
+            <EditText
+                android:id="@+id/etTglLahirProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Nomor KTP" />
+
+            <EditText
+                android:id="@+id/etKtpProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="simpan perubahan" />
+
+            <LinearLayout
+                android:id="@+id/layoutUbahPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ubah Password"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutPendidikan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Riwayat Pendidikan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Logout"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

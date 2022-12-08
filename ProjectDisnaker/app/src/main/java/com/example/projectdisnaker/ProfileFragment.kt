@@ -36,5 +36,9 @@ class ProfileFragment : Fragment() {
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
         }
+
+        binding.layoutLogout.setOnClickListener{
+            requireActivity().finish()
+        }
     }
 }
