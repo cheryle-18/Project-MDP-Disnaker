@@ -62,7 +62,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="392dp"
+        android:layout_width="0dp"
         android:layout_height="420dp"
         android:layout_marginTop="292dp"
         android:background="@drawable/rounded_bg"
@@ -107,11 +107,11 @@
             android:text="Password" />
 
         <EditText
-            android:id="@+id/etPasswordLogin"
+            android:id="@+id/etPassLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberPassword" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnLogin"

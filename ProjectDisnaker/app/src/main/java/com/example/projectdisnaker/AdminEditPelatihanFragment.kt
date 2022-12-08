@@ -5,17 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.projectdisnaker.databinding.FragmentAdminTambahPelatihanBinding
+import com.example.projectdisnaker.databinding.FragmentAdminEditPelatihanBinding
 
-class AdminTambahPelatihanFragment : Fragment() {
-    private lateinit var binding: FragmentAdminTambahPelatihanBinding
+class AdminEditPelatihanFragment : Fragment() {
+    private lateinit var binding: FragmentAdminEditPelatihanBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentAdminTambahPelatihanBinding.inflate(inflater, container, false)
+        binding = FragmentAdminEditPelatihanBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -23,7 +23,7 @@ class AdminTambahPelatihanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ivBackTambahPel.setOnClickListener {
+        binding.ivBackEditPel.setOnClickListener {
             val fragment = AdminPelatihanFragment()
             val bundle = Bundle()
             fragment.arguments = bundle

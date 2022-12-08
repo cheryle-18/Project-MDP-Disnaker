@@ -6,27 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".AdminTambahPelatihanFragment">
+    tools:context=".AdminEditPelatihanFragment">
 
     <ImageView
-        android:id="@+id/ivBackTambahPel"
+        android:id="@+id/ivBackEditPel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/textView43"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
-        android:text="Tambah Pelatihan"
+        android:text="Ubah Pelatihan"
         android:textColor="@color/green_900"
         android:textSize="26sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/textView44"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Kuota" />
@@ -39,7 +39,7 @@
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/textView45"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -53,7 +53,7 @@
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/textView46"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -87,10 +87,10 @@
         android:layout_marginTop="5dp" />
 
     <Button
-        android:id="@+id/btnTambahPel"
+        android:id="@+id/btnEditPel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="tambah" />
+        android:text="ubah" />
 
 </LinearLayout>

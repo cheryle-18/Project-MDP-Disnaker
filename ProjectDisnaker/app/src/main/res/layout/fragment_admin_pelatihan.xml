@@ -19,7 +19,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="340dp" />
+        android:layout_height="406dp" />
 
     <Button
         android:id="@+id/btnTambahPelatihan"

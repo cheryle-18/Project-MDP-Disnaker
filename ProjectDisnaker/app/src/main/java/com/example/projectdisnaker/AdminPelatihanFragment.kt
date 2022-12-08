@@ -24,7 +24,7 @@ class AdminPelatihanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnTambahPelatihan.setOnClickListener {
-            val fragment = DetailPelatihanFragment()
+            val fragment = AdminTambahPelatihanFragment()
             val bundle = Bundle()
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()

@@ -15,8 +15,17 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+            var username = binding.etUsernameLogin.text.toString()
+            var password = binding.etPassLogin.text.toString()
+
+            if(username=="admin" && password=="admin"){
+                val intent = Intent(this, AdminActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         binding.tvToRegister.setOnClickListener {

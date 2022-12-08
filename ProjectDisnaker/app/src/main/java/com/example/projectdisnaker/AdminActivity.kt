@@ -18,10 +18,15 @@ class AdminActivity : AppCompatActivity() {
         //set initial fragment
         val frag = AdminPelatihanFragment()
         frag.arguments = bundle
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, frag).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, frag).commit()
 
         binding.bottomNavAdmin.setOnItemSelectedListener {
             if(it.itemId==R.id.menu_pelatihan_admin){
+                val fragment = AdminPelatihanFragment()
+                fragment.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
+            }
+            else if(it.itemId==R.id.menu_kerja_admin){
                 val fragment = AdminPelatihanFragment()
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
