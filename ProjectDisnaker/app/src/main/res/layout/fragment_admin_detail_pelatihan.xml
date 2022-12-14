@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".AdminDetailPelatihanFragment" >
+
+    <ImageView
+        android:id="@+id/ivBackDetailPelatihan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_24" />
+
+    <TextView
+        android:id="@+id/textView50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Detail Pelatihan"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvNamaDetailAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administrasi Perkantoran"
+        android:textColor="@color/green_900"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvKuotaDetailAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Kuota Tersedia: 16 peserta"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvDurasiDetailAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Durasi Pelatihan: 20 hari"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Syarat Pelatihan:"
+        android:textColor="@color/black" />
+
+    <ListView
+        android:id="@+id/lvSyaratAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="91dp" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Peluang Kerja:"
+        android:textColor="@color/black" />
+
+    <ListView
+        android:id="@+id/lvPeluangAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="86dp" />
+
+    <Button
+        android:id="@+id/btnLihatPeserta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="lihat peserta" />
+
+    <Button
+        android:id="@+id/btnEditPelatihan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ubah pelatihan" />
+</LinearLayout>

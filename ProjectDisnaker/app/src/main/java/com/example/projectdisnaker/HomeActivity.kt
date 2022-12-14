@@ -2,8 +2,6 @@ package com.example.projectdisnaker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import com.example.projectdisnaker.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -34,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
             }
-            else if(it.itemId==R.id.menu_pendaftaran){
+            else if(it.itemId==R.id.menu_pendaftaran_admin){
                 val fragment = PendaftaranFragment()
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
