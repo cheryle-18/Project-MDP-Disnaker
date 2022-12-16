@@ -12,7 +12,6 @@
         android:id="@+id/textView48"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:text="Daftar Pendaftaran Pelatihan"
         android:textColor="@color/green_900"
@@ -20,7 +19,7 @@
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPendaftaran"
+        android:id="@+id/rvPendaftaranAdmin"
         android:layout_width="match_parent"
         android:layout_height="447dp"
         android:layout_marginTop="10dp" />
