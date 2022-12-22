@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:text="Peluang Kerja"
+            android:text="Lowongan Pekerjaan"
             android:textColor="@color/green_900"
             android:textSize="26sp"
             android:textStyle="bold" />

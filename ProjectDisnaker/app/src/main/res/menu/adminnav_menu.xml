@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_baseline_library_books_24"
         android:title="Pelatihan" />
     <item
-        android:id="@+id/menu_kerja_admin"
+        android:id="@+id/menu_lowongan_admin"
         android:icon="@drawable/ic_baseline_work_24"
-        android:title="Pekerjaan" />
+        android:title="Lowongan" />
     <item
         android:id="@+id/menu_pendaftaran_admin"
         android:icon="@drawable/ic_baseline_library_books_24"

@@ -11,8 +11,8 @@
         android:id="@+id/textView61"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Daftar Pelatihan"
+        android:layout_marginBottom="20dp"
+        android:text="Daftar Lowongan Pekerjaan"
         android:textColor="@color/green_900"
         android:textSize="26sp"
         android:textStyle="bold" />

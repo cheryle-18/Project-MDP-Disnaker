@@ -22,6 +22,10 @@ class LoginActivity : AppCompatActivity() {
                 val intent = Intent(this, AdminActivity::class.java)
                 startActivity(intent)
             }
+            else if(username=="perusahaan" && password=="perusahaan"){
+                val intent = Intent(this, PerusahaanActivity::class.java)
+                startActivity(intent)
+            }
             else{
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
