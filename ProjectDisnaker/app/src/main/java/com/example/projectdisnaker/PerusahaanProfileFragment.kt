@@ -22,5 +22,14 @@ class PerusahaanProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.layoutUbahPassPerusahaan.setOnClickListener {
+            val fragment = PerusahaanPasswordFragment()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+        }
+
+        binding.layoutLogoutPerusahaan.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 }

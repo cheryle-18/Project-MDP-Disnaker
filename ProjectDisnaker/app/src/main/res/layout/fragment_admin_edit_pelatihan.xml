@@ -35,9 +35,21 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textView74"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kategori" />
+
+            <Spinner
+                android:id="@+id/spinnerKategoriEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
                 android:id="@+id/textView44"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Kuota" />
 
             <EditText
@@ -66,7 +78,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Syarat Pelatihan" />
+                android:text="Syarat Pelatihan"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Minimal Pendidikan" />
+
+            <Spinner
+                android:id="@+id/spinnerPendidikanEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Persyaratan Tambahan" />
 
             <LinearLayout
                 android:layout_width="match_parent"

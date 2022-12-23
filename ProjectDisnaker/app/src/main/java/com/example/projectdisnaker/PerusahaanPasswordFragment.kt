@@ -21,5 +21,10 @@ class PerusahaanPasswordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.ivBackPassPerusahaan.setOnClickListener {
+            val fragment = PerusahaanProfileFragment()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+        }
     }
 }

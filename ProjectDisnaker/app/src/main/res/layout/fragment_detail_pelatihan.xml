@@ -59,16 +59,24 @@
             android:id="@+id/tvNamaDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:text="Administrasi Perkantoran"
             android:textColor="@color/green_900"
             android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvKategoriDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kategori: Administrasi"
+            android:textColor="@color/black" />
+
+        <TextView
             android:id="@+id/tvKuotaDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:text="Kuota Tersedia: 16 peserta"
             android:textColor="@color/black" />
 
@@ -78,6 +86,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Durasi Pelatihan: 20 hari"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvMinPendidikan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Minimal Pendidikan: SMA"
             android:textColor="@color/black" />
 
         <TextView

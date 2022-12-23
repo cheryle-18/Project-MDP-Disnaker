@@ -68,9 +68,25 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textView71"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kategori: Administrasi"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvKuotaLow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Kuota: 10 orang"
+                android:textColor="@color/black" />
+
+            <TextView
                 android:id="@+id/tvNamaPerusahaanLow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Perusahaan: PT ABC"
                 android:textColor="@color/black" />
 
