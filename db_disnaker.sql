@@ -40,6 +40,7 @@ CREATE TABLE `lowongan` (
   `kuota` int(11) NOT NULL,
   `keterangan` varchar(150) NOT NULL,
   `status` tinyint(4) NOT NULL COMMENT '0=tidak aktif, 1=aktif',
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`lowongan_id`),
   KEY `kategori_id` (`kategori_id`),
   KEY `perusahaan_id` (`perusahaan_id`),
@@ -62,6 +63,7 @@ CREATE TABLE `pelatihan` (
   `pendidikan` varchar(5) NOT NULL,
   `keterangan` varchar(150) NOT NULL,
   `status` tinyint(4) NOT NULL COMMENT '0=tidak aktif, 1=aktif',
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`pelatihan_id`),
   KEY `kategori_id` (`kategori_id`),
   CONSTRAINT `pelatihan_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`kategori_id`)
@@ -151,6 +153,7 @@ CREATE TABLE `syarat_lowongan` (
   `sl_id` int(11) NOT NULL AUTO_INCREMENT,
   `lowongan_id` int(11) NOT NULL,
   `deskripsi` varchar(150) NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`sl_id`),
   KEY `lowongan_id` (`lowongan_id`),
   CONSTRAINT `syarat_lowongan_ibfk_1` FOREIGN KEY (`lowongan_id`) REFERENCES `lowongan` (`lowongan_id`)
@@ -166,6 +169,7 @@ CREATE TABLE `syarat_pelatihan` (
   `sp_id` int(11) NOT NULL AUTO_INCREMENT,
   `pelatihan_id` int(11) NOT NULL,
   `deskripsi` varchar(150) NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`sp_id`),
   KEY `pelatihan_id` (`pelatihan_id`),
   CONSTRAINT `syarat_pelatihan_ibfk_1` FOREIGN KEY (`pelatihan_id`) REFERENCES `pelatihan` (`pelatihan_id`)
