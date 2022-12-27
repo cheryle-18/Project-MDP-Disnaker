@@ -24,9 +24,18 @@ CREATE TABLE `kategori` (
   `kategori_id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
   PRIMARY KEY (`kategori_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `kategori` */
+
+insert  into `kategori`(`kategori_id`,`nama`) values 
+(1,'Industri'),
+(2,'Jasa'),
+(3,'Otomotif'),
+(4,'Pariwisata'),
+(5,'Perkantoran'),
+(6,'Teknologi Informasi'),
+(7,'Kesenian');
 
 /*Table structure for table `lowongan` */
 
@@ -46,9 +55,13 @@ CREATE TABLE `lowongan` (
   KEY `perusahaan_id` (`perusahaan_id`),
   CONSTRAINT `lowongan_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`kategori_id`),
   CONSTRAINT `lowongan_ibfk_2` FOREIGN KEY (`perusahaan_id`) REFERENCES `perusahaan` (`perusahaan_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `lowongan` */
+
+insert  into `lowongan`(`lowongan_id`,`nama`,`kategori_id`,`perusahaan_id`,`kuota`,`keterangan`,`status`,`deleted_at`) values 
+(1,'Pegawai Administrasi',5,1,10,'tes',1,NULL),
+(2,'Staff IT',6,1,15,'tes tes',1,NULL);
 
 /*Table structure for table `pelatihan` */
 
@@ -121,9 +134,12 @@ CREATE TABLE `perusahaan` (
   PRIMARY KEY (`perusahaan_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `perusahaan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `perusahaan` */
+
+insert  into `perusahaan`(`perusahaan_id`,`user_id`,`alamat`) values 
+(1,2,'Jl Ngagel');
 
 /*Table structure for table `peserta` */
 
@@ -141,9 +157,12 @@ CREATE TABLE `peserta` (
   PRIMARY KEY (`peserta_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `peserta_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `peserta` */
+
+insert  into `peserta`(`peserta_id`,`user_id`,`nik`,`tgl_lahir`,`pendidikan`,`jurusan`,`nilai`,`status`) values 
+(1,1,'1234567890','2000-01-01','SMA','IPA',75,0);
 
 /*Table structure for table `syarat_lowongan` */
 
@@ -190,9 +209,13 @@ CREATE TABLE `user` (
   `telp` varchar(12) NOT NULL,
   `role` tinyint(4) NOT NULL COMMENT '0=peserta, 1=perusahaan',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
+
+insert  into `user`(`user_id`,`nama`,`email`,`username`,`password`,`telp`,`role`) values 
+(1,'John Doe','johndoe@gmail.com','johndoe','123','0123456789',0),
+(2,'PT XYZ','xyz@gmail.com','xyz','123','1234567890',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
