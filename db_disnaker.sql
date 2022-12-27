@@ -55,7 +55,7 @@ CREATE TABLE `lowongan` (
   KEY `perusahaan_id` (`perusahaan_id`),
   CONSTRAINT `lowongan_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`kategori_id`),
   CONSTRAINT `lowongan_ibfk_2` FOREIGN KEY (`perusahaan_id`) REFERENCES `perusahaan` (`perusahaan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `lowongan` */
 
@@ -157,9 +157,12 @@ CREATE TABLE `peserta` (
   PRIMARY KEY (`peserta_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `peserta_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `peserta` */
+
+insert  into `peserta`(`peserta_id`,`user_id`,`nik`,`tgl_lahir`,`pendidikan`,`jurusan`,`nilai`,`status`) values 
+(1,1,'1234567890','2000-01-01','SMA','IPA',75,0);
 
 /*Table structure for table `syarat_lowongan` */
 
