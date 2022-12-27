@@ -21,6 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/users', [UtilityController::class, "getUsers"]);
+Route::post('/register', [AuthController::class, "doRegister"]);
+
 Route::get('/kategori', [UtilityController::class, 'getKategori']);
 Route::get('/perusahaan/{perusahaan_id}', [UtilityController::class, 'getPerusahaan']);
 Route::get('/peserta/{peserta_id}', [UtilityController::class, 'getPeserta']);
@@ -35,9 +38,3 @@ Route::prefix('lowongan')->group(function () {
     Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
     Route::post('/daftar/{lowongan_id}', [LowonganController::class, 'daftarLowongan']);
 });
-Route::get('/users', [UtilityController::class, "getUsers"]);
-Route::post('/register', [AuthController::class, "doRegister"]);
-// Route::post('/mahasiswa/insert', [MahasiswaController::class, "insertMhs"]);
-// Route::post('/mahasiswa/update', [MahasiswaController::class, "updateMhs"]);
-// Route::post('/mahasiswa/delete', [MahasiswaController::class, "deleteMhs"]);
-

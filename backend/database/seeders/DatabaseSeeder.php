@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PerusahaanSeeder::class,
             PesertaSeeder::class,
-            LowonganSeeder::class
+            LowonganSeeder::class,
+            SyaratLowonganSeeder::class
         ]);
     }
 }
