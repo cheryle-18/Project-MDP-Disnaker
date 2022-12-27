@@ -14,7 +14,7 @@ class SyaratPelatihan extends Model
     protected $table = "syarat_pelatihan";
     protected $primaryKey = "sp_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function pelatihan(){
         return $this->belongsTo(Pelatihan::class, 'pelatihan_id', 'pelatihan_id');

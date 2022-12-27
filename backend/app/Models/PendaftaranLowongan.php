@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PendaftaranLowongan extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = "pendaftaran_lowongan";
     protected $primaryKey = "pl_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function lowongan(){
         return $this->belongsTo(Lowongan::class, 'lowongan_id', 'lowongan_id');

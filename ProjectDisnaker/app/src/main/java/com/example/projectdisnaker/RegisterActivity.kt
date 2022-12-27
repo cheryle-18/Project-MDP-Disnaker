@@ -34,10 +34,12 @@ class RegisterActivity : AppCompatActivity() {
                         }
                         else{
                             println("${response.message()}")
+                            Toast.makeText(this@RegisterActivity,response.message(),Toast.LENGTH_SHORT).show()
                         }
                     }
                     else{
                         Log.d("Main Activity",response.toString())
+                        Toast.makeText(this@RegisterActivity,response.toString(),Toast.LENGTH_SHORT).show()
                     }
                 }
 

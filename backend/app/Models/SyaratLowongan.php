@@ -14,7 +14,7 @@ class SyaratLowongan extends Model
     protected $table = "syarat_lowongan";
     protected $primaryKey = "sl_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function lowongan(){
         return $this->belongsTo(Lowongan::class, 'lowongan_id', 'lowongan_id');

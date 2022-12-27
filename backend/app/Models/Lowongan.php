@@ -14,7 +14,7 @@ class Lowongan extends Model
     protected $table = "lowongan";
     protected $primaryKey = "lowongan_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function peserta(){
         return $this->belongsToMany(Peserta::class, 'pendaftaran_lowongan', 'lowongan_id', 'peserta_id');
