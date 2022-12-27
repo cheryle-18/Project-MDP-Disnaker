@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Peserta extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = "peserta";
     protected $primaryKey = "peserta_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'user_id');

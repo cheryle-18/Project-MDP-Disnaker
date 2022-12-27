@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Perusahaan extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = "perusahaan";
     protected $primaryKey = "perusahaan_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function user(){
         return $this->belongsTo(User::class, 'perusahaan_id', 'perusahaan_id');

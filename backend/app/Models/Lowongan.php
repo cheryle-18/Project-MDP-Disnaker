@@ -14,7 +14,7 @@ class Lowongan extends Model
     protected $table = "lowongan";
     protected $primaryKey = "lowongan_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'lowongan_id',
@@ -37,6 +37,6 @@ class Lowongan extends Model
     }
 
     public function syarat(){
-        return $this->hasMany(SyaratPelatihan::class, 'lowongan_id', 'lowongan_id');
+        return $this->hasMany(SyaratLowongan::class, 'lowongan_id', 'lowongan_id');
     }
 }

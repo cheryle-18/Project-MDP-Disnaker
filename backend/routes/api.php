@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\LowonganController;
-use App\Http\Controllers\UtilityController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UtilityController;
+use App\Http\Controllers\Api\LowonganController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,9 @@ Route::prefix('lowongan')->group(function () {
     Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
     Route::post('/daftar/{lowongan_id}', [LowonganController::class, 'daftarLowongan']);
 });
+Route::get('/users', [UtilityController::class, "getUsers"]);
+Route::post('/register', [AuthController::class, "doRegister"]);
+// Route::post('/mahasiswa/insert', [MahasiswaController::class, "insertMhs"]);
+// Route::post('/mahasiswa/update', [MahasiswaController::class, "updateMhs"]);
+// Route::post('/mahasiswa/delete', [MahasiswaController::class, "deleteMhs"]);
+

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\Perusahaan;
 use App\Models\Peserta;
-use Illuminate\Http\Request;
 
 class UtilityController extends Controller
 {
@@ -31,5 +33,10 @@ class UtilityController extends Controller
         return response()->json([
             "peserta" => $peserta
         ], 200);
+    }
+    
+    function getUsers()
+    {
+        return response()->json(User::all(), 200);
     }
 }

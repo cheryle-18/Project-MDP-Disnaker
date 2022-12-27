@@ -14,7 +14,7 @@ class Pelatihan extends Model
     protected $table = "pelatihan";
     protected $primaryKey = "pelatihan_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function peserta(){
         return $this->belongsToMany(Peserta::class, 'pendaftaran_pelatihan', 'pelatihan_id', 'peserta_id');

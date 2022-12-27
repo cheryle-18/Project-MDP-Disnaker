@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Lowongan;
 use App\Models\PendaftaranLowongan;
@@ -122,6 +123,6 @@ class LowonganController extends Controller
     }
 
     public function daftarLowongan(Request $req){
-        
+
     }
 }

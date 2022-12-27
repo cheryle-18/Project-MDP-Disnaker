@@ -14,7 +14,7 @@ class SyaratLowongan extends Model
     protected $table = "syarat_lowongan";
     protected $primaryKey = "sl_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'sl_id',

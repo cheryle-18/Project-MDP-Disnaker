@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Kategori extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = "kategori";
     protected $primaryKey = "kategori_id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function pelatihan(){
         return $this->hasMany(Pelatihan::class, 'kategori_id', 'kategori_id');
