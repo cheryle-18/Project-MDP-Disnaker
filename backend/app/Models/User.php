@@ -16,6 +16,15 @@ class User extends Authenticatable
     public $incrementing = true;
     public $timestamps = false;
 
+    protected $fillable = [
+        "nama",
+        "username",
+        "email",
+        "password",
+        "telp",
+        "role"
+    ];
+
     public function peserta(){
         return $this->hasMany(Peserta::class, 'user_id', 'user_id');
     }
