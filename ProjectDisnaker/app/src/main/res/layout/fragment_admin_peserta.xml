@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".AdminPesertaFragment" >
+    tools:context=".admin.AdminPesertaFragment" >
 
     <TextView
         android:id="@+id/textView47"

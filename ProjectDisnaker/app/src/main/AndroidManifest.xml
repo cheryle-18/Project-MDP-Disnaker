@@ -14,13 +14,13 @@
         android:theme="@style/Theme.ProjectDisnaker"
         tools:targetApi="31">
         <activity
-            android:name=".PerusahaanActivity"
+            android:name=".perusahaan.PerusahaanActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".admin.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".peserta.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

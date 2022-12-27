@@ -3,7 +3,10 @@ package com.example.projectdisnaker
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.projectdisnaker.admin.AdminActivity
 import com.example.projectdisnaker.databinding.ActivityLoginBinding
+import com.example.projectdisnaker.perusahaan.PerusahaanActivity
+import com.example.projectdisnaker.peserta.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
 

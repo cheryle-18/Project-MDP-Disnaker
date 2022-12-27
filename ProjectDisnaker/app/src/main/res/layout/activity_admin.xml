@@ -7,7 +7,7 @@
     android:background="@color/base"
     android:backgroundTint="@color/base"
     android:orientation="vertical"
-    tools:context=".AdminActivity">
+    tools:context=".admin.AdminActivity">
 
     <FrameLayout
         android:id="@+id/fragment_container_admin"
