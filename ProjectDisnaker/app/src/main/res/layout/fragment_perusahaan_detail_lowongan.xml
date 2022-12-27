@@ -109,7 +109,7 @@
             <ListView
                 android:id="@+id/lvSyaratLowongan"
                 android:layout_width="match_parent"
-                android:layout_height="292dp" />
+                android:layout_height="272dp" />
 
             <Button
                 android:id="@+id/btnLihatPendaftaran"
@@ -119,16 +119,22 @@
                 android:text="lihat pendaftaran" />
 
             <Button
+                android:id="@+id/btnToUbahLowongan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ubah lowongan" />
+
+            <Button
                 android:id="@+id/btnTutupLowongan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="tutup lowongan" />
 
             <Button
-                android:id="@+id/btnToUbahLowongan"
+                android:id="@+id/btnDeleteLowongan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ubah lowongan" />
+                android:text="hapus lowongan" />
 
         </LinearLayout>
     </ScrollView>

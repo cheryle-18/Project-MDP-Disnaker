@@ -16,6 +16,14 @@ class SyaratLowongan extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+    protected $fillable = [
+        'sl_id',
+        'lowongan_id',
+        'deskripsi',
+        'created_at',
+        'updated_at'
+    ];
+
     public function lowongan(){
         return $this->belongsTo(Lowongan::class, 'lowongan_id', 'lowongan_id');
     }

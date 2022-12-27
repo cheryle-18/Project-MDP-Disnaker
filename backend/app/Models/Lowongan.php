@@ -16,6 +16,18 @@ class Lowongan extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+    protected $fillable = [
+        'lowongan_id',
+        'nama',
+        'kategori_id',
+        'perusahaan_id',
+        'kuota',
+        'keterangan',
+        'status',
+        'created_at',
+        'updated_at'
+    ];
+
     public function peserta(){
         return $this->belongsToMany(Peserta::class, 'pendaftaran_lowongan', 'lowongan_id', 'peserta_id');
     }

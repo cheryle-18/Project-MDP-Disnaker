@@ -15,6 +15,15 @@ class PendaftaranLowongan extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+    protected $fillable = [
+        'pl_id',
+        'lowongan_id',
+        'peserta_id',
+        'tanggal',
+        'created_at',
+        'updated_at'
+    ];
+
     public function lowongan(){
         return $this->belongsTo(Lowongan::class, 'lowongan_id', 'lowongan_id');
     }
