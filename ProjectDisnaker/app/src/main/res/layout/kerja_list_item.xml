@@ -15,7 +15,7 @@
         android:padding="12dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivPelatihan"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:srcCompat="@drawable/ic_baseline_work_outline_24" />

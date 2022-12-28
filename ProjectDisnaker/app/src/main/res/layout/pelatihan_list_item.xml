@@ -15,7 +15,7 @@
         android:padding="12dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivPelatihan"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:srcCompat="@drawable/ic_baseline_wysiwyg_24" />
@@ -45,7 +45,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvStatusPeserta"
+                android:id="@+id/tvKuotaPelatihan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kuota: 16 peserta" />
@@ -59,7 +59,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvLihatDetailPeserta"
+            android:id="@+id/tvLihatDetailPelatihan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lihat selengkapnya..."

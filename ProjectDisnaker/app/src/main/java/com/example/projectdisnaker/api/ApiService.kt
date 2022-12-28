@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-    //get all users
+    //USERS
     @GET("users")
     fun getUsers(): Call<ArrayList<UserResponseItem>>
 
@@ -22,5 +22,7 @@ interface ApiService {
         @Query("password") password:String,
     ): Call<UserResponse>
 
-
+    //KATEGORI
+    @GET("kategori")
+    fun getKategori(): Call<ArrayList<UserResponseItem>>
 }
