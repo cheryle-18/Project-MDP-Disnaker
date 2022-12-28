@@ -9,7 +9,10 @@ import java.sql.Timestamp
 data class LowonganResponse(
 
 	@field:SerializedName("lowongan")
-	val lowongan: List<LowonganItem?>? = null
+	val lowongan: List<LowonganItem?>? = null,
+
+	@field:SerializedName("message")
+	val message: String? = null
 ) : Parcelable
 
 @Parcelize

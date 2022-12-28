@@ -15,7 +15,8 @@ class LowonganController extends Controller
         $lowongan = Lowongan::with('syarat')->get();
 
         return response()->json([
-            "lowongan" => $lowongan
+            "lowongan" => $lowongan,
+            "message" => "Berhasil fetch"
         ], 200);
     }
 
@@ -23,7 +24,8 @@ class LowonganController extends Controller
         $lowongan = Lowongan::find($req->lowongan_id)->with('syarat');
 
         return response()->json([
-            "lowongan" => $lowongan
+            "lowongan" => $lowongan,
+            "message" => "Berhasil fetch"
         ], 200);
     }
 
@@ -61,7 +63,6 @@ class LowonganController extends Controller
 
         $lowongan->nama = $req->nama;
         $lowongan->kategori_id = $kategori->kategori_id;
-        $lowongan->perusahaan_id = $req->perusahaan_id;
         $lowongan->kuota = $req->kuota;
         $lowongan->keterangan = $req->keterangan;
         $lowongan->status = $req->status;
@@ -118,7 +119,8 @@ class LowonganController extends Controller
         $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id);
 
         return response()->json([
-            "pendaftaran" => $pendaftaran
+            "pendaftaran" => $pendaftaran,
+            "message" => "Berhasil fetch"
         ], 200);
     }
 
