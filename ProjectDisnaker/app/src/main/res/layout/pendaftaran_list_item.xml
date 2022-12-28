@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/list_item_shape"
     android:padding="15dp">
 
     <LinearLayout
@@ -16,8 +17,8 @@
 
         <ImageView
             android:id="@+id/ivPelatihan"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/ic_baseline_info_24" />
     </LinearLayout>
 

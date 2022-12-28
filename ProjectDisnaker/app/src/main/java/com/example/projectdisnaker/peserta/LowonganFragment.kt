@@ -1,4 +1,4 @@
-package com.example.projectdisnaker.perusahaan
+package com.example.projectdisnaker.peserta
 
 import android.os.Bundle
 import android.util.Log
@@ -12,14 +12,15 @@ import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.LowonganResponse
-import com.example.projectdisnaker.databinding.FragmentPerusahaanLowonganBinding
+import com.example.projectdisnaker.databinding.FragmentLowonganBinding
+import com.example.projectdisnaker.perusahaan.PerusahaanDetailLowonganFragment
 import com.example.projectdisnaker.rv.RVLowonganAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PerusahaanLowonganFragment : Fragment() {
-    private lateinit var binding: FragmentPerusahaanLowonganBinding
+class LowonganFragment : Fragment() {
+    private lateinit var binding: FragmentLowonganBinding
     private var listLowongan: MutableList<LowonganItem?> = arrayListOf()
     private lateinit var lowonganAdapter: RVLowonganAdapter
 
@@ -28,7 +29,7 @@ class PerusahaanLowonganFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentPerusahaanLowonganBinding.inflate(inflater, container, false)
+        binding = FragmentLowonganBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -36,22 +37,24 @@ class PerusahaanLowonganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.textView32.setOnClickListener {
+            val fragment = DetailLowonganFragment()
+            val bundle = Bundle()
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+        }
+
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
-            idx ->
-            val fragment = PerusahaanDetailLowonganFragment()
+                idx ->
+            val fragment = DetailLowonganFragment()
             val bundle = Bundle()
             bundle.putInt("lowongan_id", listLowongan.get(idx)!!.lowonganId!!)
             fragment.arguments = bundle
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
         }
-        binding.rvLowonganPerus.adapter = lowonganAdapter
-        binding.rvLowonganPerus.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvLowongan.adapter = lowonganAdapter
+        binding.rvLowongan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         fetchData()
-
-        binding.btnToTambahLowongan.setOnClickListener {
-            val fragment = PerusahaanTambahFragment()
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
-        }
     }
 
     private fun fetchData(){

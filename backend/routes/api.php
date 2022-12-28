@@ -27,16 +27,16 @@ Route::post('/login', [AuthController::class, "doLogin"]);
 
 Route::get('/kategori', [UtilityController::class, 'getKategori']);
 Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
-Route::get('/perusahaan/{perusahaan_id}', [UtilityController::class, 'getPerusahaan']);
-Route::get('/peserta/{peserta_id}', [UtilityController::class, 'getPeserta']);
+Route::get('/perusahaan', [UtilityController::class, 'getPerusahaan']);
+Route::get('/peserta', [UtilityController::class, 'getPeserta']);
 
 Route::prefix('lowongan')->group(function () {
     Route::get('/', [LowonganController::class, 'getAllLowongan']);
-    Route::get('/get/{lowongan_id}', [LowonganController::class, 'getLowongan']);
+    Route::get('/get', [LowonganController::class, 'getLowongan']);
     Route::post('/insert', [LowonganController::class, 'insertLowongan']);
     Route::post('/update', [LowonganController::class, 'updateLowongan']);
     Route::post('/delete', [LowonganController::class, 'deleteLowongan']);
     Route::post('/tutup', [LowonganController::class, 'tutupLowongan']);
-    Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
-    Route::post('/daftar/{lowongan_id}', [LowonganController::class, 'daftarLowongan']);
+    Route::get('/pendaftaran', [LowonganController::class, 'getPendaftaran']);
+    Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
 });

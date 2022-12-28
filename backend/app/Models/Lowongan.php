@@ -28,6 +28,10 @@ class Lowongan extends Model
         'updated_at'
     ];
 
+    public function perusahaan(){
+        return $this->belongsTo(Perusahaan::class, 'perusahaan_id', 'perusahaan_id');
+    }
+
     public function peserta(){
         return $this->belongsToMany(Peserta::class, 'pendaftaran_lowongan', 'lowongan_id', 'peserta_id');
     }

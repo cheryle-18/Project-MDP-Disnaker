@@ -18,7 +18,7 @@ class PerusahaanActivity : AppCompatActivity() {
         val bundle = Bundle()
 
         //set initial fragment
-        val frag = AdminPelatihanFragment()
+        val frag = PerusahaanLowonganFragment()
         frag.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, frag).commit()
 

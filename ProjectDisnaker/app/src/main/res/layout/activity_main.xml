@@ -22,9 +22,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="295dp"
-        android:layout_height="184dp"
-        android:layout_marginLeft="-20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="-150dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,9 +34,9 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
+            android:layout_width="315dp"
             android:layout_height="wrap_content"
-            android:text="Pelatihan dan Sertifikasi"
+            android:text="Pelatihan dan Pencarian Kerja"
             android:textColor="@color/white"
             android:textSize="42sp"
             android:textStyle="bold" />

@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
             }
             else if(it.itemId== R.id.menu_kerja){
-                val fragment = KerjaFragment()
+                val fragment = LowonganFragment()
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
             }

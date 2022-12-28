@@ -28,7 +28,7 @@ class AdminActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
             }
             else if(it.itemId== R.id.menu_lowongan_admin){
-                val fragment = AdminKerjaFragment()
+                val fragment = AdminLowonganFragment()
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
             }

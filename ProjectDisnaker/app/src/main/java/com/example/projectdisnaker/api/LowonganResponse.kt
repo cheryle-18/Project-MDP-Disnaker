@@ -16,6 +16,34 @@ data class LowonganResponse(
 ) : Parcelable
 
 @Parcelize
+data class LowonganItem(
+
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
+
+	@field:SerializedName("nama")
+	val nama: String? = null,
+
+	@field:SerializedName("kuota")
+	val kuota: Int? = null,
+
+	@field:SerializedName("lowongan_id")
+	val lowonganId: Int? = null,
+
+	@field:SerializedName("perusahaan")
+	val perusahaan: String? = null,
+
+	@field:SerializedName("kategori")
+	val kategori: String? = null,
+
+	@field:SerializedName("syarat")
+	val syarat: List<SyaratItem?>? = null,
+
+	@field:SerializedName("status")
+	val status: Int? = null
+) : Parcelable
+
+@Parcelize
 data class SyaratItem(
 
 	@field:SerializedName("updated_at")
@@ -35,41 +63,4 @@ data class SyaratItem(
 
 	@field:SerializedName("deleted_at")
 	val deletedAt: Timestamp? = null
-) : Parcelable
-
-@Parcelize
-data class LowonganItem(
-
-	@field:SerializedName("kategori_id")
-	val kategoriId: Int? = null,
-
-	@field:SerializedName("keterangan")
-	val keterangan: String? = null,
-
-	@field:SerializedName("nama")
-	val nama: String? = null,
-
-	@field:SerializedName("updated_at")
-	val updatedAt: Timestamp? = null,
-
-	@field:SerializedName("perusahaan_id")
-	val perusahaanId: Int? = null,
-
-	@field:SerializedName("kuota")
-	val kuota: Int? = null,
-
-	@field:SerializedName("lowongan_id")
-	val lowonganId: Int? = null,
-
-	@field:SerializedName("created_at")
-	val createdAt: Timestamp? = null,
-
-	@field:SerializedName("deleted_at")
-	val deletedAt: Timestamp? = null,
-
-	@field:SerializedName("syarat")
-	val syarat: List<SyaratItem?>? = null,
-
-	@field:SerializedName("status")
-	val status: Int? = null
 ) : Parcelable

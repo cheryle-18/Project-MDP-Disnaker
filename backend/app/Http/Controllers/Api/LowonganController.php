@@ -6,13 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Lowongan;
 use App\Models\PendaftaranLowongan;
+use App\Models\Perusahaan;
 use App\Models\SyaratLowongan;
 use Illuminate\Http\Request;
 
 class LowonganController extends Controller
 {
     public function getAllLowongan(){
-        $lowongan = Lowongan::with('syarat')->get();
+        $temp = Lowongan::with('syarat')->get();
+        $lowongan = [];
+
+        foreach($temp as $t){
+            $lowongan[] = [
+                "lowongan_id" => $t->lowongan_id,
+                "nama" => $t->nama,
+                "kategori" => $t->kategori->nama,
+                "perusahaan" => $t->perusahaan->user->nama,
+                "kuota" => $t->kuota,
+                "keterangan" => $t->keterangan,
+                "status" => $t->status,
+                "syarat" => $t->syarat
+            ];
+        }
 
         return response()->json([
             "lowongan" => $lowongan,
@@ -21,7 +36,18 @@ class LowonganController extends Controller
     }
 
     public function getLowongan(Request $req){
-        $lowongan = Lowongan::find($req->lowongan_id)->with('syarat');
+        $t = Lowongan::find($req->lowongan_id)->with('syarat')->first();
+
+        $lowongan = [
+            "lowongan_id" => $t->lowongan_id,
+            "nama" => $t->nama,
+            "kategori" => $t->kategori->nama,
+            "perusahaan" => $t->perusahaan->user->nama,
+            "kuota" => $t->kuota,
+            "keterangan" => $t->keterangan,
+            "status" => $t->status,
+            "syarat" => $t->syarat
+        ];
 
         return response()->json([
             "lowongan" => $lowongan,
@@ -52,7 +78,7 @@ class LowonganController extends Controller
         }
 
         return response()->json([
-            "lowongan" => $lowongan,
+            // "lowongan" => $lowongan,
             "message" => "Berhasil menambah lowongan"
         ], 201);
     }
@@ -81,7 +107,7 @@ class LowonganController extends Controller
         }
 
         return response()->json([
-            "lowongan" => $lowongan,
+            // "lowongan" => $lowongan,
             "message" => "Berhasil mengubah lowongan"
         ], 200);
     }
@@ -98,7 +124,7 @@ class LowonganController extends Controller
             $lowongan->delete();
 
             return response()->json([
-                "lowongan" => $lowongan,
+                // "lowongan" => $lowongan,
                 "message" => "Berhasil menghapus lowongan"
             ], 200, );
         }
@@ -110,13 +136,13 @@ class LowonganController extends Controller
         $lowongan->save();
 
         return response()->json([
-            "lowongan" => $lowongan,
+            // "lowongan" => $lowongan,
             "message" => "Berhasil menutup lowongan"
         ], 200);
     }
 
     public function getPendaftaran(Request $req){
-        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id);
+        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->get();
 
         return response()->json([
             "pendaftaran" => $pendaftaran,

@@ -17,7 +17,7 @@ class Perusahaan extends Model
     public $timestamps = true;
 
     public function user(){
-        return $this->belongsTo(User::class, 'perusahaan_id', 'perusahaan_id');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     public function lowongan(){

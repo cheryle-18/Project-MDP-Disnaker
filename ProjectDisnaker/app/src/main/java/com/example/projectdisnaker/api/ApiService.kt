@@ -28,4 +28,14 @@ interface ApiService {
 
     @GET("pelatihan")
     fun getPelatihan(): Call<PelatihanResponse>
+
+    //LOWONGAN
+    @GET("lowongan")
+    fun getAllLowongan(): Call<LowonganResponse>
+
+    @GET("lowongan/get")
+    fun getLowongan(
+        @Query("lowongan_id") lowongan_id:Int
+    ): Call<LowonganResponse>
+
 }

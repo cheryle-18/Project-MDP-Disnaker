@@ -6,17 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.databinding.FragmentKerjaBinding
+import com.example.projectdisnaker.databinding.FragmentDetailLowonganBinding
 
-class KerjaFragment : Fragment() {
-    private lateinit var binding: FragmentKerjaBinding
+class DetailLowonganFragment : Fragment() {
+    private lateinit var binding: FragmentDetailLowonganBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentKerjaBinding.inflate(inflater, container, false)
+        binding = FragmentDetailLowonganBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -24,8 +24,8 @@ class KerjaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textView32.setOnClickListener {
-            val fragment = DetailKerjaFragment()
+        binding.ivBackKerja.setOnClickListener {
+            val fragment = LowonganFragment()
             val bundle = Bundle()
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()

@@ -28,7 +28,7 @@ class UtilityController extends Controller
     }
 
     public function getPerusahaan(Request $req){
-        $perusahaan = Perusahaan::find($req->perusahaan_id);
+        $perusahaan = Perusahaan::find($req->perusahaan_id)->with('user')->get();
 
         return response()->json([
             "perusahaan" => $perusahaan
