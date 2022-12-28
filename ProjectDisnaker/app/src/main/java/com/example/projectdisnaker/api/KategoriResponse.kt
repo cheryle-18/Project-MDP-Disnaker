@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class KategoriResponse(
 
 	@field:SerializedName("kategori")
-	val kategori: List<KategoriItem?>? = null
+	val kategori: List<KategoriItem>? = null
 ) : Parcelable
 
 @Parcelize

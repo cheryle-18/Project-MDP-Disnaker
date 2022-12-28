@@ -30,7 +30,6 @@ class RVPelatihanAdapter(private val activity: Activity,
         var txtKuota: TextView = view.findViewById(R.id.tvKuotaPelatihan)
         var txtDurasi: TextView = view.findViewById(R.id.tvDurasiPelatihan)
         var txtDetail: TextView = view.findViewById(R.id.tvLihatDetailPelatihan)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {

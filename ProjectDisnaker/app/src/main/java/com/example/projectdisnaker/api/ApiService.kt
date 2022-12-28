@@ -6,7 +6,7 @@ import retrofit2.http.*
 interface ApiService {
     //USERS
     @GET("users")
-    fun getUsers(): Call<ArrayList<UserResponseItem>>
+    fun getUsers(): Call<UserResponse>
 
     @POST("register")
     fun register(
@@ -24,5 +24,8 @@ interface ApiService {
 
     //KATEGORI
     @GET("kategori")
-    fun getKategori(): Call<ArrayList<UserResponseItem>>
+    fun getKategori(): Call<KategoriResponse>
+
+    @GET("pelatihan")
+    fun getPelatihan(): Call<PelatihanResponse>
 }

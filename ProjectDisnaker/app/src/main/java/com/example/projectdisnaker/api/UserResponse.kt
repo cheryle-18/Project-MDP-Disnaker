@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class UserResponse(
 	//name and value should be the same with return data from backend
 	@field:SerializedName("userResponse")
-	val userResponse: List<UserResponseItem?>? = null,
+	val userResponse: List<UserResponseItem>? = null,
 	@field:SerializedName("message")
 	val message: String = "",
 	@field:SerializedName("status")
