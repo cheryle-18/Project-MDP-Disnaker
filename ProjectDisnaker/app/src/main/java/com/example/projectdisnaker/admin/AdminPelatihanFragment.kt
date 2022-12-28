@@ -61,22 +61,18 @@ class AdminPelatihanFragment : Fragment() {
                     if(responseBody!=null){
                         listPelatihan = responseBody.pelatihan!!
                         initRV()
-                        Toast.makeText(activity,responseBody.toString(), Toast.LENGTH_SHORT).show()
                     }
                     else{
                         println("${response.message()}")
-                        Toast.makeText(activity,response.message(), Toast.LENGTH_SHORT).show()
                     }
                 }
                 else{
                     Log.d("Error Frag Admin",response.toString())
-                    Toast.makeText(activity,response.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<PelatihanResponse>, t: Throwable) {
                 Log.d("Error Frag Admin", "${t.message}")
-                Toast.makeText(activity,t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
