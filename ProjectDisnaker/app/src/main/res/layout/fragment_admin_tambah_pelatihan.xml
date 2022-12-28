@@ -34,7 +34,8 @@
     <Spinner
         android:id="@+id/spinnerKategoriPel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:minHeight="48dp" />
 
     <TextView
         android:id="@+id/textView40"
@@ -117,7 +118,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSyaratPelatihan"
         android:layout_width="match_parent"
-        android:layout_height="219dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp" />
 
     <Button
