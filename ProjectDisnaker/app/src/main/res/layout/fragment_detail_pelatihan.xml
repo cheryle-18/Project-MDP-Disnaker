@@ -104,10 +104,10 @@
             android:text="Syarat Pelatihan:"
             android:textColor="@color/black" />
 
-        <ListView
-            android:id="@+id/lvSyarat"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSyaratPeatihan"
             android:layout_width="match_parent"
-            android:layout_height="85dp" />
+            android:layout_height="109dp" />
 
         <TextView
             android:id="@+id/textView22"
@@ -117,10 +117,10 @@
             android:text="Peluang Kerja:"
             android:textColor="@color/black" />
 
-        <ListView
-            android:id="@+id/lvPeluang"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPeluangKerjaAdmin"
             android:layout_width="match_parent"
-            android:layout_height="141dp" />
+            android:layout_height="95dp" />
 
         <Button
             android:id="@+id/btnDaftar"

@@ -60,34 +60,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Minimal Pendidikan: SMA"
+        android:text="Pendidikan Minimal: SMA"
         android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/textView51"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Syarat Pelatihan:"
-        android:textColor="@color/black" />
+        android:layout_marginTop="15dp"
+        android:text="Syarat Pelatihan"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/lvSyaratAdmin"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSyaratPelatihanAdmin"
         android:layout_width="match_parent"
-        android:layout_height="91dp" />
+        android:layout_height="109dp" />
 
     <TextView
         android:id="@+id/textView52"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Peluang Kerja:"
-        android:textColor="@color/black" />
+        android:layout_marginTop="10dp"
+        android:text="Peluang Kerja"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/lvPeluangAdmin"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPeluangKerjaAdmin"
         android:layout_width="match_parent"
-        android:layout_height="86dp" />
+        android:layout_height="107dp" />
 
     <Button
         android:id="@+id/btnLihatPeserta"

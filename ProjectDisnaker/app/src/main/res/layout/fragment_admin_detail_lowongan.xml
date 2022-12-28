@@ -79,7 +79,7 @@
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSyaratLowongan"
+        android:id="@+id/rvSyaratLowonganAdmin"
         android:layout_width="match_parent"
         android:layout_height="380dp" />
 

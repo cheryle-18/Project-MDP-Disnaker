@@ -43,8 +43,8 @@ class PerusahaanDetailLowonganFragment : Fragment() {
             syaratLowongan.add(syarat!!.deskripsi!!)
         }
         syaratAdapter = RVSyaratAdapter(syaratLowongan, requireContext())
-        binding.rvSyaratLowongan.adapter = syaratAdapter
-        binding.rvSyaratLowongan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvSyaratLowonganPerus.adapter = syaratAdapter
+        binding.rvSyaratLowonganPerus.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         binding.ivBackDetailLow.setOnClickListener {
             val fragment = PerusahaanLowonganFragment()
