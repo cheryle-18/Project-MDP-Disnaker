@@ -13,7 +13,8 @@ class AuthController extends Controller
     //
     function doLogin(Request $request)
     {
-
+        //login
+        
     }
     public function validateDataRegister($data){
         //Cek semua data
@@ -23,10 +24,10 @@ class AuthController extends Controller
         $validate["password"] = 'required|string|max:255|min:8|regex:/^\S*$/u';
         $validator = Validator::make($data,$validate,[
             'nama.required'=> "Nama harus diisi!",
-            'username.required'=> "Username harus diisi",
-            'username.unique'=> "Username sudah terdaftar",
-            'password.required'=> "Password harus diisi",
-            'password.min' => "Password harus lebih dari 8 huruf",
+            'username.required'=> "Username harus diisi!",
+            'username.unique'=> "Username sudah terdaftar!",
+            'password.required'=> "Password harus diisi!",
+            'password.min' => "Panjang password minimal 8 huruf!",
         ]);
 
         return response()->json([
