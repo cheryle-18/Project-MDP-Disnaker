@@ -6,29 +6,19 @@ import com.google.gson.annotations.SerializedName
 
 @Parcelize
 data class UserResponse(
-	//name and value should be the same with return data from backend
-	@field:SerializedName("userResponse")
-	val userResponse: List<UserResponseItem>? = null,
+
 	@field:SerializedName("message")
-	val message: String = "",
+	val message: String? = null,
+
+	@field:SerializedName("userResponse")
+	val userResponse: List<UserResponseItem?>? = null,
+
 	@field:SerializedName("status")
-    val status: Int = -1
+	val status: Int? = null
 ) : Parcelable
 
 @Parcelize
 data class UserResponseItem(
-
-	@field:SerializedName("user_id")
-	val userId: Int? = null,
-
-	@field:SerializedName("nama")
-	val nama: String? = null,
-
-	@field:SerializedName("email")
-	val email: String? = null,
-
-	@field:SerializedName("username")
-	val username: String? = null,
 
 	@field:SerializedName("password")
 	val password: String? = null,
@@ -37,6 +27,41 @@ data class UserResponseItem(
 	val telp: String? = null,
 
 	@field:SerializedName("role")
-	val role: Int? = null
+	val role: Int? = null,
 
+	@field:SerializedName("nama")
+	val nama: String? = null,
+
+	@field:SerializedName("user_id")
+	val userId: Int? = null,
+
+	@field:SerializedName("perusahaan_id")
+	val perusahaanId: Int? = null,
+
+	@field:SerializedName("email")
+	val email: String? = null,
+
+	@field:SerializedName("username")
+	val username: String? = null,
+
+	@field:SerializedName("alamat")
+	val alamat: String? = null,
+
+	@field:SerializedName("pendidikan")
+	val pendidikan: String? = null,
+
+	@field:SerializedName("nilai")
+	val nilai: Int? = null,
+
+	@field:SerializedName("jurusan")
+	val jurusan: String? = null,
+
+	@field:SerializedName("nik")
+	val nik: String? = null,
+
+	@field:SerializedName("peserta_id")
+	val pesertaId: Int? = null,
+
+	@field:SerializedName("status")
+	val status: Int? = null
 ) : Parcelable

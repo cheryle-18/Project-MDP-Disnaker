@@ -2,12 +2,20 @@ package com.example.projectdisnaker.perusahaan
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.admin.AdminPelatihanFragment
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.ActivityPerusahaanBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PerusahaanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPerusahaanBinding
+    private lateinit var user: UserResponseItem
+    private lateinit var perusahaan: Perusahaan
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +23,10 @@ class PerusahaanActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        user = intent.getParcelableExtra<UserResponseItem>("user")!!
+
         val bundle = Bundle()
+        bundle.putParcelable("user", user)
 
         //set initial fragment
         val frag = PerusahaanLowonganFragment()

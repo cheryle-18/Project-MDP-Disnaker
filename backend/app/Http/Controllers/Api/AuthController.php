@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-
-
     function doLogin(Request $request)
     {
         //login
@@ -23,13 +21,48 @@ class AuthController extends Controller
         $message = "Gagal login!";
 
         if(Auth::attempt($credentials)){
-            $user = [Auth::user()];
+            $user = Auth::user();
+
+            $userRet = [];
+            if($user->role==0){
+                $peserta = $user->peserta[0];
+                $userRet = [
+                    "user_id" => $user->user_id,
+                    "nama" => $user->nama,
+                    "email" => $user->email,
+                    "username" => $user->username,
+                    "password" => $user->password,
+                    "telp" => $user->telp,
+                    "role" => $user->role,
+                    "peserta_id" => $user->peserta->peserta_id,
+                    "nik" => $user->peserta->nik,
+                    "pendidikan" => $user->peserta->pendidikan,
+                    "jurusan" => $user->peserta->jurusan,
+                    "nilai" => $user->peserta->nilai,
+                    "status" => $user->peserta->status,
+                ];
+            }
+            else if($user->role==1){
+                $perusahaan = $user->perusahaan[0];
+                $userRet = [
+                    "user_id" => $user->user_id,
+                    "nama" => $user->nama,
+                    "email" => $user->email,
+                    "username" => $user->username,
+                    "password" => $user->password,
+                    "telp" => $user->telp,
+                    "role" => $user->role,
+                    "perusahaan_id" => $perusahaan->perusahaan_id,
+                    "alamat" => $perusahaan->alamat
+                ];
+            }
+
             $status = 1;
             $message = "Berhasil login!";
         }
 
         return response()->json([
-            "userResponse"=> $user,
+            "userResponse"=> [$userRet],
             "status" => $status,
             "message"=>$message,
 

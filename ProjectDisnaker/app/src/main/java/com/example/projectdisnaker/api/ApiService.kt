@@ -29,13 +29,24 @@ interface ApiService {
     @GET("pelatihan")
     fun getPelatihan(): Call<PelatihanResponse>
 
+    //PERUSAHAAN
+    @GET("perusahaan")
+    fun getPerusahaan(
+        @Query("user_id") userId: Int
+    ): Call<PerusahaanResponse>
+
     //LOWONGAN
     @GET("lowongan")
     fun getAllLowongan(): Call<LowonganResponse>
 
+    @GET("lowongan/perusahaan")
+    fun getPerusLowongan(
+        @Query("perusahaan_id") perusahaanId: Int
+    ): Call<LowonganResponse>
+
     @GET("lowongan/get")
     fun getLowongan(
-        @Query("lowongan_id") lowongan_id:Int
+        @Query("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
 
 }

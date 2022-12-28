@@ -25,6 +25,7 @@ Route::get('/users', [UtilityController::class, "getUsers"]);
 Route::post('/register', [AuthController::class, "doRegister"]);
 Route::post('/login', [AuthController::class, "doLogin"]);
 
+Route::get('users', [UtilityController::class, 'getUsers']);
 Route::get('/kategori', [UtilityController::class, 'getKategori']);
 Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
 Route::get('/perusahaan', [UtilityController::class, 'getPerusahaan']);
@@ -32,6 +33,7 @@ Route::get('/peserta', [UtilityController::class, 'getPeserta']);
 
 Route::prefix('lowongan')->group(function () {
     Route::get('/', [LowonganController::class, 'getAllLowongan']);
+    Route::get('/perusahaan', [LowonganController::class, 'getLowonganPerusahaan']);
     Route::get('/get', [LowonganController::class, 'getLowongan']);
     Route::post('/insert', [LowonganController::class, 'insertLowongan']);
     Route::post('/update', [LowonganController::class, 'updateLowongan']);

@@ -23,6 +23,7 @@ class RVLowonganAdapter(
         init{
             view.setOnClickListener{
                 val lowongan = listLowongan[adapterPosition]
+                onClick(adapterPosition)
             }
         }
     }

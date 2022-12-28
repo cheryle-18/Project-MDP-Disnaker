@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.ApiConfiguration
-import com.example.projectdisnaker.api.LowonganItem
-import com.example.projectdisnaker.api.LowonganResponse
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPerusahaanLowonganBinding
 import com.example.projectdisnaker.rv.RVLowonganAdapter
 import retrofit2.Call
@@ -22,6 +20,7 @@ class PerusahaanLowonganFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanLowonganBinding
     private var listLowongan: MutableList<LowonganItem?> = arrayListOf()
     private lateinit var lowonganAdapter: RVLowonganAdapter
+    private lateinit var user: UserResponseItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +35,13 @@ class PerusahaanLowonganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        user = requireArguments().getParcelable<UserResponseItem>("user")!!
+
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
             idx ->
             val fragment = PerusahaanDetailLowonganFragment()
             val bundle = Bundle()
+            bundle.putParcelable("lowongan", listLowongan.get(idx)!!)
             bundle.putInt("lowongan_id", listLowongan.get(idx)!!.lowonganId!!)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
@@ -55,7 +57,7 @@ class PerusahaanLowonganFragment : Fragment() {
     }
 
     private fun fetchData(){
-        var client = ApiConfiguration.getApiService().getAllLowongan()
+        var client = ApiConfiguration.getApiService().getPerusLowongan(user.perusahaanId!!)
         client.enqueue(object: Callback<LowonganResponse> {
             override fun onResponse(call: Call<LowonganResponse>, response: Response<LowonganResponse>){
                 if(response.isSuccessful){

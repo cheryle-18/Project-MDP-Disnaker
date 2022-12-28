@@ -5,10 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import com.example.projectdisnaker.R
+import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.databinding.FragmentPerusahaanDetailLowonganBinding
 
 class PerusahaanDetailLowonganFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanDetailLowonganBinding
+    private lateinit var lowongan: LowonganItem
+    private var syaratLowongan: ArrayList<String> = ArrayList()
+    private lateinit var lvAdapter: ArrayAdapter<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,5 +28,25 @@ class PerusahaanDetailLowonganFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
+
+        binding.tvNamaLowongan.setText(lowongan.nama)
+        binding.tvNamaPerusahaanLow.setText(lowongan.perusahaan)
+        binding.tvKategoriLow.setText("Kategori: ${lowongan.kategori}")
+        binding.tvKeteranganLowongan.setText("Keterangan: ${lowongan.keterangan}")
+        binding.tvKuotaLow.setText("Kuota: ${lowongan.kuota} peserta")
+
+        for(syarat in lowongan.syarat!!){
+            syaratLowongan.add(syarat!!.deskripsi!!)
+        }
+        lvAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, syaratLowongan)
+        binding.lvSyaratLowongan.adapter = lvAdapter
+        lvAdapter.notifyDataSetChanged()
+
+        binding.ivBackDetailLow.setOnClickListener {
+            val fragment = PerusahaanLowonganFragment()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+        }
     }
 }

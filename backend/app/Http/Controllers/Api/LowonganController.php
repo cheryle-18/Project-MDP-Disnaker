@@ -35,6 +35,29 @@ class LowonganController extends Controller
         ], 200);
     }
 
+    public function getLowonganPerusahaan(Request $req){
+        $temp = Lowongan::where('perusahaan_id', $req->perusahaan_id)->with('syarat')->get();
+        $lowongan = [];
+
+        foreach($temp as $t){
+            $lowongan[] = [
+                "lowongan_id" => $t->lowongan_id,
+                "nama" => $t->nama,
+                "kategori" => $t->kategori->nama,
+                "perusahaan" => $t->perusahaan->user->nama,
+                "kuota" => $t->kuota,
+                "keterangan" => $t->keterangan,
+                "status" => $t->status,
+                "syarat" => $t->syarat
+            ];
+        }
+
+        return response()->json([
+            "lowongan" => $lowongan,
+            "message" => "Berhasil fetch"
+        ], 200);
+    }
+
     public function getLowongan(Request $req){
         $t = Lowongan::find($req->lowongan_id)->with('syarat')->first();
 
