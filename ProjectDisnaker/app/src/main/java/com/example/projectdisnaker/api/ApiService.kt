@@ -16,4 +16,11 @@ interface ApiService {
         @Query("role") role:Int,
     ): Call<UserResponse>
 
+    @POST("login")
+    fun login(
+        @Query("username") username:String,
+        @Query("password") password:String,
+    ): Call<UserResponse>
+
+
 }
