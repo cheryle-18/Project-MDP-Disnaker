@@ -28,4 +28,10 @@ data class KategoriItem(
 
 	@field:SerializedName("deleted_at")
 	val deletedAt: String? = null
-) : Parcelable
+
+
+) : Parcelable {
+	override fun toString(): String {
+		return nama!!
+	}
+}
