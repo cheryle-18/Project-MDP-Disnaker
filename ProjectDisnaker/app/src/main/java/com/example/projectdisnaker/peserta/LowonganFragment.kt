@@ -13,7 +13,6 @@ import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.LowonganResponse
 import com.example.projectdisnaker.databinding.FragmentLowonganBinding
-import com.example.projectdisnaker.perusahaan.PerusahaanDetailLowonganFragment
 import com.example.projectdisnaker.rv.RVLowonganAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,13 +35,6 @@ class LowonganFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.textView32.setOnClickListener {
-            val fragment = DetailLowonganFragment()
-            val bundle = Bundle()
-            fragment.arguments = bundle
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
-        }
 
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
                 idx ->
@@ -70,12 +62,12 @@ class LowonganFragment : Fragment() {
                     }
                 }
                 else{
-                    Log.e("Perus Lowongan Fragment", "${response.message()}")
+                    Log.e("Lowongan Fragment", "${response.message()}")
                     Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<LowonganResponse>, t: Throwable) {
-                Log.e("Perus Lowongan Fragment", "${t.message}")
+                Log.e("Lowongan Fragment", "${t.message}")
                 Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

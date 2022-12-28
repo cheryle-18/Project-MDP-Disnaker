@@ -35,8 +35,8 @@ class PerusahaanDetailLowonganFragment : Fragment() {
 
         binding.tvNamaLowongan.setText(lowongan.nama)
         binding.tvNamaPerusahaanLow.setText(lowongan.perusahaan)
-        binding.tvKategoriLow.setText("Kategori: ${lowongan.kategori}")
-        binding.tvKuotaLow.setText("Kuota: ${lowongan.kuota} peserta")
+        binding.tvKategoriLow.setText(lowongan.kategori)
+        binding.tvKuotaLow.setText("${lowongan.kuota} peserta")
         binding.tvKeteranganLowongan.setText(lowongan.keterangan)
 
         for(syarat in lowongan.syarat!!){

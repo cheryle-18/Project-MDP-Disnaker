@@ -29,7 +29,7 @@ class RVSyaratAdapter(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val syarat = listSyarat[position]
-        holder.tvDescSyarat.setText("- ${syarat}")
+        holder.tvDescSyarat.setText(syarat)
     }
 
     override fun getItemCount(): Int {

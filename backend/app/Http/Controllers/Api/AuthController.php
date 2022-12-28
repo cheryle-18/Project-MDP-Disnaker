@@ -34,12 +34,12 @@ class AuthController extends Controller
                     "password" => $user->password,
                     "telp" => $user->telp,
                     "role" => $user->role,
-                    "peserta_id" => $user->peserta->peserta_id,
-                    "nik" => $user->peserta->nik,
-                    "pendidikan" => $user->peserta->pendidikan,
-                    "jurusan" => $user->peserta->jurusan,
-                    "nilai" => $user->peserta->nilai,
-                    "status" => $user->peserta->status,
+                    "peserta_id" => $peserta->peserta_id,
+                    "nik" => $peserta->nik,
+                    "pendidikan" => $peserta->pendidikan,
+                    "jurusan" => $peserta->jurusan,
+                    "nilai" => $peserta->nilai,
+                    "status" => $peserta->status,
                 ];
             }
             else if($user->role==1){
