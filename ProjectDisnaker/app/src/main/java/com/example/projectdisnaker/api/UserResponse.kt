@@ -6,9 +6,13 @@ import com.google.gson.annotations.SerializedName
 
 @Parcelize
 data class UserResponse(
-
-	@field:SerializedName("UserResponse")
-	val userResponse: List<UserResponseItem?>? = null
+	//name and value should be the same with return data from backend
+	@field:SerializedName("userResponse")
+	val userResponse: List<UserResponseItem?>? = null,
+	@field:SerializedName("message")
+	val message: String = "",
+	@field:SerializedName("status")
+    val status: Int = -1
 ) : Parcelable
 
 @Parcelize
@@ -34,6 +38,5 @@ data class UserResponseItem(
 
 	@field:SerializedName("role")
 	val role: Int? = null
-
 
 ) : Parcelable

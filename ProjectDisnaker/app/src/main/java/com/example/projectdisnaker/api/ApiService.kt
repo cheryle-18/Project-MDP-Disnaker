@@ -14,6 +14,6 @@ interface ApiService {
         @Query("username") username:String,
         @Query("password") password:String,
         @Query("role") role:Int,
-    ): Call<UserResponseItem>
+    ): Call<UserResponse>
 
 }

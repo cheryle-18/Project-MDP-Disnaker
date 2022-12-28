@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.projectdisnaker.api.ApiConfiguration
-import com.example.projectdisnaker.api.UserResponseItem
+import com.example.projectdisnaker.api.UserResponse
 import com.example.projectdisnaker.databinding.ActivityRegisterBinding
+import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,33 +24,40 @@ class RegisterActivity : AppCompatActivity() {
         var password = binding.edtPasswordRegister.text.toString()
         var confirmPass = binding.edtConfirmRegister.text.toString()
 
-        if(password == confirmPass){
-            var client = ApiConfiguration.getApiService().register(nama,username,password,0)
-            client.enqueue(object: Callback<UserResponseItem> {
-                override fun onResponse(call: Call<UserResponseItem>, response: Response<UserResponseItem>) {
-                    if(response.isSuccessful){
-                        val responseBody = response.body()
-                        if(responseBody!=null){
-                            Toast.makeText(this@RegisterActivity,"Berhasil register!",Toast.LENGTH_SHORT).show()
+        if(nama!="" && username!="" && password!="" && confirmPass!=""){
+            if(password == confirmPass){
+                var client = ApiConfiguration.getApiService().register(nama,username,password,0) //register as participant
+                client.enqueue(object: Callback<UserResponse> {
+
+                    override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                        if(response.isSuccessful){
+                            val responseBody = response.body()
+                            if(responseBody!=null){
+                                Toast.makeText(this@RegisterActivity,responseBody.message,Toast.LENGTH_SHORT).show()
+                            }
+                            else{
+                                println("${response.message()}")
+                                Toast.makeText(this@RegisterActivity,response.message(),Toast.LENGTH_SHORT).show()
+                            }
                         }
                         else{
-                            println("${response.message()}")
-                            Toast.makeText(this@RegisterActivity,response.message(),Toast.LENGTH_SHORT).show()
+                            Log.d("Error Register Activity",response.toString())
+                            Toast.makeText(this@RegisterActivity,response.toString(),Toast.LENGTH_SHORT).show()
                         }
                     }
-                    else{
-                        Log.d("Main Activity",response.toString())
-                        Toast.makeText(this@RegisterActivity,response.toString(),Toast.LENGTH_SHORT).show()
-                    }
-                }
 
-                override fun onFailure(call: Call<UserResponseItem>, t: Throwable) {
-                    Log.d("Main Activity", "${t.message}")
-                }
-            })
+                    override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                        Log.d("Error Register Activity", "${t.message}")
+                        Toast.makeText(this@RegisterActivity,t.message,Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+            else{
+                Toast.makeText(this,"Password harus sama dengan konfirmasi password!",Toast.LENGTH_SHORT).show()
+            }
         }
         else{
-            Toast.makeText(this,"Password harus sama dengan konfirmasi password!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Semua field harus diisi!",Toast.LENGTH_SHORT).show()
         }
     }
 
