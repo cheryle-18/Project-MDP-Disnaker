@@ -44,7 +44,7 @@
             android:id="@+id/ivBackKerja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
@@ -59,10 +59,20 @@
             android:id="@+id/tvNamaKerja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
             android:text="Administrasi Kantor"
             android:textColor="@color/green_900"
             android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNamaPerusahaan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:text="PT XYZ"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -70,15 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Kategori: Administrasi"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/tvNamaPerusahaan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Perusahaan: PT ABC"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvKuotaKerja"
@@ -86,28 +89,32 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Kuota: 10 orang"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tvKeterangan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Keterangan: lorem ipsum"
-            android:textColor="@color/black" />
+            android:text="lorem ipsum"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textView36"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Syarat Pendaftaran:"
-            android:textColor="@color/black" />
+            android:layout_marginTop="15dp"
+            android:text="Syarat Pendaftaran"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/lvSyaratKerja"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSyaratLowongan"
             android:layout_width="match_parent"
-            android:layout_height="310dp" />
+            android:layout_height="366dp" />
 
         <Button
             android:id="@+id/btnDaftar"

@@ -72,15 +72,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
-                android:text="Perusahaan: PT ABC"
-                android:textColor="@color/black" />
+                android:text="PT XYZ"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvKategoriLow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Kategori: Administrasi"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tvKuotaLow"
@@ -88,29 +91,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Kuota: 10 orang"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/tvKeteranganLowongan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Keterangan: lorem ipsum"
-                android:textColor="@color/black" />
+                android:text="lorem ipsum"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/textView36"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Syarat Pendaftaran:"
-                android:textColor="@color/black" />
+                android:layout_marginTop="15dp"
+                android:text="Syarat Pendaftaran"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
-            <ListView
-                android:id="@+id/lvSyaratLowongan"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSyaratLowongan"
                 android:layout_width="match_parent"
-                android:layout_height="185dp"
-                android:layout_marginTop="3dp" />
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:id="@+id/layoutLihatPendaftaran"

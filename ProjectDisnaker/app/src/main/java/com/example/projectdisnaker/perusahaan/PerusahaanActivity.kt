@@ -14,7 +14,7 @@ import retrofit2.Response
 
 class PerusahaanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPerusahaanBinding
-    private lateinit var user: UserResponseItem
+    lateinit var user: UserResponseItem
     private lateinit var perusahaan: Perusahaan
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,15 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.databinding.FragmentPerusahaanDetailLowonganBinding
+import com.example.projectdisnaker.rv.RVSyaratAdapter
 
 class PerusahaanDetailLowonganFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanDetailLowonganBinding
     private lateinit var lowongan: LowonganItem
     private var syaratLowongan: ArrayList<String> = ArrayList()
-    private lateinit var lvAdapter: ArrayAdapter<String>
+    private lateinit var syaratAdapter: RVSyaratAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,15 +36,15 @@ class PerusahaanDetailLowonganFragment : Fragment() {
         binding.tvNamaLowongan.setText(lowongan.nama)
         binding.tvNamaPerusahaanLow.setText(lowongan.perusahaan)
         binding.tvKategoriLow.setText("Kategori: ${lowongan.kategori}")
-        binding.tvKeteranganLowongan.setText("Keterangan: ${lowongan.keterangan}")
         binding.tvKuotaLow.setText("Kuota: ${lowongan.kuota} peserta")
+        binding.tvKeteranganLowongan.setText(lowongan.keterangan)
 
         for(syarat in lowongan.syarat!!){
             syaratLowongan.add(syarat!!.deskripsi!!)
         }
-        lvAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, syaratLowongan)
-        binding.lvSyaratLowongan.adapter = lvAdapter
-        lvAdapter.notifyDataSetChanged()
+        syaratAdapter = RVSyaratAdapter(syaratLowongan, requireContext())
+        binding.rvSyaratLowongan.adapter = syaratAdapter
+        binding.rvSyaratLowongan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         binding.ivBackDetailLow.setOnClickListener {
             val fragment = PerusahaanLowonganFragment()

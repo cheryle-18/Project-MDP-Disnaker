@@ -35,14 +35,13 @@ class PerusahaanLowonganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        user = requireArguments().getParcelable<UserResponseItem>("user")!!
+        user = (activity as PerusahaanActivity).user
 
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
             idx ->
             val fragment = PerusahaanDetailLowonganFragment()
             val bundle = Bundle()
             bundle.putParcelable("lowongan", listLowongan.get(idx)!!)
-            bundle.putInt("lowongan_id", listLowongan.get(idx)!!.lowonganId!!)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
         }
