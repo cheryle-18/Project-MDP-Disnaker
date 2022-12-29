@@ -131,6 +131,11 @@ class PerusahaanTambahFragment : Fragment() {
                 })
             }
         }
+
+        binding.ivBackTambahLow.setOnClickListener {
+            val fragment = PerusahaanLowonganFragment()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+        }
     }
 
     private fun fetchKategori(){

@@ -67,12 +67,14 @@
         android:layout_height="450dp"
         android:background="@drawable/rounded_top"
         android:orientation="vertical"
-        android:padding="30dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp"
+        android:paddingRight="30dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPendaftaran"
             android:layout_width="match_parent"
-            android:layout_height="315dp" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
