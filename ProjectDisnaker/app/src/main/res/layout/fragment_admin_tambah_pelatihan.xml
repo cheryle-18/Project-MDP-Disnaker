@@ -84,7 +84,8 @@
         android:id="@+id/spinnerPendidikanPel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/arrPendidikan" />
+        android:entries="@array/arrPendidikan"
+        android:minHeight="48dp" />
 
     <TextView
         android:id="@+id/textView68"
@@ -118,7 +119,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSyaratPelatihanAdmin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp" />
 
     <Button
