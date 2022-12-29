@@ -30,6 +30,7 @@ Route::get('/kategori', [UtilityController::class, 'getKategori']);
 Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
 Route::get('/perusahaan', [UtilityController::class, 'getPerusahaan']);
 Route::get('/peserta', [UtilityController::class, 'getPeserta']);
+Route::get('/pendaftaranPelatihan', [LowonganController::class, 'getPendaftaranPelatihan']);
 
 Route::prefix('lowongan')->group(function () {
     Route::get('/', [LowonganController::class, 'getAllLowongan']);
@@ -41,4 +42,5 @@ Route::prefix('lowongan')->group(function () {
     Route::post('/tutup', [LowonganController::class, 'tutupLowongan']);
     Route::get('/pendaftaran', [LowonganController::class, 'getPendaftaran']);
     Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
+
 });

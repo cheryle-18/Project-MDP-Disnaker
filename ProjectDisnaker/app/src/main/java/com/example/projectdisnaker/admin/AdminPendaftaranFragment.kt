@@ -1,14 +1,25 @@
 package com.example.projectdisnaker.admin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.projectdisnaker.R
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentAdminPendaftaranBinding
+import com.example.projectdisnaker.rv.RVPelatihanAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AdminPendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentAdminPendaftaranBinding
+    private lateinit var adapterPelatihan : RVPelatihanAdapter
+    private lateinit var listPelatihan : List<PendaftaranPelatihanItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,5 +33,40 @@ class AdminPendaftaranFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initData()
     }
+
+    fun initData(){
+        //retrofit call
+        var client = ApiConfiguration.getApiService().getPendaftaranPelatihan()
+        client.enqueue(object: Callback<PendaftaranResponse> {
+            override fun onResponse(call: Call<PendaftaranResponse>,response: Response<PendaftaranResponse>) {
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    Toast.makeText(requireContext(), responseBody.toString(), Toast.LENGTH_SHORT).show()
+                    if(responseBody!=null){
+                        listPelatihan = responseBody.pelatihan!!
+                    }
+                    else{
+                        println("${response.message()}")
+                    }
+                }
+                else{
+                    Log.d("Error Frag Admin",response.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<PendaftaranResponse>, t: Throwable) {
+                Log.d("Error Frag Admin", "${t.message}")
+            }
+
+        })
+    }
+
+
+//    fun initRV(){
+//        adapterPelatihan = RVPelatihanAdapter(requireActivity(), listPelatihan, R.layout.pelatihan_list_item)
+//        binding.rvPelatihanAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//        binding.rvPelatihanAdmin.adapter = adapterPelatihan
+//    }
 }

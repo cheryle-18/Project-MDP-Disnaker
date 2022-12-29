@@ -29,6 +29,9 @@ interface ApiService {
     @GET("pelatihan")
     fun getPelatihan(): Call<PelatihanResponse>
 
+    @GET("pendaftaranPelatihan")
+    fun getPendaftaranPelatihan(): Call<PendaftaranResponse>
+
     //PERUSAHAAN
     @GET("perusahaan")
     fun getPerusahaan(

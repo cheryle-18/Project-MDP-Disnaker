@@ -17,7 +17,7 @@ class Pelatihan extends Model
     public $timestamps = true;
 
     public function peserta(){
-        return $this->belongsToMany(Peserta::class, 'pendaftaran_pelatihan', 'pelatihan_id', 'peserta_id');
+        return $this->belongsToMany(Peserta::class, 'pendaftaran_pelatihan', 'pelatihan_id', 'peserta_id')->withPivot("pp_id", "status_pendaftaran", "status_kelulusan");
     }
 
     public function kategori(){
