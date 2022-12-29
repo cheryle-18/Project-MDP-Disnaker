@@ -23,6 +23,9 @@ data class PendaftaranPelatihanItem(
     @field:SerializedName("pelatihan_nama")
     val pelatihan_nama: String? = null,
 
+    @field:SerializedName("kategori")
+    val kategori: String? = null,
+
     @field:SerializedName("status_pendaftaran")
     val status_pendaftaran: Int? = null,
 

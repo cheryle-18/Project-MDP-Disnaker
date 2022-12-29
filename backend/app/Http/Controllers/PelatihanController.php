@@ -16,6 +16,7 @@ class PelatihanController extends Controller
             foreach($p->peserta as $pe){
                 $temp_pelatihan[] = [
                     "pp_id" => $pe->pivot->pp_id,
+                    "kategori" => $p->kategori->nama,
                     "pelatihan_nama" => $p->nama,
                     "status_pendaftaran" => $pe->pivot->status_pendaftaran,
                     "status_kelulusan" => $pe->pivot->status_kelulusan,
@@ -27,7 +28,6 @@ class PelatihanController extends Controller
 
         return response()->json([
             "pelatihan" => $pelatihan,
-            // "user" => $pendaftaran_pelatihan[0]->peserta->user,
             "message" => "Berhasil fetch"
         ], 200);
     }

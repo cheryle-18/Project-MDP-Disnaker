@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentAdminPendaftaranBinding
-import com.example.projectdisnaker.rv.RVPelatihanAdapter
+import com.example.projectdisnaker.rv.RVPendaftaranAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AdminPendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentAdminPendaftaranBinding
-    private lateinit var adapterPelatihan : RVPelatihanAdapter
+    private lateinit var adapterPendaftaran : RVPendaftaranAdapter
     private lateinit var listPelatihan : List<PendaftaranPelatihanItem>
 
     override fun onCreateView(
@@ -43,9 +43,9 @@ class AdminPendaftaranFragment : Fragment() {
             override fun onResponse(call: Call<PendaftaranResponse>,response: Response<PendaftaranResponse>) {
                 if(response.isSuccessful){
                     val responseBody = response.body()
-                    Toast.makeText(requireContext(), responseBody.toString(), Toast.LENGTH_SHORT).show()
                     if(responseBody!=null){
                         listPelatihan = responseBody.pelatihan!!
+                        initRV()
                     }
                     else{
                         println("${response.message()}")
@@ -59,14 +59,13 @@ class AdminPendaftaranFragment : Fragment() {
             override fun onFailure(call: Call<PendaftaranResponse>, t: Throwable) {
                 Log.d("Error Frag Admin", "${t.message}")
             }
-
         })
     }
 
 
-//    fun initRV(){
-//        adapterPelatihan = RVPelatihanAdapter(requireActivity(), listPelatihan, R.layout.pelatihan_list_item)
-//        binding.rvPelatihanAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//        binding.rvPelatihanAdmin.adapter = adapterPelatihan
-//    }
+    fun initRV(){
+        adapterPendaftaran = RVPendaftaranAdapter(requireActivity(), listPelatihan, R.layout.pendaftaran_list_item)
+        binding.rvPendaftaranAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvPendaftaranAdmin.adapter = adapterPendaftaran
+    }
 }
