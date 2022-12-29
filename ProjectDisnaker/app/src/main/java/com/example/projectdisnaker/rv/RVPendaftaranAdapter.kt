@@ -20,7 +20,7 @@ class RVPendaftaranAdapter(private val activity: Activity,
 
     private var coroutine = CoroutineScope(Dispatchers.IO)
     private var status_nama = arrayOf("Pending", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
-    private var status_warna = arrayOf(Color.RED, Color.rgb(255,215,0), Color.rgb(255,215,0), Color.GREEN, Color.RED)
+    private var status_warna = arrayOf(Color.RED, Color.rgb(255,165,0), Color.rgb(255,165,0), Color.GREEN, Color.RED)
 
     class CustomViewHolder(var view: View) : RecyclerView.ViewHolder(view)
     {
