@@ -26,10 +26,10 @@ class User extends Authenticatable
     ];
 
     public function peserta(){
-        return $this->hasMany(Peserta::class, 'user_id', 'user_id');
+        return $this->hasOne(Peserta::class, 'user_id', 'user_id');
     }
 
     public function perusahaan(){
-        return $this->hasMany(Perusahaan::class, 'user_id', 'user_id');
+        return $this->hasOne(Perusahaan::class, 'user_id', 'user_id');
     }
 }

@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references
             ('user_id')->on('user')->onDelete('cascade');
-            $table->string('nik',20);
-            $table->date('tgl_lahir');
-            $table->string('pendidikan',20);
-            $table->string('jurusan',50);
+            $table->string('nik',20)->nullable();
+            $table->date('tgl_lahir')->nullable();
+            $table->string('pendidikan',20)->nullable();
+            $table->string('jurusan',50)->nullable();
             $table->integer('nilai')->nullable();
             $table->tinyInteger('status')->comment('0 = free, 1 = sedang pelatihan');
             $table->timestamps();

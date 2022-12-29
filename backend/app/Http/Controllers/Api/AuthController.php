@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Perusahaan;
+use App\Models\Peserta;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +27,7 @@ class AuthController extends Controller
 
             $userRet = [];
             if($user->role==0){
-                $peserta = $user->peserta[0];
+                $peserta = $user->peserta;
                 $userRet = [
                     "user_id" => $user->user_id,
                     "nama" => $user->nama,
@@ -43,7 +45,7 @@ class AuthController extends Controller
                 ];
             }
             else if($user->role==1){
-                $perusahaan = $user->perusahaan[0];
+                $perusahaan = $user->perusahaan;
                 $userRet = [
                     "user_id" => $user->user_id,
                     "nama" => $user->nama,
@@ -100,6 +102,21 @@ class AuthController extends Controller
                 "password"=>Hash::make($request->password),
                 "role"=>$request->role
             ]);
+
+            if($request->role == 0){
+                //peserta
+                Peserta::create([
+                    "user_id"=>$newUser->user_id,
+                    "status"=>0
+                ]);
+            }
+            else if($request->role == 1){
+                //perusahaan
+                Perusahaan::create([
+                    "user_id"=>$newUser->user_id,
+                ]);
+            }
+
             $newUser = [$newUser];
             $status = 1;
             $message = "Berhasil register!";

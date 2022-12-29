@@ -16,6 +16,11 @@ class Perusahaan extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $fillable = [
+        "user_id",
+        "alamat",
+    ];
+
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }

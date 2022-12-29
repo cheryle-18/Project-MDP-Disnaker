@@ -16,6 +16,16 @@ class Peserta extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $fillable = [
+        "user_id",
+        "nik",
+        "tgl_lahir",
+        "pendidikan",
+        "jurusan",
+        "nilai",
+        "status"
+    ];
+
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
