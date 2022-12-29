@@ -52,4 +52,21 @@ interface ApiService {
         @Query("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
 
+    @POST("lowongan/insert")
+    fun insertLowongan(
+        @Query("kategori") kategori: String,
+        @Query("perusahaan_id") perusahaanId: Int,
+        @Body lowongan: LowonganItem
+    ): Call<LowonganResponse>
+
+    @POST("lowongan/update")
+    fun updateLowongan(
+        @Query("kategori") kategori: String,
+        @Body lowongan: LowonganItem
+    ): Call<LowonganResponse>
+
+    @POST("lowongan/delete")
+    fun deleteLowongan(
+        @Query("lowongan_id") lowonganId: Int
+    ): Call<LowonganResponse>
 }

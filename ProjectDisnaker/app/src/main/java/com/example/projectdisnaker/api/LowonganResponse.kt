@@ -45,9 +45,8 @@ data class LowonganItem(
 
 @Parcelize
 data class SyaratItem(
-
-	@field:SerializedName("updated_at")
-	val updatedAt: Timestamp? = null,
+	@field:SerializedName("deskripsi")
+	val deskripsi: String? = null,
 
 	@field:SerializedName("sl_id")
 	val slId: Int? = null,
@@ -55,11 +54,11 @@ data class SyaratItem(
 	@field:SerializedName("lowongan_id")
 	val lowonganId: Int? = null,
 
+	@field:SerializedName("updated_at")
+	val updatedAt: Timestamp? = null,
+
 	@field:SerializedName("created_at")
 	val createdAt: Timestamp? = null,
-
-	@field:SerializedName("deskripsi")
-	val deskripsi: String? = null,
 
 	@field:SerializedName("deleted_at")
 	val deletedAt: Timestamp? = null

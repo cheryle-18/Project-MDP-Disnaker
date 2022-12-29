@@ -82,7 +82,7 @@ class LowonganController extends Controller
 
     public function insertLowongan(Request $req){
         //get kategori id
-        $kategori = Kategori::where('nama', $req->kategori);
+        $kategori = Kategori::where('nama', $req->kategori)->first();
 
         $lowongan = new Lowongan();
         $lowongan->nama = $req->nama;
@@ -90,7 +90,7 @@ class LowonganController extends Controller
         $lowongan->perusahaan_id = $req->perusahaan_id;
         $lowongan->kuota = $req->kuota;
         $lowongan->keterangan = $req->keterangan;
-        $lowongan->status = $req->status;
+        $lowongan->status = 1;
         $lowongan->save();
 
         //insert syarat
@@ -98,7 +98,7 @@ class LowonganController extends Controller
         foreach($syarat as $s){
             SyaratLowongan::create([
                 'lowongan_id' => $lowongan->lowongan_id,
-                'deskripsi' => $s->deskripsi
+                'deskripsi' => $s["deskripsi"]
             ]);
         }
 
