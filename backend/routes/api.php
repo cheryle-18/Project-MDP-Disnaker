@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UtilityController;
 use App\Http\Controllers\Api\LowonganController;
+use App\Http\Controllers\PelatihanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,7 @@ Route::get('/kategori', [UtilityController::class, 'getKategori']);
 Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
 Route::get('/perusahaan', [UtilityController::class, 'getPerusahaan']);
 Route::get('/peserta', [UtilityController::class, 'getPeserta']);
-Route::get('/pendaftaranPelatihan', [LowonganController::class, 'getPendaftaranPelatihan']);
+Route::get('/pendaftaranPelatihan', [PelatihanController::class, 'getPendaftaranPelatihan']);
 
 Route::prefix('lowongan')->group(function () {
     Route::get('/', [LowonganController::class, 'getAllLowongan']);
