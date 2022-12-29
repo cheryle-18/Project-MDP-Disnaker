@@ -52,25 +52,37 @@ class PerusahaanTambahFragment : Fragment() {
 
         //rv syarat
         syaratAdapter = RVTambahSyaratAdapter(listSyarat, requireContext()){
-            idx ->
-            val popup = PopupMenu(context, view)
-            popup.setOnMenuItemClickListener {
-                if(it.itemId == R.id.menu_ubah){
-                    var syarat = listSyarat.get(idx)
-                    binding.etSyaratLowongan.setText(syarat)
-                    mode = "edit"
-                    idxEdit = idx
-                    binding.btnTambahSyaratLow.setImageResource(R.drawable.ic_baseline_edit_24)
-                }
-                else if(it.itemId == R.id.menu_hapus){
-                    listSyarat.removeAt(idx)
-                    syaratAdapter.notifyDataSetChanged()
-                }
-                return@setOnMenuItemClickListener true
+            idx, mode ->
+            if(mode=="edit"){
+                var syarat = listSyarat.get(idx)
+                binding.etSyaratLowongan.setText(syarat)
+                this.mode = "edit"
+                idxEdit = idx
+                binding.btnTambahSyaratLow.setImageResource(R.drawable.ic_baseline_edit_24)
             }
-            val inflater = popup.menuInflater
-            inflater.inflate(R.menu.syarat_popup_menu, popup.menu)
-            popup.show()
+            else if(mode=="delete"){
+                listSyarat.removeAt(idx)
+                syaratAdapter.notifyDataSetChanged()
+            }
+
+//            val popup = PopupMenu(context, view)
+//            popup.setOnMenuItemClickListener {
+//                if(it.itemId == R.id.menu_ubah){
+//                    var syarat = listSyarat.get(idx)
+//                    binding.etSyaratLowongan.setText(syarat)
+//                    mode = "edit"
+//                    idxEdit = idx
+//                    binding.btnTambahSyaratLow.setImageResource(R.drawable.ic_baseline_edit_24)
+//                }
+//                else if(it.itemId == R.id.menu_hapus){
+//                    listSyarat.removeAt(idx)
+//                    syaratAdapter.notifyDataSetChanged()
+//                }
+//                return@setOnMenuItemClickListener true
+//            }
+//            val inflater = popup.menuInflater
+//            inflater.inflate(R.menu.syarat_popup_menu, popup.menu)
+//            popup.show()
         }
         binding.rvSyaratLowongan.adapter = syaratAdapter
         binding.rvSyaratLowongan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

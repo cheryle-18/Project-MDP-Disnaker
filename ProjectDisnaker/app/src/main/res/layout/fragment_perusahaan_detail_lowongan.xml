@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Detail Pendaftaran"
+                android:text="Detail Lowongan"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -116,7 +116,7 @@
 
                 <TextView
                     android:id="@+id/textView78"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Kategori"
@@ -125,7 +125,7 @@
 
                 <TextView
                     android:id="@+id/tvKategoriLow"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Administrasi"
@@ -149,7 +149,7 @@
 
                 <TextView
                     android:id="@+id/textView80"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Kuota"
@@ -158,7 +158,7 @@
 
                 <TextView
                     android:id="@+id/tvKuotaLow"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="10 peserta"

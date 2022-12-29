@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectdisnaker.R
 
@@ -14,6 +16,7 @@ class RVSyaratAdapter(
 ) : RecyclerView.Adapter<RVSyaratAdapter.ListViewHolder>() {
     inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val tvDescSyarat: TextView = view.findViewById(R.id.tvDescSyarat)
+        val ivDeleteSyarat: ImageView = view.findViewById(R.id.ivDeleteSyarat)
 
         init{
             view.setOnClickListener{
@@ -30,6 +33,7 @@ class RVSyaratAdapter(
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val syarat = listSyarat[position]
         holder.tvDescSyarat.setText(syarat)
+        holder.ivDeleteSyarat.isVisible = false
     }
 
     override fun getItemCount(): Int {
