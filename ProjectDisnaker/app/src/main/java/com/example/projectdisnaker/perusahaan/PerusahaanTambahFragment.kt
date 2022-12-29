@@ -1,14 +1,15 @@
 package com.example.projectdisnaker.perusahaan
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.PopupMenu
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
@@ -127,9 +128,22 @@ class PerusahaanTambahFragment : Fragment() {
                         if(response.isSuccessful){
                             val responseBody = response.body()
                             if(responseBody!=null){
-                                Toast.makeText(requireActivity(), "Berhasil tambah lowongan", Toast.LENGTH_SHORT).show()
-                                val fragment = PerusahaanLowonganFragment()
-                                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+                                val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                val dialog = Dialog(requireContext())
+                                dialog.setContentView(dialogBinding)
+
+                                dialog.setCancelable(true)
+                                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                dialog.show()
+
+                                val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                tvDialog.setText("Berhasil menambah lowongan.")
+                                btnOk.setOnClickListener {
+                                    dialog.dismiss()
+                                    val fragment = PerusahaanLowonganFragment()
+                                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+                                }
                             }
                             else{
                                 Log.e("Tambah Low Frag", "${response.message()}")

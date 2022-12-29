@@ -91,16 +91,16 @@ class LowonganController extends Controller
         $lowongan->kuota = $req->kuota;
         $lowongan->keterangan = $req->keterangan;
         $lowongan->status = 1;
-        $lowongan->save();
+        // $lowongan->save();
 
         //insert syarat
-        $syarat = $req->syarat;
-        foreach($syarat as $s){
-            SyaratLowongan::create([
-                'lowongan_id' => $lowongan->lowongan_id,
-                'deskripsi' => $s["deskripsi"]
-            ]);
-        }
+        // $syarat = $req->syarat;
+        // foreach($syarat as $s){
+        //     SyaratLowongan::create([
+        //         'lowongan_id' => $lowongan->lowongan_id,
+        //         'deskripsi' => $s["deskripsi"]
+        //     ]);
+        // }
 
         return response()->json([
             // "lowongan" => $lowongan,

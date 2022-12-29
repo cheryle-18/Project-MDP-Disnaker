@@ -43,7 +43,7 @@ class AdminLowonganFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt("lowongan_id", listLowongan.get(idx)!!.lowonganId!!)
             fragment.arguments = bundle
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
         }
         binding.rvLowonganAdmin.adapter = lowonganAdapter
         binding.rvLowonganAdmin.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
