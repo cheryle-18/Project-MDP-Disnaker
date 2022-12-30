@@ -41,11 +41,17 @@ class LoginActivity : AppCompatActivity() {
                                     val loginedUser = responseBody.userResponse!![0]!!
                                     //check login based on role
                                     if(loginedUser.role == 0){
+                                        binding.edtUsernameLogin.setText("")
+                                        binding.edtPassLogin.setText("")
+
                                         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                                         intent.putExtra("user", loginedUser)
                                         startActivity(intent)
                                     }
                                     else if(loginedUser.role == 1){
+                                        binding.edtUsernameLogin.setText("")
+                                        binding.edtPassLogin.setText("")
+
                                         val intent = Intent(this@LoginActivity, PerusahaanActivity::class.java)
                                         intent.putExtra("user", loginedUser)
                                         startActivity(intent)

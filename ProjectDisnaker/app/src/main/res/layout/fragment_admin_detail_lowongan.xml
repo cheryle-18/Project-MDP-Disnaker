@@ -60,6 +60,15 @@
         android:textSize="15sp" />
 
     <TextView
+        android:id="@+id/tvStatusLowAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Status: Aktif"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
         android:id="@+id/tvKeteranganLowongan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,7 +90,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSyaratLowonganAdmin"
         android:layout_width="match_parent"
-        android:layout_height="380dp" />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnLihatPendaftaranAdm"

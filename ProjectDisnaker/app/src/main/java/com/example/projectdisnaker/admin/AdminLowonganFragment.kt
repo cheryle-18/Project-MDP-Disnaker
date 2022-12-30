@@ -41,7 +41,7 @@ class AdminLowonganFragment : Fragment() {
                 idx ->
             val fragment = AdminDetailLowonganFragment()
             val bundle = Bundle()
-            bundle.putInt("lowongan_id", listLowongan.get(idx)!!.lowonganId!!)
+            bundle.putParcelable("lowongan", listLowongan.get(idx)!!)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
         }

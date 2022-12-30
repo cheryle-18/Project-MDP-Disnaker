@@ -1,5 +1,6 @@
 package com.example.projectdisnaker.perusahaan
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +39,17 @@ class PerusahaanDetailLowonganFragment : Fragment() {
         binding.tvKategoriLow.setText(lowongan.kategori)
         binding.tvKuotaLow.setText("${lowongan.kuota} peserta")
         binding.tvKeteranganLowongan.setText(lowongan.keterangan)
+
+        var status = lowongan.status
+        if(status==0){
+            binding.tvStatusLow.setText("Ditutup")
+            binding.tvStatusLow.setTextColor(resources.getColor(R.color.red))
+            binding.layoutTutupLowongan.visibility = View.GONE
+        }
+        else{
+            binding.tvStatusLow.setText("Aktif")
+            binding.tvStatusLow.setTextColor(resources.getColor(R.color.green_900))
+        }
 
         for(syarat in lowongan.syarat!!){
             syaratLowongan.add(syarat!!.deskripsi!!)
