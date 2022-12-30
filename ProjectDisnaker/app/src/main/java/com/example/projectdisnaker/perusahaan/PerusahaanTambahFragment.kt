@@ -65,25 +65,6 @@ class PerusahaanTambahFragment : Fragment() {
                 listSyarat.removeAt(idx)
                 syaratAdapter.notifyDataSetChanged()
             }
-
-//            val popup = PopupMenu(context, view)
-//            popup.setOnMenuItemClickListener {
-//                if(it.itemId == R.id.menu_ubah){
-//                    var syarat = listSyarat.get(idx)
-//                    binding.etSyaratLowongan.setText(syarat)
-//                    mode = "edit"
-//                    idxEdit = idx
-//                    binding.btnTambahSyaratLow.setImageResource(R.drawable.ic_baseline_edit_24)
-//                }
-//                else if(it.itemId == R.id.menu_hapus){
-//                    listSyarat.removeAt(idx)
-//                    syaratAdapter.notifyDataSetChanged()
-//                }
-//                return@setOnMenuItemClickListener true
-//            }
-//            val inflater = popup.menuInflater
-//            inflater.inflate(R.menu.syarat_popup_menu, popup.menu)
-//            popup.show()
         }
         binding.rvSyaratLowongan.adapter = syaratAdapter
         binding.rvSyaratLowongan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -113,6 +94,11 @@ class PerusahaanTambahFragment : Fragment() {
             var keterangan = binding.etKeteranganLowongan.text.toString()
 
             if(kategori!="" && nama!="" && kuota!="" && keterangan!=""){
+                if(kuota.toInt() <= 0){
+                    Toast.makeText(requireActivity(), "Kuota harus lebih dari 0", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 var syaratArr = ArrayList<SyaratItem>()
                 for(s in listSyarat){
                     syaratArr.add(SyaratItem(s))
@@ -142,7 +128,8 @@ class PerusahaanTambahFragment : Fragment() {
                                 btnOk.setOnClickListener {
                                     dialog.dismiss()
                                     val fragment = PerusahaanLowonganFragment()
-                                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
                                 }
                             }
                             else{
@@ -156,11 +143,42 @@ class PerusahaanTambahFragment : Fragment() {
                     }
                 })
             }
+            else{
+                Toast.makeText(requireActivity(), "Lengkapi semua data lowongan", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.ivBackTambahLow.setOnClickListener {
-            val fragment = PerusahaanLowonganFragment()
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+            if(binding.etNamaLowongan.text.toString()!="" || binding.etKuotaLowongan.text.toString()!=""
+                || binding.etKeteranganLowongan.text.toString()!="" || listSyarat.size>0){
+                val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+                val dialog = Dialog(requireContext())
+                dialog.setContentView(dialogBinding)
+
+                dialog.setCancelable(true)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+
+                val btnKembali = dialogBinding.findViewById<Button>(R.id.btnKembaliDialog)
+                val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnKeluarDialog)
+                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+                tvDialog.setText("Keluar tanpa menyimpan lowongan?")
+
+                btnKembali.setOnClickListener {
+                    dialog.dismiss()
+                }
+                btnKeluar.setOnClickListener {
+                    dialog.dismiss()
+                    val fragment = PerusahaanLowonganFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                }
+            }
+            else{
+                val fragment = PerusahaanLowonganFragment()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_perusahaan, fragment).commit()
+            }
         }
     }
 

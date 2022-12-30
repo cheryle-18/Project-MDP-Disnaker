@@ -95,11 +95,13 @@ class LowonganController extends Controller
 
         //insert syarat
         $syarat = $req->syarat;
-        foreach($syarat as $s){
-            SyaratLowongan::create([
-                'lowongan_id' => $lowongan->lowongan_id,
-                'deskripsi' => $s["deskripsi"]
-            ]);
+        if(sizeof($syarat)>0){
+            foreach($syarat as $s){
+                SyaratLowongan::create([
+                    'lowongan_id' => $lowongan->lowongan_id,
+                    'deskripsi' => $s["deskripsi"]
+                ]);
+            }
         }
 
         return response()->json([
@@ -124,11 +126,13 @@ class LowonganController extends Controller
 
         //insert syarat
         $syarat = $req->syarat;
-        foreach($syarat as $s){
-            SyaratLowongan::create([
-                'lowongan_id' => $lowongan->lowongan_id,
-                'deskripsi' => $s->deskripsi
-            ]);
+        if(sizeof($syarat)>0){
+            foreach($syarat as $s){
+                SyaratLowongan::create([
+                    'lowongan_id' => $lowongan->lowongan_id,
+                    'deskripsi' => $s["deskripsi"]
+                ]);
+            }
         }
 
         return response()->json([

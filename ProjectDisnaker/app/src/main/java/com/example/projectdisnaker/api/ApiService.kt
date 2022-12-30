@@ -47,9 +47,9 @@ interface ApiService {
         @Query("perusahaan_id") perusahaanId: Int
     ): Call<LowonganResponse>
 
-    @GET("lowongan/get")
+    @GET("lowongan/{lowongan_id}")
     fun getLowongan(
-        @Query("lowongan_id") lowonganId: Int
+        @Path("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
 
     @POST("lowongan/insert")

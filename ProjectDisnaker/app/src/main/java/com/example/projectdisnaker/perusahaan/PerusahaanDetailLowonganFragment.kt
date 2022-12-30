@@ -50,5 +50,13 @@ class PerusahaanDetailLowonganFragment : Fragment() {
             val fragment = PerusahaanLowonganFragment()
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
         }
+
+        binding.layoutUbahLowongan.setOnClickListener {
+            val fragment = PerusahaanEditFragment()
+            val bundle = Bundle()
+            bundle.putParcelable("lowongan", lowongan)
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+        }
     }
 }
