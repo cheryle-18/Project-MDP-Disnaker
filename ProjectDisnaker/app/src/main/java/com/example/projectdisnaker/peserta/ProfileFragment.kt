@@ -38,6 +38,17 @@ class ProfileFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
         }
 
+        binding.layoutPelatihan.setOnClickListener {
+            val fragment = RiwayatPelatihanFragment()
+            val bundle = Bundle()
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+        }
+
+        binding.layoutTidakKerja.setOnClickListener {
+            //dialog
+        }
+
         binding.layoutLogout.setOnClickListener{
             requireActivity().finish()
         }

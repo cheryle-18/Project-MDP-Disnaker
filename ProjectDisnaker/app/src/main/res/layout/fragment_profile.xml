@@ -29,19 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/linearLayout3"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="500dp"-->
-    <!--        android:layout_marginTop="124dp"-->
-    <!--        android:background="@drawable/rounded_bg"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:padding="30dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="1.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="wrap_content"
@@ -49,7 +36,6 @@
         android:orientation="horizontal"
         android:padding="20dp"
         android:paddingRight="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:text="Profile"
+                android:text="Profil Saya"
                 android:textColor="@color/green_900"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -246,6 +232,54 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutPelatihan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView82"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Riwayat Pelatihan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView19"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutTidakKerja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView83"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Saya Sudah Tidak Bekerja"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView18"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/layoutLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -271,7 +305,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

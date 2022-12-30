@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_900"
-    tools:context=".peserta.PasswordFragment">
+    tools:context=".peserta.RiwayatPelatihanFragment">
 
     <ImageView
         android:id="@+id/imageView13"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/ivBackPass"
+            android:id="@+id/ivBackRPel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_arrow_back_24" />
@@ -113,58 +113,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
-            android:text="Ubah Password"
+            android:text="Riwayat Pelatihan"
             android:textColor="@color/green_900"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView17"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRiwayatPelatihan"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password Baru" />
+            android:layout_height="match_parent" />
 
-        <EditText
-            android:id="@+id/etPassBaru"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
 
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Konfirmasi Password Baru" />
-
-        <EditText
-            android:id="@+id/etConfBaru"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Password Lama" />
-
-        <EditText
-            android:id="@+id/etPassLama"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/btnUbahPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="ubah password" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
