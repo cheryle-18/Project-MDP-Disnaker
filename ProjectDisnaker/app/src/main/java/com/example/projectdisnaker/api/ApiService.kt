@@ -59,14 +59,15 @@ interface ApiService {
         @Body lowongan: LowonganItem
     ): Call<LowonganResponse>
 
-    @POST("lowongan/update")
+    @POST("lowongan/update/{lowongan_id}")
     fun updateLowongan(
+        @Path("lowongan_id") lowonganId: Int,
         @Query("kategori") kategori: String,
         @Body lowongan: LowonganItem
     ): Call<LowonganResponse>
 
-    @POST("lowongan/delete")
+    @POST("lowongan/delete/{lowongan_id}")
     fun deleteLowongan(
-        @Query("lowongan_id") lowonganId: Int
+        @Path("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
 }

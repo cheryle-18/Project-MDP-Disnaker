@@ -112,13 +112,12 @@ class LowonganController extends Controller
 
     public function updateLowongan(Request $req){
         $lowongan = Lowongan::find($req->lowongan_id);
-        $kategori = Kategori::where('nama', $req->kategori);
+        $kategori = Kategori::where('nama', $req->kategori)->first();
 
         $lowongan->nama = $req->nama;
         $lowongan->kategori_id = $kategori->kategori_id;
         $lowongan->kuota = $req->kuota;
         $lowongan->keterangan = $req->keterangan;
-        $lowongan->status = $req->status;
         $lowongan->save();
 
         //delete all syarat

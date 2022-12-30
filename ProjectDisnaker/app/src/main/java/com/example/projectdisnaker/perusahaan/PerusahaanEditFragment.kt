@@ -25,9 +25,9 @@ import retrofit2.Response
 class PerusahaanEditFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanEditBinding
     private var listSyarat:ArrayList<String> = ArrayList()
-    private var listKategori:ArrayList<KategoriItem> = ArrayList()
+    private var listKategori:ArrayList<String> = ArrayList()
     private lateinit var syaratAdapter: RVTambahSyaratAdapter
-    private lateinit var spinnerAdapter: ArrayAdapter<KategoriItem>
+    private lateinit var spinnerAdapter: ArrayAdapter<String>
     private lateinit var currLowongan: LowonganItem
     private lateinit var user: UserResponseItem
 
@@ -78,7 +78,7 @@ class PerusahaanEditFragment : Fragment() {
         binding.etNamaLowEdit.setText(currLowongan.nama)
         binding.etKuotaLowEdit.setText(currLowongan.kuota.toString())
         binding.etKeteranganLowEdit.setText(currLowongan.kuota.toString())
-        binding.spinnerKategoriLowEdit.setSelection(spinnerAdapter.getPosition(KategoriItem(null, currLowongan.kategori)))
+        binding.spinnerKategoriLowEdit.setSelection(spinnerAdapter.getPosition(currLowongan.kategori))
         for(s in currLowongan.syarat!!){
             listSyarat.add(s!!.deskripsi!!)
         }
@@ -123,7 +123,7 @@ class PerusahaanEditFragment : Fragment() {
                     null, null, syaratArr)
 
                 var client = ApiConfiguration.getApiService()
-                    .updateLowongan(kategori, lowongan)
+                    .updateLowongan(currLowongan.lowonganId!!, kategori, lowongan)
                 client.enqueue(object: Callback<LowonganResponse> {
                     override fun onResponse(call: Call<LowonganResponse>, response: Response<LowonganResponse>) {
                         if(response.isSuccessful){
@@ -197,8 +197,15 @@ class PerusahaanEditFragment : Fragment() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         listKategori.clear()
-                        listKategori.addAll(responseBody.kategori!!.toMutableList())
+                        var temp = responseBody.kategori!!.toMutableList()
+                        for(t in temp){
+                            listKategori.add(t.nama!!)
+                        }
                         spinnerAdapter.notifyDataSetChanged()
+
+                        if(currLowongan!=null){
+                            binding.spinnerKategoriLowEdit.setSelection(spinnerAdapter.getPosition(currLowongan.kategori))
+                        }
                     }
                 }
                 else{

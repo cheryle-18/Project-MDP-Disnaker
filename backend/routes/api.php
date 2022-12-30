@@ -38,9 +38,9 @@ Route::prefix('lowongan')->group(function () {
     Route::get('/perusahaan', [LowonganController::class, 'getLowonganPerusahaan']);
     Route::get('/{lowongan_id}', [LowonganController::class, 'getLowongan']);
     Route::post('/insert', [LowonganController::class, 'insertLowongan']);
-    Route::post('/update', [LowonganController::class, 'updateLowongan']);
-    Route::post('/delete', [LowonganController::class, 'deleteLowongan']);
-    Route::post('/tutup', [LowonganController::class, 'tutupLowongan']);
+    Route::post('/update/{lowongan_id}', [LowonganController::class, 'updateLowongan']);
+    Route::post('/delete/{lowongan_id}', [LowonganController::class, 'deleteLowongan']);
+    Route::post('/tutup/{lowongan_id}', [LowonganController::class, 'tutupLowongan']);
     Route::get('/pendaftaran', [LowonganController::class, 'getPendaftaran']);
     Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
 
