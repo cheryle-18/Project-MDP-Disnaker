@@ -35,13 +35,12 @@ Route::get('/pendaftaranPelatihan', [PelatihanController::class, 'getPendaftaran
 
 Route::prefix('lowongan')->group(function () {
     Route::get('/', [LowonganController::class, 'getAllLowongan']);
-    Route::get('/perusahaan', [LowonganController::class, 'getLowonganPerusahaan']);
+    Route::get('/perusahaan/{perusahaan_id}', [LowonganController::class, 'getLowonganPerusahaan']);
     Route::get('/{lowongan_id}', [LowonganController::class, 'getLowongan']);
     Route::post('/insert', [LowonganController::class, 'insertLowongan']);
     Route::post('/update/{lowongan_id}', [LowonganController::class, 'updateLowongan']);
     Route::post('/delete/{lowongan_id}', [LowonganController::class, 'deleteLowongan']);
     Route::post('/tutup/{lowongan_id}', [LowonganController::class, 'tutupLowongan']);
-    Route::get('/pendaftaran', [LowonganController::class, 'getPendaftaran']);
+    Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
     Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
-
 });

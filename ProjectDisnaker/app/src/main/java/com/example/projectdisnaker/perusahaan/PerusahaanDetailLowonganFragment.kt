@@ -57,11 +57,17 @@ class PerusahaanDetailLowonganFragment : Fragment() {
 
         binding.ivBackDetailLow.setOnClickListener {
             val fragment = PerusahaanLowonganFragment()
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_perusahaan, fragment).commit()
         }
 
         binding.layoutLihatPendaftaran.setOnClickListener {
-
+            val fragment = PerusahaanLihatPendaftaranFragment()
+            val bundle = Bundle()
+            bundle.putInt("lowongan_id", lowonganId!!)
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_perusahaan, fragment).commit()
         }
 
         binding.layoutTutupLowongan.setOnClickListener {
@@ -137,7 +143,8 @@ class PerusahaanDetailLowonganFragment : Fragment() {
             val bundle = Bundle()
             bundle.putParcelable("lowongan", lowongan)
             fragment.arguments = bundle
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_perusahaan, fragment).commit()
         }
 
         binding.layoutHapusLowngan.setOnClickListener {
@@ -180,7 +187,8 @@ class PerusahaanDetailLowonganFragment : Fragment() {
                                 btnOk.setOnClickListener {
                                     dialog.dismiss()
                                     val fragment = PerusahaanLowonganFragment()
-                                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
                                 }
                             }
                         }
