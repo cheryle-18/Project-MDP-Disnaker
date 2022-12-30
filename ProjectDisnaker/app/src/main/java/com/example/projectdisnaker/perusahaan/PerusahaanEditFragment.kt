@@ -77,7 +77,7 @@ class PerusahaanEditFragment : Fragment() {
         currLowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
         binding.etNamaLowEdit.setText(currLowongan.nama)
         binding.etKuotaLowEdit.setText(currLowongan.kuota.toString())
-        binding.etKeteranganLowEdit.setText(currLowongan.kuota.toString())
+        binding.etKeteranganLowEdit.setText(currLowongan.keterangan.toString())
         binding.spinnerKategoriLowEdit.setSelection(spinnerAdapter.getPosition(currLowongan.kategori))
         for(s in currLowongan.syarat!!){
             listSyarat.add(s!!.deskripsi!!)
@@ -120,7 +120,7 @@ class PerusahaanEditFragment : Fragment() {
                 }
 
                 var lowongan = LowonganItem(keterangan, nama, kuota.toInt(), null,
-                    null, null, syaratArr)
+                    null, null, null, syaratArr)
 
                 var client = ApiConfiguration.getApiService()
                     .updateLowongan(currLowongan.lowonganId!!, kategori, lowongan)
@@ -132,7 +132,6 @@ class PerusahaanEditFragment : Fragment() {
                                 val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
                                 val dialog = Dialog(requireContext())
                                 dialog.setContentView(dialogBinding)
-
                                 dialog.setCancelable(true)
                                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                                 dialog.show()
@@ -140,10 +139,15 @@ class PerusahaanEditFragment : Fragment() {
                                 val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
                                 val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
                                 tvDialog.setText("Berhasil mengubah lowongan.")
+
                                 btnOk.setOnClickListener {
                                     dialog.dismiss()
-                                    val fragment = PerusahaanLowonganFragment()
-                                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
+                                    val fragment = PerusahaanDetailLowonganFragment()
+                                    val bundle = Bundle()
+                                    bundle.putInt("lowongan_id", currLowongan.lowonganId!!)
+                                    fragment.arguments = bundle
+                                    requireActivity().supportFragmentManager.beginTransaction()
+                                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
                                 }
                             }
                             else{
@@ -167,13 +171,12 @@ class PerusahaanEditFragment : Fragment() {
             val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
             val dialog = Dialog(requireContext())
             dialog.setContentView(dialogBinding)
-
             dialog.setCancelable(true)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
 
-            val btnKembali = dialogBinding.findViewById<Button>(R.id.btnKembaliDialog)
-            val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnKeluarDialog)
+            val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
             val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
             tvDialog.setText("Keluar tanpa menyimpan lowongan?")
 
@@ -182,7 +185,10 @@ class PerusahaanEditFragment : Fragment() {
             }
             btnKeluar.setOnClickListener {
                 dialog.dismiss()
-                val fragment = PerusahaanLowonganFragment()
+                val fragment = PerusahaanDetailLowonganFragment()
+                val bundle = Bundle()
+                bundle.putInt("lowongan_id", currLowongan.lowonganId!!)
+                fragment.arguments = bundle
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_perusahaan, fragment).commit()
             }

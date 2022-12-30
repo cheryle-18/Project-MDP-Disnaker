@@ -47,7 +47,6 @@
                 android:id="@+id/tvNamaLowongan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Administrasi Kantor"
                 android:textColor="@color/white"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -58,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
-                android:text="PT XYZ"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -128,7 +126,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Administrasi"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -161,7 +158,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="10 peserta"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -212,7 +208,6 @@
                 android:id="@+id/tvKeteranganLowongan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="lorem ipsum"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -266,6 +261,7 @@
                 android:padding="5dp">
 
                 <TextView
+                    android:id="@+id/tvTutupLowongan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

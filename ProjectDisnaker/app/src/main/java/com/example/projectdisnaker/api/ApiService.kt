@@ -70,4 +70,9 @@ interface ApiService {
     fun deleteLowongan(
         @Path("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
+
+    @POST("lowongan/tutup/{lowongan_id}")
+    fun tutupLowongan(
+        @Path("lowongan_id") lowonganId: Int
+    ): Call<LowonganResponse>
 }

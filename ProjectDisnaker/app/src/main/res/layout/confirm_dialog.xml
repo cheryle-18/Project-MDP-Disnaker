@@ -9,7 +9,7 @@
     android:padding="30dp">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
+        android:id="@+id/avConfirm"
         android:layout_width="237dp"
         android:layout_height="77dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,13 +47,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDialogConfirm">
 
         <Button
-            android:id="@+id/btnKembaliDialog"
+            android:id="@+id/btnConfirmDialog"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:text="kembali" />
 
         <Button
-            android:id="@+id/btnKeluarDialog"
+            android:id="@+id/btnCancelDialog"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"

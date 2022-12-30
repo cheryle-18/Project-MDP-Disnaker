@@ -11,6 +11,9 @@ data class LowonganResponse(
 	@field:SerializedName("lowongan")
 	val lowongan: List<LowonganItem?>? = null,
 
+	@field:SerializedName("currLowongan")
+	val currLowongan: LowonganItem? = null,
+
 	@field:SerializedName("message")
 	val message: String? = null
 ) : Parcelable
@@ -29,6 +32,9 @@ data class LowonganItem(
 
 	@field:SerializedName("lowongan_id")
 	val lowonganId: Int? = null,
+
+	@field:SerializedName("pendaftaran")
+	val pendaftaran: Int? = null,
 
 	@field:SerializedName("perusahaan")
 	val perusahaan: String? = null,

@@ -42,6 +42,7 @@ class PerusahaanLowonganFragment : Fragment() {
             val fragment = PerusahaanDetailLowonganFragment()
             val bundle = Bundle()
             bundle.putParcelable("lowongan", listLowongan.get(idx)!!)
+            bundle.putInt("lowongan_id", listLowongan.get(idx)!!.lowonganId!!)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
         }

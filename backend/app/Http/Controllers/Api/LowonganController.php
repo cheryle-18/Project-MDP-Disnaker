@@ -42,12 +42,15 @@ class LowonganController extends Controller
         $lowongan = [];
 
         foreach($temp as $t){
+            $pendaftaran = PendaftaranLowongan::where('lowongan_id', $t->lowongan_id)->count();
+
             $lowongan[] = [
                 "lowongan_id" => $t->lowongan_id,
                 "nama" => $t->nama,
                 "kategori" => $t->kategori->nama,
                 "perusahaan" => $t->perusahaan->user->nama,
                 "kuota" => $t->kuota,
+                "pendaftaran" => $pendaftaran,
                 "keterangan" => $t->keterangan,
                 "status" => $t->status,
                 "syarat" => $t->syarat
@@ -61,7 +64,8 @@ class LowonganController extends Controller
     }
 
     public function getLowongan(Request $req){
-        $t = Lowongan::find($req->lowongan_id)->with('syarat')->first();
+        $t = Lowongan::where('lowongan_id', $req->lowongan_id)->with('syarat')->first();
+        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->count();
 
         $lowongan = [
             "lowongan_id" => $t->lowongan_id,
@@ -69,13 +73,14 @@ class LowonganController extends Controller
             "kategori" => $t->kategori->nama,
             "perusahaan" => $t->perusahaan->user->nama,
             "kuota" => $t->kuota,
+            "pendaftaran" => $pendaftaran,
             "keterangan" => $t->keterangan,
             "status" => $t->status,
             "syarat" => $t->syarat
         ];
 
         return response()->json([
-            "lowongan" => $lowongan,
+            "currLowongan" => $lowongan,
             "message" => "Berhasil fetch"
         ], 200);
     }
@@ -143,8 +148,9 @@ class LowonganController extends Controller
     public function deleteLowongan(Request $req){
         $lowongan = Lowongan::find($req->lowongan_id);
 
-        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id);
-        if(!$pendaftaran){ //blm ada yg daftar
+        $pendaftaran = [];
+        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->get();
+        if(sizeof($pendaftaran)==0){ //blm ada yg daftar
             //delete syarat
             SyaratLowongan::where('lowongan_id', $req->lowongan_id)->delete();
 
@@ -154,13 +160,19 @@ class LowonganController extends Controller
             return response()->json([
                 // "lowongan" => $lowongan,
                 "message" => "Berhasil menghapus lowongan"
-            ], 200, );
+            ], 200);
+        }
+        else{
+            return response()->json([
+                // "lowongan" => $lowongan,
+                "message" => "Lowongan tidak bisa dihapus"
+            ], 500);
         }
     }
 
     public function tutupLowongan(Request $req){
         $lowongan = Lowongan::find($req->lowongan_id);
-        $lowongan->status = 0;
+        $lowongan->status = !$lowongan->status;
         $lowongan->save();
 
         return response()->json([
