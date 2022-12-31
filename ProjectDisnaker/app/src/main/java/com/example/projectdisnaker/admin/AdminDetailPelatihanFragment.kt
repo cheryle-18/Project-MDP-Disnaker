@@ -7,11 +7,20 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.api.LowonganItem
+import com.example.projectdisnaker.api.PelatihanItem
 import com.example.projectdisnaker.databinding.FragmentAdminDetailPelatihanBinding
+import com.example.projectdisnaker.rv.RVSyaratAdapter
 
 class AdminDetailPelatihanFragment : Fragment() {
     private lateinit var binding: FragmentAdminDetailPelatihanBinding
+    private lateinit var pelatihan: PelatihanItem
+    private var syaratPelatihan: ArrayList<String> = ArrayList()
+    private lateinit var syaratAdapter: RVSyaratAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +40,23 @@ class AdminDetailPelatihanFragment : Fragment() {
         actionBar?.setTitle("Pelatihan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+
+        pelatihan = requireArguments().getParcelable<PelatihanItem>("pelatihan")!!
+
+        binding.tvNamaDetailAdmin.setText(pelatihan.nama)
+        binding.tvKategoriDetailAdmin.setText("Kategori: ${pelatihan.kategori}")
+        binding.tvKuotaDetailAdmin.setText("Kuota Tersedia: ${pelatihan.kuota}")
+        binding.tvDurasiDetailAdmin.setText("Durasi Pelatihan: ${pelatihan.durasi} hari")
+        binding.tvMinPendidikanAdmin.setText("Pendidikan Minimal: ${pelatihan.pendidikan}")
+
+
+        for(syarat in pelatihan.syarat!!){
+            syaratPelatihan.add(syarat!!.deskripsi!!)
+        }
+        syaratAdapter = RVSyaratAdapter(syaratPelatihan, requireContext())
+        binding.rvSyaratPelatihanAdmin.adapter = syaratAdapter
+        binding.rvSyaratPelatihanAdmin.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
 
         binding.btnEditPelatihan.setOnClickListener {
             val fragment = AdminEditPelatihanFragment()

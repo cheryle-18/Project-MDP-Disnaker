@@ -18,7 +18,8 @@ import kotlinx.coroutines.launch
 
 class RVPelatihanAdapter(private val activity: Activity,
                         private val listPelatihan : List<PelatihanItem>,
-                        private val layout : Int
+                        private val layout : Int,
+                        private val onClick: (idx:Int)->Unit
 ) : RecyclerView.Adapter<RVPelatihanAdapter.CustomViewHolder>() {
 
     private var coroutine = CoroutineScope(Dispatchers.IO)
@@ -47,6 +48,10 @@ class RVPelatihanAdapter(private val activity: Activity,
         holder.txtNama.text = item.nama
         holder.txtKuota.text = "Kuota: "+item.kuota+" peserta"
         holder.txtDurasi.text = "Durasi: "+item.durasi+" hari"
+
+        holder.txtDetail.setOnClickListener {
+            onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -87,7 +87,14 @@ class AdminPelatihanFragment : Fragment() {
 
 
     fun initRV(){
-        adapterPelatihan = RVPelatihanAdapter(requireActivity(), listPelatihan, R.layout.pelatihan_list_item)
+        adapterPelatihan = RVPelatihanAdapter(requireActivity(), listPelatihan, R.layout.pelatihan_list_item){
+                idx ->
+            val fragment = AdminDetailPelatihanFragment()
+            val bundle = Bundle()
+            bundle.putParcelable("pelatihan", listPelatihan.get(idx)!!)
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
+        }
         binding.rvPelatihanAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPelatihanAdmin.adapter = adapterPelatihan
     }
