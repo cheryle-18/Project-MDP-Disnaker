@@ -26,8 +26,15 @@ interface ApiService {
     @GET("kategori")
     fun getKategori(): Call<KategoriResponse>
 
+
+    //PELATIHAN
     @GET("pelatihan")
     fun getPelatihan(): Call<PelatihanResponse>
+
+    @POST("pelatihan/insert")
+    fun insertPelatihan(
+        @Body pelatihan: PelatihanItem
+    ): Call<PelatihanResponse>
 
     @GET("pendaftaranPelatihan")
     fun getPendaftaranPelatihan(): Call<PendaftaranResponse>

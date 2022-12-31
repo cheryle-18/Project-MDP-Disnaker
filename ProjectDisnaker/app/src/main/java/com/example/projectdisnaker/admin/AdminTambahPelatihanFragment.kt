@@ -88,17 +88,58 @@ class AdminTambahPelatihanFragment : Fragment() {
 
         binding.btnTambahPel.setOnClickListener {
             var kategori = binding.spinnerKategoriPel.selectedItem.toString()
-            var kuota = binding.etKuotaPelatihan.text.toString()
+            var kuota = binding.etKuotaPelatihan.text.toString().toInt()
             var durasi = binding.etDurasiPelatihan.text.toString().toInt()
             var min = binding.spinnerPendidikanPel.selectedItem.toString()
+            var ket = binding.etKeteranganPelatihan.text.toString()
+            var nama = binding.etNamaPelatihan.text.toString()
 
-            if(kategori!="" && kuota!="" && durasi>0 && min!=""){
-                var syaratArr = ArrayList<SyaratItem>()
-                for(s in listSyarat){
-                    syaratArr.add(SyaratItem(s))
+            if(kategori!="" && min!=""){
+                if(kuota >0 && durasi >0){
+                    var syaratArr = ArrayList<SyaratItem>()
+                    for(s in listSyarat){
+                        syaratArr.add(SyaratItem(s))
+                    }
+                    var pelatihan = PelatihanItem(null,ket,nama,min,kuota,kategori,durasi,syaratArr,1)
+                    var client = ApiConfiguration.getApiService()
+                        .insertPelatihan(pelatihan)
+                    client.enqueue(object: Callback<PelatihanResponse> {
+                        override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>) {
+                            if(response.isSuccessful){
+                                val responseBody = response.body()
+                                if(responseBody!=null){
+                                    val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                    val dialog = Dialog(requireContext())
+                                    dialog.setContentView(dialogBinding)
+                                    dialog.setCancelable(true)
+                                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                    dialog.show()
+
+                                    val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                    tvDialog.setText("Berhasil menambah pelatihan.")
+
+                                    btnOk.setOnClickListener {
+                                        dialog.dismiss()
+                                        val fragment = AdminPelatihanFragment()
+                                        requireActivity().supportFragmentManager.beginTransaction()
+                                            .replace(R.id.fragment_container_admin, fragment).commit()
+                                    }
+                                }
+                                else{
+                                    Log.e("Tambah pelatihan Frag", "${response.message()}")
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<PelatihanResponse>, t: Throwable) {
+                            Log.e("Tambah pelatihan Frag", "${t.message}")
+                        }
+                    })
                 }
-
-
+                else{
+                    Toast.makeText(requireContext(),"Kuota atau durasi harus > 0!",Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

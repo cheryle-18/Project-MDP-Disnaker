@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/activity_admin.xml" value="0.2" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_detail_pelatihan.xml" value="0.264" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_tambah_pelatihan.xml" value="0.264" />
+        <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/success_dialog.xml" value="0.264" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/syarat_list_item.xml" value="0.4" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/menu/syarat_popup_menu.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/drawable/circle.xml" value="0.187" />

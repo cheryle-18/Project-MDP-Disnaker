@@ -16,6 +16,12 @@ class SyaratPelatihan extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $fillable = [
+        'sp_id',
+        'pelatihan_id',
+        'deskripsi',
+    ];
+
     public function pelatihan(){
         return $this->belongsTo(Pelatihan::class, 'pelatihan_id', 'pelatihan_id');
     }
