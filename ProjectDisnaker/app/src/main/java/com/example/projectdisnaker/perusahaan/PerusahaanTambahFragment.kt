@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
@@ -42,6 +44,12 @@ class PerusahaanTambahFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //action bar
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setTitle("Lowongan")
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
 
         user = (activity as PerusahaanActivity).user
 
@@ -147,38 +155,43 @@ class PerusahaanTambahFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Lengkapi semua data lowongan", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        binding.ivBackTambahLow.setOnClickListener {
-            if(binding.etNamaLowongan.text.toString()!="" || binding.etKuotaLowongan.text.toString()!=""
-                || binding.etKeteranganLowongan.text.toString()!="" || listSyarat.size>0){
-                val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
-                val dialog = Dialog(requireContext())
-                dialog.setContentView(dialogBinding)
-                dialog.setCancelable(true)
-                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.show()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                if(binding.etNamaLowongan.text.toString()!="" || binding.etKuotaLowongan.text.toString()!=""
+                    || binding.etKeteranganLowongan.text.toString()!="" || listSyarat.size>0){
+                    val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+                    val dialog = Dialog(requireContext())
+                    dialog.setContentView(dialogBinding)
+                    dialog.setCancelable(true)
+                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    dialog.show()
 
-                val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
-                val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
-                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
-                tvDialog.setText("Keluar tanpa menyimpan lowongan?")
+                    val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+                    val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+                    tvDialog.setText("Keluar tanpa menyimpan lowongan?")
 
-                btnKembali.setOnClickListener {
-                    dialog.dismiss()
+                    btnKembali.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                    btnKeluar.setOnClickListener {
+                        dialog.dismiss()
+                        val fragment = PerusahaanLowonganFragment()
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                    }
                 }
-                btnKeluar.setOnClickListener {
-                    dialog.dismiss()
+                else{
                     val fragment = PerusahaanLowonganFragment()
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_perusahaan, fragment).commit()
                 }
             }
-            else{
-                val fragment = PerusahaanLowonganFragment()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_perusahaan, fragment).commit()
-            }
         }
+        return true
     }
 
     private fun fetchKategori(){

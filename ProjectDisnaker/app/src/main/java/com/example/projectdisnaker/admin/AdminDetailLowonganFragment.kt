@@ -3,12 +3,15 @@ package com.example.projectdisnaker.admin
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.databinding.FragmentAdminDetailLowonganBinding
+import com.example.projectdisnaker.peserta.ProfileFragment
 import com.example.projectdisnaker.rv.RVSyaratAdapter
 
 class AdminDetailLowonganFragment : Fragment() {
@@ -30,6 +33,12 @@ class AdminDetailLowonganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //action bar
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setTitle("Lowongan")
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
+
         lowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
 
         binding.tvNamaLowongan.setText(lowongan.nama)
@@ -46,13 +55,19 @@ class AdminDetailLowonganFragment : Fragment() {
         binding.rvSyaratLowonganAdmin.adapter = syaratAdapter
         binding.rvSyaratLowonganAdmin.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        binding.ivBackDetailLow.setOnClickListener {
-            val fragment = AdminLowonganFragment()
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
-        }
-
         binding.btnLihatPendaftaranAdm.setOnClickListener {
 
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                val fragment = AdminLowonganFragment()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_admin, fragment).commit()
+            }
+        }
+        return true
     }
 }

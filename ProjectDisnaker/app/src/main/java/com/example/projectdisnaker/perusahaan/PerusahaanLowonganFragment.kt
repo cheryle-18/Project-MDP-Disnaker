@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
@@ -34,6 +35,12 @@ class PerusahaanLowonganFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //action bar
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setTitle("Disnaker")
+        actionBar?.setDisplayHomeAsUpEnabled(false)
+        setHasOptionsMenu(false)
 
         user = (activity as PerusahaanActivity).user
 

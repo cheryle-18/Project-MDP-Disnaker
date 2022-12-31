@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import com.example.projectdisnaker.R
 import com.example.projectdisnaker.databinding.FragmentAdminPerusahaanBinding
 
 class AdminPerusahaanFragment : Fragment() {
@@ -22,5 +24,17 @@ class AdminPerusahaanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //action bar
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setTitle("Disnaker")
+        actionBar?.setDisplayHomeAsUpEnabled(false)
+        setHasOptionsMenu(false)
+
+        binding.btnTambahPerusahaan.setOnClickListener {
+            val fragment = AdminTambahPerusahaanFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_admin, fragment).commit()
+        }
     }
 }

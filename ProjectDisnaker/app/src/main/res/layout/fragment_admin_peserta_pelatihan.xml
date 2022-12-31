@@ -8,12 +8,6 @@
     android:padding="30dp"
     tools:context=".admin.AdminPesertaPelatihanFragment" >
 
-    <ImageView
-        android:id="@+id/ivBackPesertaPelatihan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_arrow_back_24" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

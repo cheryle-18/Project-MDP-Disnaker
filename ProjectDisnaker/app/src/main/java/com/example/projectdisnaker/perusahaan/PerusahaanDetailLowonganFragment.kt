@@ -1,21 +1,22 @@
 package com.example.projectdisnaker.perusahaan
 
+import android.app.ActionBar
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.lottie.LottieAnimationView
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LowonganItem
@@ -46,20 +47,19 @@ class PerusahaanDetailLowonganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //action bar
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setTitle("Lowongan")
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
+
         syaratAdapter = RVSyaratAdapter(syaratLowongan, requireContext())
         binding.rvSyaratLowonganPerus.adapter = syaratAdapter
         binding.rvSyaratLowonganPerus.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
 //        lowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
         lowonganId = requireArguments().getInt("lowongan_id")
-        Toast.makeText(requireActivity(), "${lowonganId}", Toast.LENGTH_SHORT).show()
         fetchCurrentLowongan()
-
-        binding.ivBackDetailLow.setOnClickListener {
-            val fragment = PerusahaanLowonganFragment()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_perusahaan, fragment).commit()
-        }
 
         binding.layoutLihatPendaftaran.setOnClickListener {
             val fragment = PerusahaanLihatPendaftaranFragment()
@@ -103,26 +103,7 @@ class PerusahaanDetailLowonganFragment : Fragment() {
                         if(response.isSuccessful){
                             val responseBody = response.body()
                             if(responseBody!=null){
-                                val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
-                                val dialog = Dialog(requireContext())
-                                dialog.setContentView(dialogBinding)
-                                dialog.setCancelable(true)
-                                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                                dialog.show()
-
-                                val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
-                                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-
-                                if(binding.tvTutupLowongan.text.toString()=="Tutup Lowongan"){
-                                    tvDialog.setText("Berhasil menutup lowongan.")
-                                }
-                                else{ //reopen lowongan
-                                    tvDialog.setText("Berhasil membuka lowongan.")
-                                }
-                                btnOk.setOnClickListener {
-                                    dialog.dismiss()
-                                    fetchCurrentLowongan()
-                                }
+                                fetchCurrentLowongan()
                             }
                         }
                         else{
@@ -204,6 +185,17 @@ class PerusahaanDetailLowonganFragment : Fragment() {
                 })
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                val fragment = PerusahaanLowonganFragment()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_perusahaan, fragment).commit()
+            }
+        }
+        return true
     }
 
     private fun fillDetails(){

@@ -7,12 +7,14 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -56,14 +58,15 @@ class AdminTambahPelatihanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //action bar
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setTitle("Pelatihan")
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
+
         loadKategori()
         initRV()
-        binding.ivBackTambahPel.setOnClickListener {
-            val fragment = AdminPelatihanFragment()
-            val bundle = Bundle()
-            fragment.arguments = bundle
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
-        }
         binding.btnTambahSyaratPelatihan.setOnClickListener {
 
             var syarat = binding.etSyaratPelatihan.text.toString()
@@ -153,5 +156,16 @@ class AdminTambahPelatihanFragment : Fragment() {
         }
         binding.rvSyaratPelatihanAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvSyaratPelatihanAdmin.adapter = adapterSyarat
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                val fragment = AdminPelatihanFragment()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_admin, fragment).commit()
+            }
+        }
+        return true
     }
 }

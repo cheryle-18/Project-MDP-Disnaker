@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:text="Profile Perusahaan"
+                android:text="Profil Perusahaan"
                 android:textColor="@color/green_900"
                 android:textSize="20sp"
                 android:textStyle="bold" />
