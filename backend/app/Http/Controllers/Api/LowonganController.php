@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Lowongan;
 use App\Models\PendaftaranLowongan;
+use App\Models\PendaftaranPelatihan;
 use App\Models\Perusahaan;
+use App\Models\Peserta;
 use App\Models\SyaratLowongan;
 use Illuminate\Http\Request;
 
@@ -58,6 +60,50 @@ class LowonganController extends Controller
         return response()->json([
             "lowongan" => $lowongan,
             "message" => "Berhasil fetch"
+        ], 200);
+    }
+
+    public function getLowonganPeserta(Request $req){
+        $peserta = Peserta::find($req->peserta_id);
+        $message = "";
+        $lowongan = [];
+
+        //cek sdh kerja blm
+        if($peserta->status==2){
+            $message = "Anda sudah memiliki pekerjaan saat ini.";
+        }
+        else{
+            //find pelatihan selesai
+            $pelatihan = PendaftaranPelatihan::where('peserta_id', $req->peserta_id)->where('status_pendaftaran', 3)->where('status_kelulusan', 1)->get();
+
+            if(sizeof($pelatihan)>0){ //sdh selesai pelatihan
+                foreach($pelatihan as $p){
+                    $low = Lowongan::where('kategori_id', $p->pelatihan->kategori_id)->where('status', 1)->get();
+                    if(sizeof($low)>0){
+                        foreach($low as $t){
+                            $lowongan[] = [
+                                "lowongan_id" => $t->lowongan_id,
+                                "nama" => $t->nama,
+                                "kategori" => $t->kategori->nama,
+                                "perusahaan" => $t->perusahaan->user->nama,
+                                "kuota" => $t->kuota,
+                                "keterangan" => $t->keterangan,
+                                "status" => $t->status
+                            ];
+                        }
+                    }
+                }
+
+                $message = "Berhasil fetch.";
+            }
+            else{ //blm ada pelatihan selesai
+                $message = "Anda belum menyelesaikan pelatihan apapun.\n\nAnda dapat melihat lowongan yang tersedia setelah menyelesaikan minimal satu pelatihan.";
+            }
+        }
+
+        return response()->json([
+            "lowongan" => $lowongan,
+            "message" => $message
         ], 200);
     }
 
@@ -180,7 +226,7 @@ class LowonganController extends Controller
     }
 
     public function getPendaftaran(Request $req){
-        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->get();
+        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->with('peserta')->get();
 
         return response()->json([
             "pendaftaran" => $pendaftaran,
@@ -189,6 +235,29 @@ class LowonganController extends Controller
     }
 
     public function daftarLowongan(Request $req){
+        $peserta = Peserta::find($req->peserta_id);
+        $lowongan = Lowongan::find($req->lowongan_id);
 
+        //daftar
+        PendaftaranLowongan::create([
+            "lowongan_id" => $req->lowongan_id,
+            "peserta_id" => $req->peserta_id,
+            "tanggal" => date("Y-m-d")
+        ]);
+
+        //auto tutup lowongan kl jmlh pendaftaran = kuota
+        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->count();
+        if($lowongan->kuota - $pendaftaran <= 0){
+            $lowongan->status = 0;
+            $lowongan->save();
+        }
+
+        //update status peserta jd sdh kerja
+        $peserta->status = 2;
+        $peserta->save();
+
+        return response()->json([
+            "message" => "Berhasil daftar lowongan"
+        ], 200);
     }
 }

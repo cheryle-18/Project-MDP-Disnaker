@@ -242,13 +242,11 @@ class PerusahaanDetailLowonganFragment : Fragment() {
                     }
                 }
                 else{
-                    Log.e("", "${response.message()}")
-                    Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e("Perus Det Low Frag", "${response.message()}")
                 }
             }
             override fun onFailure(call: Call<LowonganResponse>, t: Throwable) {
-                Log.e("", "${t.message}")
-                Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("Perus Det Low Frag", "${t.message}")
             }
         })
     }

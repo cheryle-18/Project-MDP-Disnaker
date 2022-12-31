@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -11,16 +12,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.LowonganItem
-import com.example.projectdisnaker.api.UserResponseItem
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPerusahaanLihatPendaftaranBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PerusahaanLihatPendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanLihatPendaftaranBinding
-    private var listPendaftar:ArrayList<UserResponseItem> = ArrayList()
-    private lateinit var currLowongan: LowonganItem
+    private var listPendaftar:MutableList<UserResponseItem?> = arrayListOf()
+    private var lowonganId: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +45,7 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
-        currLowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
+        lowonganId = requireArguments().getInt("lowongan_id")!!
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -49,12 +53,34 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
             android.R.id.home -> {
                 val fragment = PerusahaanDetailLowonganFragment()
                 val bundle = Bundle()
-                bundle.putInt("lowongan_id", currLowongan.lowonganId!!)
+                bundle.putInt("lowongan_id", lowonganId)
                 fragment.arguments = bundle
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_perusahaan, fragment).commit()
             }
         }
         return true
+    }
+
+    private fun fetchPendaftaran(){
+        var client = ApiConfiguration.getApiService().getPendaftaranLowongan(lowonganId)
+        client.enqueue(object: Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        listPendaftar = responseBody.userResponse!!.toMutableList()
+                    }
+                }
+                else{
+                    Log.e("", "${response.message()}")
+                    Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.e("", "${t.message}")
+                Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

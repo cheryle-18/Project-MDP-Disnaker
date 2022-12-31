@@ -114,6 +114,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ubah pelatihan" />
+
+            <Button
+                android:id="@+id/btnHapusPelatihan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="hapus pelatihan" />
         </LinearLayout>
     </ScrollView>
 

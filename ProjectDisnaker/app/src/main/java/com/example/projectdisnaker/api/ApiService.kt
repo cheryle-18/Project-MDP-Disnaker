@@ -54,6 +54,11 @@ interface ApiService {
         @Path("perusahaan_id") perusahaanId: Int
     ): Call<LowonganResponse>
 
+    @GET("lowongan/peserta/{peserta_id}")
+    fun getPesertaLowongan(
+        @Path("peserta_id") pesertaId: Int
+    ): Call<LowonganResponse>
+
     @GET("lowongan/{lowongan_id}")
     fun getLowongan(
         @Path("lowongan_id") lowonganId: Int
@@ -84,7 +89,13 @@ interface ApiService {
     ): Call<LowonganResponse>
 
     @GET("lowongan/pendaftaran/{lowongan_id}")
-    fun getPendaftaran(
+    fun getPendaftaranLowongan(
         @Path("lowongan_id") lowonganId: Int
+    ): Call<UserResponse>
+
+    @POST("lowongan/daftar")
+    fun daftarLowongan(
+        @Query("peserta_id") pesertaId: Int,
+        @Query("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
 }

@@ -13,7 +13,9 @@ import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.LowonganResponse
+import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentLowonganBinding
+import com.example.projectdisnaker.perusahaan.PerusahaanActivity
 import com.example.projectdisnaker.rv.RVLowonganAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +25,7 @@ class LowonganFragment : Fragment() {
     private lateinit var binding: FragmentLowonganBinding
     private var listLowongan: MutableList<LowonganItem?> = arrayListOf()
     private lateinit var lowonganAdapter: RVLowonganAdapter
+    private lateinit var user: UserResponseItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +46,8 @@ class LowonganFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
 
+        user = (activity as HomeActivity).user
+
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
                 idx ->
             val fragment = DetailLowonganFragment()
@@ -57,24 +62,31 @@ class LowonganFragment : Fragment() {
     }
 
     private fun fetchData(){
-        var client = ApiConfiguration.getApiService().getAllLowongan()
+        var client = ApiConfiguration.getApiService().getPesertaLowongan(user.pesertaId!!)
         client.enqueue(object: Callback<LowonganResponse> {
             override fun onResponse(call: Call<LowonganResponse>, response: Response<LowonganResponse>){
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
-                        listLowongan.clear()
-                        listLowongan.addAll(responseBody.lowongan!!.toMutableList())
-                        lowonganAdapter.notifyDataSetChanged()
+                        if(responseBody.lowongan!!.size > 0){
+                            listLowongan.clear()
+                            listLowongan.addAll(responseBody.lowongan!!.toMutableList())
+                            lowonganAdapter.notifyDataSetChanged()
+
+                            binding.tvMsgLowongan.visibility = View.GONE
+                        }
+                        else{
+                            binding.tvMsgLowongan.setText(responseBody.message)
+                            binding.rvLowongan.visibility = View.GONE
+                        }
                     }
                 }
                 else{
-                    Log.e("Lowongan Fragment", "${response.message()}")
-                    Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e("Lowongan Frag", "${response.message()}")
                 }
             }
             override fun onFailure(call: Call<LowonganResponse>, t: Throwable) {
-                Log.e("Lowongan Fragment", "${t.message}")
+                Log.e("Lowongan Frag", "${t.message}")
                 Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
