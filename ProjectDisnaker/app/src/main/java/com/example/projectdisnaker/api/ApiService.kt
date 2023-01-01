@@ -45,9 +45,9 @@ interface ApiService {
     fun getPendaftaranPelatihan(): Call<PendaftaranResponse>
 
     //PERUSAHAAN
-    @GET("perusahaan")
+    @GET("perusahaan/{user_id}")
     fun getPerusahaan(
-        @Query("user_id") userId: Int
+        @Path("user_id") userId: Int
     ): Call<PerusahaanResponse>
 
     //LOWONGAN

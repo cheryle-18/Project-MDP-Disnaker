@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UtilityController;
 use App\Http\Controllers\Api\LowonganController;
 use App\Http\Controllers\Api\PelatihanController as ApiPelatihanController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\PelatihanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,12 +28,26 @@ Route::get('/users', [UtilityController::class, "getUsers"]);
 Route::post('/register', [AuthController::class, "doRegister"]);
 Route::post('/login', [AuthController::class, "doLogin"]);
 
-Route::get('users', [UtilityController::class, 'getUsers']);
 Route::get('/kategori', [UtilityController::class, 'getKategori']);
 // Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
-Route::get('/perusahaan', [UtilityController::class, 'getPerusahaan']);
-Route::get('/peserta', [UtilityController::class, 'getPeserta']);
+
+Route::get('/peserta', [UserController::class, 'getPeserta']);
 Route::get('/pendaftaranPelatihan', [PelatihanController::class, 'getPendaftaranPelatihan']);
+
+Route::prefix('perusahaan')->group(function () {
+    Route::get('/', [UserController::class, 'getAllPerusahaan']);
+    Route::get('/{user_id}', [UserController::class, 'getPerusahaan']);
+    Route::post('/update/{perusahaan_id}', [UserController::class, 'updatePerusahaan']);
+});
+
+Route::prefix('peserta')->group(function () {
+    Route::get('/', [UserController::class, 'getAllPeserta']);
+    Route::get('/{user_id}', [UserController::class, 'getPeserta']);
+    Route::post('/update/{peserta_id}', [UserController::class, 'updatePeserta']);
+    Route::post('/pendidikan/{peserta_id}', [UserController::class, 'updatePendidikan']);
+    Route::get('/pelatihan/{peserta_id}', [UserController::class, 'getRiwayatPelatihan']);
+    Route::post('/kerja/{peserta_id}', [UserController::class, 'updateStatusKerja']);
+});
 
 Route::prefix('lowongan')->group(function () {
     Route::get('/', [LowonganController::class, 'getAllLowongan']);
