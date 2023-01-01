@@ -20,8 +20,6 @@ class AdminDetailPelatihanFragment : Fragment() {
     private var syaratPelatihan: ArrayList<String> = ArrayList()
     private lateinit var syaratAdapter: RVSyaratAdapter
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,6 +66,7 @@ class AdminDetailPelatihanFragment : Fragment() {
         binding.btnLihatPeserta.setOnClickListener {
             val fragment = AdminPesertaPelatihanFragment()
             val bundle = Bundle()
+            bundle.putParcelable("pelatihan", pelatihan)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
         }

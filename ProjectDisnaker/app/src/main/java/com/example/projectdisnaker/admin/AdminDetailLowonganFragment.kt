@@ -56,7 +56,12 @@ class AdminDetailLowonganFragment : Fragment() {
         binding.rvSyaratLowonganAdmin.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         binding.btnLihatPendaftaranAdm.setOnClickListener {
-
+            val fragment = AdminPesertaLowonganFragment()
+            val bundle = Bundle()
+            bundle.putParcelable("lowongan", lowongan)
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_admin, fragment).commit()
         }
     }
 

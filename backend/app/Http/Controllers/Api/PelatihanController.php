@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Pelatihan;
+use App\Models\PendaftaranPelatihan;
 use App\Models\SyaratPelatihan;
 use Illuminate\Http\Request;
 
@@ -65,5 +66,37 @@ class PelatihanController extends Controller
             "pelatihan" => [$pelatihan],
             "message" => "Berhasil menambah pelatihan"
         ], 201);
+    }
+
+    public function getPendaftaran(Request $req){
+        $temp = PendaftaranPelatihan::where('pelatihan_id', $req->pelatihan_id)->get();
+        $pendaftaran = [];
+
+        if(sizeof($temp)>0){
+            foreach($temp as $t){
+                $tgl = date_create($t->tanggal);
+                $dob = date_create($t->peserta->tgl_lahir);
+                $pendaftaran[] = [
+                    "pp_id" => $t->pp_id,
+                    "status_pendaftaran" => $t->status_pendaftaran,
+                    "status_kelulusan" => $t->status_kelulusan,
+                    "tanggal" => date_format($tgl, "d F Y"),
+                    "peserta_id" => $t->peserta->peserta_id,
+                    "nama" => $t->peserta->user->nama,
+                    "email" => $t->peserta->user->email,
+                    "telp" => $t->peserta->user->telp,
+                    "tgl_lahir" => date_format($dob, "d F Y"),
+                    "usia" => date_diff($dob, date_create('now'))->y,
+                    "pendidikan" => $t->peserta->pendidikan,
+                    "jurusan" => $t->peserta->jurusan,
+                    "nilai" => $t->peserta->nilai
+                ];
+            }
+        }
+
+        return response()->json([
+            "pendaftaran" => $pendaftaran,
+            "message" => "Berhasil fetch"
+        ], 200);
     }
 }

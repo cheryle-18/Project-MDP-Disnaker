@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".perusahaan.PerusahaanLihatPendaftaranFragment" >
+    tools:context=".admin.AdminPesertaLowonganFragment">
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/textView79"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:text="Pendaftar Lowongan"
         android:textColor="@color/green_900"
@@ -19,7 +18,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvBlmDaftar"
+        android:id="@+id/tvBlmDaftarAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Belum ada pendaftaran."
@@ -27,8 +26,7 @@
         android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPendaftarLow"
+        android:id="@+id/rvPendaftarLowAdmin"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>

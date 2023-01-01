@@ -226,7 +226,28 @@ class LowonganController extends Controller
     }
 
     public function getPendaftaran(Request $req){
-        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->with('peserta')->get();
+        $temp = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->get();
+        $pendaftaran = [];
+
+        if(sizeof($temp)>0){
+            foreach($temp as $t){
+                $tgl = date_create($t->tanggal);
+                $dob = date_create($t->peserta->tgl_lahir);
+                $pendaftaran[] = [
+                    "pl_id" => $t->pl_id,
+                    "tanggal" => date_format($tgl, "d F Y"),
+                    "peserta_id" => $t->peserta->peserta_id,
+                    "nama" => $t->peserta->user->nama,
+                    "email" => $t->peserta->user->email,
+                    "telp" => $t->peserta->user->telp,
+                    "tgl_lahir" => date_format($dob, "d F Y"),
+                    "usia" => date_diff($dob, date_create('now'))->y,
+                    "pendidikan" => $t->peserta->pendidikan,
+                    "jurusan" => $t->peserta->jurusan,
+                    "nilai" => $t->peserta->nilai
+                ];
+            }
+        }
 
         return response()->json([
             "pendaftaran" => $pendaftaran,

@@ -62,6 +62,9 @@ data class UserResponseItem(
 	@field:SerializedName("peserta_id")
 	val pesertaId: Int? = null,
 
+	@field:SerializedName("tgl_lahir")
+	val tglLahir: String? = null,
+
 	@field:SerializedName("status")
 	val status: Int? = null
 ) : Parcelable

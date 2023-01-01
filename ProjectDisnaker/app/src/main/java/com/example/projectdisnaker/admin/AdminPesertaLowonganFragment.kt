@@ -1,8 +1,5 @@
-package com.example.projectdisnaker.perusahaan
+package com.example.projectdisnaker.admin
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,31 +7,34 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.*
-import com.example.projectdisnaker.databinding.FragmentPerusahaanLihatPendaftaranBinding
+import com.example.projectdisnaker.api.ApiConfiguration
+import com.example.projectdisnaker.api.LowonganItem
+import com.example.projectdisnaker.api.PesertaPendaftaranItem
+import com.example.projectdisnaker.api.PesertaPendaftaranResponse
+import com.example.projectdisnaker.databinding.FragmentAdminPesertaLowonganBinding
+import com.example.projectdisnaker.perusahaan.PerusahaanDetailLowonganFragment
+import com.example.projectdisnaker.perusahaan.PerusahaanLihatPesertaFragment
 import com.example.projectdisnaker.rv.RVPesertaPendaftaranAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PerusahaanLihatPendaftaranFragment : Fragment() {
-    private lateinit var binding: FragmentPerusahaanLihatPendaftaranBinding
+class AdminPesertaLowonganFragment : Fragment() {
+    private lateinit var binding: FragmentAdminPesertaLowonganBinding
     private var listPendaftar:MutableList<PesertaPendaftaranItem?> = arrayListOf()
     private lateinit var pesertaAdapter: RVPesertaPendaftaranAdapter
-    private var lowonganId: Int = -1
+    private lateinit var lowongan: LowonganItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentPerusahaanLihatPendaftaranBinding.inflate(inflater, container, false)
+        binding = FragmentAdminPesertaLowonganBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -48,20 +48,21 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
-        lowonganId = requireArguments().getInt("lowongan_id")!!
+        lowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
 
         pesertaAdapter = RVPesertaPendaftaranAdapter(listPendaftar, "lowongan", requireContext()){
-            idx ->
-            val fragment = PerusahaanLihatPesertaFragment()
+                idx ->
+            val fragment = AdminDetailPesertaFragment()
             val bundle = Bundle()
-            bundle.putInt("lowongan_id", lowonganId)
+            bundle.putParcelable("lowongan", lowongan)
             bundle.putParcelable("peserta", listPendaftar.get(idx)!!)
+            bundle.putString("type", "lowongan")
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                .replace(R.id.fragment_container_admin, fragment).commit()
         }
-        binding.rvPendaftarLow.adapter = pesertaAdapter
-        binding.rvPendaftarLow.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvPendaftarLowAdmin.adapter = pesertaAdapter
+        binding.rvPendaftarLowAdmin.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         fetchPendaftaran()
         pesertaAdapter.notifyDataSetChanged()
     }
@@ -69,19 +70,19 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                val fragment = PerusahaanDetailLowonganFragment()
+                val fragment = AdminDetailLowonganFragment()
                 val bundle = Bundle()
-                bundle.putInt("lowongan_id", lowonganId)
+                bundle.putParcelable("lowongan", lowongan)
                 fragment.arguments = bundle
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                    .replace(R.id.fragment_container_admin, fragment).commit()
             }
         }
         return true
     }
 
     private fun fetchPendaftaran(){
-        var client = ApiConfiguration.getApiService().getPendaftaranLowongan(lowonganId)
+        var client = ApiConfiguration.getApiService().getPendaftaranLowongan(lowongan.lowonganId!!)
         client.enqueue(object: Callback<PesertaPendaftaranResponse> {
             override fun onResponse(call: Call<PesertaPendaftaranResponse>, response: Response<PesertaPendaftaranResponse>){
                 if(response.isSuccessful){
@@ -90,18 +91,18 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
                         listPendaftar.clear()
                         listPendaftar.addAll(responseBody.pendaftaran!!.toMutableList())
                         if(listPendaftar.size>0){
-                            binding.tvBlmDaftar.visibility = View.GONE
+                            binding.tvBlmDaftarAdmin.visibility = View.GONE
                         }
                         pesertaAdapter.notifyDataSetChanged()
                     }
                 }
                 else{
-                    Log.e("Perus Pendaftaran Frag", "${response.message()}")
+                    Log.e("Admin Peserta Low Frag", "${response.message()}")
                     Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<PesertaPendaftaranResponse>, t: Throwable) {
-                Log.e("Perus Pendaftaran Frag", "${t.message}")
+                Log.e("Admin Peserta Low Frag", "${t.message}")
                 Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

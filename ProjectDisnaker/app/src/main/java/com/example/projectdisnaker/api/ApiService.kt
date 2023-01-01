@@ -36,6 +36,11 @@ interface ApiService {
         @Body pelatihan: PelatihanItem
     ): Call<PelatihanResponse>
 
+    @GET("pelatihan/pendaftaran/{pelatihan_id}")
+    fun getPesertaPelatihan(
+        @Path("pelatihan_id") pelatihanId: Int
+    ): Call<PesertaPendaftaranResponse>
+
     @GET("pendaftaranPelatihan")
     fun getPendaftaranPelatihan(): Call<PendaftaranResponse>
 
@@ -91,7 +96,7 @@ interface ApiService {
     @GET("lowongan/pendaftaran/{lowongan_id}")
     fun getPendaftaranLowongan(
         @Path("lowongan_id") lowonganId: Int
-    ): Call<UserResponse>
+    ): Call<PesertaPendaftaranResponse>
 
     @POST("lowongan/daftar")
     fun daftarLowongan(

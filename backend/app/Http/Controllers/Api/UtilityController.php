@@ -28,7 +28,14 @@ class UtilityController extends Controller
     }
 
     public function getPerusahaan(Request $req){
-        $perusahaan = Perusahaan::where('user_id', $req->user_id)->first();
+        $temp = Perusahaan::where('user_id', $req->user_id)->first();
+        $perusahaan = [
+            "perusahaan_id" => $temp->perusahaan_id,
+            "nama" => $temp->user->nama,
+            "email" => $temp->user->email,
+            "telp" => $temp->user->telp,
+            "alamat" => $temp->alamat
+        ];
 
         return response()->json([
             "perusahaan" => $perusahaan,
@@ -37,7 +44,18 @@ class UtilityController extends Controller
     }
 
     public function getPeserta(Request $req){
-        $peserta = Peserta::find($req->peserta_id);
+        $temp = Peserta::find($req->peserta_id);
+        $peserta = [
+            "peserta_id" => $temp->peserta_id,
+            "nama" => $temp->user->nama,
+            "nik" => $temp->nik,
+            "email" => $temp->user->email,
+            "telp" => $temp->user->telp,
+            "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d F Y"),
+            "pendidikan" => $temp->pendidikan,
+            "jurusan" => $temp->jurusan,
+            "nilai" => $temp->nilai
+        ];
 
         return response()->json([
             "peserta" => $peserta,
@@ -51,7 +69,8 @@ class UtilityController extends Controller
         $userRet = [];
         foreach($users as $user){
             if($user->role==0){
-                $peserta = $user->peserta[0];
+                $peserta = $user->peserta;
+                $dob = date_create($peserta->tgl_laihr);
                 $temp = [
                     "user_id" => $user->user_id,
                     "nama" => $user->nama,
@@ -62,6 +81,7 @@ class UtilityController extends Controller
                     "role" => $user->role,
                     "peserta_id" => $peserta->peserta_id,
                     "nik" => $peserta->nik,
+                    "tgl_lahir" => date_format($dob, "d F Y"),
                     "pendidikan" => $peserta->pendidikan,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,
@@ -69,7 +89,7 @@ class UtilityController extends Controller
                 ];
             }
             else if($user->role==1){
-                $perusahaan = $user->perusahaan[0];
+                $perusahaan = $user->perusahaan;
                 $temp = [
                     "user_id" => $user->user_id,
                     "nama" => $user->nama,

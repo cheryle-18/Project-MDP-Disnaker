@@ -18,6 +18,14 @@
         android:textSize="26sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tvBlmDaftarPelAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Belum ada pendaftaran."
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPesertaPelatihan"
         android:layout_width="match_parent"

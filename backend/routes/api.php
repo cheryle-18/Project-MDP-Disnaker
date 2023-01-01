@@ -56,4 +56,5 @@ Route::prefix('pelatihan')->group(function () {
     // Route::post('/tutup/{lowongan_id}', [LowonganController::class, 'tutupLowongan']);
     // Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
     // Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
+    Route::get('/pendaftaran/{pelatihan_id}', [ApiPelatihanController::class, 'getPendaftaran']);
 });
