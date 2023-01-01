@@ -31,6 +31,11 @@ interface ApiService {
     @GET("pelatihan")
     fun getPelatihan(): Call<PelatihanResponse>
 
+    @GET("pelatihan")
+    fun getPelatihanWithQuery(
+        @Query("search") search:String,
+    ): Call<PelatihanResponse>
+
     @POST("pelatihan/insert")
     fun insertPelatihan(
         @Body pelatihan: PelatihanItem

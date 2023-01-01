@@ -50,16 +50,18 @@ class PelatihanFragment : Fragment() {
         initData()
 
         binding.btnSearch.setOnClickListener {
-            val fragment = DetailPelatihanFragment()
-            val bundle = Bundle()
-            fragment.arguments = bundle
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+//            val fragment = DetailPelatihanFragment()
+//            val bundle = Bundle()
+//            fragment.arguments = bundle
+//            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+            val search = binding.etSearch.text.toString()
+            initData(search)
         }
     }
 
-    fun initData(){
+    fun initData(search:String = ""){
         //retrofit call
-        var client = ApiConfiguration.getApiService().getPelatihan()
+        var client = ApiConfiguration.getApiService().getPelatihanWithQuery(search)
         client.enqueue(object: Callback<PelatihanResponse> {
 
             override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>) {

@@ -12,8 +12,16 @@ use Illuminate\Http\Request;
 class PelatihanController extends Controller
 {
     //
-    public function getAllPelatihan(){
-        $temp = Pelatihan::all();
+    public function getAllPelatihan(Request $request){
+
+        $temp = null;
+        if($request->has('search')){
+            $temp = Pelatihan::where('nama','like','%'.$request->search.'%')->get();
+        }
+        else{
+            $temp = Pelatihan::all();
+        }
+
         $pelatihan = [];
 
         foreach($temp as $t){
