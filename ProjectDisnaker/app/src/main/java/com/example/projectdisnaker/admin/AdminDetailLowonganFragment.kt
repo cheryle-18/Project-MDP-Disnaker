@@ -43,9 +43,9 @@ class AdminDetailLowonganFragment : Fragment() {
 
         binding.tvNamaLowongan.setText(lowongan.nama)
         binding.tvNamaPerusahaanLow.setText(lowongan.perusahaan)
-        binding.tvKategoriLowAdmin.setText("Kategori: ${lowongan.kategori}")
-        binding.tvKuotaLowAdmin.setText("Kuota: ${lowongan.kuota}")
-        binding.tvStatusLowAdmin.setText("Status: ${if(lowongan.status==0) "Ditutup" else "Aktif"}")
+        binding.tvKategoriLowAdmin.setText(lowongan.kategori)
+        binding.tvKuotaLowAdmin.setText("${lowongan.kuota} peserta")
+        binding.tvStatusLowAdmin.setText("${if(lowongan.status==0) "Ditutup" else "Aktif"}")
         binding.tvKeteranganLowongan.setText(lowongan.keterangan)
 
         for(syarat in lowongan.syarat!!){

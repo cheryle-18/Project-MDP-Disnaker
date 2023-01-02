@@ -46,7 +46,10 @@ class AdminDetailPesertaFragment : Fragment() {
 
         if(type=="lowongan"){
             binding.tvStatDaftarDet.visibility = View.GONE
+            binding.divider32.visibility = View.GONE
             binding.tvStatLulusDet.visibility = View.GONE
+            binding.layoutTahapPelatihan.visibility = View.GONE
+            binding.layoutStatusPelatihan.visibility = View.GONE
         }
         else if(type=="pelatihan"){
             var status = ""
@@ -71,18 +74,18 @@ class AdminDetailPesertaFragment : Fragment() {
             else if(statusInt2==2)
                 status2 = "Ditolak"
 
-            binding.tvStatDaftarDet.setText("Status Pelatihan: ${status}")
-            binding.tvStatLulusDet.setText("Status Kelulusan: ${status2}")
+            binding.tvStatDaftarDet.setText(status)
+            binding.tvStatLulusDet.setText(status2)
         }
 
         binding.tvNamaPesertaDetAdmin.setText(peserta.nama)
-        binding.tvUsiaDetAdmin.setText("Usia: ${peserta.usia} tahun")
-        binding.tvTglLahirDetAdmin.setText("Tanggal Lahir: ${peserta.tglLahir}")
-        binding.tvPendidikanDetAdmin.setText("Pendidikan Terakhir: ${peserta.pendidikan}")
-        binding.tvJurusanDetAdmin.setText("Jurusan: ${peserta.nama}")
-        binding.tvNilaiDetAdmin.setText("Nilai: ${peserta.nilai}")
-        binding.tvEmailDetAdmin.setText("Email: ${peserta.email}")
-        binding.tvTelpDetAdmin.setText("Nomor Telepon: ${peserta.telp}")
+        binding.tvUsiaDetAdmin.setText("${peserta.usia} tahun")
+        binding.tvTglLahirDetAdmin.setText(peserta.tglLahir)
+        binding.tvPendidikanDetAdmin.setText(peserta.pendidikan)
+        binding.tvJurusanDetAdmin.setText(peserta.nama)
+        binding.tvNilaiDetAdmin.setText(peserta.nilai.toString())
+        binding.tvEmailDetAdmin.setText(peserta.email)
+        binding.tvTelpDetAdmin.setText(peserta.telp)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

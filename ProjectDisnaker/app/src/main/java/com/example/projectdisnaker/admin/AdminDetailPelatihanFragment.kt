@@ -42,11 +42,12 @@ class AdminDetailPelatihanFragment : Fragment() {
         pelatihan = requireArguments().getParcelable<PelatihanItem>("pelatihan")!!
 
         binding.tvNamaDetailAdmin.setText(pelatihan.nama)
-        binding.tvKategoriDetailAdmin.setText("Kategori: ${pelatihan.kategori}")
-        binding.tvKuotaDetailAdmin.setText("Kuota Tersedia: ${pelatihan.kuota}")
-        binding.tvDurasiDetailAdmin.setText("Durasi Pelatihan: ${pelatihan.durasi} hari")
-        binding.tvMinPendidikanAdmin.setText("Pendidikan Minimal: ${pelatihan.pendidikan}")
-
+        binding.tvKategoriDetailAdmin.setText(pelatihan.kategori)
+        binding.tvKuotaDetailAdmin.setText("${pelatihan.kuota} peserta")
+        binding.tvDurasiDetailAdmin.setText("${pelatihan.durasi} hari")
+        binding.tvMinPendidikanAdmin.setText(pelatihan.pendidikan)
+        binding.tvStatusPelatihanAdmin.setText("${if(pelatihan.status==0) "Ditutup" else "Aktif"}")
+        binding.tvKetPelatihanAdmin.setText(pelatihan.keterangan)
 
         for(syarat in pelatihan.syarat!!){
             syaratPelatihan.add(syarat!!.deskripsi!!)
