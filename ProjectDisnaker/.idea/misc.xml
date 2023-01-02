@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/activity_admin.xml" value="0.2" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_detail_pelatihan.xml" value="0.264" />
+        <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_peserta.xml" value="0.264" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_tambah_pelatihan.xml" value="0.264" />
+        <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_detail_pelatihan.xml" value="0.264" />
+        <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_pelatihan.xml" value="0.2" />
+        <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_pendaftaran.xml" value="0.16" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/success_dialog.xml" value="0.264" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/syarat_list_item.xml" value="0.4" />
         <entry key="..\:/College/GITHUB/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/menu/syarat_popup_menu.xml" value="0.19010416666666666" />
@@ -29,7 +33,6 @@
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_detail_kerja.xml" value="0.22" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_detail_lowongan.xml" value="0.22" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_detail_pelatihan.xml" value="0.22" />
-        <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_detail_peserta.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_edit_pelatihan.xml" value="0.22" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_kerja.xml" value="0.16394927536231885" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_lowongan.xml" value="0.14749893116716545" />
@@ -37,7 +40,6 @@
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_pendaftaran.xml" value="0.16757246376811594" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_perusahaan.xml" value="0.165625" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_peserta.xml" value="0.16757246376811594" />
-        <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_peserta_lowongan.xml" value="0.14749893116716545" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_peserta_pelatihan.xml" value="0.16757246376811594" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_tambah_pelatihan.xml" value="0.22" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_admin_tambah_perusahaan.xml" value="0.16757246376811594" />
@@ -52,8 +54,7 @@
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_pendidikan.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_detail_lowongan.xml" value="0.22" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_edit.xml" value="0.22" />
-        <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_lihat_pendaftaran.xml" value="0.22" />
-        <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_lihat_peserta.xml" value="0.22" />
+        <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_lihat_pendaftaran.xml" value="0.13595553655408293" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_lowongan.xml" value="0.16394927536231885" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_password.xml" value="0.14749893116716545" />
         <entry key="..\:/Users/LENOVO/Documents/GitHub/Project-MDP-Disnaker/ProjectDisnaker/app/src/main/res/layout/fragment_perusahaan_profile.xml" value="0.16394927536231885" />

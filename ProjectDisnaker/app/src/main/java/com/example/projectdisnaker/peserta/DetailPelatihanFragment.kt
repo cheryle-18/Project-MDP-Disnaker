@@ -31,6 +31,8 @@ class DetailPelatihanFragment : Fragment() {
         actionBar?.setTitle("Pelatihan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+
+        binding.linearLayout4.bringToFront()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

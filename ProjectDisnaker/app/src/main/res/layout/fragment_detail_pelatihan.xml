@@ -17,7 +17,6 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/green_900"
             android:orientation="vertical"
             android:padding="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
