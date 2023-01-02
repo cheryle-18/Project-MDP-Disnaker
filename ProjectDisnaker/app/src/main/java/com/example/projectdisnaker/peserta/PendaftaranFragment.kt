@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.example.projectdisnaker.api.StatusItem
+import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentPendaftaranBinding
 
 class PendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentPendaftaranBinding
+    private var listStatus: MutableList<StatusItem?> = arrayListOf()
+    private lateinit var user: UserResponseItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,5 +33,7 @@ class PendaftaranFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
+
+        user = (activity as HomeActivity).user
     }
 }
