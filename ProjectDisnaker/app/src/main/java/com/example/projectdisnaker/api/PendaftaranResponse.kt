@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class PendaftaranResponse(
 
-    @field:SerializedName("pelatihan")
-    val pelatihan: List<PendaftaranPelatihanItem>? = null,
+    @field:SerializedName("pendaftaran")
+    val pendaftaran: List<PendaftaranPelatihanItem>? = null,
 
     @field:SerializedName("message")
     val message: String? = null
@@ -31,5 +31,11 @@ data class PendaftaranPelatihanItem(
 
     @field:SerializedName("status_kelulusan")
     val status_kelulusan: Int? = null,
-) : Parcelable
 
+    @field:SerializedName("peserta")
+    val peserta: UserResponseItem? = null,
+
+    @field:SerializedName("pelatihan")
+    val pelatihan: PelatihanItem? = null,
+
+) : Parcelable

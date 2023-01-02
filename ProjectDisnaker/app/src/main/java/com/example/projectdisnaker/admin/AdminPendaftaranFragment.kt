@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -20,7 +19,7 @@ import retrofit2.Response
 class AdminPendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentAdminPendaftaranBinding
     private lateinit var adapterPendaftaran : RVPendaftaranAdapter
-    private lateinit var listPelatihan : List<PendaftaranPelatihanItem>
+    private lateinit var listPendaftaran : List<PendaftaranPelatihanItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +51,7 @@ class AdminPendaftaranFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
-                        listPelatihan = responseBody.pelatihan!!
+                        listPendaftaran = responseBody.pendaftaran!!
                         initRV()
                     }
                     else{
@@ -72,7 +71,19 @@ class AdminPendaftaranFragment : Fragment() {
 
 
     fun initRV(){
-        adapterPendaftaran = RVPendaftaranAdapter(requireActivity(), listPelatihan, R.layout.pendaftaran_list_item)
+        adapterPendaftaran = RVPendaftaranAdapter(requireActivity(), listPendaftaran, R.layout.pendaftaran_list_item)
+        adapterPendaftaran.onClickListener = object:RVPendaftaranAdapter.OnClickListener{
+            override fun onClick(idx: Int) {
+                val adminDetailPendaftaranFragment = AdminDetailPendaftaranFragment()
+                var bundle = Bundle()
+                bundle.putParcelable("pendaftaran", listPendaftaran.get(idx)!!)
+                adminDetailPendaftaranFragment.arguments = bundle
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_admin, adminDetailPendaftaranFragment)
+                    .commit()
+            }
+        }
         binding.rvPendaftaranAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPendaftaranAdmin.adapter = adapterPendaftaran
     }

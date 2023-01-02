@@ -39,7 +39,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvKategori"
+            android:id="@+id/tvStatusPendaftaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -47,7 +47,7 @@
             android:textSize="13sp" />
 
         <LinearLayout
-            android:id="@+id/llStatus"
+            android:id="@+id/llStatusKelulusan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -60,7 +60,7 @@
             android:paddingBottom="5dp">
 
             <TextView
-                android:id="@+id/tvStatus"
+                android:id="@+id/tvStatusKelulusan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Diterima"

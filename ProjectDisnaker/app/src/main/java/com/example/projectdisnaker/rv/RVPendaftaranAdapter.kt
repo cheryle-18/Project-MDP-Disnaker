@@ -14,20 +14,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
 class RVPendaftaranAdapter(private val activity: Activity,
-                         private val listPelatihan : List<PendaftaranPelatihanItem>,
-                         private val layout : Int
+                           private val listPendaftaran : List<PendaftaranPelatihanItem>,
+                           private val layout : Int
 ) : RecyclerView.Adapter<RVPendaftaranAdapter.CustomViewHolder>() {
 
     private var coroutine = CoroutineScope(Dispatchers.IO)
-    private var status_nama = arrayOf("Pending", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
-    private var status_warna = arrayOf(Color.RED, Color.rgb(255,165,0), Color.rgb(255,165,0), Color.GREEN, Color.RED)
+    private var status_pendaftaran = arrayOf("Pending", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
+    private var status_kelulusan = arrayOf("Pending","Diterima", "Ditolak")
 
     class CustomViewHolder(var view: View) : RecyclerView.ViewHolder(view)
     {
         var tvNama : TextView = view.findViewById(R.id.tvNama)
-        var tvKategori : TextView = view.findViewById(R.id.tvKategori)
-        var llStatus : LinearLayout = view.findViewById(R.id.llStatus)
-        var tvStatus : TextView = view.findViewById(R.id.tvStatus)
+        var tvStatusPendaftaran : TextView = view.findViewById(R.id.tvStatusPendaftaran)
+        var llStatusKelulusan : LinearLayout = view.findViewById(R.id.llStatusKelulusan)
+        var tvStatusKelulusan : TextView = view.findViewById(R.id.tvStatusKelulusan)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -40,14 +40,25 @@ class RVPendaftaranAdapter(private val activity: Activity,
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val item = listPelatihan[position]
+        val item = listPendaftaran[position]
         holder.tvNama.setText(item.pelatihan_nama)
-        holder.tvKategori.setText(item.kategori)
-        holder.tvStatus.setText(status_nama[item.status_pendaftaran!!])
-        holder.llStatus.background.setTint(status_warna[item.status_pendaftaran!!])
+        holder.tvStatusPendaftaran.setText(status_pendaftaran[item.status_pendaftaran!!])
+        holder.tvStatusKelulusan.setText(status_kelulusan[item.status_pendaftaran!!])
+        if(item.status_kelulusan!=1){
+            holder.llStatusKelulusan.background.setTint(Color.RED)
+        }
+        holder.itemView.setOnClickListener {
+            onClickListener?.onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {
-        return listPelatihan.size
+        return listPendaftaran.size
+    }
+
+    var onClickListener:OnClickListener? = null
+
+    interface OnClickListener{
+        fun onClick(idx:Int)
     }
 }
