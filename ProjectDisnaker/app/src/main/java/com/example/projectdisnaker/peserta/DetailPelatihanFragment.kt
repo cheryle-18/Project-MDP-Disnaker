@@ -7,11 +7,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.api.PelatihanItem
 import com.example.projectdisnaker.databinding.FragmentDetailPelatihanBinding
+import com.example.projectdisnaker.rv.RVSyaratAdapter
 
 class DetailPelatihanFragment : Fragment() {
     private lateinit var binding: FragmentDetailPelatihanBinding
+    private lateinit var pelatihan: PelatihanItem
+    private var syaratPelatihan: ArrayList<String> = ArrayList()
+    private lateinit var syaratAdapter: RVSyaratAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +38,22 @@ class DetailPelatihanFragment : Fragment() {
         actionBar?.setTitle("Pelatihan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
-
         binding.linearLayout4.bringToFront()
+
+        pelatihan = requireArguments().getParcelable<PelatihanItem>("pelatihan")!!
+        binding.tvNamaDetail.setText(pelatihan.nama)
+        binding.tvKategoriDetail.setText(pelatihan.kategori)
+        binding.tvKuotaDetail.setText(pelatihan.kuota.toString())
+        binding.tvDurasiDetail.setText(pelatihan.durasi.toString())
+        binding.tvMinPendidikan.setText(pelatihan.pendidikan)
+        binding.tvKeterangan.setText(pelatihan.keterangan)
+
+        for(syarat in pelatihan.syarat!!){
+            syaratPelatihan.add(syarat!!.deskripsi!!)
+        }
+        syaratAdapter = RVSyaratAdapter(syaratPelatihan, requireContext())
+        binding.rvSyaratPelatihan.adapter = syaratAdapter
+        binding.rvSyaratPelatihan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
