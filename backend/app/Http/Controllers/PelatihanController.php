@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelatihan;
+use App\Models\PendaftaranPelatihan;
+use App\Models\Pendidikan;
 use App\Models\Peserta;
+use DateTime;
 use Illuminate\Http\Request;
 
 class PelatihanController extends Controller
@@ -11,53 +14,71 @@ class PelatihanController extends Controller
     public function getPendaftaranPelatihan(Request $req)
     {
         $pendaftaran = Pelatihan::all();
-        $pelatihan = [];
-        $peserta = [];
+        // $pelatihan = [];
+        // $peserta = [];
 
         $temp_pendaftaran = [];
         foreach($pendaftaran as $p){
             foreach($p->peserta as $pe){
-                $temp_peserta = Peserta::find($pe->peserta_id);
+                $peserta = Peserta::find($pe->peserta_id);
+                $now = new DateTime(now());
+                $tgl_lahir = new DateTime($peserta->tgl_lahir);
+                $usia = $now->diff($tgl_lahir)->format("%Y");
+
+                $pelatihan = Pelatihan::find($p->pelatihan_id);
+                $pelatihan["pendidikan"] = (Pendidikan::find($pelatihan->pendidikan_id))->nama;
+
                 $temp_pendaftaran[] = [
                     "pp_id" => $pe->pivot->pp_id,
                     "kategori" => $p->kategori->nama,
                     "pelatihan_nama" => $p->nama,
                     "status_pendaftaran" => $pe->pivot->status_pendaftaran,
                     "status_kelulusan" => $pe->pivot->status_kelulusan,
+                    "tgl_pendaftaran" => date_format(date_create($pe->pivot->tgl_pendaftaran), "d M Y"),
+                    "tgl_wawancara" => date_format(date_create($pe->pivot->tgl_wawancara), "d M Y"),
+                    "status_kelulusan" => $pe->pivot->status_kelulusan,
+                    "sisa_kuota" => $pelatihan->kuota - count(
+                        PendaftaranPelatihan::
+                            where("pelatihan_id","=",$pelatihan->pelatihan_id)->
+                            where("status_pendaftaran",">=",2)->
+                            where("status_kelulusan","!=",2)->
+                            get()
+                    ),
                     "peserta" => [
-                        "user_id" => $temp_peserta->user->user_id,
-                        "nama" => $temp_peserta->user->nama,
-                        "email" => $temp_peserta->user->email,
-                        "username" => $temp_peserta->user->username,
-                        "password" => $temp_peserta->user->password,
-                        "telp" => $temp_peserta->user->telp,
-                        "role" => $temp_peserta->user->role,
-                        "peserta_id" => $temp_peserta->peserta_id,
-                        "nik" => $temp_peserta->nik,
-                        "pendidikan_id" => $temp_peserta->pendidikan_id,
-                        "jurusan" => $temp_peserta->jurusan,
-                        "nilai" => $temp_peserta->nilai,
-                        "status" => $temp_peserta->status,
+                        "user_id" => $peserta->user->user_id,
+                        "nama" => $peserta->user->nama,
+                        "email" => $peserta->user->email,
+                        "username" => $peserta->user->username,
+                        "password" => $peserta->user->password,
+                        "telp" => $peserta->user->telp,
+                        "role" => $peserta->user->role,
+                        "peserta_id" => $peserta->peserta_id,
+                        "nik" => $peserta->nik,
+                        "pendidikan" => (Pendidikan::find($peserta->pendidikan_id))->nama,
+                        "jurusan" => $peserta->jurusan,
+                        "nilai" => $peserta->nilai,
+                        "status" => $peserta->status,
+                        "usia" => $usia,
                     ],
-                    "pelatihan" => Pelatihan::find($p->pelatihan_id),
+                    "pelatihan" => $pelatihan,
                 ];
-                // $temp_peserta = Peserta::find($pe->peserta_id);
-                // $peserta[] = [
-                //     "user_id" => $temp_peserta->user->user_id,
-                //     "nama" => $temp_peserta->user->nama,
-                //     "email" => $temp_peserta->user->email,
-                //     "username" => $temp_peserta->user->username,
-                //     "password" => $temp_peserta->user->password,
-                //     "telp" => $temp_peserta->user->telp,
-                //     "role" => $temp_peserta->user->role,
-                //     "peserta_id" => $temp_peserta->peserta_id,
-                //     "nik" => $temp_peserta->nik,
-                //     "pendidikan" => $temp_peserta->pendidikan,
-                //     "jurusan" => $temp_peserta->jurusan,
-                //     "nilai" => $temp_peserta->nilai,
-                //     "status" => $temp_peserta->status,
-                // ];
 
+                // $peserta = Peserta::find($pe->peserta_id);
+                // $peserta[] = [
+                //     "user_id" => $peserta->user->user_id,
+                //     "nama" => $peserta->user->nama,
+                //     "email" => $peserta->user->email,
+                //     "username" => $peserta->user->username,
+                //     "password" => $peserta->user->password,
+                //     "telp" => $peserta->user->telp,
+                //     "role" => $peserta->user->role,
+                //     "peserta_id" => $peserta->peserta_id,
+                //     "nik" => $peserta->nik,
+                //     "pendidikan" => $peserta->pendidikan,
+                //     "jurusan" => $peserta->jurusan,
+                //     "nilai" => $peserta->nilai,
+                //     "status" => $peserta->status,
+                // ];
 
                 // "user_id" => $user->user_id,
                 // "nama" => $user->nama,

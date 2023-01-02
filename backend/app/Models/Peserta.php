@@ -35,7 +35,7 @@ class Peserta extends Model
     }
 
     public function pelatihan(){
-        return $this->belongsToMany(Pelatihan::class, 'pendaftaran_pelatihan', 'peserta_id', 'pelatihan_id')->withPivot("pp_id", "status_pendaftaran", "status_kelulusan");
+        return $this->belongsToMany(Pelatihan::class, 'pendaftaran_pelatihan', 'peserta_id', 'pelatihan_id')->withPivot("pp_id", "status_pendaftaran", "status_kelulusan", "tgl_pendaftaran", "tgl_wawancara");
     }
 
     public function lowongan(){

@@ -3,6 +3,7 @@ package com.example.projectdisnaker.api
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import java.util.Date
 
 @Parcelize
 data class PendaftaranResponse(
@@ -26,6 +27,12 @@ data class PendaftaranPelatihanItem(
     @field:SerializedName("kategori")
     val kategori: String? = null,
 
+    @field:SerializedName("tgl_pendaftaran")
+    val tgl_pendaftaran: String? = null,
+
+    @field:SerializedName("tgl_wawancara")
+    val tgl_wawancara: String? = null,
+
     @field:SerializedName("status_pendaftaran")
     val status_pendaftaran: Int? = null,
 
@@ -37,5 +44,8 @@ data class PendaftaranPelatihanItem(
 
     @field:SerializedName("pelatihan")
     val pelatihan: PelatihanItem? = null,
+
+    @field:SerializedName("sisa_kuota")
+    val sisa_kuota: Int? = null,
 
 ) : Parcelable

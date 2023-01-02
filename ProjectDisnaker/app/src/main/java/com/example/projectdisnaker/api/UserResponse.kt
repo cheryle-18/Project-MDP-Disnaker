@@ -47,11 +47,8 @@ data class UserResponseItem(
 	@field:SerializedName("alamat")
 	val alamat: String? = null,
 
-//	@field:SerializedName("pendidikan")
-//	val pendidikan: String? = null,
-
-	@field:SerializedName("pendidikan_id")
-	val pendidikan_id: Int? = null,
+	@field:SerializedName("pendidikan")
+	val pendidikan: String? = null,
 
 	@field:SerializedName("nilai")
 	val nilai: Int? = null,
@@ -69,5 +66,8 @@ data class UserResponseItem(
 	val tglLahir: String? = null,
 
 	@field:SerializedName("status")
-	val status: Int? = null
+	val status: Int? = null,
+
+	@field:SerializedName("usia")
+	val usia: Int? = null
 ) : Parcelable

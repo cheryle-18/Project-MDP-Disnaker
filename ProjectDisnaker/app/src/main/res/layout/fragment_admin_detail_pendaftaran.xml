@@ -110,7 +110,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvStatusDaftarDet"
+                    android:id="@+id/tvTahapDaftarDet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
