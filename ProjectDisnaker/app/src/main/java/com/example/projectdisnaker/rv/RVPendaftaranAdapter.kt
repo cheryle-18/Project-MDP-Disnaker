@@ -43,7 +43,7 @@ class RVPendaftaranAdapter(private val activity: Activity,
         val item = listPendaftaran[position]
         holder.tvNama.setText(item.pelatihan_nama)
         holder.tvStatusPendaftaran.setText(status_pendaftaran[item.status_pendaftaran!!])
-        holder.tvStatusKelulusan.setText(status_kelulusan[item.status_pendaftaran!!])
+        holder.tvStatusKelulusan.setText(status_kelulusan[item.status_kelulusan!!])
         if(item.status_kelulusan!=1){
             holder.llStatusKelulusan.background.setTint(Color.RED)
         }

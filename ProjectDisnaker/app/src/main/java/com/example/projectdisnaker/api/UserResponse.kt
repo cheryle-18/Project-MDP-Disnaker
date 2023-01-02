@@ -51,7 +51,7 @@ data class UserResponseItem(
 //	val pendidikan: String? = null,
 
 	@field:SerializedName("pendidikan_id")
-	val pendidikan_id: String? = null,
+	val pendidikan_id: Int? = null,
 
 	@field:SerializedName("nilai")
 	val nilai: Int? = null,
