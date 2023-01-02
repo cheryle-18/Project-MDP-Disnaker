@@ -72,6 +72,14 @@
         android:paddingRight="30dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
+        <TextView
+            android:id="@+id/tvBlmDaftarStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Anda belum mendaftar pelatihan apapun"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPendaftaran"
             android:layout_width="match_parent"

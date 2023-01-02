@@ -175,4 +175,32 @@ class UserController extends Controller
     public function updateStatusKerja(Request $req){
 
     }
+
+    public function getPendaftaran(Request $req){
+        $temp = PendaftaranPelatihan::where('peserta_id', $req->peserta_id)->get();
+        $pelatihan = [];
+        $message = "";
+
+        if(sizeof($temp)>0){
+            foreach($temp as $t){
+                $pelatihan[] = [
+                    "pelatihan_id" => $t->pelatihan_id,
+                    "nama" => $t->pelatihan->nama,
+                    "tgl_pendaftaran" => date_format(date_create($t->tgl_pendaftaran), "d F Y"),
+                    "tgl_wawancara" => date_format(date_create($t->tgl_wawancara), "d F Y"),
+                    "status_pendaftaran" => $t->status_pendaftaran,
+                    "status_kelulusan" => $t->status_kelulusan
+                ];
+            }
+            $message = "Berhasil fetch";
+        }
+        else{
+            $message = "Anda belum mengikuti pelatihan apapun.";
+        }
+
+        return response()->json([
+            "pendaftaran" => $pelatihan,
+            "message" => $message
+        ], 200);
+    }
 }

@@ -33,7 +33,7 @@
             android:id="@+id/tvNama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tes Bakat Minat"
+            android:text="Administrasi Perkantoran"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:text="Pelatihan Administrasi Perkantoran"
+            android:text="Wawancara"
             android:textSize="13sp" />
 
         <LinearLayout

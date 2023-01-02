@@ -19,8 +19,8 @@ class RVPendaftaranAdapter(private val activity: Activity,
 ) : RecyclerView.Adapter<RVPendaftaranAdapter.CustomViewHolder>() {
 
     private var coroutine = CoroutineScope(Dispatchers.IO)
-    private var status_pendaftaran = arrayOf("Pending", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
-    private var status_kelulusan = arrayOf("Pending","Diterima", "Ditolak")
+    private var status_pendaftaran = arrayOf("Pendaftaran Awal", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
+    private var status_kelulusan = arrayOf("Menunggu","Diterima", "Ditolak")
 
     class CustomViewHolder(var view: View) : RecyclerView.ViewHolder(view)
     {
