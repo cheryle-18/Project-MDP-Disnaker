@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\PendaftaranLowongan;
+use App\Models\PendaftaranPelatihan;
 use App\Models\Perusahaan;
 use App\Models\Peserta;
 use App\Models\User;
@@ -116,7 +118,58 @@ class UserController extends Controller
     }
 
     public function getRiwayatPelatihan(Request $req){
+        $pendaftaran = PendaftaranPelatihan::where('peserta_id', $req->peserta_id)->where('status_pendaftaran', 3)->where('status_kelulusan', 1)->get();
 
+        $pelatihan = [];
+        $message = "";
+
+        if(sizeof($pendaftaran)>0){
+            foreach($pendaftaran as $p){
+                $pelatihan[] = [
+                    "nama" => $p->pelatihan->nama,
+                    "kategori" => $p->pelatihan->kategori->nama,
+                    "tanggal" => date_format(date_create($p->tgl_pendaftaran), "d F Y")
+                ];
+            }
+
+            $message = "Berhasil fetch";
+        }
+        else{
+            $message = "Anda tidak memiliki riwayat pelatihan.";
+        }
+
+        return response()->json([
+            "riwayat" => $pelatihan,
+            "message" => $message
+        ], 200);
+    }
+
+    public function getRiwayatPekerjaan(Request $req){
+        $pendaftaran = PendaftaranLowongan::where('peserta_id', $req->peserta_id)->get();
+
+        $lowongan = [];
+        $message = "";
+
+        if(sizeof($pendaftaran)>0){
+            foreach($pendaftaran as $p){
+                $lowongan[] = [
+                    "nama" => $p->lowongan->nama,
+                    "perusahaan" => $p->lowongan->perusahaan->user->nama,
+                    "kategori" => $p->lowongan->kategori->nama,
+                    "tanggal" => date_format(date_create($p->tanggal), "d F Y")
+                ];
+            }
+
+            $message = "Berhasil fetch";
+        }
+        else{
+            $message = "Anda tidak memiliki riwayat pekerjaan.";
+        }
+
+        return response()->json([
+            "riwayat" => $lowongan,
+            "message" => $message
+        ], 200);
     }
 
     public function updateStatusKerja(Request $req){

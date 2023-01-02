@@ -2,6 +2,8 @@ package com.example.projectdisnaker.admin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.databinding.ActivityAdminBinding
 
@@ -50,5 +52,19 @@ class AdminActivity : AppCompatActivity() {
 
             return@setOnItemSelectedListener true
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.opt_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_logout->{
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -11,16 +11,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.*
-import com.example.projectdisnaker.databinding.FragmentRiwayatPelatihanBinding
-import com.example.projectdisnaker.perusahaan.PerusahaanProfileFragment
+import com.example.projectdisnaker.api.ApiConfiguration
+import com.example.projectdisnaker.api.RiwayatItem
+import com.example.projectdisnaker.api.RiwayatResponse
+import com.example.projectdisnaker.api.UserResponseItem
+import com.example.projectdisnaker.databinding.FragmentRiwayatPekerjaanBinding
 import com.example.projectdisnaker.rv.RVRiwayatAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RiwayatPelatihanFragment : Fragment() {
-    private lateinit var binding: FragmentRiwayatPelatihanBinding
+class RiwayatPekerjaanFragment : Fragment() {
+    private lateinit var binding: FragmentRiwayatPekerjaanBinding
     private var listRiwayat: MutableList<RiwayatItem?> = arrayListOf()
     private lateinit var riwayatAdapter: RVRiwayatAdapter
     private lateinit var user: UserResponseItem
@@ -30,7 +32,7 @@ class RiwayatPelatihanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRiwayatPelatihanBinding.inflate(inflater, container, false)
+        binding = FragmentRiwayatPekerjaanBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -57,8 +59,8 @@ class RiwayatPelatihanFragment : Fragment() {
         binding.tvInisial.setText(initials)
 
         riwayatAdapter = RVRiwayatAdapter(listRiwayat, requireContext())
-        binding.rvRiwayatPelatihan.adapter = riwayatAdapter
-        binding.rvRiwayatPelatihan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvRiwayatPekerjaan.adapter = riwayatAdapter
+        binding.rvRiwayatPekerjaan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         fetchRiwayat()
     }
@@ -75,7 +77,7 @@ class RiwayatPelatihanFragment : Fragment() {
     }
 
     private fun fetchRiwayat(){
-        var client = ApiConfiguration.getApiService().getRiwayatPelatihan(user.pesertaId!!)
+        var client = ApiConfiguration.getApiService().getRiwayatPekerjaan(user.pesertaId!!)
         client.enqueue(object: Callback<RiwayatResponse> {
             override fun onResponse(call: Call<RiwayatResponse>, response: Response<RiwayatResponse>){
                 if(response.isSuccessful){
@@ -86,19 +88,19 @@ class RiwayatPelatihanFragment : Fragment() {
                             listRiwayat.addAll(responseBody.riwayat!!.toMutableList())
                             riwayatAdapter.notifyDataSetChanged()
 
-                            binding.tvBlmPelatihan.visibility = View.GONE
+                            binding.tvBlmKerja.visibility = View.GONE
                         }
                         else{
-                            binding.tvBlmPelatihan.setText(responseBody.message)
+                            binding.tvBlmKerja.setText(responseBody.message)
                         }
                     }
                 }
                 else{
-                    Log.e("Riwayat Pelatihan Frag", "${response.message()}")
+                    Log.e("Riwayat Pekerjaan Frag", "${response.message()}")
                 }
             }
             override fun onFailure(call: Call<RiwayatResponse>, t: Throwable) {
-                Log.e("Riwayat Pelatihan Frag", "${t.message}")
+                Log.e("Riwayat Pekerjaan Frag", "${t.message}")
                 Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

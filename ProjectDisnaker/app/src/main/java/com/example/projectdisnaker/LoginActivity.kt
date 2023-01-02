@@ -26,6 +26,9 @@ class LoginActivity : AppCompatActivity() {
 
         if(username!="" && password!=""){
             if(username == "admin" && password == "admin"){
+                binding.edtUsernameLogin.setText("")
+                binding.edtPassLogin.setText("")
+
                 val intent = Intent(this, AdminActivity::class.java)
                 startActivity(intent)
             }

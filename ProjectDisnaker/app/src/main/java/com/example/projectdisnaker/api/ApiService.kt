@@ -22,10 +22,20 @@ interface ApiService {
         @Query("password") password:String,
     ): Call<UserResponse>
 
+    //PESERTA PROFILE
+    @GET("peserta/riwayat/pelatihan/{peserta_id}")
+    fun getRiwayatPelatihan(
+        @Path("peserta_id") pesertaId: Int
+    ): Call<RiwayatResponse>
+
+    @GET("peserta/riwayat/pekerjaan/{peserta_id}")
+    fun getRiwayatPekerjaan(
+        @Path("peserta_id") pesertaId: Int
+    ): Call<RiwayatResponse>
+
     //KATEGORI
     @GET("kategori")
     fun getKategori(): Call<KategoriResponse>
-
 
     //PELATIHAN
     @GET("pelatihan")
