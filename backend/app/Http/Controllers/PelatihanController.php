@@ -34,7 +34,7 @@ class PelatihanController extends Controller
                         "role" => $temp_peserta->user->role,
                         "peserta_id" => $temp_peserta->peserta_id,
                         "nik" => $temp_peserta->nik,
-                        "pendidikan" => $temp_peserta->pendidikan,
+                        "pendidikan_id" => $temp_peserta->pendidikan_id,
                         "jurusan" => $temp_peserta->jurusan,
                         "nilai" => $temp_peserta->nilai,
                         "status" => $temp_peserta->status,

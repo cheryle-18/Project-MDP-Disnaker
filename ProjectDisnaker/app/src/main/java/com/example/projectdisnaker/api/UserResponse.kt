@@ -47,8 +47,11 @@ data class UserResponseItem(
 	@field:SerializedName("alamat")
 	val alamat: String? = null,
 
-	@field:SerializedName("pendidikan")
-	val pendidikan: String? = null,
+//	@field:SerializedName("pendidikan")
+//	val pendidikan: String? = null,
+
+	@field:SerializedName("pendidikan_id")
+	val pendidikan_id: String? = null,
 
 	@field:SerializedName("nilai")
 	val nilai: Int? = null,
