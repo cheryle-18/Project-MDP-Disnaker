@@ -30,7 +30,7 @@ class UserController extends Controller
                     "role" => $user->role,
                     "peserta_id" => $peserta->peserta_id,
                     "nik" => $peserta->nik,
-                    "tgl_lahir" => date_format($dob, "d F Y"),
+                    "tgl_lahir" => date_format($dob, "d/m/Y"),
                     "pendidikan" => $peserta->pendidikan->nama,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,

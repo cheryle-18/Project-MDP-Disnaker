@@ -37,6 +37,7 @@ class AuthController extends Controller
                     "telp" => $user->telp,
                     "role" => $user->role,
                     "peserta_id" => $peserta->peserta_id,
+                    "tgl_lahir" => date_format(date_create($peserta->tgl_lahir), "d/m/Y"),
                     "nik" => $peserta->nik,
                     "pendidikan" => $peserta->pendidikan->nama,
                     "jurusan" => $peserta->jurusan,

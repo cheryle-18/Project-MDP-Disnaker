@@ -5,15 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.app.DatePickerDialog
+import android.widget.DatePicker
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentProfileBinding
-import com.example.projectdisnaker.perusahaan.PerusahaanActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var user: UserResponseItem
+    private var cal = Calendar.getInstance()
+    private lateinit var sdf: SimpleDateFormat
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +55,27 @@ class ProfileFragment : Fragment() {
         binding.etEmailProfile.setText(user.email)
         binding.etTelpProfile.setText(user.telp)
         binding.etKtpProfile.setText(user.nik)
+        binding.etTglLahirProfile.setText(user.tglLahir)
+
+        var tglLahir = user.tglLahir!!.split("/")
+        Toast.makeText(requireContext(), "${tglLahir[1]}", Toast.LENGTH_SHORT).show()
+        cal.set(tglLahir[2].toInt(), tglLahir[1].toInt()-1, tglLahir[0].toInt())
+
+        val dateSetListener = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                binding.etTglLahirProfile.setText(sdf.format(cal.getTime()))
+            }
+        }
+
+        binding.ivCalendarProfile.setOnClickListener {
+            DatePickerDialog(requireContext(), R.style.DialogTheme, dateSetListener,
+                cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
 
         binding.layoutUbahPassword.setOnClickListener {
             val fragment = PasswordFragment()
