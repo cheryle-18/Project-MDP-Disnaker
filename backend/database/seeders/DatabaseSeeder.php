@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,11 +23,16 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             KategoriSeeder::class,
+            PendidikanSeeder::class,
             UserSeeder::class,
             PerusahaanSeeder::class,
             PesertaSeeder::class,
             LowonganSeeder::class,
-            SyaratLowonganSeeder::class
+            SyaratLowonganSeeder::class,
+            PelatihanSeeder::class,
+            SyaratPelatihanSeeder::class,
+            PendaftaranLowonganSeeder::class,
+            PendaftaranPelatihanSeeder::class
         ]);
     }
 }

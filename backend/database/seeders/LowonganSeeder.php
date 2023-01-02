@@ -26,7 +26,7 @@ class LowonganSeeder extends Seeder
                 'kategori_id' => 5,
                 'perusahaan_id'=>1,
                 'kuota'=>10,
-                'keterangan'=>'tes',
+                'keterangan'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit. At, nesciunt.',
                 'status'=>1
             ],
             [
@@ -35,8 +35,8 @@ class LowonganSeeder extends Seeder
                 'kategori_id' => 6,
                 'perusahaan_id'=>1,
                 'kuota'=>15,
-                'keterangan'=>'tes tes',
-                'status'=>1
+                'keterangan'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, quo?',
+                'status'=>2
             ]
         ]);
     }

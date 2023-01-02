@@ -22,12 +22,12 @@ class SyaratLowonganSeeder extends Seeder
             [
                 'sl_id' => 1,
                 'lowongan_id' => 1,
-                'deskripsi' => 'tes syarat 1'
+                'deskripsi' => 'Lorem ipsum dolor sit amet.'
             ],
             [
                 'sl_id' => 2,
                 'lowongan_id' => 1,
-                'deskripsi' => 'tes syarat 2'
+                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur.'
             ]
         ]);
     }

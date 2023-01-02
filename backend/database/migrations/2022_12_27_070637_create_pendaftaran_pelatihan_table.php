@@ -25,8 +25,8 @@ return new class extends Migration
             ('peserta_id')->on('peserta')->onDelete('cascade');
             $table->dateTime('tgl_pendaftaran');
             $table->dateTime('tgl_wawancara');
-            $table->tinyInteger('status_pendaftaran')->comment('0 = pending, 1 = wawancara');
-            $table->tinyInteger('status_kelulusan')->nullable()->comment('0 = pending, 1 = diterima');
+            $table->tinyInteger('status_pendaftaran')->comment('0 = pending, 1 = wawancara, 2 = sedang pelatihan, 3 = selesai, 4 = ditolak');
+            $table->tinyInteger('status_kelulusan')->nullable()->comment('0 = pending, 1 = diterima, 2 = ditolak');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -25,9 +25,19 @@ class PesertaSeeder extends Seeder
                 'user_id'=>1,
                 'nik'=>'1234567890',
                 'tgl_lahir'=>'2000-01-01',
-                'pendidikan'=>'SMA',
+                'pendidikan_id'=>4,
                 'jurusan'=>'IPA',
                 'nilai'=>75,
+                'status'=>2
+            ],
+            [
+                'peserta_id' => 2,
+                'user_id'=>3,
+                'nik'=>'1234567890',
+                'tgl_lahir'=>'2001-01-01',
+                'pendidikan_id'=>4,
+                'jurusan'=>'IPS',
+                'nilai'=>80,
                 'status'=>0
             ],
         ]);

@@ -242,7 +242,7 @@ class LowonganController extends Controller
                     "telp" => $t->peserta->user->telp,
                     "tgl_lahir" => date_format($dob, "d F Y"),
                     "usia" => date_diff($dob, date_create('now'))->y,
-                    "pendidikan" => $t->peserta->pendidikan,
+                    "pendidikan" => $t->peserta->pendidikan->nama,
                     "jurusan" => $t->peserta->jurusan,
                     "nilai" => $t->peserta->nilai
                 ];

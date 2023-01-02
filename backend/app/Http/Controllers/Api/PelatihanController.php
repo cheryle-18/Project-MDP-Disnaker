@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Pelatihan;
 use App\Models\PendaftaranPelatihan;
+use App\Models\Pendidikan;
 use App\Models\SyaratPelatihan;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class PelatihanController extends Controller
                 "kategori" => $t->kategori->nama,
                 "kuota" => $t->kuota,
                 "durasi"=>$t->durasi,
-                "pendidikan"=>$t->pendidikan,
+                "pendidikan"=>$t->pendidikan->nama,
                 "keterangan" => $t->keterangan,
                 "status" => $t->status,
                 "syarat" => $t->syarat
@@ -49,12 +50,15 @@ class PelatihanController extends Controller
         //get kategori id
         $kategori = Kategori::where('nama', $req->kategori)->first();
 
+        //get pendidikan id
+        $pendidikan = Pendidikan::where('nama', $req->pendidikan)->first();
+
         $pelatihan = new Pelatihan();
         $pelatihan->nama = $req->nama;
         $pelatihan->kategori_id = $kategori->kategori_id;
         $pelatihan->kuota = $req->kuota;
         $pelatihan->durasi = $req->durasi;
-        $pelatihan->pendidikan = $req->pendidikan;
+        $pelatihan->pendidikan_id = $pendidikan->pendidikan_id;
         $pelatihan->keterangan = $req->keterangan;
         $pelatihan->status = 1;
         $pelatihan->save();
@@ -95,7 +99,7 @@ class PelatihanController extends Controller
                     "telp" => $t->peserta->user->telp,
                     "tgl_lahir" => date_format($dob, "d F Y"),
                     "usia" => date_diff($dob, date_create('now'))->y,
-                    "pendidikan" => $t->peserta->pendidikan,
+                    "pendidikan" => $t->peserta->pendidikan->nama,
                     "jurusan" => $t->peserta->jurusan,
                     "nilai" => $t->peserta->nilai
                 ];

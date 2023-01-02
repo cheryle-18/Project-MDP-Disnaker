@@ -29,7 +29,7 @@ class UserController extends Controller
                     "peserta_id" => $peserta->peserta_id,
                     "nik" => $peserta->nik,
                     "tgl_lahir" => date_format($dob, "d F Y"),
-                    "pendidikan" => $peserta->pendidikan,
+                    "pendidikan" => $peserta->pendidikan->nama,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,
                     "status" => $peserta->status,
@@ -96,7 +96,7 @@ class UserController extends Controller
             "email" => $temp->user->email,
             "telp" => $temp->user->telp,
             "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d F Y"),
-            "pendidikan" => $temp->pendidikan,
+            "pendidikan" => $temp->pendidikan->nama,
             "jurusan" => $temp->jurusan,
             "nilai" => $temp->nilai
         ];

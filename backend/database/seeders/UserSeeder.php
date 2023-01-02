@@ -38,6 +38,15 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make(123),
                 'telp'=>'1234567890',
                 'role'=>1
+            ],
+            [
+                'user_id' => 3,
+                'nama'=>'Jane Doe',
+                'email' => 'janedoe@gmail.com',
+                'username'=>'janedoe',
+                'password'=>Hash::make(123),
+                'telp'=>'0123456789',
+                'role'=>0
             ]
         ]);
     }
