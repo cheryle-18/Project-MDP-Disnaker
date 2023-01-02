@@ -24,6 +24,10 @@ class Pelatihan extends Model
         return $this->belongsTo(Kategori::class, 'kategori_id', 'kategori_id');
     }
 
+    public function pendidikan(){
+        return $this->belongsTo(Pendidikan::class, 'pendidikan_id', 'pendidikan_id');
+    }
+
     public function syarat(){
         return $this->hasMany(SyaratPelatihan::class, 'pelatihan_id', 'pelatihan_id');
     }

@@ -30,6 +30,10 @@ class Peserta extends Model
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
+    public function pendidikan(){
+        return $this->belongsTo(Pendidikan::class, 'pendidikan_id', 'pendidikan_id');
+    }
+
     public function pelatihan(){
         return $this->belongsToMany(Pelatihan::class, 'pendaftaran_pelatihan', 'peserta_id', 'pelatihan_id')->withPivot("pp_id", "status_pendaftaran", "status_kelulusan");
     }

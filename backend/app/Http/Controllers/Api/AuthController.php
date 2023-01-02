@@ -38,7 +38,7 @@ class AuthController extends Controller
                     "role" => $user->role,
                     "peserta_id" => $peserta->peserta_id,
                     "nik" => $peserta->nik,
-                    "pendidikan" => $peserta->pendidikan,
+                    "pendidikan" => $peserta->pendidikan->nama,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,
                     "status" => $peserta->status,

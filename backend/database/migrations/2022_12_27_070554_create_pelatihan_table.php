@@ -21,7 +21,7 @@ return new class extends Migration
             ('kategori_id')->on('kategori')->onDelete('cascade');
             $table->integer('kuota')->default(0);
             $table->integer('durasi')->default(0);
-            $table->string('pendidikan',20);
+            $table->integer('pendidikan_id');
             $table->string('keterangan',255);
             $table->tinyInteger('status')->comment('0 = tidak aktif, 1 = aktif');
             $table->timestamps();

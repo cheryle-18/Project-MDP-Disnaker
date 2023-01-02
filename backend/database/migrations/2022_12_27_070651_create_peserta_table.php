@@ -20,10 +20,10 @@ return new class extends Migration
             ('user_id')->on('user')->onDelete('cascade');
             $table->string('nik',20)->nullable();
             $table->date('tgl_lahir')->nullable();
-            $table->string('pendidikan',20)->nullable();
+            $table->integer('pendidikan_id')->nullable();
             $table->string('jurusan',50)->nullable();
             $table->integer('nilai')->nullable();
-            $table->tinyInteger('status')->comment('0 = free, 1 = sedang pelatihan');
+            $table->tinyInteger('status')->comment('0 = free, 1 = sedang pelatihan, 2 = kerja');
             $table->timestamps();
             $table->softDeletes();
         });
