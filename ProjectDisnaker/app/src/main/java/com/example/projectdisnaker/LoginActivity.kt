@@ -65,18 +65,18 @@ class LoginActivity : AppCompatActivity() {
                             }
                             else{
                                 println("${response.message()}")
-                                Toast.makeText(this@LoginActivity,response.message(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity, "Username atau password salah", Toast.LENGTH_SHORT).show()
                             }
                         }
                         else{
                             Log.d("Error Login Activity",response.toString())
-                            Toast.makeText(this@LoginActivity,response.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@LoginActivity, "Username atau password salah", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                         Log.d("Error Login Activity", "${t.message}")
-                        Toast.makeText(this@LoginActivity,t.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "Username atau password salah", Toast.LENGTH_SHORT).show()
                     }
                 })
             }
