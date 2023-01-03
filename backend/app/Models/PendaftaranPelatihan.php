@@ -16,6 +16,16 @@ class PendaftaranPelatihan extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $fillable = [
+        'pp_id',
+        'pelatihan_id',
+        'peserta_id',
+        'tgl_pendaftaran',
+        'tgl_wawancara',
+        'status_pendaftaran',
+        'status_kelulusan'
+    ];
+
     public function pelatihan(){
         return $this->belongsTo(Pelatihan::class, 'pelatihan_id', 'pelatihan_id');
     }

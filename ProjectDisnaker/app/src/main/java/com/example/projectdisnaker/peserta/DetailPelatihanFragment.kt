@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -15,9 +16,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.admin.AdminPelatihanFragment
+import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.PelatihanItem
+import com.example.projectdisnaker.api.PelatihanResponse
+import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentDetailPelatihanBinding
 import com.example.projectdisnaker.rv.RVSyaratAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailPelatihanFragment : Fragment() {
     private lateinit var binding: FragmentDetailPelatihanBinding
@@ -26,7 +34,7 @@ class DetailPelatihanFragment : Fragment() {
     private lateinit var syaratAdapter: RVSyaratAdapter
     private var peluangPelatihan: ArrayList<String> = ArrayList()
     private lateinit var peluangAdapter: RVSyaratAdapter
-
+    private lateinit var user: UserResponseItem
 
 
     override fun onCreateView(
@@ -50,6 +58,7 @@ class DetailPelatihanFragment : Fragment() {
         binding.linearLayout4.bringToFront()
 
         pelatihan = requireArguments().getParcelable<PelatihanItem>("pelatihan")!!
+        user = (activity as HomeActivity).user
         binding.tvNamaDetail.setText(pelatihan.nama)
         binding.tvKategoriDetail.setText(pelatihan.kategori)
         binding.tvKuotaDetail.setText(pelatihan.kuota.toString())
@@ -73,6 +82,7 @@ class DetailPelatihanFragment : Fragment() {
         binding.rvPeluangKerja.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
 
+
         binding.btnDaftarPelatihan.setOnClickListener {
             val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
             val dialog = Dialog(requireContext())
@@ -94,32 +104,46 @@ class DetailPelatihanFragment : Fragment() {
             }
             btnConfirm.setOnClickListener {
                 dialog.dismiss()
-//                if(pendaftaran.status_pendaftaran==0){
-//                    if(binding.tvTglWawancaraDet.text.toString() == "-"){
-//                        Toast.makeText(requireContext(), "Harap Masukkan Tanggal Wawancara!", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//                else{
-////                var client = ApiConfiguration.getApiService().tutupLowongan(lowonganId)
-////                client.enqueue(object: Callback<LowonganResponse> {
-////                    override fun onResponse(call: Call<LowonganResponse>, response: Response<LowonganResponse>){
-////                        if(response.isSuccessful){
-////                            val responseBody = response.body()
-////                            if(responseBody!=null){
-////                                fetchCurrentLowongan()
-////                            }
-////                        }
-////                        else{
-////                            Log.e("", "${response.message()}")
-////                            Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
-////                        }
-////                    }
-////                    override fun onFailure(call: Call<LowonganResponse>, t: Throwable) {
-////                        Log.e("", "${t.message}")
-////                        Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
-////                    }
-////                })
-//                }
+                var client = ApiConfiguration.getApiService().daftarPelatihan(user.pesertaId!!,pelatihan.pelatihanId!!)
+                client.enqueue(object: Callback<PelatihanResponse> {
+                    override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>){
+                        if(response.isSuccessful){
+                            val responseBody = response.body()
+                            if(responseBody!=null){
+                                if(responseBody.message == "1"){
+                                    val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                    val dialog = Dialog(requireContext())
+                                    dialog.setContentView(dialogBinding)
+                                    dialog.setCancelable(true)
+                                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                    dialog.show()
+
+                                    val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                    tvDialog.setText("Berhasil mendaftar pelatihan")
+
+                                    btnOk.setOnClickListener {
+                                        dialog.dismiss()
+//                                        val fragment = PelatihanFragment()
+//                                        requireActivity().supportFragmentManager.beginTransaction()
+//                                            .replace(R.id.fragment_container, fragment).commit()
+                                    }
+                                }
+                                else{
+                                    Toast.makeText(requireContext(),responseBody.message,Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                        else{
+                            Log.e("", "${response.message()}")
+                            Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    override fun onFailure(call: Call<PelatihanResponse>, t: Throwable) {
+                        Log.e("", "${t.message}")
+                        Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
         }
     }

@@ -11,6 +11,7 @@ use App\Models\Peserta;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -206,11 +207,25 @@ class UserController extends Controller
         ], 200);
     }
 
-    function daftarPelatihan(Request $request)
+    function daftarPelatihan(Request $req)
     {
         # code...
         $peserta = Peserta::find($req->peserta_id);
         $pelatihan = Pelatihan::find($req->pelatihan_id);
+
+        //check for peserta status
+
+        if($peserta->status == 1){
+            return response()->json([
+                "message" => "Anda sedang melakukan pelatihan!"
+            ], 200);
+        }
+        //check for pendidikan
+        if($peserta->pendidikan_id < $pelatihan->pendidikan_id){
+            return response()->json([
+                "message" => "Anda belum memenuhi pendidikan minimal pelatihan ini!"
+            ], 200);
+        }
 
         //daftar
         PendaftaranPelatihan::create([
@@ -232,8 +247,10 @@ class UserController extends Controller
         $peserta->save();
 
         return response()->json([
-            "message" => "Berhasil daftar pelatihan"
+            "message" => "1"
         ], 200);
-    }
-    }
+     }
+
+
 }
+
