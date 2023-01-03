@@ -144,6 +144,9 @@ class AdminDetailPendaftaranFragment : Fragment() {
                                     dialog.dismiss()
                                 }
                                 val fragment = AdminPendaftaranFragment()
+                                var bundle = Bundle()
+                                bundle.putInt("idx", arguments?.getInt("idx")!!)
+                                fragment.arguments = bundle
                                 requireActivity().supportFragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container_admin, fragment).commit()
                             }
