@@ -60,7 +60,7 @@ class AdminPelatihanFragment : Fragment() {
 
     fun initData(){
        //retrofit call
-        var client = ApiConfiguration.getApiService().getPelatihan()
+        var client = ApiConfiguration.getApiService().getPelatihan("admin")
         client.enqueue(object: Callback<PelatihanResponse> {
 
             override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>) {
