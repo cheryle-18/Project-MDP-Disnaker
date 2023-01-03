@@ -39,13 +39,15 @@ class RVStatPendaftaranAdapter(
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val status = listStatus[position]
-        holder.tvNama.setText(status!!.pelatihan)
-        holder.tvNamaPesertaPend.visibility = View.GONE
-        holder.tvStatusPendaftaran.setText(status_pendaftaran[status.statusPendaftaran!!])
-        holder.tvStatusKelulusan.setText(status_kelulusan[status.statusKelulusan!!])
-        if(status.statusKelulusan!=1){
-            holder.llStatusKelulusan.background.setTint(context.resources.getColor(R.color.red))
+        if(listStatus.size > 0){
+            val status = listStatus[position]
+            holder.tvNama.setText(status!!.pelatihan)
+            holder.tvNamaPesertaPend.visibility = View.GONE
+            holder.tvStatusPendaftaran.setText(status_pendaftaran[status.statusPendaftaran!!])
+            holder.tvStatusKelulusan.setText(status_kelulusan[status.statusKelulusan!!])
+            if(status.statusKelulusan!=1){
+                holder.llStatusKelulusan.background.setTint(context.resources.getColor(R.color.red))
+            }
         }
     }
 

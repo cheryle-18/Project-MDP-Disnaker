@@ -233,7 +233,8 @@ class UserController extends Controller
             "pelatihan_id" => $req->pelatihan_id,
             "peserta_id" => $req->peserta_id,
             "tgl_pendaftaran" => Carbon::now('Asia/Jakarta'),
-            "status_pendaftaran" => 0
+            "status_pendaftaran" => 0,
+            "status_kelulusan" => 0
         ]);
 
         //auto tutup pelatihan kl jmlh pendaftaran = kuota
