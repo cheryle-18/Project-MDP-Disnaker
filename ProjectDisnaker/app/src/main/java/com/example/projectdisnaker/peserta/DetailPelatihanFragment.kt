@@ -1,11 +1,16 @@
 package com.example.projectdisnaker.peserta
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,7 +72,56 @@ class DetailPelatihanFragment : Fragment() {
         binding.rvPeluangKerja.adapter = peluangAdapter
         binding.rvPeluangKerja.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        Toast.makeText(requireContext(),peluangPelatihan.toString(),Toast.LENGTH_SHORT).show()
+
+        binding.btnDaftarPelatihan.setOnClickListener {
+            val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+            val dialog = Dialog(requireContext())
+            dialog.setContentView(dialogBinding)
+            dialog.setCancelable(true)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val btnConfirm = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+            val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+
+            tvDialog.setText("Apakah anda yakin ingin mendaftar pelatihan?")
+            btnCancel.setText("Tidak")
+            btnConfirm.setText("Ya")
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            btnConfirm.setOnClickListener {
+                dialog.dismiss()
+//                if(pendaftaran.status_pendaftaran==0){
+//                    if(binding.tvTglWawancaraDet.text.toString() == "-"){
+//                        Toast.makeText(requireContext(), "Harap Masukkan Tanggal Wawancara!", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                else{
+////                var client = ApiConfiguration.getApiService().tutupLowongan(lowonganId)
+////                client.enqueue(object: Callback<LowonganResponse> {
+////                    override fun onResponse(call: Call<LowonganResponse>, response: Response<LowonganResponse>){
+////                        if(response.isSuccessful){
+////                            val responseBody = response.body()
+////                            if(responseBody!=null){
+////                                fetchCurrentLowongan()
+////                            }
+////                        }
+////                        else{
+////                            Log.e("", "${response.message()}")
+////                            Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+////                        }
+////                    }
+////                    override fun onFailure(call: Call<LowonganResponse>, t: Throwable) {
+////                        Log.e("", "${t.message}")
+////                        Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
+////                    }
+////                })
+//                }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

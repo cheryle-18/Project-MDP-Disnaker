@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pelatihan;
 use App\Models\PendaftaranLowongan;
 use App\Models\PendaftaranPelatihan;
 use App\Models\Perusahaan;
 use App\Models\Peserta;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -202,5 +204,36 @@ class UserController extends Controller
             "pendaftaran" => $pelatihan,
             "message" => $message
         ], 200);
+    }
+
+    function daftarPelatihan(Request $request)
+    {
+        # code...
+        $peserta = Peserta::find($req->peserta_id);
+        $pelatihan = Pelatihan::find($req->pelatihan_id);
+
+        //daftar
+        PendaftaranPelatihan::create([
+            "pelatihan_id" => $req->pelatihan_id,
+            "peserta_id" => $req->peserta_id,
+            "tgl_pendaftaran" => Carbon::now('Asia/Jakarta'),
+            "status_pendaftaran" => 0
+        ]);
+
+        //auto tutup pelatihan kl jmlh pendaftaran = kuota
+        $pendaftaran = PendaftaranPelatihan::where('pelatihan_id', $req->pelatihan_id)->count();
+        if($pelatihan->kuota - $pendaftaran <= 0){
+            $pelatihan->status = 0;
+            $pelatihan->save();
+        }
+
+        //update status peserta jd sedang pelatihan
+        $peserta->status = 1;
+        $peserta->save();
+
+        return response()->json([
+            "message" => "Berhasil daftar pelatihan"
+        ], 200);
+    }
     }
 }

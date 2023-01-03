@@ -56,6 +56,12 @@ interface ApiService {
         @Path("pelatihan_id") pelatihanId: Int
     ): Call<PesertaPendaftaranResponse>
 
+    @POST("pelatihan/daftar")
+    fun daftarPelatihan(
+        @Query("peserta_id") pesertaId: Int,
+        @Query("pelatihan_id") pelatihanId: Int
+    ): Call<PelatihanResponse>
+
     @GET("pendaftaranPelatihan")
     fun getPendaftaranPelatihan(): Call<PendaftaranResponse>
 
