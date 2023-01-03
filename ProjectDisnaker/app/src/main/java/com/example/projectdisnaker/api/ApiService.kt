@@ -95,6 +95,15 @@ interface ApiService {
         @Path("user_id") userId: Int
     ): Call<PerusahaanResponse>
 
+    @POST("perusahaan/update/{user_id}")
+    fun updatePerusahaan(
+        @Path("user_id") user_id: Int,
+        @Query("alamat") alamat: String,
+        @Query("telp") telp: String,
+        @Query("email") email: String,
+//        @Body perusahaan: UserResponseItem
+    ): Call<PerusahaanResponse>
+
     //LOWONGAN
     @GET("lowongan")
     fun getAllLowongan(): Call<LowonganResponse>

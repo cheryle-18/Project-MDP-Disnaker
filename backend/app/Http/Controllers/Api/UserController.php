@@ -85,7 +85,16 @@ class UserController extends Controller
     }
 
     public function updatePerusahaan(Request $req){
+        $perusahaan = Perusahaan::find('user_id', $req->user_id)->first();
 
+        $perusahaan->user->email = $req->email;
+        $perusahaan->user->telp = $req->telp;
+        $perusahaan->alamat = $req->alamat;
+        $perusahaan->save();
+
+        return response()->json([
+            "message" => "Berhasil mengubah Profile Perusahaan"
+        ], 200);
     }
 
     public function getAllPeserta(Request $req){
