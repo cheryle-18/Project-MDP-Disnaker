@@ -27,8 +27,9 @@ class DetailPendaftaranFragment : Fragment() {
     private lateinit var peluangAdapter: RVSyaratAdapter
 
     private var pelatihanId = -1
-    private var statPendaftaran = ""
-    private var statKelulusan = ""
+    private lateinit var status: StatusItem
+    private var status_pendaftaran = arrayOf("Pendaftaran Awal", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
+    private var status_kelulusan = arrayOf("Menunggu","Diterima", "Ditolak")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +49,10 @@ class DetailPendaftaranFragment : Fragment() {
         actionBar?.setTitle("Pendaftaran")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+        binding.linearLayout4.bringToFront()
 
         pelatihanId = requireArguments().getInt("pelatihan_id")
-        statPendaftaran = requireArguments().getString("stat_pendaftaran")!!
-        statKelulusan = requireArguments().getString("stat_kelulusan")!!
+        status = requireArguments().getParcelable<StatusItem>("status")!!
 
         syaratAdapter = RVSyaratAdapter(syaratPelatihan, requireContext())
         binding.rvSyaratPelatihan.adapter = syaratAdapter
@@ -76,12 +77,14 @@ class DetailPendaftaranFragment : Fragment() {
     }
 
     private fun fillDetails(){
-        binding.tvStatPendaftaran.setText(statPendaftaran)
-        binding.tvStatKelulusan.setText(statKelulusan)
-        if(statKelulusan=="Diterima"){
+        binding.tvStatPendaftaran.setText(status_pendaftaran[status.statusPendaftaran!!])
+        binding.tvTglDaftar.setText(status.tglPendaftaran)
+        binding.tvTglWawancara.setText(status.tglWawancara)
+        binding.tvStatKelulusan.setText(status_kelulusan[status.statusKelulusan!!])
+        if(status.statusKelulusan==1){
             binding.tvStatKelulusan.setTextColor(resources.getColor(R.color.green_900))
         }
-        else if(statKelulusan=="Ditolak"){
+        else if(status.statusKelulusan==2){
             binding.tvStatKelulusan.setTextColor(resources.getColor(R.color.red))
         }
 

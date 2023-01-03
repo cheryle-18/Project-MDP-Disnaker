@@ -13,7 +13,7 @@ import com.example.projectdisnaker.api.StatusItem
 class RVStatPendaftaranAdapter(
     private val listStatus: MutableList<StatusItem?>,
     val context: Context,
-    private val onClick: (idx:Int, pelatihanId:Int, statPendaftaran:String, statKelulusan:String)->Unit
+    private val onClick: (idx:Int, pelatihanId:Int, stat: StatusItem)->Unit
 ) : RecyclerView.Adapter<RVStatPendaftaranAdapter.ListViewHolder>() {
     private var status_pendaftaran = arrayOf("Pendaftaran Awal", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
     private var status_kelulusan = arrayOf("Menunggu","Diterima", "Ditolak")
@@ -28,8 +28,7 @@ class RVStatPendaftaranAdapter(
         init{
             view.setOnClickListener{
                 val status = listStatus[adapterPosition]
-                onClick(adapterPosition, status!!.pelatihanId!!,status_pendaftaran[status.statusPendaftaran!!],
-                    status_kelulusan[status.statusKelulusan!!])
+                onClick(adapterPosition, status!!.pelatihanId!!, status)
             }
         }
     }
