@@ -1,18 +1,26 @@
 package com.example.projectdisnaker.peserta
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.projectdisnaker.api.StatusItem
-import com.example.projectdisnaker.api.UserResponseItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.projectdisnaker.R
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPendaftaranBinding
+import com.example.projectdisnaker.rv.RVStatPendaftaranAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentPendaftaranBinding
     private var listStatus: MutableList<StatusItem?> = arrayListOf()
+    private lateinit var statusAdapter: RVStatPendaftaranAdapter
     private lateinit var user: UserResponseItem
 
     override fun onCreateView(
@@ -35,5 +43,49 @@ class PendaftaranFragment : Fragment() {
         setHasOptionsMenu(false)
 
         user = (activity as HomeActivity).user
+
+        statusAdapter = RVStatPendaftaranAdapter(listStatus, requireContext()){
+            idx, pelatihanId, stat ->
+            val fragment = DetailPendaftaranFragment()
+            val bundle = Bundle()
+            bundle.putInt("pelatihan_id", pelatihanId)
+            bundle.putParcelable("status", stat)
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment).commit()
+        }
+        binding.rvPendaftaran.adapter = statusAdapter
+        binding.rvPendaftaran.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        fetchStatus()
+    }
+
+    private fun fetchStatus(){
+        var client = ApiConfiguration.getApiService().getPesertaPendaftaran(user.pesertaId!!)
+        client.enqueue(object: Callback<StatusPendaftaranResponse> {
+            override fun onResponse(call: Call<StatusPendaftaranResponse>, response: Response<StatusPendaftaranResponse>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        if(responseBody.pendaftaran!!.size > 0){
+                            listStatus.clear()
+                            listStatus.addAll(responseBody.pendaftaran!!.toMutableList())
+                            statusAdapter.notifyDataSetChanged()
+
+                            binding.tvBlmDaftarStatus.visibility = View.GONE
+                        }
+                        else{
+                            binding.tvBlmDaftarStatus.setText(responseBody.message)
+                        }
+                    }
+                }
+                else{
+                    Log.e("Pendaftaran Frag", "${response.message()}")
+                }
+            }
+            override fun onFailure(call: Call<StatusPendaftaranResponse>, t: Throwable) {
+                Log.e("Pendaftaran Frag", "${t.message}")
+                Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

@@ -38,19 +38,34 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvStatusPendaftaran"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="3dp"
-            android:text="Wawancara"
-            android:textSize="13sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvNamaPesertaPend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jonathan Theja" />
+
+            <TextView
+                android:id="@+id/tvStatusPendaftaran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="Wawancara"
+                android:textSize="14sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llStatusKelulusan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/rounded_pill"
             android:backgroundTint="@color/green_800"
             android:orientation="horizontal"

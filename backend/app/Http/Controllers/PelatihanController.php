@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class PelatihanController extends Controller
 {
-    public function getPendaftaranPelatihan(Request $req)
+    public function getAllPendaftaranPelatihan(Request $req)
     {
         $pendaftaran = Pelatihan::all();
         // $pelatihan = [];
@@ -102,5 +102,50 @@ class PelatihanController extends Controller
             "pendaftaran" => $pendaftaran,
             "message" => "Berhasil fetch"
         ], 200);
+    }
+
+    public function tolakPendaftaran(Request $req)
+    {
+        $pendaftaran = PendaftaranPelatihan::find($req->pp_id);
+        if($pendaftaran->status_pendaftaran == 0 || $pendaftaran->status_pendaftaran == 1){
+            $pendaftaran->status_kelulusan = 2;
+        }
+        else{
+            $pendaftaran->status_pendaftaran = 4;
+            $pendaftaran->status_kelulusan = 2;
+        }
+        $pendaftaran->save();
+        $temp_pendaftaran = [];
+        $temp_pendaftaran[] = $pendaftaran;
+        $pendaftaran = $temp_pendaftaran;
+
+        return response()->json([
+            "pendaftaran" => $pendaftaran,
+            "message" => "Berhasil update"
+        ], 201);
+    }
+
+    public function terimaPendaftaran(Request $req)
+    {
+        $pendaftaran = PendaftaranPelatihan::find($req->pp_id);
+        if($pendaftaran->status_pendaftaran == 0 || $pendaftaran->status_pendaftaran == 1){
+            if($pendaftaran->status_pendaftaran == 0){
+                $pendaftaran->tgl_wawancara = $req->tgl_wawancara;
+            }
+            $pendaftaran->status_pendaftaran += 1;
+        }
+        else{
+            $pendaftaran->status_pendaftaran += 1;
+            $pendaftaran->status_kelulusan = 1;
+        }
+        $pendaftaran->save();
+        $temp_pendaftaran = [];
+        $temp_pendaftaran[] = $pendaftaran;
+        $pendaftaran = $temp_pendaftaran;
+
+        return response()->json([
+            "pendaftaran" => $pendaftaran,
+            "message" => "Berhasil update"
+        ], 201);
     }
 }

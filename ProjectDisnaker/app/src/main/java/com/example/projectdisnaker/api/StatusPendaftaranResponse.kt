@@ -20,8 +20,11 @@ data class StatusItem(
 	@field:SerializedName("pelatihan_id")
 	val pelatihanId: Int? = null,
 
-	@field:SerializedName("nama")
-	val nama: String? = null,
+	@field:SerializedName("pelatihan")
+	val pelatihan: String? = null,
+
+	@field:SerializedName("peserta")
+	val peserta: String? = null,
 
 	@field:SerializedName("tgl_pendaftaran")
 	val tglPendaftaran: String? = null,

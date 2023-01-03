@@ -49,6 +49,11 @@ interface ApiService {
         @Query("user_role") userRole:String
     ): Call<PelatihanResponse>
 
+    @GET("pelatihan/{pelatihan_id}")
+    fun getOnePelatihan(
+        @Path("pelatihan_id") pelatihanId: Int
+    ): Call<PelatihanResponse>
+
     @POST("pelatihan/insert")
     fun insertPelatihan(
         @Body pelatihan: PelatihanItem
@@ -65,8 +70,24 @@ interface ApiService {
         @Query("pelatihan_id") pelatihanId: Int
     ): Call<PelatihanResponse>
 
-    @GET("pendaftaranPelatihan")
+    @GET("pelatihan/pendaftaran/all")
     fun getPendaftaranPelatihan(): Call<PendaftaranResponse>
+
+    @POST("pelatihan/pendaftaran/terima")
+    fun terimaPendaftaran(
+        @Query("pp_id") pp_id: Int,
+        @Query("tgl_wawancara") tgl_wawancara: String,
+    ): Call<PendaftaranResponse>
+
+    @POST("pelatihan/pendaftaran/tolak")
+    fun tolakPendaftaran(
+        @Query("pp_id") pp_id: Int,
+    ): Call<PendaftaranResponse>
+
+    @GET("peserta/pendaftaran/{peserta_id}")
+    fun getPesertaPendaftaran(
+        @Path("peserta_id") pesertaId: Int
+    ): Call<StatusPendaftaranResponse>
 
     //PERUSAHAAN
     @GET("perusahaan/{user_id}")

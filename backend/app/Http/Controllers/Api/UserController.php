@@ -188,17 +188,18 @@ class UserController extends Controller
             foreach($temp as $t){
                 $pelatihan[] = [
                     "pelatihan_id" => $t->pelatihan_id,
-                    "nama" => $t->pelatihan->nama,
-                    "tgl_pendaftaran" => date_format(date_create($t->tgl_pendaftaran), "d F Y"),
-                    "tgl_wawancara" => date_format(date_create($t->tgl_wawancara), "d F Y"),
+                    "pelatihan" => $t->pelatihan->nama,
+                    "peserta" => $t->peserta->nama,
+                    "tgl_pendaftaran" => date_format(date_create($t->tgl_pendaftaran), "d M Y"),
+                    "tgl_wawancara" => date_format(date_create($t->tgl_wawancara), "d M Y"),
                     "status_pendaftaran" => $t->status_pendaftaran,
-                    "status_kelulusan" => $t->status_kelulusan
+                    "status_kelulusan" => $t->status_kelulusan,
                 ];
             }
             $message = "Berhasil fetch";
         }
         else{
-            $message = "Anda belum mengikuti pelatihan apapun.";
+            $message = "Anda belum mendaftar pelatihan apapun.";
         }
 
         return response()->json([
