@@ -36,7 +36,6 @@ class DetailPelatihanFragment : Fragment() {
     private lateinit var peluangAdapter: RVSyaratAdapter
     private lateinit var user: UserResponseItem
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,7 +79,6 @@ class DetailPelatihanFragment : Fragment() {
         peluangAdapter = RVSyaratAdapter(peluangPelatihan, requireContext())
         binding.rvPeluangKerja.adapter = peluangAdapter
         binding.rvPeluangKerja.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
 
 
         binding.btnDaftarPelatihan.setOnClickListener {

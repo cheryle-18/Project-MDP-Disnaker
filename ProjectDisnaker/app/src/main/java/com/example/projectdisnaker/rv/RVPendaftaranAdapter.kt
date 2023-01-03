@@ -25,6 +25,7 @@ class RVPendaftaranAdapter(private val activity: Activity,
     class CustomViewHolder(var view: View) : RecyclerView.ViewHolder(view)
     {
         var tvNama : TextView = view.findViewById(R.id.tvNama)
+        var tvNamaPesertaPend : TextView = view.findViewById(R.id.tvNamaPesertaPend)
         var tvStatusPendaftaran : TextView = view.findViewById(R.id.tvStatusPendaftaran)
         var llStatusKelulusan : LinearLayout = view.findViewById(R.id.llStatusKelulusan)
         var tvStatusKelulusan : TextView = view.findViewById(R.id.tvStatusKelulusan)
@@ -42,10 +43,11 @@ class RVPendaftaranAdapter(private val activity: Activity,
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val item = listPendaftaran[position]
         holder.tvNama.setText(item.pelatihan_nama)
+        holder.tvNamaPesertaPend.setText(item.peserta!!.nama)
         holder.tvStatusPendaftaran.setText(status_pendaftaran[item.status_pendaftaran!!])
         holder.tvStatusKelulusan.setText(status_kelulusan[item.status_kelulusan!!])
         if(item.status_kelulusan!=1){
-            holder.llStatusKelulusan.background.setTint(Color.RED)
+            holder.llStatusKelulusan.background.setTint(activity.resources.getColor(R.color.red))
         }
         holder.itemView.setOnClickListener {
             onClickListener?.onClick(position)

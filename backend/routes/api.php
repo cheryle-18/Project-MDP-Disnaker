@@ -65,6 +65,7 @@ Route::prefix('lowongan')->group(function () {
 
 Route::prefix('pelatihan')->group(function () {
     Route::get('/', [ApiPelatihanController::class, 'getAllPelatihan']);
+    Route::get('/{pelatihan_id}', [ApiPelatihanController::class, 'getPelatihan']);
     Route::post('/insert', [ApiPelatihanController::class, 'insertPelatihan']);
     // Route::post('/update/{lowongan_id}', [LowonganController::class, 'updateLowongan']);
     // Route::post('/delete/{lowongan_id}', [LowonganController::class, 'deleteLowongan']);
