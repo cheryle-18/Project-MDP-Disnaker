@@ -15,7 +15,7 @@ class RVStatPendaftaranAdapter(
     val context: Context,
     private val onClick: (idx:Int, pelatihanId:Int, stat: StatusItem)->Unit
 ) : RecyclerView.Adapter<RVStatPendaftaranAdapter.ListViewHolder>() {
-    private var status_pendaftaran = arrayOf("Pendaftaran Awal", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
+    private var status_pendaftaran = arrayOf("Pendaftaran", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
     private var status_kelulusan = arrayOf("Menunggu","Diterima", "Ditolak")
 
     inner class ListViewHolder(view: View) : RecyclerView.ViewHolder(view){

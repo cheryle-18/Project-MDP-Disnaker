@@ -18,7 +18,7 @@ class RVPendaftaranAdapter(private val activity: Activity,
                            private val layout : Int
 ) : RecyclerView.Adapter<RVPendaftaranAdapter.CustomViewHolder>() {
 
-    private var status_pendaftaran = arrayOf("Pendaftaran Awal", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
+    private var status_pendaftaran = arrayOf("Pendaftaran", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
     private var status_kelulusan = arrayOf("Menunggu","Diterima", "Ditolak")
 
     class CustomViewHolder(var view: View) : RecyclerView.ViewHolder(view)

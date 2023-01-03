@@ -28,7 +28,7 @@ class DetailPendaftaranFragment : Fragment() {
 
     private var pelatihanId = -1
     private lateinit var status: StatusItem
-    private var status_pendaftaran = arrayOf("Pendaftaran Awal", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
+    private var status_pendaftaran = arrayOf("Pendaftaran", "Wawancara", "Pelatihan", "Selesai", "Ditolak")
     private var status_kelulusan = arrayOf("Menunggu","Diterima", "Ditolak")
 
     override fun onCreateView(
