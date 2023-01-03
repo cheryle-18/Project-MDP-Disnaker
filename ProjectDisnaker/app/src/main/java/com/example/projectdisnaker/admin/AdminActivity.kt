@@ -16,7 +16,7 @@ class AdminActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val bundle = Bundle()
+        var bundle = Bundle()
 
         //set initial fragment
         val frag = AdminPelatihanFragment()
@@ -36,8 +36,10 @@ class AdminActivity : AppCompatActivity() {
             }
             else if(it.itemId== R.id.menu_pendaftaran_admin){
                 val fragment = AdminPendaftaranFragment()
+                bundle.putInt("idx",-1)
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
+                bundle = Bundle()
             }
             else if(it.itemId== R.id.menu_peserta){
                 val fragment = AdminPesertaFragment()
