@@ -43,6 +43,10 @@ class PerusahaanProfileFragment : Fragment() {
         setHasOptionsMenu(false)
         user = (activity as PerusahaanActivity).user
 
+        binding.etAlamatPerusahaanProfile.setText(user.alamat)
+        binding.etTelpPerusahaanProfile.setText(user.telp)
+        binding.etEmailPerusahaanProfile.setText(user.email)
+
         binding.layoutUbahPassPerusahaan.setOnClickListener {
             val fragment = PerusahaanPasswordFragment()
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()

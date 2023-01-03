@@ -108,5 +108,21 @@ class ProfileFragment : Fragment() {
         binding.layoutLogout.setOnClickListener{
             requireActivity().finish()
         }
+
+        binding.btnEditProfile.setOnClickListener {
+            binding.etEmailProfile.setText(user.email)
+            binding.etTelpProfile.setText(user.telp)
+            binding.etKtpProfile.setText(user.nik)
+            binding.etTglLahirProfile.setText(user.tglLahir)
+            if ( binding.etEmailProfile.text.isBlank() &&
+                binding.etTelpProfile.text.isBlank() &&
+                binding.etKtpProfile.text.isBlank() &&
+                binding.etTglLahirProfile.text.isBlank()){
+                Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show()
+            }
+            else{
+
+            }
+        }
     }
 }
