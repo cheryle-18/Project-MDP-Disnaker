@@ -61,7 +61,7 @@ class PelatihanFragment : Fragment() {
 
     fun initData(search:String = ""){
         //retrofit call
-        var client = ApiConfiguration.getApiService().getPelatihanWithQuery(search)
+        var client = ApiConfiguration.getApiService().getPelatihanWithQuery(search,"peserta")
         client.enqueue(object: Callback<PelatihanResponse> {
 
             override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>) {

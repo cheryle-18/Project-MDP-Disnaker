@@ -45,12 +45,11 @@ class PendaftaranFragment : Fragment() {
         user = (activity as HomeActivity).user
 
         statusAdapter = RVStatPendaftaranAdapter(listStatus, requireContext()){
-            idx, pelatihanId, statPendaftaran, statKelulusan ->
+            idx, pelatihanId, stat ->
             val fragment = DetailPendaftaranFragment()
             val bundle = Bundle()
             bundle.putInt("pelatihan_id", pelatihanId)
-            bundle.putString("stat_pendaftaran", statPendaftaran)
-            bundle.putString("stat_kelulusan", statKelulusan)
+            bundle.putParcelable("status", stat)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment).commit()

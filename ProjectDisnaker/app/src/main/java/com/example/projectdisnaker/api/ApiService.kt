@@ -39,11 +39,14 @@ interface ApiService {
 
     //PELATIHAN
     @GET("pelatihan")
-    fun getPelatihan(): Call<PelatihanResponse>
+    fun getPelatihan(
+        @Query("user_role") userRole:String
+    ): Call<PelatihanResponse>
 
     @GET("pelatihan")
     fun getPelatihanWithQuery(
         @Query("search") search:String,
+        @Query("user_role") userRole:String
     ): Call<PelatihanResponse>
 
     @GET("pelatihan/{pelatihan_id}")

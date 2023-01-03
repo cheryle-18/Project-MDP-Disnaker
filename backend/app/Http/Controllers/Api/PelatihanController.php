@@ -17,11 +17,22 @@ class PelatihanController extends Controller
     public function getAllPelatihan(Request $request){
 
         $temp = null;
+
         if($request->has('search')){
-            $temp = Pelatihan::where('nama','like','%'.$request->search.'%')->get();
+            if($request->user_role == "peserta"){
+                $temp = Pelatihan::where('status','=',1)->where('nama','like','%'.$request->search.'%')->get();
+            }
+            else{
+                $temp = Pelatihan::where('nama','like','%'.$request->search.'%')->get();
+            }
         }
         else{
-            $temp = Pelatihan::all();
+            if($request->user_role == "peserta"){
+                $temp = Pelatihan::where('status','=',1)->get();
+            }
+            else{
+                $temp = Pelatihan::all();
+            }
         }
 
         $pelatihan = [];
