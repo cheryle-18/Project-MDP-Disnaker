@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -15,6 +16,7 @@ import com.example.projectdisnaker.rv.RVPendaftaranAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 class AdminPendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentAdminPendaftaranBinding
@@ -53,6 +55,12 @@ class AdminPendaftaranFragment : Fragment() {
                     if(responseBody!=null){
                         listPendaftaran = responseBody.pendaftaran!!
                         initRV()
+
+                        if(arguments?.getInt("idx") != null){
+                            if(arguments?.getInt("idx") != -1){
+                                lihatDetail(arguments?.getInt("idx")!!)
+                            }
+                        }
                     }
                     else{
                         println("${response.message()}")
@@ -74,17 +82,22 @@ class AdminPendaftaranFragment : Fragment() {
         adapterPendaftaran = RVPendaftaranAdapter(requireActivity(), listPendaftaran, R.layout.pendaftaran_list_item)
         adapterPendaftaran.onClickListener = object:RVPendaftaranAdapter.OnClickListener{
             override fun onClick(idx: Int) {
-                val adminDetailPendaftaranFragment = AdminDetailPendaftaranFragment()
-                var bundle = Bundle()
-                bundle.putParcelable("pendaftaran", listPendaftaran.get(idx)!!)
-                adminDetailPendaftaranFragment.arguments = bundle
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_admin, adminDetailPendaftaranFragment)
-                    .commit()
+                lihatDetail(idx)
             }
         }
         binding.rvPendaftaranAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPendaftaranAdmin.adapter = adapterPendaftaran
+    }
+
+    fun lihatDetail(idx:Int){
+        val adminDetailPendaftaranFragment = AdminDetailPendaftaranFragment()
+        var bundle = Bundle()
+        bundle.putParcelable("pendaftaran", listPendaftaran.get(idx)!!)
+        bundle.putInt("idx", idx)
+        adminDetailPendaftaranFragment.arguments = bundle
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_admin, adminDetailPendaftaranFragment)
+            .commitNow()
     }
 }

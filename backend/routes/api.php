@@ -32,7 +32,6 @@ Route::get('/kategori', [UtilityController::class, 'getKategori']);
 // Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
 
 Route::get('/peserta', [UserController::class, 'getPeserta']);
-Route::get('/pendaftaranPelatihan', [PelatihanController::class, 'getPendaftaranPelatihan']);
 
 Route::prefix('perusahaan')->group(function () {
     Route::get('/', [UserController::class, 'getAllPerusahaan']);
@@ -64,7 +63,6 @@ Route::prefix('lowongan')->group(function () {
     Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
 });
 
-
 Route::prefix('pelatihan')->group(function () {
     Route::get('/', [ApiPelatihanController::class, 'getAllPelatihan']);
     Route::post('/insert', [ApiPelatihanController::class, 'insertPelatihan']);
@@ -73,6 +71,12 @@ Route::prefix('pelatihan')->group(function () {
     // Route::post('/tutup/{lowongan_id}', [LowonganController::class, 'tutupLowongan']);
     // Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
     // Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
-    Route::get('/pendaftaran/{pelatihan_id}', [ApiPelatihanController::class, 'getPendaftaran']);
+    Route::prefix('pendaftaran')->group(function () {
+        Route::get('/all', [PelatihanController::class, 'getAllPendaftaranPelatihan']);
+        Route::get('/', [PelatihanController::class, 'getPendaftaranPelatihan']);
+        Route::post('/tolak', [PelatihanController::class, 'tolakPendaftaran']);
+        Route::post('/terima', [PelatihanController::class, 'terimaPendaftaran']);
+        Route::get('/{pelatihan_id}', [ApiPelatihanController::class, 'getPendaftaran']);
+    });
     Route::post('/daftar', [UserController::class, 'daftarPelatihan']);
 });
