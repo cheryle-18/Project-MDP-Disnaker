@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
+use App\Models\Lowongan;
 use App\Models\Pelatihan;
 use App\Models\PendaftaranPelatihan;
 use App\Models\Pendidikan;
@@ -26,6 +27,7 @@ class PelatihanController extends Controller
         $pelatihan = [];
 
         foreach($temp as $t){
+            $peluang = Lowongan::where('lowongan.status','=',1)->where('lowongan.kategori_id','=',$t->kategori_id)->get();
             $pelatihan[] = [
                 "pelatihan_id" => $t->pelatihan_id,
                 "nama" => $t->nama,
@@ -35,7 +37,8 @@ class PelatihanController extends Controller
                 "pendidikan"=>$t->pendidikan->nama,
                 "keterangan" => $t->keterangan,
                 "status" => $t->status,
-                "syarat" => $t->syarat
+                "syarat" => $t->syarat,
+                "peluang"=>$peluang
             ];
         }
 

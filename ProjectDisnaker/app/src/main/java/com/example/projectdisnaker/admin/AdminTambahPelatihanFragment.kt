@@ -96,11 +96,11 @@ class AdminTambahPelatihanFragment : Fragment() {
 
             if(kategori!="" && min!=""){
                 if(kuota >0 && durasi >0){
-                    var syaratArr = ArrayList<SyaratItem>()
+                    var syaratArr = ArrayList<PelatihanSyaratItem>()
                     for(s in listSyarat){
-                        syaratArr.add(SyaratItem(s))
+                        syaratArr.add(PelatihanSyaratItem(s))
                     }
-                    var pelatihan = PelatihanItem(null,ket,nama,min,kuota,kategori,durasi,syaratArr,1)
+                    var pelatihan = PelatihanItem(null,ket,nama,min,kuota,kategori,durasi,syaratArr,null,1)
                     var client = ApiConfiguration.getApiService()
                         .insertPelatihan(pelatihan)
                     client.enqueue(object: Callback<PelatihanResponse> {
