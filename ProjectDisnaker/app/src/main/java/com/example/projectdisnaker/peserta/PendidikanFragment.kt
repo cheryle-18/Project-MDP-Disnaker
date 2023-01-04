@@ -34,8 +34,9 @@ class PendidikanFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
-        user = (activity as HomeActivity).user
+//        binding.llPendidikan.visibility = View.GONE
 
+        user = (activity as HomeActivity).user
         binding.tvNamaProfile.setText(user.nama)
         binding.tvUsernameProfile.setText(user.username)
 

@@ -51,6 +51,8 @@ class DetailPendaftaranFragment : Fragment() {
         setHasOptionsMenu(true)
         binding.linearLayout4.bringToFront()
 
+        binding.llDetailPendaftaran.visibility = View.GONE
+
         pelatihanId = requireArguments().getInt("pelatihan_id")
         status = requireArguments().getParcelable<StatusItem>("status")!!
 
@@ -104,6 +106,9 @@ class DetailPendaftaranFragment : Fragment() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         if(responseBody.pelatihan!!.size > 0){
+                            binding.avLoading.visibility = View.GONE
+                            binding.llDetailPendaftaran.visibility = View.VISIBLE
+
                             pelatihan = responseBody.pelatihan!![0]
                             fillDetails()
 

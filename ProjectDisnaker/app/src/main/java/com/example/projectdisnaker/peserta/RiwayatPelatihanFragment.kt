@@ -44,8 +44,10 @@ class RiwayatPelatihanFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
-        user = (activity as HomeActivity).user
+        binding.rvRiwayatPelatihan.visibility = View.GONE
+        binding.tvBlmPelatihan.visibility = View.GONE
 
+        user = (activity as HomeActivity).user
         binding.tvNamaProfile.setText(user.nama)
         binding.tvUsernameProfile.setText(user.username)
 
@@ -81,14 +83,16 @@ class RiwayatPelatihanFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
                         if(responseBody.riwayat!!.size > 0){
+                            binding.rvRiwayatPelatihan.visibility = View.VISIBLE
+
                             listRiwayat.clear()
                             listRiwayat.addAll(responseBody.riwayat!!.toMutableList())
                             riwayatAdapter.notifyDataSetChanged()
-
-                            binding.tvBlmPelatihan.visibility = View.GONE
                         }
                         else{
+                            binding.tvBlmPelatihan.visibility = View.VISIBLE
                             binding.tvBlmPelatihan.setText(responseBody.message)
                         }
                     }

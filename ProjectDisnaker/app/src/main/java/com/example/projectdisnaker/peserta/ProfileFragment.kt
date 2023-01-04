@@ -50,6 +50,8 @@ class ProfileFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
 
+        binding.llProfil.visibility = View.GONE
+
         user = (activity as HomeActivity).user
         binding.tvNamaProfile.setText(user.nama)
         binding.tvUsernameProfile.setText(user.username)
@@ -182,6 +184,9 @@ class ProfileFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.llProfil.visibility = View.VISIBLE
+
                         peserta = responseBody.peserta!![0]!!
                         fillDetails()
                     }

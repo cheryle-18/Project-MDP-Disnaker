@@ -45,8 +45,10 @@ class LowonganFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
-
         user = (activity as HomeActivity).user
+
+        binding.rvLowongan.visibility = View.GONE
+        binding.tvMsgLowongan.visibility = View.GONE
 
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
                 idx ->
@@ -68,14 +70,16 @@ class LowonganFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
                         if(responseBody.lowongan!!.size > 0){
+                            binding.rvLowongan.visibility = View.VISIBLE
+
                             listLowongan.clear()
                             listLowongan.addAll(responseBody.lowongan!!.toMutableList())
                             lowonganAdapter.notifyDataSetChanged()
-
-                            binding.tvMsgLowongan.visibility = View.GONE
                         }
                         else{
+                            binding.tvMsgLowongan.visibility = View.VISIBLE
                             binding.tvMsgLowongan.setText(responseBody.message)
                             binding.rvLowongan.visibility = View.GONE
                         }

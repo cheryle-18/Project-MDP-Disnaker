@@ -49,6 +49,7 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding.rvPendaftarLow.visibility = View.GONE
+        binding.tvBlmDaftar.visibility = View.GONE
 
         lowonganId = requireArguments().getInt("lowongan_id")!!
 
@@ -91,6 +92,7 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
                     if(responseBody!=null){
                         binding.avLoading.visibility = View.GONE
                         binding.rvPendaftarLow.visibility = View.VISIBLE
+                        binding.tvBlmDaftar.visibility = View.VISIBLE
 
                         listPendaftar.clear()
                         listPendaftar.addAll(responseBody.pendaftaran!!.toMutableList())

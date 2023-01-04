@@ -112,240 +112,260 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <TextView
-                android:id="@+id/textView37"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:text="Profil Saya"
-                android:textColor="@color/green_900"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email" />
-
-            <EditText
-                android:id="@+id/etEmailProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Nomor Telepon" />
-
-            <EditText
-                android:id="@+id/etTelpProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Tanggal Lahir" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/avLoading"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading_gray" />
 
             <LinearLayout
+                android:id="@+id/llProfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView37"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:text="Profil Saya"
+                    android:textColor="@color/green_900"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email" />
 
                 <EditText
-                    android:id="@+id/etTglLahirProfile"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/etEmailProfile"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
-                    android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/black" />
-
-                <ImageView
-                    android:id="@+id/ivCalendarProfile"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_baseline_edit_calendar_24" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Nomor KTP" />
-
-            <EditText
-                android:id="@+id/etKtpProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number" />
-
-            <Button
-                android:id="@+id/btnEditProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="simpan perubahan" />
-
-            <LinearLayout
-                android:id="@+id/layoutUbahPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                    android:inputType="textEmailAddress" />
 
                 <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Ubah Password"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="5dp"
+                    android:text="Nomor Telepon" />
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutPendidikan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                <EditText
+                    android:id="@+id/etTelpProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date" />
 
                 <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView20"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Riwayat Pendidikan"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="5dp"
+                    android:text="Tanggal Lahir" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/layoutPelatihan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                    <EditText
+                        android:id="@+id/etTglLahirProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/ivCalendarProfile"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_baseline_edit_calendar_24" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView82"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Riwayat Pelatihan"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="5dp"
+                    android:text="Nomor KTP" />
 
-                <ImageView
-                    android:id="@+id/imageView19"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutPekerjaan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/textView92"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/etKtpProfile"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Riwayat Pekerjaan"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:ems="10"
+                    android:inputType="number" />
 
-                <ImageView
-                    android:id="@+id/imageView20"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutTidakKerja"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/textView83"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Saya Sudah Tidak Bekerja"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="10dp"
+                    android:text="simpan perubahan" />
 
-                <ImageView
-                    android:id="@+id/imageView18"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/layoutUbahPassword"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Logout"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ubah Password"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutPendidikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Riwayat Pendidikan"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutPelatihan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView82"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Riwayat Pelatihan"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView19"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutPekerjaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView92"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Riwayat Pekerjaan"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView20"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutTidakKerja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView83"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Saya Sudah Tidak Bekerja"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView18"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Logout"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

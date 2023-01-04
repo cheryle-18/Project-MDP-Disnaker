@@ -47,6 +47,8 @@ class PelatihanFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
 
+        binding.rvPelatihan.visibility = View.GONE
+
         initData()
 
         binding.btnSearch.setOnClickListener {
@@ -68,6 +70,9 @@ class PelatihanFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.rvPelatihan.visibility = View.VISIBLE
+
                         listPelatihan = responseBody.pelatihan!!
                         initRV()
                     }

@@ -54,8 +54,9 @@ class DetailLowonganFragment : Fragment() {
         actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
-
         user = (activity as HomeActivity).user
+
+        binding.llDetailLowongan.visibility = View.GONE
 
         syaratAdapter = RVSyaratAdapter(syaratLowongan, requireContext())
         binding.rvSyaratLowongan.adapter = syaratAdapter
@@ -157,6 +158,9 @@ class DetailLowonganFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.llDetailLowongan.visibility = View.VISIBLE
+
                         lowongan = responseBody.currLowongan!!
                         fillDetails()
                     }

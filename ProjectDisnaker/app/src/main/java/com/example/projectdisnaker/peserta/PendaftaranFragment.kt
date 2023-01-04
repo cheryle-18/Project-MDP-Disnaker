@@ -41,8 +41,10 @@ class PendaftaranFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
-
         user = (activity as HomeActivity).user
+
+        binding.tvBlmDaftarStatus.visibility = View.GONE
+        binding.rvPendaftaran.visibility = View.GONE
 
         statusAdapter = RVStatPendaftaranAdapter(listStatus, requireContext()){
             idx, pelatihanId, stat ->
@@ -67,13 +69,15 @@ class PendaftaranFragment : Fragment() {
                     val responseBody = response.body()
                     if(responseBody!=null){
                         if(responseBody.pendaftaran!!.size > 0){
+                            binding.avLoading.visibility = View.GONE
+                            binding.rvPendaftaran.visibility = View.VISIBLE
+
                             listStatus.clear()
                             listStatus.addAll(responseBody.pendaftaran!!.toMutableList())
                             statusAdapter.notifyDataSetChanged()
-
-                            binding.tvBlmDaftarStatus.visibility = View.GONE
                         }
                         else{
+                            binding.tvBlmDaftarStatus.visibility = View.VISIBLE
                             binding.tvBlmDaftarStatus.setText(responseBody.message)
                         }
                     }
