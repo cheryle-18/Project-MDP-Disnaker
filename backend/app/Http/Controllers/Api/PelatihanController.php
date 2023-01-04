@@ -169,6 +169,16 @@ class PelatihanController extends Controller
         ], 201);
     }
 
+    function deletePelatihan(Request $request)
+    {
+        # code...
+        Pelatihan::find($request->pelatihan_id)->delete();
+        return response()->json([
+            "pelatihan" => null,
+            "message" => "Berhasil delete pelatihan"
+        ], 201);
+    }
+
     public function getPendaftaran(Request $req){
         $temp = PendaftaranPelatihan::where('pelatihan_id', $req->pelatihan_id)->get();
         $pendaftaran = [];

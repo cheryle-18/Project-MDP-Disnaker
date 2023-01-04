@@ -69,8 +69,9 @@ Route::prefix('pelatihan')->group(function () {
     Route::get('/{pelatihan_id}', [ApiPelatihanController::class, 'getPelatihan']);
     Route::post('/insert', [ApiPelatihanController::class, 'insertPelatihan']);
     Route::post('/edit', [ApiPelatihanController::class, 'editPelatihan']);
+    Route::post('/delete/{pelatihan_id}', [ApiPelatihanController::class, 'deletePelatihan']);
     // Route::post('/update/{lowongan_id}', [LowonganController::class, 'updateLowongan']);
-    // Route::post('/delete/{lowongan_id}', [LowonganController::class, 'deleteLowongan']);
+
     // Route::post('/tutup/{lowongan_id}', [LowonganController::class, 'tutupLowongan']);
     // Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
     // Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);

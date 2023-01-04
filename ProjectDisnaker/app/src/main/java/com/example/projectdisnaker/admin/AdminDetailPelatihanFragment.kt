@@ -1,18 +1,29 @@
 package com.example.projectdisnaker.admin
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.PelatihanItem
+import com.example.projectdisnaker.api.PelatihanResponse
 import com.example.projectdisnaker.databinding.FragmentAdminDetailPelatihanBinding
 import com.example.projectdisnaker.rv.RVSyaratAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AdminDetailPelatihanFragment : Fragment() {
     private lateinit var binding: FragmentAdminDetailPelatihanBinding
@@ -71,6 +82,72 @@ class AdminDetailPelatihanFragment : Fragment() {
             bundle.putParcelable("pelatihan", pelatihan)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
+        }
+
+        binding.btnHapusPelatihan.setOnClickListener {
+            val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+            val dialog = Dialog(requireContext())
+            dialog.setContentView(dialogBinding)
+            dialog.setCancelable(true)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val btnConfirm = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+            val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+
+            tvDialog.setText("Hapus pelatihan ini?")
+            btnCancel.setText("Tidak")
+            btnConfirm.setText("Ya")
+
+            btnCancel.background.setTint(Color.rgb(27, 94, 32))
+            btnConfirm.background.setTint(Color.RED)
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            btnConfirm.setOnClickListener {
+                dialog.dismiss()
+                var client = ApiConfiguration.getApiService().deletePelatihan(pelatihan.pelatihanId!!)
+                client.enqueue(object: Callback<PelatihanResponse> {
+                    override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>) {
+                        if(response.isSuccessful){
+                            val responseBody = response.body()
+                            if(responseBody!=null){
+                                val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                val dialog = Dialog(requireContext())
+                                dialog.setContentView(dialogBinding)
+                                dialog.setCancelable(true)
+                                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                dialog.show()
+
+                                val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                tvDialog.setText("Berhasil delete pelatihan ini!")
+
+                                btnOk.setOnClickListener {
+                                    dialog.dismiss()
+
+                                }
+                                val fragment = AdminPelatihanFragment()
+                                requireActivity().supportFragmentManager.beginTransaction()
+                                    .replace(R.id.fragment_container_admin, fragment).commit()
+                            }
+                            else{
+                                println("${response.message()}")
+                            }
+                        }
+                        else{
+                            Log.d("Error Frag Admin",response.toString())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<PelatihanResponse>, t: Throwable) {
+                        Log.d("Error Frag Admin", "${t.message}")
+                    }
+                })
+            }
+
         }
     }
 

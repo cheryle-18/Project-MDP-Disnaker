@@ -80,6 +80,10 @@ interface ApiService {
     fun editPelatihan(
         @Body pelatihan: PelatihanItem
     ): Call<PelatihanResponse>
+    @POST("pelatihan/delete/{pelatihan_id}")
+    fun deletePelatihan(
+        @Path("pelatihan_id") pelatihanId: Int
+    ): Call<PelatihanResponse>
 
     @GET("pelatihan/pendaftaran/{pelatihan_id}")
     fun getPesertaPelatihan(
