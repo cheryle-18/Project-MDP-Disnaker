@@ -76,6 +76,11 @@ interface ApiService {
         @Body pelatihan: PelatihanItem
     ): Call<PelatihanResponse>
 
+    @POST("pelatihan/edit")
+    fun editPelatihan(
+        @Body pelatihan: PelatihanItem
+    ): Call<PelatihanResponse>
+
     @GET("pelatihan/pendaftaran/{pelatihan_id}")
     fun getPesertaPelatihan(
         @Path("pelatihan_id") pelatihanId: Int

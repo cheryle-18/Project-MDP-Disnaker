@@ -1,5 +1,8 @@
 package com.example.projectdisnaker.admin
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +10,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,9 +73,11 @@ class AdminEditPelatihanFragment : Fragment() {
         loadPendidikan()
         initRV()
 
+
+
         binding.etNamaPelatihanEdit.setText(pelatihan.nama)
-        binding.etKuotaPelatihan.setText(pelatihan.kuota.toString())
-        binding.etDurasiPelatihan.setText(pelatihan.durasi.toString())
+        binding.etKuotaPelatihanEdit.setText(pelatihan.kuota.toString())
+        binding.etDurasiPelatihanEdit.setText(pelatihan.durasi.toString())
 
         if(pelatihan.status == 0){
             binding.rbTdkAktif.isChecked = true
@@ -80,6 +88,96 @@ class AdminEditPelatihanFragment : Fragment() {
             binding.rbTdkAktif.isChecked = false
         }
 
+        binding.btnTambahSyaratPelatihanEdit.setOnClickListener {
+
+            var syarat = binding.etSyaratPelatihan.text.toString()
+            if(syarat!=""){
+                if(mode=="add"){
+                    listSyarat.add(syarat)
+                    adapterSyarat.notifyDataSetChanged()
+                }
+                else if(mode=="edit" && idxEdit!=-1){
+                    listSyarat.set(idxEdit, syarat)
+                    adapterSyarat.notifyDataSetChanged()
+                }
+                binding.etSyaratPelatihan.setText("")
+                mode = "add"
+                idxEdit = -1
+                binding.btnTambahSyaratPelatihanEdit.setImageResource(R.drawable.ic_baseline_add_24)
+            }
+        }
+
+        binding.btnEditPel.setOnClickListener {
+            var kategori = binding.spinnerKategoriEdit.selectedItem.toString()
+            var kuota = binding.etKuotaPelatihanEdit.text.toString().toInt()
+            var durasi = binding.etDurasiPelatihanEdit.text.toString().toInt()
+            var min = binding.spinnerPendidikanEdit.selectedItem.toString()
+            var ket = binding.etKeteranganPelatihanEdit.text.toString()
+            var nama = binding.etNamaPelatihanEdit.text.toString()
+
+            if(kategori!="" && min!=""){
+                if(kuota >0 && durasi >0){
+                    var syaratArr = ArrayList<PelatihanSyaratItem>()
+                    for(s in listSyarat){
+                        syaratArr.add(PelatihanSyaratItem(s))
+                    }
+
+                    pelatihan.nama = nama
+                    pelatihan.kategori = kategori
+                    pelatihan.kuota = kuota
+                    pelatihan.durasi = durasi
+                    pelatihan.pendidikan = min
+
+                    if(binding.rbAktif.isChecked){
+                        pelatihan.status = 1
+                    }
+                    else{
+                        pelatihan.status = 0
+                    }
+                    //send to db
+                    pelatihan.syarat = syaratArr
+                    var client = ApiConfiguration.getApiService()
+                        .editPelatihan(pelatihan)
+                    client.enqueue(object: Callback<PelatihanResponse> {
+                        override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>) {
+                            if(response.isSuccessful){
+                                val responseBody = response.body()
+                                if(responseBody!=null){
+                                    val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                    val dialog = Dialog(requireContext())
+                                    dialog.setContentView(dialogBinding)
+                                    dialog.setCancelable(true)
+                                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                    dialog.show()
+
+                                    val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                    tvDialog.setText("Berhasil edit pelatihan.")
+
+                                    btnOk.setOnClickListener {
+                                        dialog.dismiss()
+                                        val fragment = AdminPelatihanFragment()
+                                        requireActivity().supportFragmentManager.beginTransaction()
+                                            .replace(R.id.fragment_container_admin, fragment).commit()
+                                    }
+                                }
+                                else{
+                                    Log.e("edit pelatihan Frag", "${response.message()}")
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<PelatihanResponse>, t: Throwable) {
+                            Log.e("edit pelatihan Frag", "${t.message}")
+                        }
+                    })
+                }
+
+                else{
+                    Toast.makeText(requireContext(),"Kuota atau durasi harus > 0!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
     }
 

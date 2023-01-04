@@ -61,7 +61,7 @@
                 android:text="Kuota" />
 
             <EditText
-                android:id="@+id/etKuotaPelatihan"
+                android:id="@+id/etKuotaPelatihanEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -75,11 +75,25 @@
                 android:text="Durasi" />
 
             <EditText
-                android:id="@+id/etDurasiPelatihan"
+                android:id="@+id/etDurasiPelatihanEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView130"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Keterangan" />
+
+            <EditText
+                android:id="@+id/etKeteranganPelatihanEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/textView46"

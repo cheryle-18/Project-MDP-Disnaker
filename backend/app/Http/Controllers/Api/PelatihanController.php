@@ -132,6 +132,43 @@ class PelatihanController extends Controller
         ], 201);
     }
 
+    public function editPelatihan(Request $req){
+        //get kategori id
+        $pelatihan = Pelatihan::find($req->pelatihan_id);
+        $kategori = Kategori::where('nama', $req->kategori)->first();
+        //get pendidikan id
+        $pendidikan = Pendidikan::where('nama', $req->pendidikan)->first();
+
+        $pelatihan->nama = $req->nama;
+        $pelatihan->kategori_id = $kategori->kategori_id;
+        $pelatihan->kuota = $req->kuota;
+        $pelatihan->durasi = $req->durasi;
+        $pelatihan->pendidikan_id = $pendidikan->pendidikan_id;
+        $pelatihan->keterangan = $req->keterangan;
+        $pelatihan->status = $req->status;
+        $pelatihan->save();
+
+        //update syarat
+
+        //delete all syarat
+        SyaratPelatihan::where('pelatihan_id','=',$pelatihan->pelatihan_id)->delete();
+
+        $syarat = $req->syarat;
+        if(sizeof($syarat)>0){
+            foreach($syarat as $s){
+                SyaratPelatihan::create([
+                    'pelatihan_id' => $pelatihan->pelatihan_id,
+                    'deskripsi' => $s["deskripsi"]
+                ]);
+            }
+        }
+
+        return response()->json([
+            "pelatihan" => [$pelatihan],
+            "message" => "Berhasil edit pelatihan"
+        ], 201);
+    }
+
     public function getPendaftaran(Request $req){
         $temp = PendaftaranPelatihan::where('pelatihan_id', $req->pelatihan_id)->get();
         $pendaftaran = [];
