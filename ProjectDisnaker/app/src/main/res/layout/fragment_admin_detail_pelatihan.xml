@@ -29,7 +29,7 @@
                 android:id="@+id/tvNamaDetailAdmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="20dp"
                 android:text="Administrasi Perkantoran"
                 android:textColor="@color/green_900"
                 android:textSize="26sp"

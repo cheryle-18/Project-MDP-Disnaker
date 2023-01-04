@@ -48,6 +48,10 @@ interface ApiService {
     @GET("kategori")
     fun getKategori(): Call<KategoriResponse>
 
+    //PENDIDIKAN
+    @GET("pendidikan")
+    fun getPendidikan(): Call<PendidikanResponse>
+
     //PELATIHAN
     @GET("pelatihan")
     fun getPelatihan(

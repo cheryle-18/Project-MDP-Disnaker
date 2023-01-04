@@ -29,6 +29,7 @@ Route::post('/register', [AuthController::class, "doRegister"]);
 Route::post('/login', [AuthController::class, "doLogin"]);
 
 Route::get('/kategori', [UtilityController::class, 'getKategori']);
+Route::get('/pendidikan', [UtilityController::class, 'getPendidikan']);
 // Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
 
 Route::get('/peserta', [UserController::class, 'getPeserta']);
