@@ -69,7 +69,7 @@ class UserController extends Controller
     }
 
     public function getPerusahaan(Request $req){
-        $temp = Perusahaan::where('user_id', $req->user_id)->first();
+        $temp = Perusahaan::find($req->perusahaan_id);
         $perusahaan = [
             "perusahaan_id" => $temp->perusahaan_id,
             "nama" => $temp->user->nama,
@@ -85,15 +85,17 @@ class UserController extends Controller
     }
 
     public function updatePerusahaan(Request $req){
-        $perusahaan = Perusahaan::find('user_id', $req->user_id)->first();
-
-        $perusahaan->user->email = $req->email;
-        $perusahaan->user->telp = $req->telp;
+        $perusahaan = Perusahaan::find($req->perusahaan_id);
         $perusahaan->alamat = $req->alamat;
         $perusahaan->save();
 
+        $user = User::find($perusahaan->user_id);
+        $user->email = $req->email;
+        $user->telp = $req->telp;
+        $user->save();
+
         return response()->json([
-            "message" => "Berhasil mengubah Profile Perusahaan"
+            "message" => "Berhasil mengubah profile perusahaan"
         ], 200);
     }
 
