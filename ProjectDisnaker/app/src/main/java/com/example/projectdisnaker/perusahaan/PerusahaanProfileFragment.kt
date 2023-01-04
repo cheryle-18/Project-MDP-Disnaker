@@ -47,6 +47,8 @@ class PerusahaanProfileFragment : Fragment() {
 
         fetchPerusahaan()
 
+        binding.llProfilePerus.visibility = View.GONE
+
         binding.layoutUbahPassPerusahaan.setOnClickListener {
             val fragment = PerusahaanPasswordFragment()
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_perusahaan, fragment).commit()
@@ -118,6 +120,9 @@ class PerusahaanProfileFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.llProfilePerus.visibility = View.VISIBLE
+
                         perusahaan = responseBody.perusahaan!![0]!!
                         fillDetails()
                     }

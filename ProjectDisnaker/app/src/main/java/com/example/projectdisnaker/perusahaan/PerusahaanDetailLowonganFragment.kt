@@ -53,6 +53,9 @@ class PerusahaanDetailLowonganFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
+        binding.avLoading.visibility = View.VISIBLE
+        binding.llDetailLowongan.visibility = View.GONE
+
         syaratAdapter = RVSyaratAdapter(syaratLowongan, requireContext())
         binding.rvSyaratLowonganPerus.adapter = syaratAdapter
         binding.rvSyaratLowonganPerus.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -237,6 +240,8 @@ class PerusahaanDetailLowonganFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.llDetailLowongan.visibility = View.VISIBLE
                         lowongan = responseBody.currLowongan!!
                         fillDetails()
                     }

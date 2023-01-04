@@ -102,110 +102,130 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <TextView
-                android:id="@+id/textView37"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:text="Profil Perusahaan"
-                android:textColor="@color/green_900"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView72"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Alamat Perusahaan" />
-
-            <EditText
-                android:id="@+id/etAlamatPerusahaanProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textView73"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nomor Telepon Perusahaan" />
-
-            <EditText
-                android:id="@+id/etTelpPerusahaanProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email Perusahaan" />
-
-            <EditText
-                android:id="@+id/etEmailPerusahaanProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <Button
-                android:id="@+id/btnEditPerusahaan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="simpan perubahan" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/avLoading"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading_gray" />
 
             <LinearLayout
-                android:id="@+id/layoutUbahPassPerusahaan"
+                android:id="@+id/llProfilePerus"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView37"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Ubah Password"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutLogoutPerusahaan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                    android:layout_marginBottom="25dp"
+                    android:text="Profil Perusahaan"
+                    android:textColor="@color/green_900"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView72"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Logout"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:text="Alamat Perusahaan" />
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                <EditText
+                    android:id="@+id/etAlamatPerusahaanProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/textView73"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nomor Telepon Perusahaan" />
+
+                <EditText
+                    android:id="@+id/etTelpPerusahaanProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="phone" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email Perusahaan" />
+
+                <EditText
+                    android:id="@+id/etEmailPerusahaanProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+
+                <Button
+                    android:id="@+id/btnEditPerusahaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="simpan perubahan" />
+
+                <LinearLayout
+                    android:id="@+id/layoutUbahPassPerusahaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ubah Password"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutLogoutPerusahaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Logout"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

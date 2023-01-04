@@ -48,6 +48,8 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
+        binding.rvPendaftarLow.visibility = View.GONE
+
         lowonganId = requireArguments().getInt("lowongan_id")!!
 
         pesertaAdapter = RVPesertaPendaftaranAdapter(listPendaftar, "lowongan", requireContext()){
@@ -87,6 +89,9 @@ class PerusahaanLihatPendaftaranFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.rvPendaftarLow.visibility = View.VISIBLE
+
                         listPendaftar.clear()
                         listPendaftar.addAll(responseBody.pendaftaran!!.toMutableList())
                         if(listPendaftar.size>0){

@@ -44,6 +44,8 @@ class PerusahaanLowonganFragment : Fragment() {
 
         user = (activity as PerusahaanActivity).user
 
+        binding.rvLowonganPerus.visibility = View.GONE
+
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
             idx ->
             val fragment = PerusahaanDetailLowonganFragment()
@@ -70,6 +72,9 @@ class PerusahaanLowonganFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.rvLowonganPerus.visibility = View.VISIBLE
+
                         listLowongan.clear()
                         listLowongan.addAll(responseBody.lowongan!!.toMutableList())
                         lowonganAdapter.notifyDataSetChanged()

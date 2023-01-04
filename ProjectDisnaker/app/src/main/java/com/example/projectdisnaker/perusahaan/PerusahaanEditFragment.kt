@@ -3,6 +3,7 @@ package com.example.projectdisnaker.perusahaan
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -54,8 +55,9 @@ class PerusahaanEditFragment : Fragment() {
         actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
-
         user = (activity as PerusahaanActivity).user
+
+        binding.llUbahLowongan.visibility = View.GONE
 
         //spinner kategori
         spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, listKategori)
@@ -215,6 +217,9 @@ class PerusahaanEditFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.llUbahLowongan.visibility = View.VISIBLE
+
                         listKategori.clear()
                         var temp = responseBody.kategori!!.toMutableList()
                         for(t in temp){
