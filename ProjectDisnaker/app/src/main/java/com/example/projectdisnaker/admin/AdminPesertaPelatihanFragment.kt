@@ -47,6 +47,9 @@ class AdminPesertaPelatihanFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
+        binding.rvPesertaPelatihan.visibility = View.GONE
+        binding.tvBlmDaftarPelAdmin.visibility = View.GONE
+
         pelatihan = requireArguments().getParcelable<PelatihanItem>("pelatihan")!!
 
         pesertaAdapter = RVPesertaPendaftaranAdapter(listPendaftar, "pelatihan", requireContext()){
@@ -84,10 +87,15 @@ class AdminPesertaPelatihanFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+
                         listPendaftar.clear()
                         listPendaftar.addAll(responseBody.pendaftaran!!.toMutableList())
                         if(listPendaftar.size>0){
-                            binding.tvBlmDaftarPelAdmin.visibility = View.GONE
+                            binding.rvPesertaPelatihan.visibility = View.VISIBLE
+                        }
+                        else{
+                            binding.tvBlmDaftarPelAdmin.visibility = View.VISIBLE
                         }
                         pesertaAdapter.notifyDataSetChanged()
                     }

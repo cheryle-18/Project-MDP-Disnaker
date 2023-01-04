@@ -44,6 +44,8 @@ class AdminLowonganFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
 
+        binding.rvLowonganAdmin.visibility = View.GONE
+
         lowonganAdapter = RVLowonganAdapter(listLowongan, requireContext()){
                 idx ->
             val fragment = AdminDetailLowonganFragment()
@@ -64,6 +66,9 @@ class AdminLowonganFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+                        binding.rvLowonganAdmin.visibility = View.VISIBLE
+
                         listLowongan.clear()
                         listLowongan.addAll(responseBody.lowongan!!.toMutableList())
                         lowonganAdapter.notifyDataSetChanged()

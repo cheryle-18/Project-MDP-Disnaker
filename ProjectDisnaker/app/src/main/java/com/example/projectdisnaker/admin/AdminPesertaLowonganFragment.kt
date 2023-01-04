@@ -48,6 +48,9 @@ class AdminPesertaLowonganFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
+        binding.tvBlmDaftarAdmin.visibility = View.GONE
+        binding.rvPendaftarLowAdmin.visibility = View.GONE
+
         lowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
 
         pesertaAdapter = RVPesertaPendaftaranAdapter(listPendaftar, "lowongan", requireContext()){
@@ -88,10 +91,15 @@ class AdminPesertaLowonganFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
+
                         listPendaftar.clear()
                         listPendaftar.addAll(responseBody.pendaftaran!!.toMutableList())
                         if(listPendaftar.size>0){
-                            binding.tvBlmDaftarAdmin.visibility = View.GONE
+                            binding.rvPendaftarLowAdmin.visibility = View.VISIBLE
+                        }
+                        else{
+                            binding.tvBlmDaftarAdmin.visibility = View.VISIBLE
                         }
                         pesertaAdapter.notifyDataSetChanged()
                     }

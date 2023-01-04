@@ -40,6 +40,9 @@ class AdminPendaftaranFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
 
+        binding.rvPendaftaranAdmin.visibility = View.GONE
+        binding.tvBlmAdaPendaftaran.visibility = View.GONE
+
         initData()
     }
 
@@ -51,12 +54,21 @@ class AdminPendaftaranFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
-                        listPendaftaran = responseBody.pendaftaran!!
-                        initRV()
+                        binding.avLoading.visibility = View.GONE
+                        if(responseBody.pendaftaran!=null){
+                            if(responseBody.pendaftaran.size > 0){
+                                binding.rvPendaftaranAdmin.visibility = View.VISIBLE
+                                listPendaftaran = responseBody.pendaftaran!!
+                                initRV()
 
-                        if(arguments?.getInt("idx") != null){
-                            if(arguments?.getInt("idx") != -1){
-                                lihatDetail(arguments?.getInt("idx")!!)
+                                if(arguments?.getInt("idx") != null){
+                                    if(arguments?.getInt("idx") != -1){
+                                        lihatDetail(arguments?.getInt("idx")!!)
+                                    }
+                                }
+                            }
+                            else{
+                                binding.tvBlmAdaPendaftaran.visibility = View.VISIBLE
                             }
                         }
                     }
