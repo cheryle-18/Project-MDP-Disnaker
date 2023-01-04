@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class PendidikanResponse(
 
 	@field:SerializedName("pendidikan")
-	val pendidikan: List<PendidikanItem?>? = null
+	val pendidikan: List<PendidikanItem>? = null
 ) : Parcelable
 
 @Parcelize
@@ -19,4 +19,8 @@ data class PendidikanItem(
 
 	@field:SerializedName("nama")
 	val nama: String? = null
-) : Parcelable
+) : Parcelable {
+	override fun toString(): String {
+		return nama!!
+	}
+}

@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.api.PelatihanItem
 import com.example.projectdisnaker.databinding.FragmentAdminEditPelatihanBinding
 
 class AdminEditPelatihanFragment : Fragment() {
     private lateinit var binding: FragmentAdminEditPelatihanBinding
-
+    private lateinit var pelatihan: PelatihanItem
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,12 +32,16 @@ class AdminEditPelatihanFragment : Fragment() {
         actionBar?.setTitle("Pelatihan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+        pelatihan = requireArguments().getParcelable<PelatihanItem>("pelatihan")!!
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
                 val fragment = AdminDetailPelatihanFragment()
+                val bundle = Bundle()
+                bundle.putParcelable("pelatihan", pelatihan)
+                fragment.arguments = bundle
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_admin, fragment).commit()
             }

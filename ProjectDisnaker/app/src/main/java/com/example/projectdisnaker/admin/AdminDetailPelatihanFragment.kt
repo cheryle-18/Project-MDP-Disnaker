@@ -60,6 +60,7 @@ class AdminDetailPelatihanFragment : Fragment() {
         binding.btnEditPelatihan.setOnClickListener {
             val fragment = AdminEditPelatihanFragment()
             val bundle = Bundle()
+            bundle.putParcelable("pelatihan", pelatihan)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container_admin, fragment).commit()
         }

@@ -33,6 +33,7 @@ import retrofit2.Response
 class AdminTambahPelatihanFragment : Fragment() {
     private lateinit var binding: FragmentAdminTambahPelatihanBinding
     private lateinit var listKategori : List<KategoriItem>
+    private lateinit var listPendidikan : List<PendidikanItem>
     private lateinit var adapterSyarat : RVTambahSyaratAdapter
     private lateinit var listSyarat : ArrayList<String>
 
@@ -43,6 +44,7 @@ class AdminTambahPelatihanFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         listKategori = listOf()
+        listPendidikan = listOf()
         listSyarat = arrayListOf()
     }
 
@@ -66,6 +68,7 @@ class AdminTambahPelatihanFragment : Fragment() {
         setHasOptionsMenu(true)
 
         loadKategori()
+        loadPendidikan()
         initRV()
         binding.btnTambahSyaratPelatihan.setOnClickListener {
 
@@ -152,6 +155,14 @@ class AdminTambahPelatihanFragment : Fragment() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerKategoriPel.adapter = adapter
+
+        val adapterPendidikan: ArrayAdapter<PendidikanItem> = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            listPendidikan
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerPendidikanPel.adapter = adapterPendidikan
     }
 
     fun loadKategori(){
@@ -176,6 +187,31 @@ class AdminTambahPelatihanFragment : Fragment() {
 
             override fun onFailure(call: Call<KategoriResponse>, t: Throwable) {
                 Log.d("Error kat pel", "${t.message}")
+            }
+        })
+    }
+    fun loadPendidikan(){
+        //fetch from db
+        var client = ApiConfiguration.getApiService().getPendidikan()
+        client.enqueue(object: Callback<PendidikanResponse> {
+            override fun onResponse(call: Call<PendidikanResponse>, response: Response<PendidikanResponse>) {
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        listPendidikan = responseBody.pendidikan!!
+                        initSpinner()
+                    }
+                    else{
+                        println("${response.message()}")
+                    }
+                }
+                else{
+                    Log.d("Error pendidikan",response.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<PendidikanResponse>, t: Throwable) {
+                Log.d("Error pendidikan", "${t.message}")
             }
         })
     }
