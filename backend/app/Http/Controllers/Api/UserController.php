@@ -64,8 +64,26 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getAllPerusahaan(Request $req){
+    public function getAllPerusahaan(){
+        $t = Perusahaan::all();
+        $perusahaan = [];
 
+        if(sizeof($t)>0){
+            foreach($t as $temp){
+                $perusahaan[] = [
+                    "perusahaan_id" => $temp->perusahaan_id,
+                    "nama" => $temp->user->nama,
+                    "email" => $temp->user->email,
+                    "telp" => $temp->user->telp,
+                    "alamat" => $temp->alamat
+                ];
+            }
+        }
+
+        return response()->json([
+            "perusahaan" => $perusahaan,
+            "message" => "Berhasil fetch perusahaan"
+        ], 200);
     }
 
     public function getPerusahaan(Request $req){
@@ -79,7 +97,7 @@ class UserController extends Controller
         ];
 
         return response()->json([
-            "perusahaan" => $perusahaan,
+            "perusahaan" => [$perusahaan],
             "message" => "Berhasil fetch perusahaan"
         ], 200);
     }
@@ -99,23 +117,25 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getAllPeserta(Request $req){
+    public function getAllPeserta(){
+        $t = Peserta::all();
+        $peserta = [];
 
-    }
-
-    public function getPeserta(Request $req){
-        $temp = Peserta::where('user_id', $req->user_id)->first();
-        $peserta = [
-            "peserta_id" => $temp->peserta_id,
-            "nama" => $temp->user->nama,
-            "nik" => $temp->nik,
-            "email" => $temp->user->email,
-            "telp" => $temp->user->telp,
-            "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d F Y"),
-            "pendidikan" => $temp->pendidikan->nama,
-            "jurusan" => $temp->jurusan,
-            "nilai" => $temp->nilai
-        ];
+        if(sizeof($t)>0){
+            foreach($t as $temp){
+                $peserta[] = [
+                    "peserta_id" => $temp->peserta_id,
+                    "nama" => $temp->user->nama,
+                    "nik" => $temp->nik,
+                    "email" => $temp->user->email,
+                    "telp" => $temp->user->telp,
+                    "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d/m/Y"),
+                    "pendidikan" => $temp->pendidikan->nama,
+                    "jurusan" => $temp->jurusan,
+                    "nilai" => $temp->nilai
+                ];
+            }
+        }
 
         return response()->json([
             "peserta" => $peserta,
@@ -123,8 +143,40 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function updatePeserta(Request $req){
+    public function getPeserta(Request $req){
+        $temp = Peserta::find($req->peserta_id)->first();
+        $peserta = [
+            "peserta_id" => $temp->peserta_id,
+            "nama" => $temp->user->nama,
+            "nik" => $temp->nik,
+            "email" => $temp->user->email,
+            "telp" => $temp->user->telp,
+            "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d/m/Y"),
+            "pendidikan" => $temp->pendidikan->nama,
+            "jurusan" => $temp->jurusan,
+            "nilai" => $temp->nilai
+        ];
 
+        return response()->json([
+            "peserta" => [$peserta],
+            "message" => "Berhasil fetch peserta"
+        ], 200);
+    }
+
+    public function updatePeserta(Request $req){
+        $peserta = Peserta::find($req->peserta_id);
+        $peserta->tgl_lahir = date_format(date_create($req->tgl_lahir, ), 'Y-m-d');
+        $peserta->nik = $req->nik;
+        $peserta->save();
+
+        $user = User::find($peserta->user_id);
+        $user->email = $req->email;
+        $user->telp = $req->telp;
+        $user->save();
+
+        return response()->json([
+            "message" => "Berhasil edit profil peserta"
+        ], 200);
     }
 
     public function updatePendidikan(Request $req){

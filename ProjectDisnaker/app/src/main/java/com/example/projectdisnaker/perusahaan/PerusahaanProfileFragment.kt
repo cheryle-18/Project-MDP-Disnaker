@@ -23,7 +23,7 @@ import retrofit2.Response
 class PerusahaanProfileFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanProfileBinding
     private lateinit var user: UserResponseItem
-    private lateinit var perusahaan: Perusahaan
+    private lateinit var perusahaan: PerusahaanItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +63,7 @@ class PerusahaanProfileFragment : Fragment() {
                 var telp = binding.etTelpPerusahaanProfile.text.toString()
                 var email = binding.etEmailPerusahaanProfile.text.toString()
 
-                var edited = Perusahaan(telp, email, alamat)
+                var edited = PerusahaanItem(telp, email, alamat)
 
                 var client = ApiConfiguration.getApiService().updatePerusahaan(user.perusahaanId!!, edited)
                 client.enqueue(object: Callback<PerusahaanResponse> {
@@ -98,7 +98,6 @@ class PerusahaanProfileFragment : Fragment() {
                         Log.e("Edit perusahaan Frag", "${t.message}")
                     }
                 })
-
             }
         }
         binding.layoutLogoutPerusahaan.setOnClickListener {
@@ -119,7 +118,7 @@ class PerusahaanProfileFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
-                        perusahaan = responseBody.perusahaan!!
+                        perusahaan = responseBody.perusahaan!![0]!!
                         fillDetails()
                     }
                 }

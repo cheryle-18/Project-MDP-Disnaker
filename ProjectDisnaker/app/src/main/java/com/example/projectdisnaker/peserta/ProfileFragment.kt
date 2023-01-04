@@ -8,16 +8,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.app.DatePickerDialog
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.util.Log
+import android.widget.Button
 import android.widget.DatePicker
+import android.widget.TextView
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.UserResponseItem
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentProfileBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var user: UserResponseItem
+    private lateinit var peserta: PesertaItem
     private var cal = Calendar.getInstance()
     private lateinit var sdf: SimpleDateFormat
 
@@ -41,7 +51,6 @@ class ProfileFragment : Fragment() {
         setHasOptionsMenu(false)
 
         user = (activity as HomeActivity).user
-
         binding.tvNamaProfile.setText(user.nama)
         binding.tvUsernameProfile.setText(user.username)
 
@@ -52,14 +61,7 @@ class ProfileFragment : Fragment() {
         }
         binding.tvInisial.setText(initials)
 
-        binding.etEmailProfile.setText(user.email)
-        binding.etTelpProfile.setText(user.telp)
-        binding.etKtpProfile.setText(user.nik)
-        binding.etTglLahirProfile.setText(user.tglLahir)
-
-        var tglLahir = user.tglLahir!!.split("/")
-        Toast.makeText(requireContext(), "${tglLahir[1]}", Toast.LENGTH_SHORT).show()
-        cal.set(tglLahir[2].toInt(), tglLahir[1].toInt()-1, tglLahir[0].toInt())
+        fetchPeserta()
 
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
@@ -110,19 +112,87 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnEditProfile.setOnClickListener {
-            binding.etEmailProfile.setText(user.email)
-            binding.etTelpProfile.setText(user.telp)
-            binding.etKtpProfile.setText(user.nik)
-            binding.etTglLahirProfile.setText(user.tglLahir)
             if ( binding.etEmailProfile.text.isBlank() &&
                 binding.etTelpProfile.text.isBlank() &&
                 binding.etKtpProfile.text.isBlank() &&
                 binding.etTglLahirProfile.text.isBlank()){
-                Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Pastikan semua data diri terisi", Toast.LENGTH_SHORT).show()
             }
             else{
+                var email = binding.etEmailProfile.text.toString()
+                var telp = binding.etTelpProfile.text.toString()
+                var nik = binding.etKtpProfile.text.toString()
 
+                sdf = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+                var tglLahir = sdf.format(cal.getTime())
+
+                var edited = PesertaItem(nik, telp, email, tglLahir)
+
+                var client = ApiConfiguration.getApiService().updatePeserta(user.pesertaId!!, edited)
+                client.enqueue(object: Callback<PesertaResponse> {
+                    override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
+                        if(response.isSuccessful){
+                            val responseBody = response.body()
+                            if(responseBody!=null){
+                                val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                val dialog = Dialog(requireContext())
+                                dialog.setContentView(dialogBinding)
+                                dialog.setCancelable(true)
+                                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                dialog.show()
+
+                                val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                tvDialog.setText("Berhasil mengubah profil.")
+
+                                btnOk.setOnClickListener {
+                                    dialog.dismiss()
+                                    fetchPeserta()
+                                }
+                            }
+                            else{
+                                Log.e("Edit Profile Frag", "${response.message()}")
+                                Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
+                        Log.e("Edit Profile Frag", "${t.message}")
+                    }
+                })
             }
         }
+    }
+
+    private fun fillDetails(){
+        binding.etEmailProfile.setText(peserta.email)
+        binding.etTelpProfile.setText(peserta.telp)
+        binding.etKtpProfile.setText(peserta.nik)
+        binding.etTglLahirProfile.setText(peserta.tglLahir)
+
+        var tglLahir = user.tglLahir!!.split("/")
+        cal.set(tglLahir[2].toInt(), tglLahir[1].toInt()-1, tglLahir[0].toInt())
+    }
+
+    private fun fetchPeserta(){
+        var client = ApiConfiguration.getApiService().getPeserta(user.pesertaId!!)
+        client.enqueue(object: Callback<PesertaResponse> {
+            override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        peserta = responseBody.peserta!![0]!!
+                        fillDetails()
+                    }
+                }
+                else{
+                    Log.e("Profile Fragment", "${response.message()}")
+                }
+            }
+            override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
+                Log.e("Profile Fragment", "${t.message}")
+            }
+        })
     }
 }

@@ -8,14 +8,14 @@ import com.google.gson.annotations.SerializedName
 data class PerusahaanResponse(
 
 	@field:SerializedName("perusahaan")
-	val perusahaan: Perusahaan? = null,
+	val perusahaan: List<PerusahaanItem?>? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null
 ) : Parcelable
 
 @Parcelize
-data class Perusahaan(
+data class PerusahaanItem(
 
 	@field:SerializedName("telp")
 	val telp: String? = null,

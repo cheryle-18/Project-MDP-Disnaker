@@ -23,6 +23,17 @@ interface ApiService {
     ): Call<UserResponse>
 
     //PESERTA PROFILE
+    @GET("peserta/{peserta_id}")
+    fun getPeserta(
+        @Path("peserta_id") pesertaId: Int
+    ): Call<PesertaResponse>
+
+    @POST("peserta/update/{peserta_id}")
+    fun updatePeserta(
+        @Path("peserta_id") pesertaId: Int,
+        @Body peserta: PesertaItem
+    ): Call<PesertaResponse>
+
     @GET("peserta/riwayat/pelatihan/{peserta_id}")
     fun getRiwayatPelatihan(
         @Path("peserta_id") pesertaId: Int
@@ -98,7 +109,7 @@ interface ApiService {
     @POST("perusahaan/update/{perusahaan_id}")
     fun updatePerusahaan(
         @Path("perusahaan_id") perusahaanId: Int,
-        @Body perusahaan: Perusahaan
+        @Body perusahaan: PerusahaanItem
     ): Call<PerusahaanResponse>
 
     //LOWONGAN
