@@ -73,6 +73,9 @@ class AdminPesertaPelatihanFragment : Fragment() {
         when (item.getItemId()) {
             android.R.id.home -> {
                 val fragment = AdminDetailPelatihanFragment()
+                val bundle = Bundle()
+                bundle.putParcelable("pelatihan", pelatihan)
+                fragment.arguments = bundle
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_admin, fragment).commit()
             }

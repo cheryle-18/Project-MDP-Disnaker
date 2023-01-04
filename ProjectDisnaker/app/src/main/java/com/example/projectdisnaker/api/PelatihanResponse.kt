@@ -49,41 +49,6 @@ data class PeluangItem(
 ) : Parcelable
 
 @Parcelize
-data class PelatihanItem(
-
-	@field:SerializedName("pelatihan_id")
-	val pelatihanId: Int? = null,
-
-	@field:SerializedName("keterangan")
-	val keterangan: String? = null,
-
-	@field:SerializedName("nama")
-	val nama: String? = null,
-
-	@field:SerializedName("pendidikan")
-	val pendidikan: String? = null,
-
-
-	@field:SerializedName("kuota")
-	val kuota: Int? = null,
-
-	@field:SerializedName("kategori")
-	val kategori: String? = null,
-
-	@field:SerializedName("durasi")
-	val durasi: Int? = null,
-
-	@field:SerializedName("syarat")
-	val syarat: List<PelatihanSyaratItem>? = null,
-
-	@field:SerializedName("peluang")
-	val peluang: List<PeluangItem>? = null,
-
-	@field:SerializedName("status")
-	val status: Int? = null
-) : Parcelable
-
-@Parcelize
 data class PelatihanSyaratItem(
 
 	@field:SerializedName("deskripsi")
@@ -103,4 +68,41 @@ data class PelatihanSyaratItem(
 
 	@field:SerializedName("deleted_at")
 	val deletedAt: String? = null
+) : Parcelable
+
+@Parcelize
+data class PelatihanItem(
+
+	@field:SerializedName("pelatihan_id")
+	val pelatihanId: Int? = null,
+
+	@field:SerializedName("keterangan")
+	val keterangan: String? = null,
+
+	@field:SerializedName("nama")
+	val nama: String? = null,
+
+	@field:SerializedName("pendidikan")
+	val pendidikan: String? = null,
+
+	@field:SerializedName("kuota")
+	val kuota: Int? = null,
+
+	@field:SerializedName("kategori")
+	val kategori: String? = null,
+
+	@field:SerializedName("durasi")
+	val durasi: Int? = null,
+
+	@field:SerializedName("syarat")
+	val syarat: List<PelatihanSyaratItem>? = null,
+
+	@field:SerializedName("peluang")
+	val peluang: List<PeluangItem>? = null,
+
+	@field:SerializedName("status")
+	val status: Int? = null,
+
+	@field:SerializedName("stat")
+	val stat: Int? = -1,
 ) : Parcelable

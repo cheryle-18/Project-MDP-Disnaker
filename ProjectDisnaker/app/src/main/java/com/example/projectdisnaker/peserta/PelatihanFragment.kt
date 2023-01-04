@@ -12,6 +12,7 @@ import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.PelatihanItem
 import com.example.projectdisnaker.api.PelatihanResponse
+import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentPelatihanBinding
 import com.example.projectdisnaker.rv.RVPelatihanAdapter
 import retrofit2.Call
@@ -22,6 +23,7 @@ class PelatihanFragment : Fragment() {
     private lateinit var binding: FragmentPelatihanBinding
     private lateinit var adapterPelatihan : RVPelatihanAdapter
     private lateinit var listPelatihan : List<PelatihanItem>
+    private lateinit var user: UserResponseItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +50,7 @@ class PelatihanFragment : Fragment() {
         setHasOptionsMenu(false)
 
         binding.rvPelatihan.visibility = View.GONE
-
+        user = (activity as HomeActivity).user
         initData()
 
         binding.btnSearch.setOnClickListener {
@@ -63,7 +65,7 @@ class PelatihanFragment : Fragment() {
 
     fun initData(search:String = ""){
         //retrofit call
-        var client = ApiConfiguration.getApiService().getPelatihanWithQuery(search,"peserta")
+        var client = ApiConfiguration.getApiService().getPelatihanWithQuery(search,"peserta",user.pesertaId!!)
         client.enqueue(object: Callback<PelatihanResponse> {
 
             override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>) {

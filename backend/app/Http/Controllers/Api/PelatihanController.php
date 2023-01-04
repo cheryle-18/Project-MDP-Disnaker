@@ -38,7 +38,20 @@ class PelatihanController extends Controller
         $pelatihan = [];
 
         foreach($temp as $t){
+            $stat = -1;
             $peluang = Lowongan::where('lowongan.status','=',1)->where('lowongan.kategori_id','=',$t->kategori_id)->get();
+            if($request->peserta_id != -1){
+                $isDaftar = $t->peserta()->where('peserta.peserta_id','=',$request->peserta_id)->wherePivot('pendaftaran_pelatihan.status_pendaftaran','>',0)->exists();
+                if($isDaftar){
+                    $stat = 2;
+                }
+                else{
+                    $isWaiting = $t->peserta()->where('peserta.peserta_id','=',$request->peserta_id)->wherePivot('pendaftaran_pelatihan.status_pendaftaran','=',0)->exists();
+                    if($isWaiting){
+                        $stat = 1;
+                    }
+                }
+            }
             $pelatihan[] = [
                 "pelatihan_id" => $t->pelatihan_id,
                 "nama" => $t->nama,
@@ -49,7 +62,8 @@ class PelatihanController extends Controller
                 "keterangan" => $t->keterangan,
                 "status" => $t->status,
                 "syarat" => $t->syarat,
-                "peluang"=>$peluang
+                "peluang"=>$peluang,
+                "stat"=>$stat
             ];
         }
 

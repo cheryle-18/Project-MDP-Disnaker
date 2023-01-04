@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.admin.AdminPelatihanFragment
@@ -35,6 +36,13 @@ class DetailPelatihanFragment : Fragment() {
     private var peluangPelatihan: ArrayList<String> = ArrayList()
     private lateinit var peluangAdapter: RVSyaratAdapter
     private lateinit var user: UserResponseItem
+
+
+    fun setDisable(text:String){
+        binding.btnDaftarPelatihan.isEnabled = false
+        binding.btnDaftarPelatihan.setText(text)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,6 +88,12 @@ class DetailPelatihanFragment : Fragment() {
         binding.rvPeluangKerja.adapter = peluangAdapter
         binding.rvPeluangKerja.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        if(pelatihan.stat!! == 2){
+            setDisable("Anda telah mendaftar")
+        }
+        else if(pelatihan.stat!! == 1){
+            setDisable("Menunggu konfirmasi pendaftaran")
+        }
 
         binding.btnDaftarPelatihan.setOnClickListener {
             val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
@@ -122,9 +136,11 @@ class DetailPelatihanFragment : Fragment() {
 
                                     btnOk.setOnClickListener {
                                         dialog.dismiss()
+                                        setDisable("Menunggu konfirmasi pendaftaran")
 //                                        val fragment = PelatihanFragment()
 //                                        requireActivity().supportFragmentManager.beginTransaction()
 //                                            .replace(R.id.fragment_container, fragment).commit()
+
                                     }
                                 }
                                 else{
