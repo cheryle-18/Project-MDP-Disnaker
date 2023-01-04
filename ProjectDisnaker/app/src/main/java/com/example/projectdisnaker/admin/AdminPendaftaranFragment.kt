@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -16,7 +15,6 @@ import com.example.projectdisnaker.rv.RVPendaftaranAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 class AdminPendaftaranFragment : Fragment() {
     private lateinit var binding: FragmentAdminPendaftaranBinding
@@ -47,7 +45,7 @@ class AdminPendaftaranFragment : Fragment() {
 
     fun initData(){
         //retrofit call
-        var client = ApiConfiguration.getApiService().getPendaftaranPelatihan()
+        var client = ApiConfiguration.getApiService().getAllPendaftaranPelatihan()
         client.enqueue(object: Callback<PendaftaranResponse> {
             override fun onResponse(call: Call<PendaftaranResponse>,response: Response<PendaftaranResponse>) {
                 if(response.isSuccessful){

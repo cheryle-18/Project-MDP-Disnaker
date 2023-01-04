@@ -81,19 +81,22 @@ interface ApiService {
         @Query("pelatihan_id") pelatihanId: Int
     ): Call<PelatihanResponse>
 
-    @GET("pelatihan/pendaftaran/all")
-    fun getPendaftaranPelatihan(): Call<PendaftaranResponse>
+    @GET("admin/pelatihan/pendaftaran/all")
+    fun getAllPendaftaranPelatihan(): Call<PendaftaranResponse>
 
-    @POST("pelatihan/pendaftaran/terima")
+    @POST("admin/pelatihan/pendaftaran/terima")
     fun terimaPendaftaran(
         @Query("pp_id") pp_id: Int,
         @Query("tgl_wawancara") tgl_wawancara: String,
     ): Call<PendaftaranResponse>
 
-    @POST("pelatihan/pendaftaran/tolak")
+    @POST("admin/pelatihan/pendaftaran/tolak")
     fun tolakPendaftaran(
         @Query("pp_id") pp_id: Int,
     ): Call<PendaftaranResponse>
+
+    @GET("admin/peserta/all")
+    fun getAllPeserta(): Call<UserResponse>
 
     @GET("peserta/pendaftaran/{peserta_id}")
     fun getPesertaPendaftaran(

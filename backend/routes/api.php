@@ -73,11 +73,21 @@ Route::prefix('pelatihan')->group(function () {
     // Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
     // Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
     Route::prefix('pendaftaran')->group(function () {
-        Route::get('/all', [PelatihanController::class, 'getAllPendaftaranPelatihan']);
         Route::get('/', [PelatihanController::class, 'getPendaftaranPelatihan']);
-        Route::post('/tolak', [PelatihanController::class, 'tolakPendaftaran']);
-        Route::post('/terima', [PelatihanController::class, 'terimaPendaftaran']);
         Route::get('/{pelatihan_id}', [ApiPelatihanController::class, 'getPendaftaran']);
     });
     Route::post('/daftar', [UserController::class, 'daftarPelatihan']);
+});
+
+Route::prefix('admin')->group(function () {
+    Route::prefix('pelatihan')->group(function () {
+        Route::prefix('pendaftaran')->group(function () {
+            Route::get('/all', [PelatihanController::class, 'getAllPendaftaranPelatihan']);
+            Route::post('/tolak', [PelatihanController::class, 'tolakPendaftaran']);
+            Route::post('/terima', [PelatihanController::class, 'terimaPendaftaran']);
+        });
+    });
+    Route::prefix('peserta')->group(function () {
+        Route::get('/all', [PelatihanController::class, 'getAllPeserta']);
+    });
 });

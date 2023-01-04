@@ -6,6 +6,7 @@ use App\Models\Pelatihan;
 use App\Models\PendaftaranPelatihan;
 use App\Models\Pendidikan;
 use App\Models\Peserta;
+use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -147,5 +148,44 @@ class PelatihanController extends Controller
             "pendaftaran" => $pendaftaran,
             "message" => "Berhasil update"
         ], 201);
+    }
+
+    public function getAllPeserta(Request $req)
+    {
+        $users = User::where("role",0)->get();
+        $userRet = [];
+        foreach($users as $user){
+            $peserta = $user->peserta;
+            $dob = date_create($peserta->tgl_lahir);
+
+            $now = new DateTime(now());
+            $tgl_lahir = new DateTime($peserta->tgl_lahir);
+            $usia = $now->diff($tgl_lahir)->format("%Y");
+
+            $temp = [
+                "user_id" => $user->user_id,
+                "nama" => $user->nama,
+                "email" => $user->email,
+                "username" => $user->username,
+                "password" => $user->password,
+                "telp" => $user->telp,
+                "role" => $user->role,
+                "peserta_id" => $peserta->peserta_id,
+                "nik" => $peserta->nik,
+                "tgl_lahir" => date_format($dob, "d/m/Y"),
+                "pendidikan" => $peserta->pendidikan->nama,
+                "jurusan" => $peserta->jurusan,
+                "nilai" => $peserta->nilai,
+                "status" => $peserta->status,
+                "usia" => $usia,
+            ];
+            $userRet[] = $temp;
+        }
+
+        return response()->json([
+            "userResponse" => $userRet,
+            "message" => "Berhasil fetch user",
+            "status" => 1
+        ], 200);
     }
 }
