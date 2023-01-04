@@ -28,6 +28,10 @@ class AuthController extends Controller
             $userRet = [];
             if($user->role==0){
                 $peserta = $user->peserta;
+                $pendidikan = null;
+                if($peserta->pendidikan_id != null){
+                    $pendidikan = $peserta->pendidikan->nama;
+                }
                 $userRet = [
                     "user_id" => $user->user_id,
                     "nama" => $user->nama,
@@ -39,7 +43,7 @@ class AuthController extends Controller
                     "peserta_id" => $peserta->peserta_id,
                     "tgl_lahir" => date_format(date_create($peserta->tgl_lahir), "d/m/Y"),
                     "nik" => $peserta->nik,
-                    "pendidikan" => $peserta->pendidikan->nama,
+                    "pendidikan" => $pendidikan,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,
                     "status" => $peserta->status,
