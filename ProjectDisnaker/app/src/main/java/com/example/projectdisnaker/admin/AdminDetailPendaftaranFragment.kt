@@ -111,7 +111,7 @@ class AdminDetailPendaftaranFragment : Fragment() {
             val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
             val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
 
-            tvDialog.setText("Konfirmasi Tolak Pendaftaran Pelatihan Ini!")
+            tvDialog.setText("Tolak pendaftaran ini?")
             btnCancel.setText("Batal")
             btnConfirm.setText("Tolak")
 
@@ -175,7 +175,7 @@ class AdminDetailPendaftaranFragment : Fragment() {
 
         binding.btnTerimaPendaftaran.setOnClickListener{
             if(pendaftaran.status_pendaftaran!! == 0 && tgl_wawancara == "-"){
-                Toast.makeText(requireContext(), "Harap Masukkan Tanggal Wawancara!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Harap masukkan tanggal wawancara!", Toast.LENGTH_SHORT).show()
             }
             else{
                 val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
@@ -189,8 +189,7 @@ class AdminDetailPendaftaranFragment : Fragment() {
                 val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
                 val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
 
-                tvDialog.setText("Konfirmasi Terima Pendaftaran Pelatihan Ini dari status " +
-                        "${status_pendaftaran[pendaftaran.status_pendaftaran!!]} menjadi " +
+                tvDialog.setText("Terima pendaftaran ini? Peserta akan melanjutkan ke tahap" +
                         "${status_pendaftaran[pendaftaran.status_pendaftaran!!+1]}!")
                 btnCancel.setText("Batal")
                 btnConfirm.setText("Terima")
@@ -215,7 +214,7 @@ class AdminDetailPendaftaranFragment : Fragment() {
 
                                     val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
                                     val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-                                    tvDialog.setText("Berhasil menerima pendaftaran pelatihan ini ke tahap ${status_pendaftaran[pendaftaran.status_pendaftaran!!+1]}!")
+                                    tvDialog.setText("Berhasil menerima pendaftaran ini ke tahap ${status_pendaftaran[pendaftaran.status_pendaftaran!!+1]}!")
 
                                     btnOk.setOnClickListener {
                                         dialog.dismiss()
@@ -229,7 +228,7 @@ class AdminDetailPendaftaranFragment : Fragment() {
                                 }
                                 else{
                                     println("${response.message()}")
-                                    Toast.makeText(requireContext(), "aopweifjaeopwijf", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
                                 }
                             }
                             else{

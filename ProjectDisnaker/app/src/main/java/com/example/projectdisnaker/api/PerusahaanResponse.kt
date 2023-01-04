@@ -3,7 +3,6 @@ package com.example.projectdisnaker.api
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.sql.Timestamp
 
 @Parcelize
 data class PerusahaanResponse(
@@ -18,21 +17,19 @@ data class PerusahaanResponse(
 @Parcelize
 data class Perusahaan(
 
-	@field:SerializedName("updated_at")
-	val updatedAt: Timestamp? = null,
+	@field:SerializedName("telp")
+	val telp: String? = null,
 
-	@field:SerializedName("user_id")
-	val userId: Int? = null,
-
-	@field:SerializedName("perusahaan_id")
-	val perusahaanId: Int? = null,
-
-	@field:SerializedName("created_at")
-	val createdAt: Timestamp? = null,
-
-	@field:SerializedName("deleted_at")
-	val deletedAt: Timestamp? = null,
+	@field:SerializedName("email")
+	val email: String? = null,
 
 	@field:SerializedName("alamat")
-	val alamat: String? = null
+	val alamat: String? = null,
+
+	@field:SerializedName("nama")
+	val nama: String? = null,
+
+	@field:SerializedName("perusahaan_id")
+	val perusahaanId: Int? = null
+
 ) : Parcelable

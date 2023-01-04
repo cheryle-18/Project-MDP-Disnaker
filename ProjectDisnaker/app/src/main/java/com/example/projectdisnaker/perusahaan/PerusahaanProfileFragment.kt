@@ -23,6 +23,8 @@ import retrofit2.Response
 class PerusahaanProfileFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanProfileBinding
     private lateinit var user: UserResponseItem
+    private lateinit var perusahaan: Perusahaan
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,9 +45,7 @@ class PerusahaanProfileFragment : Fragment() {
         setHasOptionsMenu(false)
         user = (activity as PerusahaanActivity).user
 
-        binding.etAlamatPerusahaanProfile.setText(user.alamat)
-        binding.etTelpPerusahaanProfile.setText(user.telp)
-        binding.etEmailPerusahaanProfile.setText(user.email)
+        fetchPerusahaan()
 
         binding.layoutUbahPassPerusahaan.setOnClickListener {
             val fragment = PerusahaanPasswordFragment()
@@ -56,18 +56,16 @@ class PerusahaanProfileFragment : Fragment() {
             if (binding.etAlamatPerusahaanProfile.text.toString().isBlank()&&
                     binding.etTelpPerusahaanProfile.text.toString().isBlank()&&
                     binding.etEmailPerusahaanProfile.text.toString().isBlank()){
-                Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Pastikan semua data terisi", Toast.LENGTH_SHORT).show()
             }
             else{
-                var Alamat = binding.etAlamatPerusahaanProfile.text.toString()
-                var Telp = binding.etTelpPerusahaanProfile.text.toString()
-                var Email = binding.etEmailPerusahaanProfile.text.toString()
+                var alamat = binding.etAlamatPerusahaanProfile.text.toString()
+                var telp = binding.etTelpPerusahaanProfile.text.toString()
+                var email = binding.etEmailPerusahaanProfile.text.toString()
 
-//                var perusahaan = UserResponseItem(null, Telp, null,null,null, null,
-//                    Email, null, Alamat,null,null,null,null ,null,null,null,null)
+                var edited = Perusahaan(telp, email, alamat)
 
-                var client = ApiConfiguration.getApiService()
-                    .updatePerusahaan(user.userId!!,Alamat,Telp,Email)
+                var client = ApiConfiguration.getApiService().updatePerusahaan(user.perusahaanId!!, edited)
                 client.enqueue(object: Callback<PerusahaanResponse> {
                     override fun onResponse(call: Call<PerusahaanResponse>, response: Response<PerusahaanResponse>) {
                         if(response.isSuccessful){
@@ -82,15 +80,11 @@ class PerusahaanProfileFragment : Fragment() {
 
                                 val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
                                 val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-                                tvDialog.setText("Berhasil Edit Profil Perusahaan.")
+                                tvDialog.setText("Berhasil mengubah profil perusahaan.")
 
                                 btnOk.setOnClickListener {
                                     dialog.dismiss()
-                                    val fragment = PerusahaanProfileFragment()
-                                    val bundle = Bundle()
-                                    fragment.arguments = bundle
-                                    requireActivity().supportFragmentManager.beginTransaction()
-                                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                                    fetchPerusahaan()
                                 }
                             }
                             else{
@@ -110,5 +104,32 @@ class PerusahaanProfileFragment : Fragment() {
         binding.layoutLogoutPerusahaan.setOnClickListener {
             requireActivity().finish()
         }
+    }
+
+    private fun fillDetails(){
+        binding.etAlamatPerusahaanProfile.setText(perusahaan.alamat)
+        binding.etTelpPerusahaanProfile.setText(perusahaan.telp)
+        binding.etEmailPerusahaanProfile.setText(perusahaan.email)
+    }
+
+    private fun fetchPerusahaan(){
+        var client = ApiConfiguration.getApiService().getPerusahaan(user.perusahaanId!!)
+        client.enqueue(object: Callback<PerusahaanResponse> {
+            override fun onResponse(call: Call<PerusahaanResponse>, response: Response<PerusahaanResponse>){
+                if(response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody!=null){
+                        perusahaan = responseBody.perusahaan!!
+                        fillDetails()
+                    }
+                }
+                else{
+                    Log.e("Perus Profile Fragment", "${response.message()}")
+                }
+            }
+            override fun onFailure(call: Call<PerusahaanResponse>, t: Throwable) {
+                Log.e("Perus Profile Fragment", "${t.message}")
+            }
+        })
     }
 }
