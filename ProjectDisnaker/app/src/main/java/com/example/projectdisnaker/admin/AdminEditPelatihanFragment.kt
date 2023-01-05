@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentAdminEditPelatihanBinding
+import com.example.projectdisnaker.peserta.ProfileFragment
 import com.example.projectdisnaker.rv.RVTambahSyaratAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -194,12 +195,30 @@ class AdminEditPelatihanFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                val fragment = AdminDetailPelatihanFragment()
-                val bundle = Bundle()
-                bundle.putParcelable("pelatihan", pelatihan)
-                fragment.arguments = bundle
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_admin, fragment).commit()
+                val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+                val dialog = Dialog(requireContext())
+                dialog.setContentView(dialogBinding)
+                dialog.setCancelable(true)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+
+                val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+                val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+                tvDialog.setText("Keluar tanpa menyimpan perubahan?")
+
+                btnKembali.setOnClickListener {
+                    dialog.dismiss()
+                }
+                btnKeluar.setOnClickListener {
+                    dialog.dismiss()
+                    val fragment = AdminDetailPelatihanFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("pelatihan", pelatihan)
+                    fragment.arguments = bundle
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
             }
         }
         return true
