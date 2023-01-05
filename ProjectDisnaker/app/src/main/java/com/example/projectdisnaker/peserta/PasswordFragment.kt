@@ -107,7 +107,9 @@ class PasswordFragment : Fragment() {
                                             val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
                                             tvDialog.setText("Berhasil mengubah Password.")
 
-                                        
+                                            binding.etPassBaru.setText("")
+                                            binding.etConfBaru.setText("")
+                                            binding.etPassLama.setText("")
 
                                             btnOk.setOnClickListener {
                                                 dialog.dismiss()
