@@ -22,6 +22,14 @@ interface ApiService {
         @Query("password") password:String,
     ): Call<UserResponse>
 
+
+    // PESERTA password
+    @POST("peserta/password/{peserta_id}")
+    fun updatePasswordPerserta(
+        @Path("peserta_id") pesertaId: Int,
+        @Query("passbaru") passbaru:String,
+    ): Call<PesertaResponse>
+
     //PESERTA PROFILE
     @GET("peserta/{peserta_id}")
     fun getPeserta(
@@ -192,4 +200,5 @@ interface ApiService {
         @Query("peserta_id") pesertaId: Int,
         @Query("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
+
 }

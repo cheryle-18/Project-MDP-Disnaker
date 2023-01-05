@@ -180,6 +180,19 @@ class UserController extends Controller
         ], 200);
     }
 
+
+    public function updatePasswordPerserta(Request $req){
+        $peserta = Peserta::find($req->peserta_id);
+
+        $user = User::find($peserta->user_id);
+        $user->password = $req->passbaru;
+        $user->save();
+
+        return response()->json([
+            "message" => "Berhasil mengubah Password"
+        ], 200);
+    }
+
     public function updatePendidikan(Request $req){
         $peserta = Peserta::find($req->peserta_id);
         $pendidikan = Pendidikan::where('nama', $req->pendidikan)->first();

@@ -1,15 +1,25 @@
 package com.example.projectdisnaker.peserta
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.UserResponseItem
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPasswordBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PasswordFragment : Fragment() {
     private lateinit var binding: FragmentPasswordBinding
@@ -45,6 +55,70 @@ class PasswordFragment : Fragment() {
             initials += n.substring(0, 1)
         }
         binding.tvInisial.setText(initials)
+
+
+        binding.btnUbahPass.setOnClickListener{
+            var passbaru =binding.etPassBaru.text.toString()
+            var confpass =binding.etConfBaru.text.toString()
+            var passlama =binding.etPassLama.text.toString()
+
+            if (binding.etPassBaru.text.toString().isNotBlank()&&
+                    binding.etConfBaru.text.toString().isNotBlank()&&
+                binding.etPassLama.text.toString().isNotBlank()){
+                if (passbaru==confpass){
+                    if (passbaru == passlama){
+                        Toast.makeText(requireActivity(), "password tidak boleh sama dengan sebelumnya ", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+//                        if (passlama !=user.password){
+//                            Toast.makeText(requireActivity(), "password lama salah", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(requireActivity(), "${user.password}", Toast.LENGTH_SHORT).show()
+//                        }
+//                        else{
+
+                            var client = ApiConfiguration.getApiService().updatePasswordPerserta(user.pesertaId!!, passbaru)
+                            client.enqueue(object: Callback<PesertaResponse> {
+                                override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
+                                    if(response.isSuccessful){
+                                        val responseBody = response.body()
+                                        if(responseBody!=null){
+                                            val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                            val dialog = Dialog(requireContext())
+                                            dialog.setContentView(dialogBinding)
+                                            dialog.setCancelable(true)
+                                            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                            dialog.show()
+
+                                            val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                            val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                            tvDialog.setText("Berhasil mengubah Password.")
+
+                                            btnOk.setOnClickListener {
+                                                dialog.dismiss()
+                                            }
+                                        }
+                                        else{
+                                            Log.e("Edit PassPeserta Frag", "${response.message()}")
+                                            Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
+                                    Log.e("Edit Profile Frag", "${t.message}")
+                                }
+                            })
+//                        }
+                    }
+                }
+                else{
+                    Toast.makeText(requireActivity(), "password harus sama dengan confirm password", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                Toast.makeText(requireActivity(), "Pastikan semua data terisi", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -57,4 +131,6 @@ class PasswordFragment : Fragment() {
         }
         return true
     }
+
+
 }
