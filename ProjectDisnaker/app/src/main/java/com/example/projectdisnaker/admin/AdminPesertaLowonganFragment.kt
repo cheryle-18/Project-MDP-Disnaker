@@ -11,10 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.ApiConfiguration
-import com.example.projectdisnaker.api.LowonganItem
-import com.example.projectdisnaker.api.PesertaPendaftaranItem
-import com.example.projectdisnaker.api.PesertaPendaftaranResponse
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentAdminPesertaLowonganBinding
 import com.example.projectdisnaker.perusahaan.PerusahaanDetailLowonganFragment
 import com.example.projectdisnaker.perusahaan.PerusahaanLihatPesertaFragment
@@ -58,6 +55,10 @@ class AdminPesertaLowonganFragment : Fragment() {
             val fragment = AdminDetailPesertaFragment()
             val bundle = Bundle()
             bundle.putParcelable("lowongan", lowongan)
+            if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                //kalau kembali ke daftar perusahaan
+                bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+            }
             bundle.putParcelable("peserta", listPendaftar.get(idx)!!)
             bundle.putString("type", "lowongan")
             fragment.arguments = bundle
@@ -76,6 +77,10 @@ class AdminPesertaLowonganFragment : Fragment() {
                 val fragment = AdminDetailLowonganFragment()
                 val bundle = Bundle()
                 bundle.putParcelable("lowongan", lowongan)
+                if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                    //kalau kembali ke daftar perusahaan
+                    bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+                }
                 fragment.arguments = bundle
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_admin, fragment).commit()

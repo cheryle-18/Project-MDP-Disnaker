@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.PerusahaanItem
+import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.UserResponseItem
 
-class RVPerusahaanAdapter (
+class RVPerusahaanAdapter(
     val context: Context,
     private val listPerusahaan: List<UserResponseItem>,
     private val onClick: (idx:Int)->Unit

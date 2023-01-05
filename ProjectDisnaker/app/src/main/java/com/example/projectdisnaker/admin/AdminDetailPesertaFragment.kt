@@ -119,12 +119,18 @@ class AdminDetailPesertaFragment : Fragment() {
             android.R.id.home -> {
                 if(requireArguments().getString("type") == null){
                     val fragment = AdminPesertaFragment()
+                    val bundle = Bundle() //daftar peserta
+                    fragment.arguments = bundle
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_admin, fragment).commit()
                 }
                 else if(type=="lowongan"){
                     val fragment = AdminPesertaLowonganFragment()
                     val bundle = Bundle()
+                    if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                        //kalau kembali ke daftar perusahaan
+                        bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+                    }
                     bundle.putParcelable("lowongan", lowongan)
                     fragment.arguments = bundle
                     requireActivity().supportFragmentManager.beginTransaction()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lowongan;
 use App\Models\Pelatihan;
 use App\Models\PendaftaranPelatihan;
 use App\Models\Pendidikan;
@@ -195,6 +196,24 @@ class PelatihanController extends Controller
         $userRet = [];
         foreach($users as $user){
             $perusahaan = $user->perusahaan;
+
+
+            $temp = Lowongan::with('syarat')->where("perusahaan_id",$user->perusahaan->perusahaan_id)->where("status","!=",0)->get();
+            $lowongan = [];
+
+            foreach($temp as $t){
+                $lowongan[] = [
+                    "lowongan_id" => $t->lowongan_id,
+                    "nama" => $t->nama,
+                    "kategori" => $t->kategori->nama,
+                    "perusahaan" => $t->perusahaan->user->nama,
+                    "kuota" => $t->kuota,
+                    "keterangan" => $t->keterangan,
+                    "status" => $t->status,
+                    "syarat" => $t->syarat
+                ];
+            }
+
             $temp = [
                 "user_id" => $user->user_id,
                 "nama" => $user->nama,
@@ -204,7 +223,8 @@ class PelatihanController extends Controller
                 "telp" => $user->telp,
                 "role" => $user->role,
                 "perusahaan_id" => $perusahaan->perusahaan_id,
-                "alamat" => $perusahaan->alamat
+                "alamat" => $perusahaan->alamat,
+                "listLowongan" => $lowongan,
             ];
             $userRet[] = $temp;
         }

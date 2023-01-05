@@ -69,5 +69,9 @@ data class UserResponseItem(
 	val status: Int? = null,
 
 	@field:SerializedName("usia")
-	val usia: Int? = null
+	val usia: Int? = null,
+
+	@field:SerializedName("listLowongan")
+	val listLowongan: List<LowonganItem>? = null
+
 ) : Parcelable

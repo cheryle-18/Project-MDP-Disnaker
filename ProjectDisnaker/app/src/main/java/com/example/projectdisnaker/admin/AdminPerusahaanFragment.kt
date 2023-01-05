@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentAdminPerusahaanBinding
-import com.example.projectdisnaker.rv.RVPendaftaranAdapter
 import com.example.projectdisnaker.rv.RVPerusahaanAdapter
 import retrofit2.Call
 import retrofit2.Callback

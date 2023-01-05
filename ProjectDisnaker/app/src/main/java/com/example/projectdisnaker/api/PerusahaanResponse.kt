@@ -30,6 +30,6 @@ data class PerusahaanItem(
 	val nama: String? = null,
 
 	@field:SerializedName("perusahaan_id")
-	val perusahaanId: Int? = null
+	val perusahaanId: Int? = null,
 
 ) : Parcelable

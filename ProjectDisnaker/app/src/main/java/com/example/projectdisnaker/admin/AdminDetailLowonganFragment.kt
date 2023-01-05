@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.LowonganItem
+import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentAdminDetailLowonganBinding
 import com.example.projectdisnaker.peserta.ProfileFragment
 import com.example.projectdisnaker.rv.RVSyaratAdapter
@@ -58,6 +59,10 @@ class AdminDetailLowonganFragment : Fragment() {
         binding.btnLihatPendaftaranAdm.setOnClickListener {
             val fragment = AdminPesertaLowonganFragment()
             val bundle = Bundle()
+            if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                //untuk daftar perusahaan
+                bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+            }
             bundle.putParcelable("lowongan", lowongan)
             fragment.arguments = bundle
             requireActivity().supportFragmentManager.beginTransaction()
@@ -68,9 +73,19 @@ class AdminDetailLowonganFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                val fragment = AdminLowonganFragment()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_admin, fragment).commit()
+                if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                    val fragment = AdminDetailPerusahaanFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+                    fragment.arguments = bundle
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
+                else {
+                    val fragment = AdminLowonganFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
             }
         }
         return true
