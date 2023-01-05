@@ -188,4 +188,31 @@ class PelatihanController extends Controller
             "status" => 1
         ], 200);
     }
+
+    public function getAllPerusahaan(Request $req)
+    {
+        $users = User::where("role",1)->get();
+        $userRet = [];
+        foreach($users as $user){
+            $perusahaan = $user->perusahaan;
+            $temp = [
+                "user_id" => $user->user_id,
+                "nama" => $user->nama,
+                "email" => $user->email,
+                "username" => $user->username,
+                "password" => $user->password,
+                "telp" => $user->telp,
+                "role" => $user->role,
+                "perusahaan_id" => $perusahaan->perusahaan_id,
+                "alamat" => $perusahaan->alamat
+            ];
+            $userRet[] = $temp;
+        }
+
+        return response()->json([
+            "userResponse" => $userRet,
+            "message" => "Berhasil fetch user",
+            "status" => 1
+        ], 200);
+    }
 }

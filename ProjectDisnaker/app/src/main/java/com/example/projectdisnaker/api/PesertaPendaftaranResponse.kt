@@ -20,6 +20,9 @@ data class PesertaPendaftaranItem(
 	@field:SerializedName("pl_id")
 	val plId: Int? = null,
 
+	@field:SerializedName("pp_id")
+	val ppId: Int? = null,
+
 	@field:SerializedName("telp")
 	val telp: String? = null,
 
@@ -40,6 +43,9 @@ data class PesertaPendaftaranItem(
 
 	@field:SerializedName("tanggal")
 	val tanggal: String? = null,
+
+	@field:SerializedName("username")
+	val username: String? = null,
 
 	@field:SerializedName("email")
 	val email: String? = null,
