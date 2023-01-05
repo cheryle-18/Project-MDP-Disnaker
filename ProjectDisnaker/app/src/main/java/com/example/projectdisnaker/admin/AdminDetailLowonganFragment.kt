@@ -36,9 +36,15 @@ class AdminDetailLowonganFragment : Fragment() {
 
         //action bar
         val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+
+        if(arguments?.getParcelable<UserResponseItem>("perusahaan")!=null){
+            actionBar?.setTitle("Perusahaan")
+        }
+        else{
+            actionBar?.setTitle("Lowongan")
+        }
 
         lowongan = requireArguments().getParcelable<LowonganItem>("lowongan")!!
 
