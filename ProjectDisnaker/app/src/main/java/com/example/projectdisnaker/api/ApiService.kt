@@ -31,6 +31,12 @@ interface ApiService {
     ): Call<PesertaResponse>
 
     //PESERTA PROFILE
+    @POST("peserta/kerja/{peserta_id}")
+    fun updateStatusKerja(
+        @Path("peserta_id") pesertaId: Int,
+    ): Call<PesertaResponse>
+
+    //PESERTA PROFILE
     @GET("peserta/{peserta_id}")
     fun getPeserta(
         @Path("peserta_id") pesertaId: Int

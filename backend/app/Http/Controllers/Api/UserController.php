@@ -276,7 +276,13 @@ class UserController extends Controller
     }
 
     public function updateStatusKerja(Request $req){
+        $peserta = Peserta::find($req->peserta_id);
+        $peserta->status = 0;
+        $peserta->save();
 
+        return response()->json([
+            "message" => "Berhasil mengubah Status Kerja"
+        ], 200);
     }
 
     public function getPendaftaran(Request $req){

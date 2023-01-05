@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.admin.AdminPendaftaranFragment
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentProfileBinding
 import retrofit2.Call
@@ -107,6 +108,64 @@ class ProfileFragment : Fragment() {
 
         binding.layoutTidakKerja.setOnClickListener {
             //dialog
+            val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+            val dialog = Dialog(requireContext())
+            dialog.setContentView(dialogBinding)
+            dialog.setCancelable(true)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val btnConfirm = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+            val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+
+            tvDialog.setText("Berhenti Kerja?")
+            btnCancel.setText("Batal")
+            btnConfirm.setText("Iya")
+
+            btnCancel.background.setTint(Color.rgb(27, 94, 32))
+            btnConfirm.background.setTint(Color.RED)
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            btnConfirm.setOnClickListener {
+                dialog.dismiss()
+
+                var client = ApiConfiguration.getApiService().updateStatusKerja(user.pesertaId!!)
+                client.enqueue(object: Callback<PesertaResponse> {
+                    override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
+                            if(response.isSuccessful){
+                                val responseBody = response.body()
+                                if(responseBody!=null){
+                                    val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                    val dialog = Dialog(requireContext())
+                                    dialog.setContentView(dialogBinding)
+                                    dialog.setCancelable(true)
+                                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                    dialog.show()
+
+                                    val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                    tvDialog.setText("Berhasil mengubah Status Kerja.")
+
+                                    btnOk.setOnClickListener {
+                                        dialog.dismiss()
+                                    }
+                                }
+                                else{
+                                    Log.e("Edit statusKerja Frag", "${response.message()}")
+                                    Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
+                            Log.e("Edit statusKerja Frag", "${t.message}")
+                        }
+                    })
+            }
+
         }
 
         binding.layoutLogout.setOnClickListener{
