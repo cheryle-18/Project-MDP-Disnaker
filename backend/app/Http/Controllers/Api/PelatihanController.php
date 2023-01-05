@@ -194,6 +194,7 @@ class PelatihanController extends Controller
                     "tanggal" => date_format($tgl, "d F Y"),
                     "peserta_id" => $t->peserta->peserta_id,
                     "nama" => $t->peserta->user->nama,
+                    "username" => $t->peserta->user->username,
                     "email" => $t->peserta->user->email,
                     "telp" => $t->peserta->user->telp,
                     "tgl_lahir" => date_format($dob, "d F Y"),

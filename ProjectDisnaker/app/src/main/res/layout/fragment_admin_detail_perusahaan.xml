@@ -11,7 +11,7 @@
         android:id="@+id/textView91"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detail Peserta"
+        android:text="Detail Perusahaan"
         android:textColor="@color/black"
         android:textSize="18sp" />
 

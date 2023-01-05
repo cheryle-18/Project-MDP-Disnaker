@@ -89,6 +89,12 @@ class AdminPerusahaanFragment : Fragment() {
     fun initRV(){
         adapterPerusahaan = RVPerusahaanAdapter(requireContext(), listPerusahaan){
             idx ->
+            val fragment = AdminDetailPerusahaanFragment()
+            val bundle = Bundle()
+            bundle.putParcelable("perusahaan", listPerusahaan.get(idx)!!)
+            fragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_admin, fragment).commit()
         }
         binding.rvPerusahaanAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPerusahaanAdmin.adapter = adapterPerusahaan

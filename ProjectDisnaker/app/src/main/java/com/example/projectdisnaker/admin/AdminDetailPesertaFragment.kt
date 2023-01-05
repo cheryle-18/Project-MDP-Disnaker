@@ -83,6 +83,7 @@ class AdminDetailPesertaFragment : Fragment() {
             }
 
             binding.tvNamaPesertaDetAdmin.setText(peserta.nama)
+            binding.tvUsernameDetAdmin.setText(peserta.username)
             binding.tvUsiaDetAdmin.setText("${peserta.usia} tahun")
             binding.tvTglLahirDetAdmin.setText(peserta.tglLahir)
             binding.tvPendidikanDetAdmin.setText(peserta.pendidikan)
@@ -97,6 +98,7 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.layoutStatusPelatihan.visibility = View.GONE
 
             binding.tvNamaPesertaDetAdmin.setText(user.nama)
+            binding.tvUsernameDetAdmin.setText(user.username)
             binding.tvUsiaDetAdmin.setText("${user.usia} tahun")
             binding.tvTglLahirDetAdmin.setText(user.tglLahir)
             binding.tvPendidikanDetAdmin.setText(user.pendidikan)
@@ -110,7 +112,12 @@ class AdminDetailPesertaFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                if(type=="lowongan"){
+                if(requireArguments().getString("type") == null){
+                    val fragment = AdminPesertaFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
+                else if(type=="lowongan"){
                     val fragment = AdminPesertaLowonganFragment()
                     val bundle = Bundle()
                     bundle.putParcelable("lowongan", lowongan)
