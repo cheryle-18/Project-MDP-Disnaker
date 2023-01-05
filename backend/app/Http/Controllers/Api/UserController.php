@@ -184,13 +184,21 @@ class UserController extends Controller
 
     public function updatePasswordPerserta(Request $req){
         $peserta = Peserta::find($req->peserta_id);
-
+        $message = "";
         $user = User::find($peserta->user_id);
+        // if(hash::check( $req->passbaru, $user->password)){
+        //     $message = "password tidak boleh sama dengan password sebelumnya";
+        // }
+        // else{
+        //     $user->password = Hash::make($req->passbaru);
+        //     $user->save();
+        //     $message = "Berhasil mengubah Password";
+        // }
         $user->password = Hash::make($req->passbaru);
         $user->save();
-
+        $message = "Berhasil mengubah Password";
         return response()->json([
-            "message" => "Berhasil mengubah Password"
+            "message" => $message
         ], 200);
     }
 

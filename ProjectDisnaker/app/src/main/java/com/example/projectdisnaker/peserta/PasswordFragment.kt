@@ -70,19 +70,33 @@ class PasswordFragment : Fragment() {
                         Toast.makeText(requireActivity(), "password tidak boleh sama dengan sebelumnya ", Toast.LENGTH_SHORT).show()
                     }
                     else{
-//                        if (passlama !=user.password){
-//                            Toast.makeText(requireActivity(), "password lama salah", Toast.LENGTH_SHORT).show()
-//                            Toast.makeText(requireActivity(), "${user.password}", Toast.LENGTH_SHORT).show()
-//                        }
-//                        else{
+                        var client = ApiConfiguration.getApiService().updatePasswordPerserta(user.pesertaId!!, passbaru)
+                        client.enqueue(object: Callback<PesertaResponse> {
+                            override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
+                                if(response.isSuccessful){
+                                    val responseBody = response.body()
+                                    if(responseBody!=null){
+//                                        if (response.message() =="password tidak boleh sama dengan password sebelumnya"){
+//                                            Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+//                                        }
+//                                        else{
+//                                            val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+//                                            val dialog = Dialog(requireContext())
+//                                            dialog.setContentView(dialogBinding)
+//                                            dialog.setCancelable(true)
+//                                            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//                                            dialog.show()
+//
+//                                            val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+//                                            val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+//                                            tvDialog.setText("Berhasil mengubah Password.")
+//
+//                                            btnOk.setOnClickListener {
+//                                                dialog.dismiss()
+//                                            }
+//                                        }
 
-                            var client = ApiConfiguration.getApiService().updatePasswordPerserta(user.pesertaId!!, passbaru)
-                            client.enqueue(object: Callback<PesertaResponse> {
-                                override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
-                                    if(response.isSuccessful){
-                                        val responseBody = response.body()
-                                        if(responseBody!=null){
-                                            val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                        val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
                                             val dialog = Dialog(requireContext())
                                             dialog.setContentView(dialogBinding)
                                             dialog.setCancelable(true)
@@ -93,22 +107,24 @@ class PasswordFragment : Fragment() {
                                             val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
                                             tvDialog.setText("Berhasil mengubah Password.")
 
+                                        
+
                                             btnOk.setOnClickListener {
                                                 dialog.dismiss()
                                             }
-                                        }
-                                        else{
-                                            Log.e("Edit PassPeserta Frag", "${response.message()}")
-                                            Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
-                                        }
+
+                                    }
+                                    else{
+                                        Log.e("Edit PassPeserta Frag", "${response.message()}")
+                                        Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
                                     }
                                 }
+                            }
 
-                                override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
-                                    Log.e("Edit PassPeserta Frag", "${t.message}")
-                                }
-                            })
-//                        }
+                            override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
+                                Log.e("Edit PassPeserta Frag", "${t.message}")
+                            }
+                        })
                     }
                 }
                 else{
