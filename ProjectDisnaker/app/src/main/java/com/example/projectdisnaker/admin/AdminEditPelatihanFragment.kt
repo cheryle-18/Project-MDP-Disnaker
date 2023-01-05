@@ -73,8 +73,6 @@ class AdminEditPelatihanFragment : Fragment() {
         loadPendidikan()
         initRV()
 
-
-
         binding.etNamaPelatihanEdit.setText(pelatihan.nama)
         binding.etKuotaPelatihanEdit.setText(pelatihan.kuota.toString())
         binding.etDurasiPelatihanEdit.setText(pelatihan.durasi.toString())

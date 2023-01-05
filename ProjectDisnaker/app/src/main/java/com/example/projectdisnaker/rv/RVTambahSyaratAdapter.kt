@@ -26,7 +26,17 @@ class RVTambahSyaratAdapter(
             }
 
             view.setOnLongClickListener {
-                onLongClick(adapterPosition, "edit")
+                val popup = PopupMenu(context, view)
+                popup.setOnMenuItemClickListener {
+                    if(it.itemId == R.id.menu_ubah){
+                        onLongClick(adapterPosition, "edit")
+                    }
+                    return@setOnMenuItemClickListener true
+                }
+                val inflater = popup.menuInflater
+                inflater.inflate(R.menu.syarat_popup_menu, popup.menu)
+                popup.show()
+
                 true
             }
         }
