@@ -18,6 +18,14 @@
         android:textSize="26sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tvBlmAdaPendaftaran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Belum ada pendaftaran."
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

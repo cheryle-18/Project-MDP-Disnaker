@@ -93,4 +93,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('peserta')->group(function () {
         Route::get('/all', [PelatihanController::class, 'getAllPeserta']);
     });
+    Route::prefix('perusahaan')->group(function () {
+        Route::get('/all', [PelatihanController::class, 'getAllPerusahaan']);
+    });
 });

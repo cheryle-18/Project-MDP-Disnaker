@@ -113,6 +113,9 @@ interface ApiService {
     @GET("admin/peserta/all")
     fun getAllPeserta(): Call<UserResponse>
 
+    @GET("admin/perusahaan/all")
+    fun getAllPerusahaan(): Call<UserResponse>
+
     @GET("peserta/pendaftaran/{peserta_id}")
     fun getPesertaPendaftaran(
         @Path("peserta_id") pesertaId: Int
