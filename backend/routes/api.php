@@ -38,6 +38,7 @@ Route::prefix('perusahaan')->group(function () {
     Route::get('/', [UserController::class, 'getAllPerusahaan']);
     Route::get('/{perusahaan_id}', [UserController::class, 'getPerusahaan']);
     Route::post('/update/{perusahaan_id}', [UserController::class, 'updatePerusahaan']);
+    Route::post('/password/{perusahaan_id}', [UserController::class, 'updatePasswordPerusahaan']);
 });
 
 Route::prefix('peserta')->group(function () {

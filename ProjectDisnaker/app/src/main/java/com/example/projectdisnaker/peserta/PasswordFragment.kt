@@ -105,7 +105,7 @@ class PasswordFragment : Fragment() {
                                 }
 
                                 override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
-                                    Log.e("Edit Profile Frag", "${t.message}")
+                                    Log.e("Edit PassPeserta Frag", "${t.message}")
                                 }
                             })
 //                        }

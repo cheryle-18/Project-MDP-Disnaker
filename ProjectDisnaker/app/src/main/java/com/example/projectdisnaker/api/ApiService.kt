@@ -147,6 +147,13 @@ interface ApiService {
         @Body perusahaan: PerusahaanItem
     ): Call<PerusahaanResponse>
 
+    // PERUSAHAAN password
+    @POST("perusahaan/password/{perusahaan_id}")
+    fun updatePasswordPerusahaan(
+        @Path("perusahaan_id") perusahaanId: Int,
+        @Query("passbaru") passbaru:String,
+    ): Call<PerusahaanResponse>
+
     //LOWONGAN
     @GET("lowongan")
     fun getAllLowongan(): Call<LowonganResponse>

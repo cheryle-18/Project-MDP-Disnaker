@@ -193,6 +193,18 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function updatePasswordPerusahaan(Request $req){
+        $perusahaan = Perusahaan::find($req->perusahaan_id);
+
+        $user = User::find($perusahaan->user_id);
+        $user->password = $req->passbaru;
+        $user->save();
+
+        return response()->json([
+            "message" => "Berhasil mengubah Password"
+        ], 200);
+    }
+
     public function updatePendidikan(Request $req){
         $peserta = Peserta::find($req->peserta_id);
         $pendidikan = Pendidikan::where('nama', $req->pendidikan)->first();
