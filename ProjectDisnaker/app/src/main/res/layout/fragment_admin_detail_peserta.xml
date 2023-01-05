@@ -16,7 +16,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvNamaPesertaDetAdmin"
+        android:id="@+id/tvNamaPerusahaanDetAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -99,7 +99,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvUsernameDetAdmin"
+            android:id="@+id/tvUsernamePerusAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -129,7 +129,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvUsiaDetAdmin"
+            android:id="@+id/tvAlamatPerusAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

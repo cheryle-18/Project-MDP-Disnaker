@@ -37,7 +37,6 @@ class AdminDetailPesertaFragment : Fragment() {
 
         //action bar
         val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
@@ -49,6 +48,8 @@ class AdminDetailPesertaFragment : Fragment() {
             type = requireArguments().getString("type")!!
 
             if(type=="lowongan"){
+                actionBar?.setTitle("Lowongan")
+
                 binding.tvStatDaftarDet.visibility = View.GONE
                 binding.divider32.visibility = View.GONE
                 binding.tvStatLulusDet.visibility = View.GONE
@@ -56,6 +57,8 @@ class AdminDetailPesertaFragment : Fragment() {
                 binding.layoutStatusPelatihan.visibility = View.GONE
             }
             else if(type=="pelatihan"){
+                actionBar?.setTitle("Pelatihan")
+
                 var status = ""
                 var statusInt = peserta.status_pendaftaran
                 if(statusInt==0)
@@ -93,6 +96,8 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.tvTelpDetAdmin.setText(peserta.telp)
         }
         else{//semua peserta admin
+            actionBar?.setTitle("Peserta")
+
             user = arguments?.getParcelable<UserResponseItem>("user")!!
             binding.layoutTahapPelatihan.visibility = View.GONE
             binding.layoutStatusPelatihan.visibility = View.GONE

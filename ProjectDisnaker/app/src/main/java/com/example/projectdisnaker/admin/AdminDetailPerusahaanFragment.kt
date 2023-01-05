@@ -30,8 +30,8 @@ class AdminDetailPerusahaanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setTitle("Disnaker")
+        actionBar?.setTitle("Perusahaan")
         actionBar?.setDisplayHomeAsUpEnabled(false)
-        setHasOptionsMenu(false)
+        setHasOptionsMenu(true)
     }
 }
