@@ -136,6 +136,16 @@ class PelatihanController extends Controller
     public function editPelatihan(Request $req){
         //get kategori id
         $pelatihan = Pelatihan::find($req->pelatihan_id);
+
+        $pendaftaran = PendaftaranPelatihan::where('pelatihan_id', $req->pelatihan_id)->count();
+        if(($req->kuota - $pendaftaran <= 0) && ($req->status == 1)){
+
+        return response()->json([
+            "pelatihan" => null,
+            "message" => "-2"
+        ], 201);
+        }
+
         $kategori = Kategori::where('nama', $req->kategori)->first();
         //get pendidikan id
         $pendidikan = Pendidikan::where('nama', $req->pendidikan)->first();

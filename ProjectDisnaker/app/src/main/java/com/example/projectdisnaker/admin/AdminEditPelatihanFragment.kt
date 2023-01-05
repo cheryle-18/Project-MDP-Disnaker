@@ -20,6 +20,7 @@ import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentAdminEditPelatihanBinding
 import com.example.projectdisnaker.rv.RVTambahSyaratAdapter
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -145,28 +146,35 @@ class AdminEditPelatihanFragment : Fragment() {
                             if(response.isSuccessful){
                                 val responseBody = response.body()
                                 if(responseBody!=null){
-                                    val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
-                                    val dialog = Dialog(requireContext())
-                                    dialog.setContentView(dialogBinding)
-                                    dialog.setCancelable(true)
-                                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                                    dialog.show()
-
-                                    val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
-                                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-                                    tvDialog.setText("Berhasil edit pelatihan.")
-
-                                    pelatihan = responseBody.pelatihan?.get(0)!!
-
-                                    btnOk.setOnClickListener {
-                                        dialog.dismiss()
-                                        val fragment = AdminDetailPelatihanFragment()
-                                        val bundle = Bundle()
-                                        bundle.putParcelable("pelatihan", pelatihan)
-                                        fragment.arguments = bundle
-                                        requireActivity().supportFragmentManager.beginTransaction()
-                                            .replace(R.id.fragment_container_admin, fragment).commit()
+                                    if(responseBody.message == "-2"){
+                                        Toast.makeText(requireContext(),"Tidak dapat mengaktifkan pelatihan dengan kuota yang sudah penuh!",Toast.LENGTH_SHORT).show()
                                     }
+                                    else{
+                                        val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                        val dialog = Dialog(requireContext())
+                                        dialog.setContentView(dialogBinding)
+                                        dialog.setCancelable(true)
+                                        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                        dialog.show()
+
+                                        val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                        val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                        tvDialog.setText("Berhasil edit pelatihan.")
+
+                                        pelatihan = responseBody.pelatihan?.get(0)!!
+
+                                        btnOk.setOnClickListener {
+                                            dialog.dismiss()
+                                            val fragment = AdminDetailPelatihanFragment()
+                                            val bundle = Bundle()
+                                            bundle.putParcelable("pelatihan", pelatihan)
+                                            fragment.arguments = bundle
+                                            requireActivity().supportFragmentManager.beginTransaction()
+                                                .replace(R.id.fragment_container_admin, fragment).commit()
+                                        }
+                                    }
+
+
                                 }
                                 else{
                                     Log.e("edit pelatihan Frag", "${response.message()}")
