@@ -13,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -185,7 +186,7 @@ class UserController extends Controller
         $peserta = Peserta::find($req->peserta_id);
 
         $user = User::find($peserta->user_id);
-        $user->password = $req->passbaru;
+        $user->password = Hash::make($req->passbaru);
         $user->save();
 
         return response()->json([
@@ -197,7 +198,7 @@ class UserController extends Controller
         $perusahaan = Perusahaan::find($req->perusahaan_id);
 
         $user = User::find($perusahaan->user_id);
-        $user->password = $req->passbaru;
+        $user->password = Hash::make($req->passbaru);
         $user->save();
 
         return response()->json([
