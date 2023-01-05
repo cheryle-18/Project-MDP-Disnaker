@@ -1,5 +1,8 @@
 package com.example.projectdisnaker.peserta
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,10 +11,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPendidikanBinding
+import com.example.projectdisnaker.perusahaan.PerusahaanDetailLowonganFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,14 +67,86 @@ class PendidikanFragment : Fragment() {
         spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, listPendidikan)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerPendidikan.adapter = spinnerAdapter
+        
+        binding.btnEditPendidikan.setOnClickListener { 
+            var pendidikan = binding.spinnerPendidikan.selectedItem.toString()
+            var jurusan = binding.etJurusan.text.toString()
+            var nilai = binding.etNilai.text.toString()
+            
+            if(pendidikan!="" && jurusan!="" && nilai!=""){
+                var edited = PendidikanItem(pendidikan, jurusan, nilai.toInt())
+
+                var client = ApiConfiguration.getApiService().updatePendidikan(user.pesertaId!!, edited)
+                client.enqueue(object: Callback<PendidikanResponse> {
+                    override fun onResponse(call: Call<PendidikanResponse>, response: Response<PendidikanResponse>){
+                        if(response.isSuccessful){
+                            val responseBody = response.body()
+                            if(responseBody!=null){
+                                val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                val dialog = Dialog(requireContext())
+                                dialog.setContentView(dialogBinding)
+                                dialog.setCancelable(true)
+                                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                dialog.show()
+
+                                val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                tvDialog.setText("Berhasil mengubah riwayat pendidikan.")
+
+                                btnOk.setOnClickListener {
+                                    dialog.dismiss()
+                                    fetchPeserta()
+                                }
+                            }
+                        }
+                        else{
+                            Log.e("Pendidikan Fragment", "${response.message()}")
+                        }
+                    }
+                    override fun onFailure(call: Call<PendidikanResponse>, t: Throwable) {
+                        Log.e("Pendidikan Fragment", "${t.message}")
+                    }
+                })
+            }
+            else{
+                Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                val fragment = ProfileFragment()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment).commit()
+                if(binding.spinnerPendidikan.selectedItem.toString()!=peserta.pendidikan
+                    || binding.etJurusan.text.toString()!=peserta.jurusan
+                    || binding.etNilai.text.toString().toInt()!=peserta.nilai){
+                    val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+                    val dialog = Dialog(requireContext())
+                    dialog.setContentView(dialogBinding)
+                    dialog.setCancelable(true)
+                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    dialog.show()
+
+                    val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+                    val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+                    tvDialog.setText("Keluar tanpa menyimpan perubahan?")
+
+                    btnKembali.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                    btnKeluar.setOnClickListener {
+                        dialog.dismiss()
+                        val fragment = ProfileFragment()
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, fragment).commit()
+                    }
+                }
+                else{
+                    val fragment = ProfileFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment).commit()
+                }
             }
         }
         return true

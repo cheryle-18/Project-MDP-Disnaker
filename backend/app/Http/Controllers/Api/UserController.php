@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pelatihan;
 use App\Models\PendaftaranLowongan;
 use App\Models\PendaftaranPelatihan;
+use App\Models\Pendidikan;
 use App\Models\Perusahaan;
 use App\Models\Peserta;
 use App\Models\User;
@@ -180,7 +181,17 @@ class UserController extends Controller
     }
 
     public function updatePendidikan(Request $req){
+        $peserta = Peserta::find($req->peserta_id);
+        $pendidikan = Pendidikan::where('nama', $req->pendidikan)->first();
 
+        $peserta->jurusan = $req->jurusan;
+        $peserta->pendidikan_id = $pendidikan->pendidikan_id;
+        $peserta->nilai = $req->nilai;
+        $peserta->save();
+
+        return response()->json([
+            "message" => "Berhasil mengubah riwayat pendidikan."
+        ], 200);
     }
 
     public function getRiwayatPelatihan(Request $req){
