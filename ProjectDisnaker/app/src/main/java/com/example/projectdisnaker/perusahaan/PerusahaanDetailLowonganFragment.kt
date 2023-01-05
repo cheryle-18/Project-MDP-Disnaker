@@ -178,12 +178,12 @@ class PerusahaanDetailLowonganFragment : Fragment() {
                         }
                         else{
                             Log.e("", "${response.message()}")
-                            Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireActivity(), "Lowongan tidak dapat dihapus", Toast.LENGTH_SHORT).show()
                         }
                     }
                     override fun onFailure(call: Call<LowonganResponse>, t: Throwable) {
                         Log.e("", "${t.message}")
-                        Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), "Lowongan tidak dapat dihapus", Toast.LENGTH_SHORT).show()
                     }
                 })
             }

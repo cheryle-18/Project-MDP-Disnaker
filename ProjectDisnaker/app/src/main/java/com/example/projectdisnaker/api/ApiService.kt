@@ -34,6 +34,12 @@ interface ApiService {
         @Body peserta: PesertaItem
     ): Call<PesertaResponse>
 
+    @POST("peserta/pendidikan/{peserta_id}")
+    fun updatePendidikan(
+        @Path("peserta_id") pesertaId: Int,
+        @Body pendidikanItem: PendidikanItem
+    ): Call<PendidikanResponse>
+
     @GET("peserta/riwayat/pelatihan/{peserta_id}")
     fun getRiwayatPelatihan(
         @Path("peserta_id") pesertaId: Int

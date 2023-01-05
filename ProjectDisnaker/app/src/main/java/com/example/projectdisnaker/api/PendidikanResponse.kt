@@ -14,11 +14,21 @@ data class PendidikanResponse(
 @Parcelize
 data class PendidikanItem(
 
+	@field:SerializedName("pendidikan")
+	val pendidikan: String? = null,
+
+	@field:SerializedName("jurusan")
+	val jurusan: String? = null,
+
+	@field:SerializedName("nilai")
+	val nilai: Int? = null,
+
 	@field:SerializedName("pendidikan_id")
 	val pendidikanId: Int? = null,
 
 	@field:SerializedName("nama")
 	val nama: String? = null
+
 ) : Parcelable {
 	override fun toString(): String {
 		return nama!!
