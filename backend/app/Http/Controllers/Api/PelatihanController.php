@@ -126,6 +126,7 @@ class PelatihanController extends Controller
             }
         }
 
+
         return response()->json([
             "pelatihan" => [$pelatihan],
             "message" => "Berhasil menambah pelatihan"
@@ -163,8 +164,26 @@ class PelatihanController extends Controller
             }
         }
 
+        $t = Pelatihan::find($req->pelatihan_id);
+        $pelatihan = [];
+
+        $peluang = Lowongan::where('lowongan.status','=',1)->where('lowongan.kategori_id','=',$t->kategori_id)->get();
+        $pelatihan[] = [
+            "pelatihan_id" => $t->pelatihan_id,
+            "nama" => $t->nama,
+            "kategori" => $t->kategori->nama,
+            "kuota" => $t->kuota,
+            "durasi"=>$t->durasi,
+            "pendidikan"=>$t->pendidikan->nama,
+            "keterangan" => $t->keterangan,
+            "status" => $t->status,
+            "syarat" => $t->syarat,
+            "peluang"=>$peluang
+        ];
+
+
         return response()->json([
-            "pelatihan" => [$pelatihan],
+            "pelatihan" => $pelatihan,
             "message" => "Berhasil edit pelatihan"
         ], 201);
     }
