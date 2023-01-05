@@ -91,13 +91,15 @@ class AdminTambahPelatihanFragment : Fragment() {
 
         binding.btnTambahPel.setOnClickListener {
             var kategori = binding.spinnerKategoriPel.selectedItem.toString()
-            var kuota = binding.etKuotaPelatihan.text.toString().toInt()
-            var durasi = binding.etDurasiPelatihan.text.toString().toInt()
+            var kuotaku = binding.etKuotaPelatihan.text.toString()
+            var durasiku = binding.etDurasiPelatihan.text.toString()
             var min = binding.spinnerPendidikanPel.selectedItem.toString()
             var ket = binding.etKeteranganPelatihan.text.toString()
             var nama = binding.etNamaPelatihan.text.toString()
 
-            if(kategori!="" && min!=""){
+            if(kategori!="" && min!="" && nama!="" && kuotaku!="" && durasiku!=""){
+                var kuota = kuotaku.toInt()
+                var durasi = durasiku.toInt()
                 if(kuota >0 && durasi >0){
                     var syaratArr = ArrayList<PelatihanSyaratItem>()
                     for(s in listSyarat){
@@ -143,6 +145,9 @@ class AdminTambahPelatihanFragment : Fragment() {
                 else{
                     Toast.makeText(requireContext(),"Kuota atau durasi harus > 0!",Toast.LENGTH_SHORT).show()
                 }
+            }
+            else{
+                Toast.makeText(requireContext(),"Semua field harus diisi!",Toast.LENGTH_SHORT).show()
             }
         }
     }

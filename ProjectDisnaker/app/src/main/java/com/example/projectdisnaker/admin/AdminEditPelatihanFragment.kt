@@ -73,9 +73,11 @@ class AdminEditPelatihanFragment : Fragment() {
         loadPendidikan()
         initRV()
 
+
         binding.etNamaPelatihanEdit.setText(pelatihan.nama)
         binding.etKuotaPelatihanEdit.setText(pelatihan.kuota.toString())
         binding.etDurasiPelatihanEdit.setText(pelatihan.durasi.toString())
+        binding.etKeteranganPelatihanEdit.setText(pelatihan.keterangan)
 
         if(pelatihan.status == 0){
             binding.rbTdkAktif.isChecked = true
@@ -107,13 +109,15 @@ class AdminEditPelatihanFragment : Fragment() {
 
         binding.btnEditPel.setOnClickListener {
             var kategori = binding.spinnerKategoriEdit.selectedItem.toString()
-            var kuota = binding.etKuotaPelatihanEdit.text.toString().toInt()
-            var durasi = binding.etDurasiPelatihanEdit.text.toString().toInt()
+            var kuotaku = binding.etKuotaPelatihanEdit.text.toString()
+            var durasiku = binding.etDurasiPelatihanEdit.text.toString()
             var min = binding.spinnerPendidikanEdit.selectedItem.toString()
             var ket = binding.etKeteranganPelatihanEdit.text.toString()
             var nama = binding.etNamaPelatihanEdit.text.toString()
 
-            if(kategori!="" && min!=""){
+            if(kategori!="" && min!="" && nama!="" && kuotaku!="" && durasiku!=""){
+                var kuota = kuotaku.toInt()
+                var durasi = durasiku.toInt()
                 if(kuota >0 && durasi >0){
                     var syaratArr = ArrayList<PelatihanSyaratItem>()
                     for(s in listSyarat){
@@ -152,9 +156,14 @@ class AdminEditPelatihanFragment : Fragment() {
                                     val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
                                     tvDialog.setText("Berhasil edit pelatihan.")
 
+                                    pelatihan = responseBody.pelatihan?.get(0)!!
+
                                     btnOk.setOnClickListener {
                                         dialog.dismiss()
-                                        val fragment = AdminPelatihanFragment()
+                                        val fragment = AdminDetailPelatihanFragment()
+                                        val bundle = Bundle()
+                                        bundle.putParcelable("pelatihan", pelatihan)
+                                        fragment.arguments = bundle
                                         requireActivity().supportFragmentManager.beginTransaction()
                                             .replace(R.id.fragment_container_admin, fragment).commit()
                                     }
@@ -174,6 +183,9 @@ class AdminEditPelatihanFragment : Fragment() {
                 else{
                     Toast.makeText(requireContext(),"Kuota atau durasi harus > 0!", Toast.LENGTH_SHORT).show()
                 }
+            }
+            else{
+                Toast.makeText(requireContext(),"Semua field harus diisi!",Toast.LENGTH_SHORT).show()
             }
         }
 
