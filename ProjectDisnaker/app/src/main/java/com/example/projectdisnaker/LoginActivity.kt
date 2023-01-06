@@ -62,7 +62,6 @@ class LoginActivity : AppCompatActivity() {
                                         startActivity(intent)
                                     }
                                 }
-                                Toast.makeText(this@LoginActivity,responseBody.message, Toast.LENGTH_SHORT).show()
 
                             }
                             else{

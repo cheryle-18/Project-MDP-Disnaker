@@ -6,12 +6,15 @@ import com.google.gson.annotations.SerializedName
 
 @Parcelize
 data class PesertaResponse(
+	@field:SerializedName("peserta")
+	val peserta: List<PesertaItem?>? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
 
-	@field:SerializedName("peserta")
-	val peserta: List<PesertaItem?>? = null
+	@field:SerializedName("status")
+	val status: Int? = null,
+
 ) : Parcelable
 
 @Parcelize

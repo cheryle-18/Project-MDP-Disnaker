@@ -51,7 +51,7 @@ Route::prefix('peserta')->group(function () {
     Route::get('/riwayat/pekerjaan/{peserta_id}', [UserController::class, 'getRiwayatPekerjaan']);
     Route::post('/kerja/{peserta_id}', [UserController::class, 'updateStatusKerja']);
     Route::get('/pendaftaran/{peserta_id}', [UserController::class, 'getPendaftaran']);
-    Route::post('/password/{peserta_id}', [UserController::class, 'updatePasswordPerserta']);
+    Route::post('/password/{peserta_id}', [UserController::class, 'updatePasswordPeserta']);
 });
 
 Route::prefix('lowongan')->group(function () {

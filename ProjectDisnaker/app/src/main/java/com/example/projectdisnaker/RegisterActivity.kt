@@ -1,9 +1,14 @@
 package com.example.projectdisnaker
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LoginItem
@@ -35,7 +40,21 @@ class RegisterActivity : AppCompatActivity() {
                         if(response.isSuccessful){
                             val responseBody = response.body()
                             if(responseBody!=null){
-                                Toast.makeText(this@RegisterActivity,responseBody.message,Toast.LENGTH_SHORT).show()
+                                val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                val dialog = Dialog(this@RegisterActivity)
+                                dialog.setContentView(dialogBinding)
+                                dialog.setCancelable(true)
+                                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                dialog.show()
+
+                                val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                tvDialog.setText("${responseBody.message}")
+
+                                btnOk.setOnClickListener {
+                                    dialog.dismiss()
+                                    toLogin()
+                                }
                             }
                             else{
                                 println("${response.message()}")
@@ -63,6 +82,12 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun toLogin(){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        this.finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -70,9 +95,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.tvToLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            this.finish()
+            toLogin()
         }
         binding.btnRegister.setOnClickListener {
             doRegister()

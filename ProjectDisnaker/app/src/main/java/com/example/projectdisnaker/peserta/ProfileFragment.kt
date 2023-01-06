@@ -107,7 +107,6 @@ class ProfileFragment : Fragment() {
         }
 
         binding.layoutTidakKerja.setOnClickListener {
-            //dialog
             val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
             val dialog = Dialog(requireContext())
             dialog.setContentView(dialogBinding)
@@ -119,12 +118,12 @@ class ProfileFragment : Fragment() {
             val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
             val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
 
-            tvDialog.setText("Berhenti Kerja?")
+            tvDialog.setText("Apakah anda sudah berhenti bekerja?")
             btnCancel.setText("Batal")
-            btnConfirm.setText("Iya")
+            btnConfirm.setText("Ya")
 
-            btnCancel.background.setTint(Color.rgb(27, 94, 32))
-            btnConfirm.background.setTint(Color.RED)
+            btnCancel.background.setTint(resources.getColor(R.color.green_900))
+            btnConfirm.background.setTint(resources.getColor(R.color.green_500))
 
             btnCancel.setOnClickListener {
                 dialog.dismiss()
@@ -147,7 +146,7 @@ class ProfileFragment : Fragment() {
 
                                     val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
                                     val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-                                    tvDialog.setText("Berhasil mengubah Status Kerja.")
+                                    tvDialog.setText("Berhasil mengubah status kerja.")
 
                                     btnOk.setOnClickListener {
                                         dialog.dismiss()
@@ -169,7 +168,28 @@ class ProfileFragment : Fragment() {
         }
 
         binding.layoutLogout.setOnClickListener{
-            requireActivity().finish()
+            val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+            val dialog = Dialog(requireContext())
+            dialog.setContentView(dialogBinding)
+            dialog.setCancelable(true)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val btnConfirm = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+            val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+
+            tvDialog.setText("Keluar dari akun anda?")
+            btnCancel.setText("Keluar")
+            btnConfirm.setText("Kembali")
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            btnConfirm.setOnClickListener {
+                dialog.dismiss()
+                requireActivity().finish()
+            }
         }
 
         binding.btnEditProfile.setOnClickListener {

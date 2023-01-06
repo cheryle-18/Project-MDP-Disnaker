@@ -15,12 +15,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.api.ApiConfiguration
-import com.example.projectdisnaker.api.PerusahaanResponse
-import com.example.projectdisnaker.api.PesertaResponse
-import com.example.projectdisnaker.api.UserResponseItem
+import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPerusahaanPasswordBinding
 import com.example.projectdisnaker.peserta.HomeActivity
+import com.example.projectdisnaker.peserta.ProfileFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,22 +55,15 @@ class PerusahaanPasswordFragment : Fragment() {
                 binding.etConfBaruPerus.text.toString().isNotBlank()&&
                 binding.etPassLamaPerus.text.toString().isNotBlank()){
                 if (passbaru==confpass){
-                    if (passbaru == passlama){
-                        Toast.makeText(requireActivity(), "password tidak boleh sama dengan sebelumnya ", Toast.LENGTH_SHORT).show()
-                    }
-                    else{
-//                        if (passlama !=user.password){
-//                            Toast.makeText(requireActivity(), "password lama salah", Toast.LENGTH_SHORT).show()
-//                            Toast.makeText(requireActivity(), "${user.password}", Toast.LENGTH_SHORT).show()
-//                        }
-//                        else{
+                    var edited = PasswordItem(passbaru, passlama)
 
-                        var client = ApiConfiguration.getApiService().updatePasswordPerusahaan(user.perusahaanId!!, passbaru)
-                        client.enqueue(object: Callback<PerusahaanResponse> {
-                            override fun onResponse(call: Call<PerusahaanResponse>, response: Response<PerusahaanResponse>) {
-                                if(response.isSuccessful){
-                                    val responseBody = response.body()
-                                    if(responseBody!=null){
+                    var client = ApiConfiguration.getApiService().updatePasswordPerusahaan(user.perusahaanId!!, edited)
+                    client.enqueue(object: Callback<PerusahaanResponse> {
+                        override fun onResponse(call: Call<PerusahaanResponse>, response: Response<PerusahaanResponse>) {
+                            if(response.isSuccessful){
+                                val responseBody = response.body()
+                                if(responseBody!=null){
+                                    if(responseBody.status==1){
                                         val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
                                         val dialog = Dialog(requireContext())
                                         dialog.setContentView(dialogBinding)
@@ -82,28 +73,33 @@ class PerusahaanPasswordFragment : Fragment() {
 
                                         val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
                                         val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-                                        tvDialog.setText("Berhasil mengubah Password.")
+                                        tvDialog.setText("Berhasil mengubah password.")
 
                                         btnOk.setOnClickListener {
                                             dialog.dismiss()
+                                            val fragment = PerusahaanProfileFragment()
+                                            requireActivity().supportFragmentManager.beginTransaction()
+                                                .replace(R.id.fragment_container_perusahaan, fragment).commit()
                                         }
                                     }
                                     else{
-                                        Log.e("Edit passperu Frag", "${response.message()}")
-                                        Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(requireActivity(), "${responseBody.message}",
+                                            Toast.LENGTH_SHORT).show()
                                     }
                                 }
+                                else{
+                                    Log.e("Edit passperu Frag", "${response.message()}")
+                                }
                             }
+                        }
 
-                            override fun onFailure(call: Call<PerusahaanResponse>, t: Throwable) {
-                                Log.e("Edit passperu Frag", "${t.message}")
-                            }
-                        })
-//                        }
-                    }
+                        override fun onFailure(call: Call<PerusahaanResponse>, t: Throwable) {
+                            Log.e("Edit passperu Frag", "${t.message}")
+                        }
+                    })
                 }
                 else{
-                    Toast.makeText(requireActivity(), "password harus sama dengan confirm password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), "Password harus sama dengan konfirmasi password", Toast.LENGTH_SHORT).show()
                 }
             }
             else{
@@ -116,9 +112,35 @@ class PerusahaanPasswordFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             android.R.id.home -> {
-                val fragment = PerusahaanProfileFragment()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                if(binding.etPassBaruPerus.text.toString()!="" || binding.etConfBaruPerus.text.toString()!=""
+                    || binding.etPassLamaPerus.text.toString()!=""){
+                    val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+                    val dialog = Dialog(requireContext())
+                    dialog.setContentView(dialogBinding)
+                    dialog.setCancelable(true)
+                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    dialog.show()
+
+                    val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+                    val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+                    tvDialog.setText("Keluar tanpa menyimpan perubahan?")
+
+                    btnKembali.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                    btnKeluar.setOnClickListener {
+                        dialog.dismiss()
+                        val fragment = PerusahaanProfileFragment()
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                    }
+                }
+                else{
+                    val fragment = PerusahaanProfileFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                }
             }
         }
         return true

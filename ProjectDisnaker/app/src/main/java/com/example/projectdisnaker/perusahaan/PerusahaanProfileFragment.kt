@@ -103,7 +103,28 @@ class PerusahaanProfileFragment : Fragment() {
             }
         }
         binding.layoutLogoutPerusahaan.setOnClickListener {
-            requireActivity().finish()
+            val dialogBinding = layoutInflater.inflate(R.layout.confirm_dialog, null)
+            val dialog = Dialog(requireContext())
+            dialog.setContentView(dialogBinding)
+            dialog.setCancelable(true)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val btnConfirm = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+            val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
+
+            tvDialog.setText("Keluar dari akun anda?")
+            btnCancel.setText("Keluar")
+            btnConfirm.setText("Kembali")
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            btnConfirm.setOnClickListener {
+                dialog.dismiss()
+                requireActivity().finish()
+            }
         }
     }
 

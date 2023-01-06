@@ -172,7 +172,7 @@ class PerusahaanTambahFragment : Fragment() {
                     val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
                     val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
                     val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
-                    tvDialog.setText("Keluar tanpa menyimpan lowongan?")
+                    tvDialog.setText("Keluar tanpa menyimpan perusahaan?")
 
                     btnKembali.setOnClickListener {
                         dialog.dismiss()

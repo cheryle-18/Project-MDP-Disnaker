@@ -11,17 +11,11 @@ interface ApiService {
     @POST("register")
     fun register(
         @Body register: LoginItem
-//        @Query("nama") nama:String,
-//        @Query("username") username:String,
-//        @Query("password") password:String,
-//        @Query("role") role:Int,
     ): Call<UserResponse>
 
     @POST("login")
     fun login(
         @Body login: LoginItem
-//        @Query("username") username:String,
-//        @Query("password") password:String,
     ): Call<UserResponse>
 
     //PESERTA PROFILE
@@ -39,7 +33,7 @@ interface ApiService {
     @POST("peserta/password/{peserta_id}")
     fun updatePasswordPerserta(
         @Path("peserta_id") pesertaId: Int,
-        @Query("passbaru") passbaru:String,
+        @Body pass: PasswordItem
     ): Call<PesertaResponse>
 
     @POST("peserta/pendidikan/{peserta_id}")
@@ -160,7 +154,7 @@ interface ApiService {
     @POST("perusahaan/password/{perusahaan_id}")
     fun updatePasswordPerusahaan(
         @Path("perusahaan_id") perusahaanId: Int,
-        @Query("passbaru") passbaru:String,
+        @Body pass: PasswordItem
     ): Call<PerusahaanResponse>
 
     //LOWONGAN

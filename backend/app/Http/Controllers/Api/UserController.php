@@ -141,6 +141,31 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function updatePasswordPerusahaan(Request $req){
+        $perusahaan = Perusahaan::find($req->perusahaan_id);
+        $status = 0;
+        $message = "";
+        $user = User::find($perusahaan->user_id);
+
+        if(hash::check( $req->passbaru, $user->password)){
+            $message = "Password tidak boleh sama dengan password sebelumnya";
+        }
+        else if(!hash::check($req->passlama, $user->password)){
+            $message = "Password lama salah";
+        }
+        else{
+            $user->password = Hash::make($req->passbaru);
+            $user->save();
+            $message = "Berhasil mengubah password";
+            $status = 1;
+        }
+
+        return response()->json([
+            "status" => $status,
+            "message" => $message
+        ], 200);
+    }
+
     public function getAllPeserta(){
         $t = Peserta::all();
         $peserta = [];
@@ -204,35 +229,28 @@ class UserController extends Controller
     }
 
 
-    public function updatePasswordPerserta(Request $req){
+    public function updatePasswordPeserta(Request $req){
         $peserta = Peserta::find($req->peserta_id);
         $message = "";
+        $status = 0;
         $user = User::find($peserta->user_id);
-        // if(hash::check( $req->passbaru, $user->password)){
-        //     $message = "password tidak boleh sama dengan password sebelumnya";
-        // }
-        // else{
-        //     $user->password = Hash::make($req->passbaru);
-        //     $user->save();
-        //     $message = "Berhasil mengubah Password";
-        // }
-        $user->password = Hash::make($req->passbaru);
-        $user->save();
-        $message = "Berhasil mengubah Password";
+
+        if(hash::check( $req->passbaru, $user->password)){
+            $message = "Password tidak boleh sama dengan password sebelumnya";
+        }
+        else if(!hash::check($req->passlama, $user->password)){
+            $message = "Password lama salah";
+        }
+        else{
+            $user->password = Hash::make($req->passbaru);
+            $user->save();
+            $message = "Berhasil mengubah password";
+            $status = 1;
+        }
+
         return response()->json([
+            "status" => $status,
             "message" => $message
-        ], 200);
-    }
-
-    public function updatePasswordPerusahaan(Request $req){
-        $perusahaan = Perusahaan::find($req->perusahaan_id);
-
-        $user = User::find($perusahaan->user_id);
-        $user->password = Hash::make($req->passbaru);
-        $user->save();
-
-        return response()->json([
-            "message" => "Berhasil mengubah Password"
         ], 200);
     }
 
