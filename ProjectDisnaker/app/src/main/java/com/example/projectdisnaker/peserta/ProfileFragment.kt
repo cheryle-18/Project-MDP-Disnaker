@@ -177,7 +177,7 @@ class ProfileFragment : Fragment() {
                 binding.etTelpProfile.text.isBlank() &&
                 binding.etKtpProfile.text.isBlank() &&
                 binding.etTglLahirProfile.text.isBlank()){
-                Toast.makeText(requireActivity(), "Pastikan semua data diri terisi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
             }
             else{
                 var email = binding.etEmailProfile.text.toString()

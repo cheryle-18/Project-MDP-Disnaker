@@ -58,7 +58,7 @@ class PerusahaanProfileFragment : Fragment() {
             if (binding.etAlamatPerusahaanProfile.text.toString().isBlank()&&
                     binding.etTelpPerusahaanProfile.text.toString().isBlank()&&
                     binding.etEmailPerusahaanProfile.text.toString().isBlank()){
-                Toast.makeText(requireActivity(), "Pastikan semua data terisi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
             }
             else{
                 var alamat = binding.etAlamatPerusahaanProfile.text.toString()

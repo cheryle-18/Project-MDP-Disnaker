@@ -194,7 +194,7 @@ class AdminEditPelatihanFragment : Fragment() {
                 }
             }
             else{
-                Toast.makeText(requireContext(),"Semua field harus diisi!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Harap isi semua data",Toast.LENGTH_SHORT).show()
             }
         }
 

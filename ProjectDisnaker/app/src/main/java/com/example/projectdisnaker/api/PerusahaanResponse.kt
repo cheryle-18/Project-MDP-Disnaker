@@ -29,6 +29,12 @@ data class PerusahaanItem(
 	@field:SerializedName("nama")
 	val nama: String? = null,
 
+	@field:SerializedName("username")
+	val username: String? = null,
+
+	@field:SerializedName("password")
+	val password: String? = null,
+
 	@field:SerializedName("perusahaan_id")
 	val perusahaanId: Int? = null,
 

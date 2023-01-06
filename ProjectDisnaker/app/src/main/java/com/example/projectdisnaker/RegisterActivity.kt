@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.projectdisnaker.api.ApiConfiguration
+import com.example.projectdisnaker.api.LoginItem
 import com.example.projectdisnaker.api.UserResponse
 import com.example.projectdisnaker.databinding.ActivityRegisterBinding
 import org.json.JSONArray
@@ -26,7 +27,8 @@ class RegisterActivity : AppCompatActivity() {
 
         if(nama!="" && username!="" && password!="" && confirmPass!=""){
             if(password == confirmPass){
-                var client = ApiConfiguration.getApiService().register(nama,username,password,0) //register as participant
+                var register = LoginItem(username, password, nama, 0)
+                var client = ApiConfiguration.getApiService().register(register) //register as participant
                 client.enqueue(object: Callback<UserResponse> {
 
                     override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
@@ -57,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
         else{
-            Toast.makeText(this,"Semua field harus diisi!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Harap isi semua data",Toast.LENGTH_SHORT).show()
         }
     }
 

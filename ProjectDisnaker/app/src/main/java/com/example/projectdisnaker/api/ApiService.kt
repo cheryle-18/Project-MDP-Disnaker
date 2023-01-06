@@ -10,31 +10,19 @@ interface ApiService {
 
     @POST("register")
     fun register(
-        @Query("nama") nama:String,
-        @Query("username") username:String,
-        @Query("password") password:String,
-        @Query("role") role:Int,
+        @Body register: LoginItem
+//        @Query("nama") nama:String,
+//        @Query("username") username:String,
+//        @Query("password") password:String,
+//        @Query("role") role:Int,
     ): Call<UserResponse>
 
     @POST("login")
     fun login(
-        @Query("username") username:String,
-        @Query("password") password:String,
+        @Body login: LoginItem
+//        @Query("username") username:String,
+//        @Query("password") password:String,
     ): Call<UserResponse>
-
-
-    // PESERTA password
-    @POST("peserta/password/{peserta_id}")
-    fun updatePasswordPerserta(
-        @Path("peserta_id") pesertaId: Int,
-        @Query("passbaru") passbaru:String,
-    ): Call<PesertaResponse>
-
-    //PESERTA PROFILE
-    @POST("peserta/kerja/{peserta_id}")
-    fun updateStatusKerja(
-        @Path("peserta_id") pesertaId: Int,
-    ): Call<PesertaResponse>
 
     //PESERTA PROFILE
     @GET("peserta/{peserta_id}")
@@ -46,6 +34,12 @@ interface ApiService {
     fun updatePeserta(
         @Path("peserta_id") pesertaId: Int,
         @Body peserta: PesertaItem
+    ): Call<PesertaResponse>
+
+    @POST("peserta/password/{peserta_id}")
+    fun updatePasswordPerserta(
+        @Path("peserta_id") pesertaId: Int,
+        @Query("passbaru") passbaru:String,
     ): Call<PesertaResponse>
 
     @POST("peserta/pendidikan/{peserta_id}")
@@ -63,6 +57,11 @@ interface ApiService {
     fun getRiwayatPekerjaan(
         @Path("peserta_id") pesertaId: Int
     ): Call<RiwayatResponse>
+
+    @POST("peserta/kerja/{peserta_id}")
+    fun updateStatusKerja(
+        @Path("peserta_id") pesertaId: Int,
+    ): Call<PesertaResponse>
 
     //KATEGORI
     @GET("kategori")
@@ -147,13 +146,17 @@ interface ApiService {
         @Path("perusahaan_id") perusahaanId: Int
     ): Call<PerusahaanResponse>
 
+    @POST("perusahaan/insert")
+    fun insertPerusahaan(
+        @Body perusahaan: PerusahaanItem
+    ): Call<PerusahaanResponse>
+
     @POST("perusahaan/update/{perusahaan_id}")
     fun updatePerusahaan(
         @Path("perusahaan_id") perusahaanId: Int,
         @Body perusahaan: PerusahaanItem
     ): Call<PerusahaanResponse>
 
-    // PERUSAHAAN password
     @POST("perusahaan/password/{perusahaan_id}")
     fun updatePasswordPerusahaan(
         @Path("perusahaan_id") perusahaanId: Int,

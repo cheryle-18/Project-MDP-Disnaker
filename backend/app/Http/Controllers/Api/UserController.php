@@ -104,6 +104,28 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function insertPerusahaan(Request $req){
+        //create user
+        $user = new User();
+        $user->nama = $req->nama;
+        $user->username = $req->username;
+        $user->password = $req->password;
+        $user->role = 1;
+        $user->email = $req->email;
+        $user->telp = $req->telp;
+        $user->save();
+
+        //create perusahaan
+        $perusahaan = new Perusahaan();
+        $perusahaan->user_id = $user->user_id;
+        $perusahaan->alamat = $req->alamat;
+        $perusahaan->save();
+
+        return response()->json([
+            "message" => "Berhasil menambah perusahaan"
+        ], 201);
+    }
+
     public function updatePerusahaan(Request $req){
         $perusahaan = Perusahaan::find($req->perusahaan_id);
         $perusahaan->alamat = $req->alamat;

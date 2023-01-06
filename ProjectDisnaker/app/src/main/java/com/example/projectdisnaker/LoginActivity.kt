@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.projectdisnaker.admin.AdminActivity
 import com.example.projectdisnaker.api.ApiConfiguration
+import com.example.projectdisnaker.api.LoginItem
 import com.example.projectdisnaker.api.UserResponse
 import com.example.projectdisnaker.databinding.ActivityLoginBinding
 import com.example.projectdisnaker.perusahaan.PerusahaanActivity
@@ -33,7 +34,8 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else{
-                var client = ApiConfiguration.getApiService().login(username,password)
+                var login = LoginItem(username, password)
+                var client = ApiConfiguration.getApiService().login(login)
                 client.enqueue(object: Callback<UserResponse> {
                     override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                         if(response.isSuccessful){
@@ -82,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         else{
-            Toast.makeText(this,"Semua field harus diisi!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Harap isi semua data", Toast.LENGTH_SHORT).show()
         }
     }
 

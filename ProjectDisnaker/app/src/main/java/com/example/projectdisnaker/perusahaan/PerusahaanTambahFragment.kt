@@ -152,7 +152,7 @@ class PerusahaanTambahFragment : Fragment() {
                 })
             }
             else{
-                Toast.makeText(requireActivity(), "Lengkapi semua data lowongan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
             }
         }
     }
