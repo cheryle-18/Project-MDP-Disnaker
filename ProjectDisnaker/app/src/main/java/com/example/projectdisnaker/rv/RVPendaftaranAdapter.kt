@@ -45,8 +45,11 @@ class RVPendaftaranAdapter(private val activity: Activity,
         holder.tvNamaPesertaPend.setText(item.peserta!!.nama)
         holder.tvStatusPendaftaran.setText(status_pendaftaran[item.status_pendaftaran!!])
         holder.tvStatusKelulusan.setText(status_kelulusan[item.status_kelulusan!!])
-        if(item.status_kelulusan!=1){
+        if(item.status_kelulusan==2){
             holder.llStatusKelulusan.background.setTint(activity.resources.getColor(R.color.red))
+        }
+        else if(item.status_kelulusan==0){
+            holder.llStatusKelulusan.background.setTint(Color.GRAY)
         }
         holder.itemView.setOnClickListener {
             onClickListener?.onClick(position)

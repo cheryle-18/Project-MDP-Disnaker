@@ -68,8 +68,8 @@ class PendaftaranFragment : Fragment() {
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody!=null){
+                        binding.avLoading.visibility = View.GONE
                         if(responseBody.pendaftaran!!.size > 0){
-                            binding.avLoading.visibility = View.GONE
                             binding.rvPendaftaran.visibility = View.VISIBLE
 
                             listStatus.clear()

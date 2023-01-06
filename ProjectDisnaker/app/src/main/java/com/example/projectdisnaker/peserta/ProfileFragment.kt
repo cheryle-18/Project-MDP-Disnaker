@@ -16,7 +16,6 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.admin.AdminPendaftaranFragment
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentProfileBinding
 import retrofit2.Call
@@ -55,7 +54,7 @@ class ProfileFragment : Fragment() {
 
         user = (activity as HomeActivity).user
         binding.tvNamaProfile.setText(user.nama)
-        binding.tvUsernameProfile.setText(user.username)
+        binding.tvUsernameProfile.setText("@${user.username}")
 
         var nama = user.nama!!.trim().split("\\s+".toRegex()).toTypedArray()
         var initials = ""
@@ -175,20 +174,20 @@ class ProfileFragment : Fragment() {
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
 
-            val btnConfirm = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
-            val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+            val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
             val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
 
             tvDialog.setText("Keluar dari akun anda?")
-            btnCancel.setText("Keluar")
-            btnConfirm.setText("Kembali")
+            btnKeluar.setText("Keluar")
+            btnKembali.setText("Kembali")
 
-            btnCancel.setOnClickListener {
-                dialog.dismiss()
-            }
-            btnConfirm.setOnClickListener {
+            btnKeluar.setOnClickListener {
                 dialog.dismiss()
                 requireActivity().finish()
+            }
+            btnKembali.setOnClickListener {
+                dialog.dismiss()
             }
         }
 
@@ -252,8 +251,14 @@ class ProfileFragment : Fragment() {
         binding.etKtpProfile.setText(peserta.nik)
         binding.etTglLahirProfile.setText(peserta.tglLahir)
 
-        var tglLahir = user.tglLahir!!.split("/")
-        cal.set(tglLahir[2].toInt(), tglLahir[1].toInt()-1, tglLahir[0].toInt())
+        if(peserta.tglLahir!=""){
+            var tglLahir = peserta.tglLahir!!.split("/")
+            cal.set(tglLahir[2].toInt(), tglLahir[1].toInt()-1, tglLahir[0].toInt())
+        }
+
+        if(peserta.status!=2){
+            binding.layoutTidakKerja.visibility = View.GONE
+        }
     }
 
     private fun fetchPeserta(){
@@ -275,7 +280,7 @@ class ProfileFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
-                Log.e("Profile Fragment", "${t.message}")
+                Log.e("Profile Fragment Fail", "${t.message}")
             }
         })
     }

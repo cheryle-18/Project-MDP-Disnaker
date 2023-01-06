@@ -193,17 +193,18 @@ class UserController extends Controller
     }
 
     public function getPeserta(Request $req){
-        $temp = Peserta::find($req->peserta_id)->first();
+        $temp = Peserta::find($req->peserta_id);
         $peserta = [
             "peserta_id" => $temp->peserta_id,
             "nama" => $temp->user->nama,
-            "nik" => $temp->nik,
-            "email" => $temp->user->email,
-            "telp" => $temp->user->telp,
-            "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d/m/Y"),
-            "pendidikan" => $temp->pendidikan->nama,
-            "jurusan" => $temp->jurusan,
-            "nilai" => $temp->nilai
+            "nik" => $temp->nik ?? "",
+            "email" => $temp->user->email ?? "",
+            "telp" => $temp->user->telp ?? "",
+            "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d/m/Y") ?? "",
+            "pendidikan" => $temp->pendidikan->nama ?? "",
+            "jurusan" => $temp->jurusan ?? "",
+            "nilai" => $temp->nilai ?? null,
+            "status" => $temp->status
         ];
 
         return response()->json([

@@ -1,6 +1,7 @@
 package com.example.projectdisnaker.rv
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,8 +46,11 @@ class RVStatPendaftaranAdapter(
             holder.tvNamaPesertaPend.visibility = View.GONE
             holder.tvStatusPendaftaran.setText(status_pendaftaran[status.statusPendaftaran!!])
             holder.tvStatusKelulusan.setText(status_kelulusan[status.statusKelulusan!!])
-            if(status.statusKelulusan!=1){
+            if(status.statusKelulusan==2){
                 holder.llStatusKelulusan.background.setTint(context.resources.getColor(R.color.red))
+            }
+            else if(status.statusKelulusan==0){
+                holder.llStatusKelulusan.background.setTint(Color.GRAY)
             }
         }
     }

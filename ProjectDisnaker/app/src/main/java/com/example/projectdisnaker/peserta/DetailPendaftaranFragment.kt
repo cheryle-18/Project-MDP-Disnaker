@@ -90,6 +90,10 @@ class DetailPendaftaranFragment : Fragment() {
             binding.tvStatKelulusan.setTextColor(resources.getColor(R.color.red))
         }
 
+        if(status.statusPendaftaran!=1){
+            binding.tvDetWawancara.visibility = View.GONE
+        }
+
         binding.tvNamaDetail.setText(pelatihan.nama)
         binding.tvKategoriDetail.setText(pelatihan.kategori)
         binding.tvKuotaDetail.setText(pelatihan.kuota.toString())

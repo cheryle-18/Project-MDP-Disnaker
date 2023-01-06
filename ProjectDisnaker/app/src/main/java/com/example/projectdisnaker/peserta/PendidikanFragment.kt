@@ -192,7 +192,7 @@ class PendidikanFragment : Fragment() {
                         peserta = responseBody.peserta!![0]!!
 
                         binding.etJurusan.setText(peserta.jurusan)
-                        binding.etNilai.setText(peserta.nilai.toString())
+                        binding.etNilai.setText(if(peserta.nilai!=null) peserta.nilai.toString() else "")
 
                         fetchPendidikan()
                     }

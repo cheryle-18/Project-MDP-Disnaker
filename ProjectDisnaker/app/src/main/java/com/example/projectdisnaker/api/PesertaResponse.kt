@@ -45,5 +45,8 @@ data class PesertaItem(
 	val nilai: Int? = null,
 
 	@field:SerializedName("jurusan")
-	val jurusan: String? = null
+	val jurusan: String? = null,
+
+	@field:SerializedName("status")
+	val status: Int? = null,
 ) : Parcelable

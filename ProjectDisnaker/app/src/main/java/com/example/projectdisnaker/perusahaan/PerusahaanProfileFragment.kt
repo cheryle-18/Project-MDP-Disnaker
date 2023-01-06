@@ -110,20 +110,20 @@ class PerusahaanProfileFragment : Fragment() {
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
 
-            val btnConfirm = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
-            val btnCancel = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
+            val btnKembali = dialogBinding.findViewById<Button>(R.id.btnConfirmDialog)
+            val btnKeluar = dialogBinding.findViewById<Button>(R.id.btnCancelDialog)
             val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialogConfirm)
 
             tvDialog.setText("Keluar dari akun anda?")
-            btnCancel.setText("Keluar")
-            btnConfirm.setText("Kembali")
+            btnKeluar.setText("Keluar")
+            btnKembali.setText("Kembali")
 
-            btnCancel.setOnClickListener {
-                dialog.dismiss()
-            }
-            btnConfirm.setOnClickListener {
+            btnKeluar.setOnClickListener {
                 dialog.dismiss()
                 requireActivity().finish()
+            }
+            btnKembali.setOnClickListener {
+                dialog.dismiss()
             }
         }
     }
