@@ -29,6 +29,6 @@ class SyaratPelatihanSeeder extends Seeder
                 'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
         ]);
-        SyaratPelatihan::factory()->count(80)->create();
+        SyaratPelatihan::factory()->count(30)->create();
     }
 }

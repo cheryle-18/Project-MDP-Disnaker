@@ -37,6 +37,6 @@ class SyaratLowonganSeeder extends Seeder
             ]
         ]);
 
-        SyaratLowongan::factory()->count(80)->create();
+        SyaratLowongan::factory()->count(30)->create();
     }
 }

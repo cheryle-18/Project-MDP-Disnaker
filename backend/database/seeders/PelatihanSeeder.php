@@ -32,7 +32,7 @@ class PelatihanSeeder extends Seeder
             ]
         ]);
 
-        Pelatihan::factory()->count(50)->create();
+        Pelatihan::factory()->count(15)->create();
 
     }
 }

@@ -31,7 +31,7 @@ class PendaftaranPelatihanSeeder extends Seeder
             [
                 'pp_id' => 2,
                 'pelatihan_id' => 1,
-                'peserta_id' => 1,
+                'peserta_id' => 2,
                 'tgl_pendaftaran' => date_create('2022-12-31 15:37:17'),
                 'tgl_wawancara' => date_create('2023-01-15 00:00:00'),
                 'status_pendaftaran' => 0,
@@ -40,7 +40,7 @@ class PendaftaranPelatihanSeeder extends Seeder
             [
                 'pp_id' => 3,
                 'pelatihan_id' => 1,
-                'peserta_id' => 1,
+                'peserta_id' => 5,
                 'tgl_pendaftaran' => date_create('2022-12-31 15:37:17'),
                 'tgl_wawancara' => date_create('2023-01-15 00:00:00'),
                 'status_pendaftaran' => 1,
@@ -49,7 +49,7 @@ class PendaftaranPelatihanSeeder extends Seeder
             [
                 'pp_id' => 4,
                 'pelatihan_id' => 1,
-                'peserta_id' => 1,
+                'peserta_id' => 3,
                 'tgl_pendaftaran' => date_create('2022-12-31 15:37:17'),
                 'tgl_wawancara' => date_create('2023-01-15 00:00:00'),
                 'status_pendaftaran' => 2,
@@ -58,7 +58,7 @@ class PendaftaranPelatihanSeeder extends Seeder
             [
                 'pp_id' => 5,
                 'pelatihan_id' => 1,
-                'peserta_id' => 1,
+                'peserta_id' => 4,
                 'tgl_pendaftaran' => date_create('2022-12-31 15:37:17'),
                 'tgl_wawancara' => date_create('2023-01-15 00:00:00'),
                 'status_pendaftaran' => 4,

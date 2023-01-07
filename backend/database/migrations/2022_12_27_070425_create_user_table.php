@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('password');
             $table->string('telp',50)->nullable();
             $table->tinyInteger('role');
+            $table->string('api_key', 16);
             $table->timestamps();
             $table->softDeletes();
         });

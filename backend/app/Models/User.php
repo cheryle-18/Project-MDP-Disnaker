@@ -22,7 +22,8 @@ class User extends Authenticatable
         "email",
         "password",
         "telp",
-        "role"
+        "role",
+        "api_key"
     ];
 
     public function peserta(){

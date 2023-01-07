@@ -41,6 +41,6 @@ class LowonganSeeder extends Seeder
             ]
         ]);
 
-        Lowongan::factory()->count(50)->create();
+        Lowongan::factory()->count(15)->create();
     }
 }

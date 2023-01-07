@@ -8,6 +8,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Hidehalo\Nanoid\Client;
+use Hidehalo\Nanoid\GeneratorInterface;
 
 class UserSeeder extends Seeder
 {
@@ -19,6 +21,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
+        $client = new Client();
+
         DB::statement("SET FOREIGN_KEY_CHECKS=0");
         DB::table("user")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
@@ -31,6 +35,7 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make(123),
                 'telp'=>'0123456789',
                 'role'=>0,
+                'api_key' => $client->generateId($size = 16, $mode = Client::MODE_DYNAMIC),
                 'created_at'=>Carbon::now('Asia/Jakarta'),
                 'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
@@ -42,6 +47,7 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make(123),
                 'telp'=>'1234567890',
                 'role'=>1,
+                'api_key' => $client->generateId($size = 16, $mode = Client::MODE_DYNAMIC),
                 'created_at'=>Carbon::now('Asia/Jakarta'),
                 'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
@@ -53,12 +59,13 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make(123),
                 'telp'=>'0123456789',
                 'role'=>0,
+                'api_key' => $client->generateId($size = 16, $mode = Client::MODE_DYNAMIC),
                 'created_at'=>Carbon::now('Asia/Jakarta'),
                 'updated_at'=>Carbon::now('Asia/Jakarta')
             ]
         ]);
 
-        User::factory()->count(50)->create();
+        User::factory()->count(20)->create();
     }
 
 }
