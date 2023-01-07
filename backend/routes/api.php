@@ -47,6 +47,7 @@ Route::prefix('peserta')->group(function () {
     Route::get('/{peserta_id}', [UserController::class, 'getPeserta']);
     Route::post('/update', [UserController::class, 'updatePeserta'])->middleware('CekToken');
     Route::post('/pendidikan', [UserController::class, 'updatePendidikan'])->middleware('CekToken');
+    Route::post('/pendidikan/upload', [UserController::class, 'uploadIjazah'])->middleware('CekToken');
     Route::get('/riwayat/pelatihan', [UserController::class, 'getRiwayatPelatihan']);
     Route::get('/riwayat/pekerjaan', [UserController::class, 'getRiwayatPekerjaan']);
     Route::post('/kerja', [UserController::class, 'updateStatusKerja'])->middleware('CekToken');

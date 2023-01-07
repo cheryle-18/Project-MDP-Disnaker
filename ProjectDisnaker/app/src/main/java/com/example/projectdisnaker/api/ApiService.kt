@@ -1,5 +1,6 @@
 package com.example.projectdisnaker.api
 
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -46,6 +47,13 @@ interface ApiService {
         @Query("api_key") token: String,
         @Body pendidikanItem: PendidikanItem
     ): Call<PendidikanResponse>
+
+    @Multipart
+    @POST("peserta/pendidikan/upload")
+    suspend fun uploadIjazah(
+        @Query("api_key") token: String,
+        @Part ijazah: MultipartBody.Part
+    ): Call<UserResponse>
 
     @GET("peserta/riwayat/pelatihan")
     fun getRiwayatPelatihan(

@@ -39,6 +39,7 @@ class UserController extends Controller
                     "pendidikan" => $peserta->pendidikan->nama,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,
+                    "ijazah" => $peserta->ijazah,
                     "status" => $peserta->status,
                 ];
             }
@@ -180,7 +181,8 @@ class UserController extends Controller
                     "tgl_lahir" => date_format(date_create($temp->tgl_lahir), "d/m/Y"),
                     "pendidikan" => $temp->pendidikan->nama,
                     "jurusan" => $temp->jurusan,
-                    "nilai" => $temp->nilai
+                    "nilai" => $temp->nilai,
+                    "ijazah" => $temp->ijazah,
                 ];
             }
         }
@@ -203,6 +205,7 @@ class UserController extends Controller
             "pendidikan" => $temp->pendidikan->nama ?? "",
             "jurusan" => $temp->jurusan ?? "",
             "nilai" => $temp->nilai ?? null,
+            "ijazah" => $temp->ijazah ?? "",
             "status" => $temp->status
         ];
 
@@ -266,6 +269,18 @@ class UserController extends Controller
 
         return response()->json([
             "message" => "Berhasil mengubah riwayat pendidikan."
+        ], 200);
+    }
+
+    public function uploadIjazah(Request $req){
+        $user = User::where('api_key', $req->api_key)->first();
+        $peserta = Peserta::where('user_id', $user->user_id)->first();
+
+        $namafile  = $peserta->peserta_id . "." . $req->file("ijazah")->getClientOriginalExtension();
+        $result = $req->file('ijazah')->storeAs("images", $namafile, 'public');
+
+        return response()->json([
+            "message" => "Berhasil upload ijazah."
         ], 200);
     }
 

@@ -71,6 +71,9 @@ data class UserResponseItem(
 	@field:SerializedName("usia")
 	val usia: Int? = null,
 
+	@field:SerializedName("ijazah")
+	val ijazah: String? = null,
+
 	@field:SerializedName("api_key")
 	val apiKey: String? = null,
 

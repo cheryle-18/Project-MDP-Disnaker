@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('pendidikan_id')->nullable();
             $table->string('jurusan',50)->nullable();
             $table->integer('nilai')->nullable();
+            $table->string('ijazah', 100)->nullable();
             $table->tinyInteger('status')->comment('0 = free, 1 = sedang pelatihan, 2 = kerja');
             $table->timestamps();
             $table->softDeletes();

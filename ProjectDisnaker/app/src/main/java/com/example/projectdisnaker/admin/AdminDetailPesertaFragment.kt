@@ -1,6 +1,7 @@
 package com.example.projectdisnaker.admin
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -8,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.UnsafeHttpClient
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.PelatihanItem
 import com.example.projectdisnaker.api.PesertaPendaftaranItem
 import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentAdminDetailPesertaBinding
+import com.squareup.picasso.OkHttp3Downloader
+import com.squareup.picasso.Picasso
 
 class AdminDetailPesertaFragment : Fragment() {
     private lateinit var binding: FragmentAdminDetailPesertaBinding
@@ -94,6 +98,20 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.tvNilaiDetAdmin.setText(peserta.nilai.toString())
             binding.tvEmailDetAdmin.setText(peserta.email)
             binding.tvTelpDetAdmin.setText(peserta.telp)
+
+            try {
+                val unsafeHttp = UnsafeHttpClient()
+                val picassoClient = unsafeHttp.getUnsafeOkHttpClient()
+                val picasso = Picasso.Builder(requireContext()).downloader(OkHttp3Downloader(picassoClient)).build()
+                picasso.isLoggingEnabled = true
+                Picasso.get()
+                    .load("127.0.0.1:8000/gudang/images/${user.ijazah}")
+                    .placeholder(R.drawable.ijazah_template)
+                    .into(binding.ivIjazahAdmin)
+            }catch (e:Error){
+                binding.ivIjazahAdmin.setImageResource(R.drawable.ijazah_template)
+                Log.e("ERROR_GET_PICTURE",e.message.toString())
+            }
         }
         else{//semua peserta admin
             actionBar?.setTitle("Peserta")

@@ -1,27 +1,48 @@
 package com.example.projectdisnaker.peserta
 
+import android.Manifest
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewConfiguration.get
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.fragment.app.Fragment
 import com.example.projectdisnaker.R
+import com.example.projectdisnaker.URIPathHelper
+import com.example.projectdisnaker.UnsafeHttpClient
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPendidikanBinding
-import com.example.projectdisnaker.perusahaan.PerusahaanDetailLowonganFragment
+import com.squareup.picasso.OkHttp3Downloader
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+
 
 class PendidikanFragment : Fragment() {
     private lateinit var binding: FragmentPendidikanBinding
@@ -29,6 +50,10 @@ class PendidikanFragment : Fragment() {
     private lateinit var peserta: PesertaItem
     private var listPendidikan: ArrayList<String> = ArrayList()
     private lateinit var spinnerAdapter: ArrayAdapter<String>
+    val ioScope = CoroutineScope(Dispatchers.IO)
+
+    lateinit var selectedImageUri: Uri
+    lateinit var imagename: MultipartBody.Part
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +80,21 @@ class PendidikanFragment : Fragment() {
         binding.tvNamaProfile.setText(user.nama)
         binding.tvUsernameProfile.setText(user.username)
 
+        try {
+            val unsafeHttp = UnsafeHttpClient()
+            val picassoClient = unsafeHttp.getUnsafeOkHttpClient()
+            val picasso = Picasso.Builder(requireContext()).downloader(OkHttp3Downloader(picassoClient)).build()
+            picasso.isLoggingEnabled = true
+            picasso.load("http://10.0.2.2:8000/gudang/images/${user.ijazah}")
+                .placeholder(R.drawable.ijazah_template)
+                .into(binding.ivIjazah)
+
+            Log.d("uri", "http://10.0.2.2:8000/gudang/images/${user.ijazah}")
+        }catch (e:Error){
+            binding.ivIjazah.setImageResource(R.drawable.ijazah_template)
+            Log.e("ERROR_GET_PICTURE",e.message.toString())
+        }
+
         var nama = user.nama!!.trim().split("\\s+".toRegex()).toTypedArray()
         var initials = ""
         for(n in nama){
@@ -67,6 +107,21 @@ class PendidikanFragment : Fragment() {
         spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, listPendidikan)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerPendidikan.adapter = spinnerAdapter
+
+        binding.btnUpload.setOnClickListener {
+            if(ContextCompat.checkSelfPermission(requireActivity(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+            {
+                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, 101)
+            }
+            Intent(Intent.ACTION_PICK).also {
+                it.type = "image/*"
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                startActivityForResult(it, 101)
+            }
+        }
         
         binding.btnEditPendidikan.setOnClickListener { 
             var pendidikan = binding.spinnerPendidikan.selectedItem.toString()
@@ -203,6 +258,74 @@ class PendidikanFragment : Fragment() {
             }
             override fun onFailure(call: Call<PesertaResponse>, t: Throwable) {
                 Log.e("Pendidikan Fragment", "${t.message}")
+            }
+        })
+    }
+
+    private fun checkPermission(permission: String, requestCode: Int) {
+        if (ContextCompat.checkSelfPermission(requireContext(),permission)
+            == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(requireActivity(),
+                arrayOf(permission), requestCode)
+        } else {
+            Toast.makeText(requireContext(),"Permission already granted", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode,
+            permissions, grantResults)
+        if (requestCode == 101) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(requireContext(), "Storage Permission Granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Storage Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                101 -> {
+                    selectedImageUri = data?.data!!
+                    binding.ivIjazah.setImageURI(selectedImageUri)
+                    val uriPathHelper = URIPathHelper()
+                    val filePath = uriPathHelper.getPath(requireContext(), selectedImageUri)
+                    var file: File = File("${filePath}")
+                    val requestBody = file.asRequestBody("multipart".toMediaTypeOrNull())
+                    imagename = MultipartBody.Part.createFormData("ijazah",file.name,requestBody)
+                    Log.i("IMAGENAME",data.data.toString())
+
+                    ioScope.launch {
+                        uploadIjazah()
+                    }
+                }
+            }
+        }
+    }
+
+    private suspend fun uploadIjazah(){
+        val client = ApiConfiguration.getApiService().uploadIjazah(user.apiKey!!,imagename)
+        client.enqueue(object: Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: retrofit2.Response<UserResponse>){
+                val responseBody = response.body()
+                if(response.isSuccessful){
+                    if(responseBody!=null){
+                        Toast.makeText(requireActivity(), "Berhasil upload", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else{
+                }
+            }
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.e("ERRORPIC", selectedImageUri.toString())
+                Log.e("Error Upload Picture", "onFailure: ${t.message}")
             }
         })
     }
