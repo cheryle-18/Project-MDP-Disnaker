@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Hidehalo\Nanoid\Client;
+use Hidehalo\Nanoid\GeneratorInterface;
 
 class AuthController extends Controller
 {
@@ -40,6 +42,7 @@ class AuthController extends Controller
                     "password" => $user->password,
                     "telp" => $user->telp,
                     "role" => $user->role,
+                    "api_key" => $user->api_key,
                     "peserta_id" => $peserta->peserta_id,
                     "tgl_lahir" => date_format(date_create($peserta->tgl_lahir), "d/m/Y"),
                     "nik" => $peserta->nik,
@@ -59,6 +62,7 @@ class AuthController extends Controller
                     "password" => $user->password,
                     "telp" => $user->telp,
                     "role" => $user->role,
+                    "api_key" => $user->api_key,
                     "perusahaan_id" => $perusahaan->perusahaan_id,
                     "alamat" => $perusahaan->alamat
                 ];
@@ -72,7 +76,6 @@ class AuthController extends Controller
             "userResponse"=> [$userRet],
             "status" => $status,
             "message"=>$message,
-
         ],201);
     }
     public function validateDataRegister($data){
@@ -100,12 +103,15 @@ class AuthController extends Controller
         $status = 0;
         $message = "";
 
+        $client = new Client();
+
         if($validate->success){
             $newUser = User::create([
                 "nama"=> $request->nama,
                 "username"=>$request->username,
                 "password"=>Hash::make($request->password),
-                "role"=>$request->role
+                "role"=>$request->role,
+                "api_key" => $client->generateId($size = 16, $mode = Client::MODE_DYNAMIC),
             ]);
 
             if($request->role == 0){
@@ -137,5 +143,65 @@ class AuthController extends Controller
             "status" => $status,
             "message" => $message
         ], 201);
+    }
+
+    function autoLogin(Request $req){
+        $user = null;
+        $status = 0;
+        $message = "Gagal login!";
+
+        if($req->api_key!=""){
+            $user = User::where('api_key', $req->api_key)->first();
+
+            $userRet = [];
+            if($user->role==0){
+                $peserta = $user->peserta;
+                $pendidikan = null;
+                if($peserta->pendidikan_id != null){
+                    $pendidikan = $peserta->pendidikan->nama;
+                }
+                $userRet = [
+                    "user_id" => $user->user_id,
+                    "nama" => $user->nama,
+                    "email" => $user->email,
+                    "username" => $user->username,
+                    "password" => $user->password,
+                    "telp" => $user->telp,
+                    "role" => $user->role,
+                    "api_key" => $user->api_key,
+                    "peserta_id" => $peserta->peserta_id,
+                    "tgl_lahir" => date_format(date_create($peserta->tgl_lahir), "d/m/Y"),
+                    "nik" => $peserta->nik,
+                    "pendidikan" => $pendidikan,
+                    "jurusan" => $peserta->jurusan,
+                    "nilai" => $peserta->nilai,
+                    "status" => $peserta->status,
+                ];
+            }
+            else if($user->role==1){
+                $perusahaan = $user->perusahaan;
+                $userRet = [
+                    "user_id" => $user->user_id,
+                    "nama" => $user->nama,
+                    "email" => $user->email,
+                    "username" => $user->username,
+                    "password" => $user->password,
+                    "telp" => $user->telp,
+                    "role" => $user->role,
+                    "api_key" => $user->api_key,
+                    "perusahaan_id" => $perusahaan->perusahaan_id,
+                    "alamat" => $perusahaan->alamat
+                ];
+            }
+
+            $status = 1;
+            $message = "Berhasil login!";
+        }
+
+        return response()->json([
+            "userResponse"=> [$userRet],
+            "status" => $status,
+            "message"=>$message,
+        ],200);
     }
 }

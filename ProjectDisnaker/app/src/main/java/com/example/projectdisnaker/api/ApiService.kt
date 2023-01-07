@@ -18,6 +18,11 @@ interface ApiService {
         @Body login: LoginItem
     ): Call<UserResponse>
 
+    @POST("autoLogin")
+    fun autoLogin(
+        @Query("api_key") apiKey: String
+    ): Call<UserResponse>
+
     //PESERTA PROFILE
     @GET("peserta/{peserta_id}")
     fun getPeserta(

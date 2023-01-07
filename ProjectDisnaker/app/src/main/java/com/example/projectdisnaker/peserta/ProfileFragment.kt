@@ -1,5 +1,6 @@
 package com.example.projectdisnaker.peserta
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
@@ -18,6 +20,10 @@ import android.widget.TextView
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentProfileBinding
+import com.example.projectdisnaker.local.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,8 +34,12 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var user: UserResponseItem
     private lateinit var peserta: PesertaItem
+
     private var cal = Calendar.getInstance()
     private lateinit var sdf: SimpleDateFormat
+
+    val ioScope = CoroutineScope(Dispatchers.IO)
+    lateinit var db: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +59,8 @@ class ProfileFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
+
+        db = AppDatabase.build(requireContext())
 
         binding.llProfil.visibility = View.GONE
 
@@ -183,8 +195,15 @@ class ProfileFragment : Fragment() {
             btnKembali.setText("Kembali")
 
             btnKeluar.setOnClickListener {
-                dialog.dismiss()
-                requireActivity().finish()
+                ioScope.launch {
+                    db.usersDao.removeToken()
+                    requireActivity().runOnUiThread{
+                        dialog.dismiss()
+                        val resultIntent = Intent()
+                        requireActivity().setResult(Activity.RESULT_OK, resultIntent)
+                        requireActivity().finish()
+                    }
+                }
             }
             btnKembali.setOnClickListener {
                 dialog.dismiss()

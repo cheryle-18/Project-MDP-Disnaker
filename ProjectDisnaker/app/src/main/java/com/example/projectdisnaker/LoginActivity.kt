@@ -10,16 +10,22 @@ import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LoginItem
 import com.example.projectdisnaker.api.UserResponse
 import com.example.projectdisnaker.databinding.ActivityLoginBinding
+import com.example.projectdisnaker.local.AppDatabase
+import com.example.projectdisnaker.local.Users
 import com.example.projectdisnaker.perusahaan.PerusahaanActivity
 import com.example.projectdisnaker.peserta.HomeActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.log2
 
 class LoginActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityLoginBinding
+    val ioScope = CoroutineScope(Dispatchers.IO)
+    lateinit var db: AppDatabase
 
     private fun doLogin(){
         var username = binding.edtUsernameLogin.text.toString()
@@ -44,25 +50,31 @@ class LoginActivity : AppCompatActivity() {
                                 if(responseBody.status == 1){
                                     //successful attempt
                                     val loginedUser = responseBody.userResponse!![0]!!
-                                    //check login based on role
-                                    if(loginedUser.role == 0){
-                                        binding.edtUsernameLogin.setText("")
-                                        binding.edtPassLogin.setText("")
 
-                                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                                        intent.putExtra("user", loginedUser)
-                                        startActivity(intent)
-                                    }
-                                    else if(loginedUser.role == 1){
-                                        binding.edtUsernameLogin.setText("")
-                                        binding.edtPassLogin.setText("")
+                                    //save api key to local storage
+                                    ioScope.launch {
+                                        db.usersDao.saveToken(Users(loginedUser.apiKey!!))
+                                        runOnUiThread {
+                                            //check login based on role
+                                            if(loginedUser.role == 0){
+                                                binding.edtUsernameLogin.setText("")
+                                                binding.edtPassLogin.setText("")
 
-                                        val intent = Intent(this@LoginActivity, PerusahaanActivity::class.java)
-                                        intent.putExtra("user", loginedUser)
-                                        startActivity(intent)
+                                                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                                                intent.putExtra("user", loginedUser)
+                                                startActivity(intent)
+                                            }
+                                            else if(loginedUser.role == 1){
+                                                binding.edtUsernameLogin.setText("")
+                                                binding.edtPassLogin.setText("")
+
+                                                val intent = Intent(this@LoginActivity, PerusahaanActivity::class.java)
+                                                intent.putExtra("user", loginedUser)
+                                                startActivity(intent)
+                                            }
+                                        }
                                     }
                                 }
-
                             }
                             else{
                                 println("${response.message()}")
@@ -92,6 +104,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        db = AppDatabase.build(this)
 
         binding.btnLogin.setOnClickListener {
             doLogin()

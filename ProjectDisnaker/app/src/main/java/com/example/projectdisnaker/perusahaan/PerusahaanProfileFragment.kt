@@ -1,6 +1,8 @@
 package com.example.projectdisnaker.perusahaan
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -16,6 +18,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPerusahaanProfileBinding
+import com.example.projectdisnaker.local.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +30,9 @@ class PerusahaanProfileFragment : Fragment() {
     private lateinit var binding: FragmentPerusahaanProfileBinding
     private lateinit var user: UserResponseItem
     private lateinit var perusahaan: PerusahaanItem
+
+    val ioScope = CoroutineScope(Dispatchers.IO)
+    lateinit var db: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +53,8 @@ class PerusahaanProfileFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
         user = (activity as PerusahaanActivity).user
+
+        db = AppDatabase.build(requireContext())
 
         fetchPerusahaan()
 
@@ -119,8 +130,15 @@ class PerusahaanProfileFragment : Fragment() {
             btnKembali.setText("Kembali")
 
             btnKeluar.setOnClickListener {
-                dialog.dismiss()
-                requireActivity().finish()
+                ioScope.launch {
+                    db.usersDao.removeToken()
+                    requireActivity().runOnUiThread{
+                        dialog.dismiss()
+                        val resultIntent = Intent()
+                        requireActivity().setResult(Activity.RESULT_OK, resultIntent)
+                        requireActivity().finish()
+                    }
+                }
             }
             btnKembali.setOnClickListener {
                 dialog.dismiss()
