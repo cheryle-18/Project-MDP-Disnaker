@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Peserta;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class PesertaSeeder extends Seeder
@@ -28,7 +32,9 @@ class PesertaSeeder extends Seeder
                 'pendidikan_id'=>4,
                 'jurusan'=>'IPA',
                 'nilai'=>75,
-                'status'=>2
+                'status'=>2,
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'peserta_id' => 2,
@@ -38,8 +44,16 @@ class PesertaSeeder extends Seeder
                 'pendidikan_id'=>4,
                 'jurusan'=>'IPS',
                 'nilai'=>80,
-                'status'=>0
+                'status'=>0,
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
         ]);
+
+        Peserta::factory()->count(User::where('role',0)->count())->create();
+
+     
     }
+
+
 }

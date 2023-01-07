@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lowongan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -36,8 +37,10 @@ class LowonganSeeder extends Seeder
                 'perusahaan_id'=>1,
                 'kuota'=>15,
                 'keterangan'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, quo?',
-                'status'=>2
+                'status'=>0
             ]
         ]);
+
+        Lowongan::factory()->count(50)->create();
     }
 }

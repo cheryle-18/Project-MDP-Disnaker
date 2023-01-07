@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,31 +23,45 @@ class KategoriSeeder extends Seeder
         DB::table("kategori")->insert([
             [
                 'kategori_id' => 1,
-                'nama'=>'Industri'
+                'nama'=>'Industri',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'kategori_id' => 2,
-                'nama'=>'Jasa'
+                'nama'=>'Jasa',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'kategori_id' => 3,
-                'nama'=>'Otomotif'
+                'nama'=>'Otomotif',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'kategori_id' => 4,
-                'nama'=>'Pariwisata'
+                'nama'=>'Pariwisata',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'kategori_id' => 5,
-                'nama'=>'Perkantoran'
+                'nama'=>'Perkantoran',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'kategori_id' => 6,
-                'nama'=>'Teknologi Informasi'
+                'nama'=>'Teknologi Informasi',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'kategori_id' => 7,
-                'nama'=>'Kesenian'
+                'nama'=>'Kesenian',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
         ]);
     }

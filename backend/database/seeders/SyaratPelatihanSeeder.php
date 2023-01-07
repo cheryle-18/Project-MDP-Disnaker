@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\SyaratPelatihan;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +24,11 @@ class SyaratPelatihanSeeder extends Seeder
             [
                 'sp_id' => 1,
                 'pelatihan_id' => 1,
-                'deskripsi' => 'Lorem ipsum dolor sit amet.'
+                'deskripsi' => 'Lorem ipsum dolor sit amet.',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
         ]);
+        SyaratPelatihan::factory()->count(80)->create();
     }
 }

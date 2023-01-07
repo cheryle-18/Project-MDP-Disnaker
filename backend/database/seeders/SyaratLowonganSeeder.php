@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\SyaratLowongan;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,13 +24,19 @@ class SyaratLowonganSeeder extends Seeder
             [
                 'sl_id' => 1,
                 'lowongan_id' => 1,
-                'deskripsi' => 'Lorem ipsum dolor sit amet.'
+                'deskripsi' => 'Lorem ipsum dolor sit amet.',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'sl_id' => 2,
                 'lowongan_id' => 1,
-                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur.'
+                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur.',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ]
         ]);
+
+        SyaratLowongan::factory()->count(80)->create();
     }
 }

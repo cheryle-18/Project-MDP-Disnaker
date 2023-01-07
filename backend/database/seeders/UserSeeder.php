@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +30,9 @@ class UserSeeder extends Seeder
                 'username'=>'johndoe',
                 'password'=>Hash::make(123),
                 'telp'=>'0123456789',
-                'role'=>0
+                'role'=>0,
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'user_id' => 2,
@@ -37,7 +41,9 @@ class UserSeeder extends Seeder
                 'username'=>'xyz',
                 'password'=>Hash::make(123),
                 'telp'=>'1234567890',
-                'role'=>1
+                'role'=>1,
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'user_id' => 3,
@@ -46,8 +52,13 @@ class UserSeeder extends Seeder
                 'username'=>'janedoe',
                 'password'=>Hash::make(123),
                 'telp'=>'0123456789',
-                'role'=>0
+                'role'=>0,
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ]
         ]);
+
+        User::factory()->count(50)->create();
     }
+
 }

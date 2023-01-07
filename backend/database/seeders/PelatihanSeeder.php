@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pelatihan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -30,5 +31,8 @@ class PelatihanSeeder extends Seeder
                 'status'=>1
             ]
         ]);
+
+        Pelatihan::factory()->count(50)->create();
+
     }
 }

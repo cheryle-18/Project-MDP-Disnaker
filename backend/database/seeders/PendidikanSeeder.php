@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,51 +22,75 @@ class PendidikanSeeder extends Seeder
         DB::table("pendidikan")->insert([
             [
                 'pendidikan_id' => 1,
-                'nama'=>'Tidak Memiliki Ijazah'
+                'nama'=>'Tidak Memiliki Ijazah',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 2,
-                'nama'=>'SD'
+                'nama'=>'SD',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 3,
-                'nama'=>'SMP'
+                'nama'=>'SMP',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 4,
-                'nama'=>'SMA'
+                'nama'=>'SMA',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 5,
-                'nama'=>'SMK'
+                'nama'=>'SMK',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 6,
-                'nama'=>'Diploma I'
+                'nama'=>'Diploma I',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 7,
-                'nama'=>'Diploma II'
+                'nama'=>'Diploma II',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 8,
-                'nama'=>'Diploma III'
+                'nama'=>'Diploma III',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 9,
-                'nama'=>'Diploma IV'
+                'nama'=>'Diploma IV',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 10,
-                'nama'=>'Strata I'
+                'nama'=>'Strata I',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 11,
-                'nama'=>'Strata II'
+                'nama'=>'Strata II',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
             [
                 'pendidikan_id' => 12,
-                'nama'=>'Strata III'
+                'nama'=>'Strata III',
+                'created_at'=>Carbon::now('Asia/Jakarta'),
+                'updated_at'=>Carbon::now('Asia/Jakarta')
             ],
         ]);
     }
