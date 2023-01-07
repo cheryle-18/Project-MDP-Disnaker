@@ -127,14 +127,14 @@ class UserController extends Controller
     }
 
     public function updatePerusahaan(Request $req){
-        $perusahaan = Perusahaan::find($req->perusahaan_id);
-        $perusahaan->alamat = $req->alamat;
-        $perusahaan->save();
-
-        $user = User::find($perusahaan->user_id);
+        $user = User::where('api_key', $req->api_key)->first();
         $user->email = $req->email;
         $user->telp = $req->telp;
         $user->save();
+
+        $perusahaan = Perusahaan::where('user_id', $user->user_id)->first();
+        $perusahaan->alamat = $req->alamat;
+        $perusahaan->save();
 
         return response()->json([
             "message" => "Berhasil mengubah profile perusahaan"
@@ -142,10 +142,9 @@ class UserController extends Controller
     }
 
     public function updatePasswordPerusahaan(Request $req){
-        $perusahaan = Perusahaan::find($req->perusahaan_id);
+        $user = User::where('api_key', $req->api_key)->first();
         $status = 0;
         $message = "";
-        $user = User::find($perusahaan->user_id);
 
         if(hash::check( $req->passbaru, $user->password)){
             $message = "Password tidak boleh sama dengan password sebelumnya";
@@ -214,7 +213,8 @@ class UserController extends Controller
     }
 
     public function updatePeserta(Request $req){
-        $peserta = Peserta::find($req->peserta_id);
+        $user = User::where('api_key', $req->api_key)->first();
+        $peserta = Peserta::where('user_id', $user->user_id)->first();
         $peserta->tgl_lahir = date_format(date_create($req->tgl_lahir, ), 'Y-m-d');
         $peserta->nik = $req->nik;
         $peserta->save();
@@ -231,10 +231,9 @@ class UserController extends Controller
 
 
     public function updatePasswordPeserta(Request $req){
-        $peserta = Peserta::find($req->peserta_id);
+        $user = User::where('api_key', $req->api_key)->first();
         $message = "";
         $status = 0;
-        $user = User::find($peserta->user_id);
 
         if(hash::check( $req->passbaru, $user->password)){
             $message = "Password tidak boleh sama dengan password sebelumnya";
@@ -256,7 +255,8 @@ class UserController extends Controller
     }
 
     public function updatePendidikan(Request $req){
-        $peserta = Peserta::find($req->peserta_id);
+        $user = User::where('api_key', $req->api_key)->first();
+        $peserta = Peserta::where('user_id', $user->user_id)->first();
         $pendidikan = Pendidikan::where('nama', $req->pendidikan)->first();
 
         $peserta->jurusan = $req->jurusan;
@@ -325,7 +325,8 @@ class UserController extends Controller
     }
 
     public function updateStatusKerja(Request $req){
-        $peserta = Peserta::find($req->peserta_id);
+        $user = User::where('api_key', $req->api_key)->first();
+        $peserta = Peserta::where('user_id', $user->user_id)->first();
         $peserta->status = 0;
         $peserta->save();
 
@@ -365,8 +366,8 @@ class UserController extends Controller
 
     function daftarPelatihan(Request $req)
     {
-        # code...
-        $peserta = Peserta::find($req->peserta_id);
+        $user = User::where('api_key', $req->api_key)->first();
+        $peserta = Peserta::where('user_id', $user->user_id)->first();
         $pelatihan = Pelatihan::find($req->pelatihan_id);
 
         //check for peserta status
@@ -386,7 +387,7 @@ class UserController extends Controller
         //daftar
         PendaftaranPelatihan::create([
             "pelatihan_id" => $req->pelatihan_id,
-            "peserta_id" => $req->peserta_id,
+            "peserta_id" => $peserta->peserta_id,
             "tgl_pendaftaran" => Carbon::now('Asia/Jakarta'),
             "status_pendaftaran" => 0,
             "status_kelulusan" => 0

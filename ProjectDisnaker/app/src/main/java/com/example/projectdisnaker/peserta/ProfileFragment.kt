@@ -142,7 +142,7 @@ class ProfileFragment : Fragment() {
             btnConfirm.setOnClickListener {
                 dialog.dismiss()
 
-                var client = ApiConfiguration.getApiService().updateStatusKerja(user.pesertaId!!)
+                var client = ApiConfiguration.getApiService().updateStatusKerja(user.apiKey!!)
                 client.enqueue(object: Callback<PesertaResponse> {
                     override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
                             if(response.isSuccessful){
@@ -227,7 +227,7 @@ class ProfileFragment : Fragment() {
 
                 var edited = PesertaItem(nik, telp, email, tglLahir)
 
-                var client = ApiConfiguration.getApiService().updatePeserta(user.pesertaId!!, edited)
+                var client = ApiConfiguration.getApiService().updatePeserta(user.apiKey!!, edited)
                 client.enqueue(object: Callback<PesertaResponse> {
                     override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
                         if(response.isSuccessful){

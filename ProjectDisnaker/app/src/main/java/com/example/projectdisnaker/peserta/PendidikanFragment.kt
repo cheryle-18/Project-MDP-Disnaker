@@ -76,7 +76,7 @@ class PendidikanFragment : Fragment() {
             if(pendidikan!="" && jurusan!="" && nilai!=""){
                 var edited = PendidikanItem(pendidikan, jurusan, nilai.toInt())
 
-                var client = ApiConfiguration.getApiService().updatePendidikan(user.pesertaId!!, edited)
+                var client = ApiConfiguration.getApiService().updatePendidikan(user.apiKey!!, edited)
                 client.enqueue(object: Callback<PendidikanResponse> {
                     override fun onResponse(call: Call<PendidikanResponse>, response: Response<PendidikanResponse>){
                         if(response.isSuccessful){

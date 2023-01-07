@@ -29,37 +29,37 @@ interface ApiService {
         @Path("peserta_id") pesertaId: Int
     ): Call<PesertaResponse>
 
-    @POST("peserta/update/{peserta_id}")
+    @POST("peserta/update")
     fun updatePeserta(
-        @Path("peserta_id") pesertaId: Int,
+        @Query("api_key") token: String,
         @Body peserta: PesertaItem
     ): Call<PesertaResponse>
 
-    @POST("peserta/password/{peserta_id}")
+    @POST("peserta/password")
     fun updatePasswordPerserta(
-        @Path("peserta_id") pesertaId: Int,
+        @Query("api_key") token: String,
         @Body pass: PasswordItem
     ): Call<PesertaResponse>
 
-    @POST("peserta/pendidikan/{peserta_id}")
+    @POST("peserta/pendidikan")
     fun updatePendidikan(
-        @Path("peserta_id") pesertaId: Int,
+        @Query("api_key") token: String,
         @Body pendidikanItem: PendidikanItem
     ): Call<PendidikanResponse>
 
-    @GET("peserta/riwayat/pelatihan/{peserta_id}")
+    @GET("peserta/riwayat/pelatihan")
     fun getRiwayatPelatihan(
-        @Path("peserta_id") pesertaId: Int
+        @Query("peserta_id") pesertaId: Int
     ): Call<RiwayatResponse>
 
-    @GET("peserta/riwayat/pekerjaan/{peserta_id}")
+    @GET("peserta/riwayat/pekerjaan")
     fun getRiwayatPekerjaan(
-        @Path("peserta_id") pesertaId: Int
+        @Query("peserta_id") pesertaId: Int
     ): Call<RiwayatResponse>
 
-    @POST("peserta/kerja/{peserta_id}")
+    @POST("peserta/kerja")
     fun updateStatusKerja(
-        @Path("peserta_id") pesertaId: Int,
+        @Query("api_key") token: String,
     ): Call<PesertaResponse>
 
     //KATEGORI
@@ -98,6 +98,7 @@ interface ApiService {
     fun editPelatihan(
         @Body pelatihan: PelatihanItem
     ): Call<PelatihanResponse>
+
     @POST("pelatihan/delete/{pelatihan_id}")
     fun deletePelatihan(
         @Path("pelatihan_id") pelatihanId: Int
@@ -110,7 +111,7 @@ interface ApiService {
 
     @POST("pelatihan/daftar")
     fun daftarPelatihan(
-        @Query("peserta_id") pesertaId: Int,
+        @Query("api_key") token: String,
         @Query("pelatihan_id") pelatihanId: Int
     ): Call<PelatihanResponse>
 
@@ -150,15 +151,15 @@ interface ApiService {
         @Body perusahaan: PerusahaanItem
     ): Call<PerusahaanResponse>
 
-    @POST("perusahaan/update/{perusahaan_id}")
+    @POST("perusahaan/update")
     fun updatePerusahaan(
-        @Path("perusahaan_id") perusahaanId: Int,
+        @Query("api_key") token: String,
         @Body perusahaan: PerusahaanItem
     ): Call<PerusahaanResponse>
 
-    @POST("perusahaan/password/{perusahaan_id}")
+    @POST("perusahaan/password")
     fun updatePasswordPerusahaan(
-        @Path("perusahaan_id") perusahaanId: Int,
+        @Query("api_key") token: String,
         @Body pass: PasswordItem
     ): Call<PerusahaanResponse>
 
@@ -212,7 +213,7 @@ interface ApiService {
 
     @POST("lowongan/daftar")
     fun daftarLowongan(
-        @Query("peserta_id") pesertaId: Int,
+        @Query("api_key") token: String,
         @Query("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
 

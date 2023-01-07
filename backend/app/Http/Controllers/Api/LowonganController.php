@@ -10,6 +10,7 @@ use App\Models\PendaftaranPelatihan;
 use App\Models\Perusahaan;
 use App\Models\Peserta;
 use App\Models\SyaratLowongan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LowonganController extends Controller
@@ -257,13 +258,14 @@ class LowonganController extends Controller
     }
 
     public function daftarLowongan(Request $req){
-        $peserta = Peserta::find($req->peserta_id);
+        $user = User::where('api_key', $req->api_key)->first();
+        $peserta = Peserta::where('user_id', $user->user_id)->first();
         $lowongan = Lowongan::find($req->lowongan_id);
 
         //daftar
         PendaftaranLowongan::create([
             "lowongan_id" => $req->lowongan_id,
-            "peserta_id" => $req->peserta_id,
+            "peserta_id" => $peserta->peserta_id,
             "tanggal" => date("Y-m-d")
         ]);
 

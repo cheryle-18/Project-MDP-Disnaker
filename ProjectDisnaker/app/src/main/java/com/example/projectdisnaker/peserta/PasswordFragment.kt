@@ -69,7 +69,7 @@ class PasswordFragment : Fragment() {
                 if (passbaru==confpass){
                     var edited = PasswordItem(passbaru, passlama)
 
-                    var client = ApiConfiguration.getApiService().updatePasswordPerserta(user.pesertaId!!, edited)
+                    var client = ApiConfiguration.getApiService().updatePasswordPerserta(user.apiKey!!, edited)
                     client.enqueue(object: Callback<PesertaResponse> {
                         override fun onResponse(call: Call<PesertaResponse>, response: Response<PesertaResponse>) {
                             if(response.isSuccessful){

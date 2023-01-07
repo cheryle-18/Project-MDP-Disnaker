@@ -78,7 +78,7 @@ class PerusahaanProfileFragment : Fragment() {
 
                 var edited = PerusahaanItem(telp, email, alamat)
 
-                var client = ApiConfiguration.getApiService().updatePerusahaan(user.perusahaanId!!, edited)
+                var client = ApiConfiguration.getApiService().updatePerusahaan(user.apiKey!!, edited)
                 client.enqueue(object: Callback<PerusahaanResponse> {
                     override fun onResponse(call: Call<PerusahaanResponse>, response: Response<PerusahaanResponse>) {
                         if(response.isSuccessful){

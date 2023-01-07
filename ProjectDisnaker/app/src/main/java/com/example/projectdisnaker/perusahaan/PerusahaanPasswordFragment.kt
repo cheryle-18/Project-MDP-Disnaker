@@ -57,7 +57,7 @@ class PerusahaanPasswordFragment : Fragment() {
                 if (passbaru==confpass){
                     var edited = PasswordItem(passbaru, passlama)
 
-                    var client = ApiConfiguration.getApiService().updatePasswordPerusahaan(user.perusahaanId!!, edited)
+                    var client = ApiConfiguration.getApiService().updatePasswordPerusahaan(user.apiKey!!, edited)
                     client.enqueue(object: Callback<PerusahaanResponse> {
                         override fun onResponse(call: Call<PerusahaanResponse>, response: Response<PerusahaanResponse>) {
                             if(response.isSuccessful){

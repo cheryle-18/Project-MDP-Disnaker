@@ -87,7 +87,7 @@ class DetailLowonganFragment : Fragment() {
             }
             btnConfirm.setOnClickListener {
                 dialog.dismiss()
-                var client = ApiConfiguration.getApiService().daftarLowongan(user.pesertaId!!, lowonganId)
+                var client = ApiConfiguration.getApiService().daftarLowongan(user.apiKey!!, lowonganId)
                 client.enqueue(object: Callback<LowonganResponse> {
                     override fun onResponse(call: Call<LowonganResponse>, response: Response<LowonganResponse>){
                         if(response.isSuccessful){

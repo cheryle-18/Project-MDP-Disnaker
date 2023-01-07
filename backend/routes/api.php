@@ -31,7 +31,6 @@ Route::post('/autoLogin', [AuthController::class, "autoLogin"]);
 
 Route::get('/kategori', [UtilityController::class, 'getKategori']);
 Route::get('/pendidikan', [UtilityController::class, 'getPendidikan']);
-// Route::get('/pelatihan', [UtilityController::class, 'getPelatihan']);
 
 Route::get('/peserta', [UserController::class, 'getPeserta']);
 
@@ -39,20 +38,20 @@ Route::prefix('perusahaan')->group(function () {
     Route::get('/', [UserController::class, 'getAllPerusahaan']);
     Route::get('/{perusahaan_id}', [UserController::class, 'getPerusahaan']);
     Route::post('/insert', [UserController::class, 'insertPerusahaan']);
-    Route::post('/update/{perusahaan_id}', [UserController::class, 'updatePerusahaan']);
-    Route::post('/password/{perusahaan_id}', [UserController::class, 'updatePasswordPerusahaan']);
+    Route::post('/update', [UserController::class, 'updatePerusahaan'])->middleware('CekToken');
+    Route::post('/password', [UserController::class, 'updatePasswordPerusahaan'])->middleware('CekToken');
 });
 
 Route::prefix('peserta')->group(function () {
     Route::get('/', [UserController::class, 'getAllPeserta']);
     Route::get('/{peserta_id}', [UserController::class, 'getPeserta']);
-    Route::post('/update/{peserta_id}', [UserController::class, 'updatePeserta']);
-    Route::post('/pendidikan/{peserta_id}', [UserController::class, 'updatePendidikan']);
-    Route::get('/riwayat/pelatihan/{peserta_id}', [UserController::class, 'getRiwayatPelatihan']);
-    Route::get('/riwayat/pekerjaan/{peserta_id}', [UserController::class, 'getRiwayatPekerjaan']);
-    Route::post('/kerja/{peserta_id}', [UserController::class, 'updateStatusKerja']);
+    Route::post('/update', [UserController::class, 'updatePeserta'])->middleware('CekToken');
+    Route::post('/pendidikan', [UserController::class, 'updatePendidikan'])->middleware('CekToken');
+    Route::get('/riwayat/pelatihan', [UserController::class, 'getRiwayatPelatihan']);
+    Route::get('/riwayat/pekerjaan', [UserController::class, 'getRiwayatPekerjaan']);
+    Route::post('/kerja', [UserController::class, 'updateStatusKerja'])->middleware('CekToken');
     Route::get('/pendaftaran/{peserta_id}', [UserController::class, 'getPendaftaran']);
-    Route::post('/password/{peserta_id}', [UserController::class, 'updatePasswordPeserta']);
+    Route::post('/password', [UserController::class, 'updatePasswordPeserta'])->middleware('CekToken');
 });
 
 Route::prefix('lowongan')->group(function () {
@@ -65,7 +64,7 @@ Route::prefix('lowongan')->group(function () {
     Route::post('/delete/{lowongan_id}', [LowonganController::class, 'deleteLowongan']);
     Route::post('/tutup/{lowongan_id}', [LowonganController::class, 'tutupLowongan']);
     Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
-    Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
+    Route::post('/daftar', [LowonganController::class, 'daftarLowongan'])->middleware('CekToken');
 });
 
 Route::prefix('pelatihan')->group(function () {
@@ -74,16 +73,11 @@ Route::prefix('pelatihan')->group(function () {
     Route::post('/insert', [ApiPelatihanController::class, 'insertPelatihan']);
     Route::post('/edit', [ApiPelatihanController::class, 'editPelatihan']);
     Route::post('/delete/{pelatihan_id}', [ApiPelatihanController::class, 'deletePelatihan']);
-    // Route::post('/update/{lowongan_id}', [LowonganController::class, 'updateLowongan']);
-
-    // Route::post('/tutup/{lowongan_id}', [LowonganController::class, 'tutupLowongan']);
-    // Route::get('/pendaftaran/{lowongan_id}', [LowonganController::class, 'getPendaftaran']);
-    // Route::post('/daftar', [LowonganController::class, 'daftarLowongan']);
     Route::prefix('pendaftaran')->group(function () {
         Route::get('/', [PelatihanController::class, 'getPendaftaranPelatihan']);
         Route::get('/{pelatihan_id}', [ApiPelatihanController::class, 'getPendaftaran']);
     });
-    Route::post('/daftar', [UserController::class, 'daftarPelatihan']);
+    Route::post('/daftar', [UserController::class, 'daftarPelatihan'])->middleware('CekToken');
 });
 
 Route::prefix('admin')->group(function () {

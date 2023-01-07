@@ -116,7 +116,7 @@ class DetailPelatihanFragment : Fragment() {
             }
             btnConfirm.setOnClickListener {
                 dialog.dismiss()
-                var client = ApiConfiguration.getApiService().daftarPelatihan(user.pesertaId!!,pelatihan.pelatihanId!!)
+                var client = ApiConfiguration.getApiService().daftarPelatihan(user.apiKey!!,pelatihan.pelatihanId!!)
                 client.enqueue(object: Callback<PelatihanResponse> {
                     override fun onResponse(call: Call<PelatihanResponse>, response: Response<PelatihanResponse>){
                         if(response.isSuccessful){
