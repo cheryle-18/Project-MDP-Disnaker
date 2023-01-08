@@ -308,7 +308,7 @@ class PendidikanFragment : Fragment() {
                 if(response.isSuccessful){
                     if(responseBody!=null){
                         requireActivity().runOnUiThread {
-                            Toast.makeText(requireActivity(), "Berhasil upload", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireActivity(), "Berhasil mengupload ijazah", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
