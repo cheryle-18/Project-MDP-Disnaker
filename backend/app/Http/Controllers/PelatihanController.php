@@ -60,41 +60,11 @@ class PelatihanController extends Controller
                         "jurusan" => $peserta->jurusan,
                         "nilai" => $peserta->nilai,
                         "status" => $peserta->status,
+                        "ijazah" => $peserta->ijazah,
                         "usia" => $usia,
                     ],
                     "pelatihan" => $pelatihan,
                 ];
-
-                // $peserta = Peserta::find($pe->peserta_id);
-                // $peserta[] = [
-                //     "user_id" => $peserta->user->user_id,
-                //     "nama" => $peserta->user->nama,
-                //     "email" => $peserta->user->email,
-                //     "username" => $peserta->user->username,
-                //     "password" => $peserta->user->password,
-                //     "telp" => $peserta->user->telp,
-                //     "role" => $peserta->user->role,
-                //     "peserta_id" => $peserta->peserta_id,
-                //     "nik" => $peserta->nik,
-                //     "pendidikan" => $peserta->pendidikan,
-                //     "jurusan" => $peserta->jurusan,
-                //     "nilai" => $peserta->nilai,
-                //     "status" => $peserta->status,
-                // ];
-
-                // "user_id" => $user->user_id,
-                // "nama" => $user->nama,
-                // "email" => $user->email,
-                // "username" => $user->username,
-                // "password" => $user->password,
-                // "telp" => $user->telp,
-                // "role" => $user->role,
-                // "peserta_id" => $peserta->peserta_id,
-                // "nik" => $peserta->nik,
-                // "pendidikan" => $peserta->pendidikan,
-                // "jurusan" => $peserta->jurusan,
-                // "nilai" => $peserta->nilai,
-                // "status" => $peserta->status,
             }
         }
         $pendaftaran = $temp_pendaftaran;
@@ -178,6 +148,7 @@ class PelatihanController extends Controller
                 "jurusan" => $peserta->jurusan,
                 "nilai" => $peserta->nilai,
                 "status" => $peserta->status,
+                "ijazah" => $peserta->ijazah,
                 "usia" => $usia,
             ];
             $userRet[] = $temp;

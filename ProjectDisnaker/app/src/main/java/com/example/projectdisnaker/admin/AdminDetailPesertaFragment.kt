@@ -7,15 +7,14 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
-import com.example.projectdisnaker.UnsafeHttpClient
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.PelatihanItem
 import com.example.projectdisnaker.api.PesertaPendaftaranItem
 import com.example.projectdisnaker.api.UserResponseItem
 import com.example.projectdisnaker.databinding.FragmentAdminDetailPesertaBinding
-import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 
 class AdminDetailPesertaFragment : Fragment() {
@@ -100,12 +99,8 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.tvTelpDetAdmin.setText(peserta.telp)
 
             try {
-                val unsafeHttp = UnsafeHttpClient()
-                val picassoClient = unsafeHttp.getUnsafeOkHttpClient()
-                val picasso = Picasso.Builder(requireContext()).downloader(OkHttp3Downloader(picassoClient)).build()
-                picasso.isLoggingEnabled = true
                 Picasso.get()
-                    .load("127.0.0.1:8000/gudang/images/${user.ijazah}")
+                    .load("http://10.0.2.2:8000/gudang/images/${peserta.ijazah}")
                     .placeholder(R.drawable.ijazah_template)
                     .into(binding.ivIjazahAdmin)
             }catch (e:Error){
@@ -129,6 +124,16 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.tvNilaiDetAdmin.setText(user.nilai.toString())
             binding.tvEmailDetAdmin.setText(user.email)
             binding.tvTelpDetAdmin.setText(user.telp)
+
+            try {
+                Picasso.get()
+                    .load("http://10.0.2.2:8000/gudang/images/${user.ijazah}")
+                    .placeholder(R.drawable.ijazah_template)
+                    .into(binding.ivIjazahAdmin)
+            }catch (e:Error){
+                binding.ivIjazahAdmin.setImageResource(R.drawable.ijazah_template)
+                Log.e("ERROR_GET_PICTURE",e.message.toString())
+            }
         }
     }
 

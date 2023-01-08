@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewConfiguration.get
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -22,21 +21,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.URIPathHelper
-import com.example.projectdisnaker.UnsafeHttpClient
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPendidikanBinding
-import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -81,15 +76,10 @@ class PendidikanFragment : Fragment() {
         binding.tvUsernameProfile.setText(user.username)
 
         try {
-            val unsafeHttp = UnsafeHttpClient()
-            val picassoClient = unsafeHttp.getUnsafeOkHttpClient()
-            val picasso = Picasso.Builder(requireContext()).downloader(OkHttp3Downloader(picassoClient)).build()
-            picasso.isLoggingEnabled = true
-            picasso.load("http://10.0.2.2:8000/gudang/images/${user.ijazah}")
+            Picasso.get()
+                .load("http://10.0.2.2:8000/gudang/images/${user.ijazah}")
                 .placeholder(R.drawable.ijazah_template)
                 .into(binding.ivIjazah)
-
-            Log.d("uri", "http://10.0.2.2:8000/gudang/images/${user.ijazah}")
         }catch (e:Error){
             binding.ivIjazah.setImageResource(R.drawable.ijazah_template)
             Log.e("ERROR_GET_PICTURE",e.message.toString())
@@ -313,11 +303,13 @@ class PendidikanFragment : Fragment() {
     private suspend fun uploadIjazah(){
         val client = ApiConfiguration.getApiService().uploadIjazah(user.apiKey!!,imagename)
         client.enqueue(object: Callback<UserResponse> {
-            override fun onResponse(call: Call<UserResponse>, response: retrofit2.Response<UserResponse>){
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>){
                 val responseBody = response.body()
                 if(response.isSuccessful){
                     if(responseBody!=null){
-                        Toast.makeText(requireActivity(), "Berhasil upload", Toast.LENGTH_SHORT).show()
+                        requireActivity().runOnUiThread {
+                            Toast.makeText(requireActivity(), "Berhasil upload", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
                 else{

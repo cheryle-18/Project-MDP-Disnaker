@@ -230,6 +230,7 @@ class PelatihanController extends Controller
                     "usia" => date_diff($dob, date_create('now'))->y,
                     "pendidikan" => $t->peserta->pendidikan->nama,
                     "jurusan" => $t->peserta->jurusan,
+                    "ijazah" => $t->peserta->ijazah,
                     "nilai" => $t->peserta->nilai
                 ];
             }

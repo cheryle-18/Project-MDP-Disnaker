@@ -56,6 +56,9 @@ data class PesertaPendaftaranItem(
 	@field:SerializedName("usia")
 	val usia: Int? = null,
 
+	@field:SerializedName("ijazah")
+	val ijazah: String? = null,
+
 	@field:SerializedName("status_pendaftaran")
 	val status_pendaftaran: Int? = null,
 

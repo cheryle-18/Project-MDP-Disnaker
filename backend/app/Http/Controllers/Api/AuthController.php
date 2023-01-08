@@ -49,6 +49,7 @@ class AuthController extends Controller
                     "pendidikan" => $pendidikan,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,
+                    "ijazah" => $peserta->ijazah,
                     "status" => $peserta->status,
                 ];
             }
@@ -175,6 +176,7 @@ class AuthController extends Controller
                     "pendidikan" => $pendidikan,
                     "jurusan" => $peserta->jurusan,
                     "nilai" => $peserta->nilai,
+                    "ijazah" => $peserta->ijazah,
                     "status" => $peserta->status,
                 ];
             }

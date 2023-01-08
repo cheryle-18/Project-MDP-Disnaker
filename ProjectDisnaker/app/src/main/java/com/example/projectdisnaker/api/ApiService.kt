@@ -50,7 +50,7 @@ interface ApiService {
 
     @Multipart
     @POST("peserta/pendidikan/upload")
-    suspend fun uploadIjazah(
+    fun uploadIjazah(
         @Query("api_key") token: String,
         @Part ijazah: MultipartBody.Part
     ): Call<UserResponse>

@@ -280,6 +280,7 @@ class UserController extends Controller
         $result = $req->file('ijazah')->storeAs("images", $namafile, 'public');
 
         return response()->json([
+            "filename" => $namafile,
             "message" => "Berhasil upload ijazah."
         ], 200);
     }
