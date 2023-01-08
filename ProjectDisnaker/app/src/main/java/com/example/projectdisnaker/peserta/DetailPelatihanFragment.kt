@@ -86,14 +86,13 @@ class DetailPelatihanFragment : Fragment() {
         for(syarat in pelatihan.syarat!!){
             syaratPelatihan.add(syarat!!.deskripsi!!)
         }
-
-        for(peluang in pelatihan.peluang!!){
-            peluangPelatihan.add(peluang!!.nama!!)
-        }
         syaratAdapter = RVSyaratAdapter(syaratPelatihan, requireContext())
         binding.rvSyaratPelatihan.adapter = syaratAdapter
         binding.rvSyaratPelatihan.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        for(peluang in pelatihan.peluang!!){
+            peluangPelatihan.add(peluang!!.nama!!)
+        }
         peluangAdapter = RVSyaratAdapter(peluangPelatihan, requireContext())
         binding.rvPeluangKerja.adapter = peluangAdapter
         binding.rvPeluangKerja.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

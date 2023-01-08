@@ -29,6 +29,8 @@ class AdminDetailPelatihanFragment : Fragment() {
     private lateinit var pelatihan: PelatihanItem
     private var syaratPelatihan: ArrayList<String> = ArrayList()
     private lateinit var syaratAdapter: RVSyaratAdapter
+    private var peluangPelatihan: ArrayList<String> = ArrayList()
+    private lateinit var peluangAdapter: RVSyaratAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +67,13 @@ class AdminDetailPelatihanFragment : Fragment() {
         syaratAdapter = RVSyaratAdapter(syaratPelatihan, requireContext())
         binding.rvSyaratPelatihanAdmin.adapter = syaratAdapter
         binding.rvSyaratPelatihanAdmin.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        for(peluang in pelatihan.peluang!!){
+            peluangPelatihan.add(peluang!!.nama!!)
+        }
+        peluangAdapter = RVSyaratAdapter(peluangPelatihan, requireContext())
+        binding.rvPeluangKerjaAdmin.adapter = peluangAdapter
+        binding.rvPeluangKerjaAdmin.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
 
         binding.btnEditPelatihan.setOnClickListener {
