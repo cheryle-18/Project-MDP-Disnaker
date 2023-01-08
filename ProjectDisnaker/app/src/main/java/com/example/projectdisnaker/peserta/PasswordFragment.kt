@@ -45,6 +45,7 @@ class PasswordFragment : Fragment() {
         actionBar?.setTitle("Profil")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+        binding.llInitial.bringToFront()
 
         requireActivity().onBackPressedDispatcher
         .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

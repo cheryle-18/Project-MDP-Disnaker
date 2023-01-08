@@ -54,6 +54,7 @@ class PerusahaanDetailLowonganFragment : Fragment() {
         actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+        binding.linearLayout4.bringToFront()
 
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

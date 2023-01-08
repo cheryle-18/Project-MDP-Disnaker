@@ -9,6 +9,7 @@
     tools:context=".perusahaan.PerusahaanLihatPesertaFragment">
 
     <LinearLayout
+        android:id="@+id/llDetPeserta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

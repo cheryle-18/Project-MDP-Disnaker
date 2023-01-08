@@ -45,6 +45,7 @@ class PerusahaanPasswordFragment : Fragment() {
         actionBar?.setTitle("Profil")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+        binding.llInitial.bringToFront()
         user = (activity as PerusahaanActivity).user
 
         requireActivity().onBackPressedDispatcher

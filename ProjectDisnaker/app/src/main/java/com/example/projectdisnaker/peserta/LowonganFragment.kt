@@ -46,6 +46,7 @@ class LowonganFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
+        binding.linearLayout4.bringToFront()
 
         requireActivity().onBackPressedDispatcher
         .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

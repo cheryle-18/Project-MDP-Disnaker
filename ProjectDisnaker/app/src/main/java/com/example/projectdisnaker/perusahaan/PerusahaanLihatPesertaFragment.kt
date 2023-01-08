@@ -47,6 +47,7 @@ class PerusahaanLihatPesertaFragment : Fragment() {
         binding.tvNilaiDetail.setText(peserta.nilai.toString())
         binding.tvEmailDetail.setText(peserta.email)
         binding.tvTelpDetail.setText(peserta.telp)
+        binding.llDetPeserta.bringToFront()
 
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
