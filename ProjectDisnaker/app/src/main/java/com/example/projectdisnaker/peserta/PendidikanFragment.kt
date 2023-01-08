@@ -99,11 +99,11 @@ class PendidikanFragment : Fragment() {
         binding.spinnerPendidikan.adapter = spinnerAdapter
 
         binding.btnUpload.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED)
             {
                 ActivityCompat.requestPermissions(requireActivity(),
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 101)
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 101)
             }
             else{
                 Intent(Intent.ACTION_PICK).also {
