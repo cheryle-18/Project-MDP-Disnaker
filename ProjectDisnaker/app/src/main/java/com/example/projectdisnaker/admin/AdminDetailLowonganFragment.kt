@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -74,6 +75,25 @@ class AdminDetailLowonganFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_admin, fragment).commit()
         }
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                        val fragment = AdminDetailPerusahaanFragment()
+                        val bundle = Bundle()
+                        bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+                        fragment.arguments = bundle
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_admin, fragment).commit()
+                    }
+                    else {
+                        val fragment = AdminLowonganFragment()
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_admin, fragment).commit()
+                    }
+                }
+            })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

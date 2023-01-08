@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ import com.example.projectdisnaker.api.ApiConfiguration
 import com.example.projectdisnaker.api.LowonganItem
 import com.example.projectdisnaker.api.LowonganResponse
 import com.example.projectdisnaker.databinding.FragmentPerusahaanDetailLowonganBinding
+import com.example.projectdisnaker.peserta.PendaftaranFragment
 import com.example.projectdisnaker.rv.RVSyaratAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,6 +54,15 @@ class PerusahaanDetailLowonganFragment : Fragment() {
         actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = PerusahaanLowonganFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                }
+            })
 
         binding.avLoading.visibility = View.VISIBLE
         binding.llDetailLowongan.visibility = View.GONE

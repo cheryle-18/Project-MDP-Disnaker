@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -198,6 +199,17 @@ class AdminEditPelatihanFragment : Fragment() {
             }
         }
 
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = AdminDetailPelatihanFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("pelatihan", pelatihan)
+                    fragment.arguments = bundle
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
+            })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

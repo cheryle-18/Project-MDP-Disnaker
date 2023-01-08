@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -69,6 +70,15 @@ class PendidikanFragment : Fragment() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
+        requireActivity().onBackPressedDispatcher
+        .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val fragment = ProfileFragment()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment).commit()
+            }
+        })
+
         binding.llPendidikan.visibility = View.GONE
 
         user = (activity as HomeActivity).user
@@ -78,6 +88,7 @@ class PendidikanFragment : Fragment() {
         try {
             Picasso.get()
                 .load("http://10.0.2.2:8000/gudang/images/${user.ijazah}")
+//                .load("http://192.168.100.7:8000/gudang/images/${user.ijazah}")
                 .placeholder(R.drawable.ijazah_template)
                 .into(binding.ivIjazah)
         }catch (e:Error){

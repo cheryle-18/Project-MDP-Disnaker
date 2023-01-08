@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -56,6 +57,15 @@ class DetailLowonganFragment : Fragment() {
         setHasOptionsMenu(true)
         binding.linearLayout4.bringToFront()
         user = (activity as HomeActivity).user
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = LowonganFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment).commit()
+                }
+            })
 
         binding.llDetailLowongan.visibility = View.GONE
 

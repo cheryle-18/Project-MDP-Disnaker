@@ -15,11 +15,13 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentPerusahaanEditBinding
+import com.example.projectdisnaker.peserta.PendaftaranFragment
 import com.example.projectdisnaker.rv.RVTambahSyaratAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -176,6 +178,18 @@ class PerusahaanEditFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
             }
         }
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = PerusahaanDetailLowonganFragment()
+                    val bundle = Bundle()
+                    bundle.putInt("lowongan_id", currLowongan.lowonganId!!)
+                    fragment.arguments = bundle
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                }
+            })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

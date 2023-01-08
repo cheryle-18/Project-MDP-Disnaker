@@ -17,6 +17,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
 import com.example.projectdisnaker.databinding.FragmentProfileBinding
@@ -59,6 +60,13 @@ class ProfileFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
+
+        requireActivity().onBackPressedDispatcher
+        .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().moveTaskToBack(true)
+            }
+        })
 
         db = AppDatabase.build(requireContext())
 

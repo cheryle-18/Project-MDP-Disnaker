@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.ApiConfiguration
@@ -45,6 +46,15 @@ class AdminTambahPerusahaanFragment : Fragment() {
         actionBar?.setTitle("Perusahaan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = AdminPerusahaanFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
+            })
 
         binding.btnTambahPerus.setOnClickListener {
             var nama = binding.etNamaPerusahaan.text.toString()

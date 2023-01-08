@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.projectdisnaker.R
@@ -82,11 +83,7 @@ class AdminDetailPendaftaranFragment : Fragment() {
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-//                Log.d(tag, year.toString())
-//                Log.d(tag, monthOfYear.toString())
-//                Log.d(tag, dayOfMonth.toString())
                 tgl_wawancara = "${year}-${monthOfYear+1}-${dayOfMonth}"
-//                Toast.makeText(requireContext(), "${tgl_wawancara}", Toast.LENGTH_SHORT).show()
                 sdf = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
                 binding.tvTglWawancaraDet.setText(sdf.format(cal.getTime()))
             }
@@ -164,13 +161,6 @@ class AdminDetailPendaftaranFragment : Fragment() {
                     }
                 })
             }
-//            val adminDetailPendaftaranFragment = AdminDetailPendaftaranFragment()
-//            var bundle = Bundle()
-//            bundle.putParcelable("pendaftaran", pendaftaran)
-//            adminDetailPendaftaranFragment.arguments = bundle
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container_admin, adminDetailPendaftaranFragment)
-//                .commit()
         }
 
         binding.btnTerimaPendaftaran.setOnClickListener{
@@ -243,6 +233,15 @@ class AdminDetailPendaftaranFragment : Fragment() {
                 }
             }
         }
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = AdminPendaftaranFragment()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
+            })
     }
 
     fun checkStatusVisible(){

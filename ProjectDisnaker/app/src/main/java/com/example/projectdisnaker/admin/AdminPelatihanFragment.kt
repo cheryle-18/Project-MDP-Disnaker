@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -15,6 +16,7 @@ import com.example.projectdisnaker.api.PelatihanItem
 import com.example.projectdisnaker.api.PelatihanResponse
 import com.example.projectdisnaker.api.UserResponse
 import com.example.projectdisnaker.databinding.FragmentAdminPelatihanBinding
+import com.example.projectdisnaker.peserta.ProfileFragment
 import com.example.projectdisnaker.rv.RVPelatihanAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -48,6 +50,13 @@ class AdminPelatihanFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().moveTaskToBack(true)
+                }
+            })
 
         binding.rvPelatihanAdmin.visibility = View.GONE
 

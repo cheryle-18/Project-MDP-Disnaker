@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.*
@@ -52,8 +53,15 @@ class PerusahaanProfileFragment : Fragment() {
         actionBar?.setTitle("Disnaker")
         actionBar?.setDisplayHomeAsUpEnabled(false)
         setHasOptionsMenu(false)
-        user = (activity as PerusahaanActivity).user
 
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().moveTaskToBack(true)
+                }
+            })
+
+        user = (activity as PerusahaanActivity).user
         db = AppDatabase.build(requireContext())
 
         fetchPerusahaan()

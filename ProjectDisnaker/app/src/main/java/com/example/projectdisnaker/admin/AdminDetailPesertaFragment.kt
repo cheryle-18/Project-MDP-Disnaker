@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.LowonganItem
@@ -101,6 +102,7 @@ class AdminDetailPesertaFragment : Fragment() {
             try {
                 Picasso.get()
                     .load("http://10.0.2.2:8000/gudang/images/${peserta.ijazah}")
+//                    .load("http://192.168.100.7:8000/gudang/images/${peserta.ijazah}")
                     .placeholder(R.drawable.ijazah_template)
                     .into(binding.ivIjazahAdmin)
             }catch (e:Error){
@@ -128,6 +130,7 @@ class AdminDetailPesertaFragment : Fragment() {
             try {
                 Picasso.get()
                     .load("http://10.0.2.2:8000/gudang/images/${user.ijazah}")
+//                    .load("http://192.168.100.7:8000/gudang/images/${user.ijazah}")
                     .placeholder(R.drawable.ijazah_template)
                     .into(binding.ivIjazahAdmin)
             }catch (e:Error){
@@ -135,6 +138,39 @@ class AdminDetailPesertaFragment : Fragment() {
                 Log.e("ERROR_GET_PICTURE",e.message.toString())
             }
         }
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if(requireArguments().getString("type") == null){
+                        val fragment = AdminPesertaFragment()
+                        val bundle = Bundle() //daftar peserta
+                        fragment.arguments = bundle
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_admin, fragment).commit()
+                    }
+                    else if(type=="lowongan"){
+                        val fragment = AdminPesertaLowonganFragment()
+                        val bundle = Bundle()
+                        if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                            //kalau kembali ke daftar perusahaan
+                            bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+                        }
+                        bundle.putParcelable("lowongan", lowongan)
+                        fragment.arguments = bundle
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_admin, fragment).commit()
+                    }
+                    else if(type=="pelatihan"){
+                        val fragment = AdminPesertaPelatihanFragment()
+                        val bundle = Bundle()
+                        bundle.putParcelable("pelatihan", pelatihan)
+                        fragment.arguments = bundle
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_admin, fragment).commit()
+                    }
+                }
+            })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

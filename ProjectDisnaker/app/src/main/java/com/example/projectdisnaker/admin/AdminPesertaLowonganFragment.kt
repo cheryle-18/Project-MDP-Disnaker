@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectdisnaker.R
@@ -44,6 +45,22 @@ class AdminPesertaLowonganFragment : Fragment() {
         actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = AdminDetailLowonganFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("lowongan", lowongan)
+                    if(arguments?.getParcelable<UserResponseItem>("perusahaan") != null){
+                        //kalau kembali ke daftar perusahaan
+                        bundle.putParcelable("perusahaan", arguments?.getParcelable("perusahaan")!!)
+                    }
+                    fragment.arguments = bundle
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_admin, fragment).commit()
+                }
+            })
 
         binding.tvBlmDaftarAdmin.visibility = View.GONE
         binding.rvPendaftarLowAdmin.visibility = View.GONE

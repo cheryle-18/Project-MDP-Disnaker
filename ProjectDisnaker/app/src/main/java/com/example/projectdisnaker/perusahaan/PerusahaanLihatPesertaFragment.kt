@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectdisnaker.R
 import com.example.projectdisnaker.api.PesertaPendaftaranItem
@@ -46,6 +47,18 @@ class PerusahaanLihatPesertaFragment : Fragment() {
         binding.tvNilaiDetail.setText(peserta.nilai.toString())
         binding.tvEmailDetail.setText(peserta.email)
         binding.tvTelpDetail.setText(peserta.telp)
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val fragment = PerusahaanLihatPendaftaranFragment()
+                    val bundle = Bundle()
+                    bundle.putInt("lowongan_id", lowonganId)
+                    fragment.arguments = bundle
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_perusahaan, fragment).commit()
+                }
+            })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
