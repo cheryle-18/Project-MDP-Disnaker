@@ -55,6 +55,7 @@ class PendaftaranFragment : Fragment() {
 
         binding.tvBlmDaftarStatus.visibility = View.GONE
         binding.rvPendaftaran.visibility = View.GONE
+        binding.linearLayout4.bringToFront()
 
         statusAdapter = RVStatPendaftaranAdapter(listStatus, requireContext()){
             idx, pelatihanId, stat ->
