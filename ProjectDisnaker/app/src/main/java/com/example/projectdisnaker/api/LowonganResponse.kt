@@ -46,7 +46,10 @@ data class LowonganItem(
 	val syarat: List<SyaratItem?>? = null,
 
 	@field:SerializedName("status")
-	val status: Int? = null
+	val status: Int? = null,
+
+	@field:SerializedName("sdhDaftar")
+	val sdhDaftar: Int? = null
 ) : Parcelable
 
 @Parcelize

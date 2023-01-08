@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Hidehalo\Nanoid\Client;
 
 class UserController extends Controller
 {
@@ -106,14 +107,17 @@ class UserController extends Controller
     }
 
     public function insertPerusahaan(Request $req){
+        $client = new Client();
+
         //create user
         $user = new User();
         $user->nama = $req->nama;
         $user->username = $req->username;
-        $user->password = $req->password;
+        $user->password = Hash::make($req->password);
         $user->role = 1;
         $user->email = $req->email;
         $user->telp = $req->telp;
+        $user->api_key = $client->generateId($size = 16, $mode = Client::MODE_DYNAMIC);
         $user->save();
 
         //create perusahaan
@@ -278,6 +282,9 @@ class UserController extends Controller
 
         $namafile  = $peserta->peserta_id . "." . $req->file("ijazah")->getClientOriginalExtension();
         $result = $req->file('ijazah')->storeAs("images", $namafile, 'public');
+
+        $peserta->ijazah = $namafile;
+        $peserta->save();
 
         return response()->json([
             "filename" => $namafile,

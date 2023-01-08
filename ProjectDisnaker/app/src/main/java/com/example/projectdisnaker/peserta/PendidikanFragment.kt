@@ -308,6 +308,7 @@ class PendidikanFragment : Fragment() {
                 if(response.isSuccessful){
                     if(responseBody!=null){
                         requireActivity().runOnUiThread {
+                            user.ijazah = responseBody.filename
                             Toast.makeText(requireActivity(), "Berhasil mengupload ijazah", Toast.LENGTH_SHORT).show()
                         }
                     }

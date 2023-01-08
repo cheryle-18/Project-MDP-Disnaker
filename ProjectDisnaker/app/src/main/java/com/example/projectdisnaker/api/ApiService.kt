@@ -190,6 +190,12 @@ interface ApiService {
         @Path("lowongan_id") lowonganId: Int
     ): Call<LowonganResponse>
 
+    @GET("lowongan/{lowongan_id}")
+    fun getPesertaDetLow(
+        @Path("lowongan_id") lowonganId: Int,
+        @Query("peserta_id") pesertaId: Int
+    ): Call<LowonganResponse>
+
     @POST("lowongan/insert")
     fun insertLowongan(
         @Query("kategori") kategori: String,

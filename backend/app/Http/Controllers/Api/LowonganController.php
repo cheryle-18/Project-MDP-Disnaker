@@ -82,6 +82,12 @@ class LowonganController extends Controller
                     $low = Lowongan::where('kategori_id', $p->pelatihan->kategori_id)->where('status', 1)->get();
                     if(sizeof($low)>0){
                         foreach($low as $t){
+                            $sdhDaftar = 1;
+                            $daftar = PendaftaranLowongan::where('peserta_id', $peserta->peserta_id)->where('lowongan_id', $t->lowongan_id)->first();
+                            if($daftar){
+                                $sdhDaftar = 0;
+                            }
+
                             $lowongan[] = [
                                 "lowongan_id" => $t->lowongan_id,
                                 "nama" => $t->nama,
@@ -89,6 +95,7 @@ class LowonganController extends Controller
                                 "perusahaan" => $t->perusahaan->user->nama,
                                 "kuota" => $t->kuota,
                                 "keterangan" => $t->keterangan,
+                                "sdhDaftar" => $sdhDaftar,
                                 "status" => $t->status
                             ];
                         }
@@ -112,6 +119,12 @@ class LowonganController extends Controller
         $t = Lowongan::where('lowongan_id', $req->lowongan_id)->with('syarat')->first();
         $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->count();
 
+        $sdhDaftar = 1;
+        $daftar = PendaftaranLowongan::where('peserta_id', $req->peserta_id)->where('lowongan_id', $req->lowongan_id)->first();
+        if($daftar){
+            $sdhDaftar = 0;
+        }
+
         $lowongan = [
             "lowongan_id" => $t->lowongan_id,
             "nama" => $t->nama,
@@ -121,6 +134,7 @@ class LowonganController extends Controller
             "pendaftaran" => $pendaftaran,
             "keterangan" => $t->keterangan,
             "status" => $t->status,
+            "sdhDaftar" => $sdhDaftar,
             "syarat" => $t->syarat
         ];
 
@@ -263,26 +277,40 @@ class LowonganController extends Controller
         $peserta = Peserta::where('user_id', $user->user_id)->first();
         $lowongan = Lowongan::find($req->lowongan_id);
 
-        //daftar
-        PendaftaranLowongan::create([
-            "lowongan_id" => $req->lowongan_id,
-            "peserta_id" => $peserta->peserta_id,
-            "tanggal" => date("Y-m-d")
-        ]);
+        $message = "";
+        $sdhDaftar = false;
 
-        //auto tutup lowongan kl jmlh pendaftaran = kuota
-        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->count();
-        if($lowongan->kuota - $pendaftaran <= 0){
-            $lowongan->status = 0;
-            $lowongan->save();
+        //cek sdh pernah daftar blm
+        $daftar = PendaftaranLowongan::where('peserta_id', $peserta->peserta_id)->where('lowongan_id', $req->lowongan_id)->first();
+        if($daftar){
+            $sdhDaftar = true;
+            $message = "Anda telah mendaftar";
         }
 
-        //update status peserta jd sdh kerja
-        $peserta->status = 2;
-        $peserta->save();
+        if(!$sdhDaftar){
+            //daftar
+            PendaftaranLowongan::create([
+                "lowongan_id" => $req->lowongan_id,
+                "peserta_id" => $peserta->peserta_id,
+                "tanggal" => date("Y-m-d")
+            ]);
+
+            //auto tutup lowongan kl jmlh pendaftaran = kuota
+            $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->count();
+            if($lowongan->kuota - $pendaftaran <= 0){
+                $lowongan->status = 0;
+                $lowongan->save();
+            }
+
+            //update status peserta jd sdh kerja
+            $peserta->status = 2;
+            $peserta->save();
+
+            $message = "Berhasil daftar lowongan";
+        }
 
         return response()->json([
-            "message" => "Berhasil daftar lowongan"
+            "message" => $message
         ], 200);
     }
 }

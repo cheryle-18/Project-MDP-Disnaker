@@ -54,6 +54,7 @@ class DetailLowonganFragment : Fragment() {
         actionBar?.setTitle("Lowongan")
         actionBar?.setDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
+        binding.linearLayout4.bringToFront()
         user = (activity as HomeActivity).user
 
         binding.llDetailLowongan.visibility = View.GONE
@@ -144,6 +145,11 @@ class DetailLowonganFragment : Fragment() {
         binding.tvKuotaKerja.setText("${lowongan.kuota!! - lowongan.pendaftaran!!} peserta")
         binding.tvKeterangan.setText(lowongan.keterangan)
 
+        if(lowongan.sdhDaftar==0){
+            binding.btnDaftarLowongan.setText("Anda telah mendaftar")
+            binding.btnDaftarLowongan.isEnabled = false
+        }
+
         syaratLowongan.clear()
         for(syarat in lowongan.syarat!!){
             syaratLowongan.add(syarat!!.deskripsi!!)
@@ -152,7 +158,7 @@ class DetailLowonganFragment : Fragment() {
     }
 
     private fun fetchCurrentLowongan(){
-        var client = ApiConfiguration.getApiService().getLowongan(lowonganId)
+        var client = ApiConfiguration.getApiService().getPesertaDetLow(lowonganId, user.pesertaId!!)
         client.enqueue(object: Callback<LowonganResponse> {
             override fun onResponse(call: Call<LowonganResponse>, response: Response<LowonganResponse>){
                 if(response.isSuccessful){

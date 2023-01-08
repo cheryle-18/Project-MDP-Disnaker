@@ -14,7 +14,11 @@ data class UserResponse(
 	val userResponse: List<UserResponseItem?>? = null,
 
 	@field:SerializedName("status")
-	val status: Int? = null
+	val status: Int? = null,
+
+	@field:SerializedName("filename")
+	val filename: String? = null
+
 ) : Parcelable
 
 @Parcelize
@@ -72,7 +76,7 @@ data class UserResponseItem(
 	val usia: Int? = null,
 
 	@field:SerializedName("ijazah")
-	val ijazah: String? = null,
+	var ijazah: String? = null,
 
 	@field:SerializedName("api_key")
 	val apiKey: String? = null,

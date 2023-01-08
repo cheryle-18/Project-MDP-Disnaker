@@ -40,20 +40,25 @@ class RegisterActivity : AppCompatActivity() {
                         if(response.isSuccessful){
                             val responseBody = response.body()
                             if(responseBody!=null){
-                                val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
-                                val dialog = Dialog(this@RegisterActivity)
-                                dialog.setContentView(dialogBinding)
-                                dialog.setCancelable(true)
-                                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                                dialog.show()
+                                if(responseBody.status==1){
+                                    val dialogBinding = layoutInflater.inflate(R.layout.success_dialog, null)
+                                    val dialog = Dialog(this@RegisterActivity)
+                                    dialog.setContentView(dialogBinding)
+                                    dialog.setCancelable(true)
+                                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                                    dialog.show()
 
-                                val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
-                                val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-                                tvDialog.setText("${responseBody.message}")
+                                    val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
+                                    val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
+                                    tvDialog.setText("${responseBody.message}")
 
-                                btnOk.setOnClickListener {
-                                    dialog.dismiss()
-                                    toLogin()
+                                    btnOk.setOnClickListener {
+                                        dialog.dismiss()
+                                        toLogin()
+                                    }
+                                }
+                                else{
+                                    Toast.makeText(this@RegisterActivity,"${responseBody.message}",Toast.LENGTH_SHORT).show()
                                 }
                             }
                             else{

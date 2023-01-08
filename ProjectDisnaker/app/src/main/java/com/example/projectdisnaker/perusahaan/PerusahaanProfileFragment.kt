@@ -58,6 +58,8 @@ class PerusahaanProfileFragment : Fragment() {
 
         fetchPerusahaan()
 
+        binding.tvNamaPerusahaanProfile.setText(user.nama)
+        binding.tvUsernamePerusahaan.setText(user.username)
         binding.llProfilePerus.visibility = View.GONE
 
         binding.layoutUbahPassPerusahaan.setOnClickListener {
