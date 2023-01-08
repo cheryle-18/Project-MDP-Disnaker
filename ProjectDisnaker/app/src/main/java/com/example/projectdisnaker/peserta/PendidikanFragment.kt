@@ -99,17 +99,19 @@ class PendidikanFragment : Fragment() {
         binding.spinnerPendidikan.adapter = spinnerAdapter
 
         binding.btnUpload.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(requireActivity(),
-                    Manifest.permission.READ_EXTERNAL_STORAGE)
+            if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED)
             {
-                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, 101)
+                ActivityCompat.requestPermissions(requireActivity(),
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 101)
             }
-            Intent(Intent.ACTION_PICK).also {
-                it.type = "image/*"
-                val mimeTypes = arrayOf("image/jpeg", "image/png")
-                it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-                startActivityForResult(it, 101)
+            else{
+                Intent(Intent.ACTION_PICK).also {
+                    it.type = "image/*"
+                    val mimeTypes = arrayOf("image/jpeg", "image/png")
+                    it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                    startActivityForResult(it, 101)
+                }
             }
         }
         
@@ -252,25 +254,20 @@ class PendidikanFragment : Fragment() {
         })
     }
 
-    private fun checkPermission(permission: String, requestCode: Int) {
-        if (ContextCompat.checkSelfPermission(requireContext(),permission)
-            == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(requireActivity(),
-                arrayOf(permission), requestCode)
-        } else {
-            Toast.makeText(requireContext(),"Permission already granted", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode,
-            permissions, grantResults)
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 101) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent(Intent.ACTION_PICK).also {
+                    it.type = "image/*"
+                    val mimeTypes = arrayOf("image/jpeg", "image/png")
+                    it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                    startActivityForResult(it, 101)
+                }
                 Toast.makeText(requireContext(), "Storage Permission Granted", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "Storage Permission Denied", Toast.LENGTH_SHORT).show()
