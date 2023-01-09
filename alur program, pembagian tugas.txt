@@ -1,0 +1,53 @@
+Alur Program MDP
+- user register
+- user harus melengkapi semua kelengkapan di profile
+- user daftar pelatihan, kl gk sesuai persyaratan auto ditolak?
+- admin terima / tolak pendaftaran
+- user bisa lihat status pendaftaran
+- user ikut wawancara, admin akan update dia lulus wawancara / tidak
+- kl lulus user lanjut ikut pelatihan (status dalam pelatihan)
+- selama user dalam pelatihan, dia gabisa daftar pelatihan lain
+- stlh pelatihan selesai, admin akan update setiap peserta pelatihan lulus / tidak
+- stlh mengikuti pelatihan, user akan diberi list lowongan sesuai dengan pelatihan2 yg pernah diambil
+- user bisa daftar lowongan -> auto diterima di perusahaan
+- perusahaan bisa lihat siapa aja yg daftar di lowongannya
+
+Non User
+- login [angel] v
+- register [angel] v
+- auto login [cherilyn] v
+- migration, factory, seeder [angel] v
+
+Admin
+- lihat pelatihan [angel] v
+- tambah pelatihan [angel] v
+- edit pelatihan [angel] v
+- lihat lowongan [cherilyn] v
+- lihat org2 yg mendaftar di lowongan itu [cherilyn] v
+- lihat pendaftaran pelatihan [cherilyn] v
+- terima / tolak pendaftaran [jonathan] v
+- update status pendaftaran [jonathan] v
+- selesaikan pelatihan (peserta lulus / gk) v
+- lihat daftar peserta, detail peserta [jonathan] v
+- lihat daftar perusahaan, detail perusahaan [jonathan] v
+- tambah perusahan [cherilyn] v
+
+Perusahaan
+- tambah lowongan [cherilyn] v
+- lihat detail lowongan [cherilyn] v
+- edit lowongan [cherilyn] v
+- lihat pendaftaran lowongan [cherilyn] v
+- edit profile, ubah password [airlangga] v
+
+Peserta
+- lihat daftar pelatihan, detail pelatihan [angel] v
+- daftar pelatihan [angel] v
+- lihat daftar lowongan, detail lowongan [cherilyn] v
+- daftar ke lowongan [cherilyn] v
+- lihat status pendaftaran, lihat status pelatihan [cherilyn] v
+- edit profile [cherilyn] v
+- ubah password [airlangga] v
+- lengkapi riwayat pendidikan [cherilyn] v
+- lihat history pelatihan yg sdh selesai [cherilyn] v
+- lihat history pekerjaan [cherilyn] v
+- update status employment (lg kerja ato gk) [airlangga] v
