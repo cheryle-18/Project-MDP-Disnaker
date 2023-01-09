@@ -76,7 +76,7 @@ class AdminDetailPendaftaranFragment : Fragment() {
         binding.tvUsiaDet.setText(pendaftaran.peserta!!.usia!!.toString() + " tahun")
         binding.tvPendDet.setText(pendaftaran.peserta!!.pendidikan!!)
         binding.tvJurusanDet.setText(pendaftaran.peserta!!.jurusan!!)
-        binding.tvNilaiDet.setText(pendaftaran.peserta!!.nilai!!.toString())
+        binding.tvNilaiDet.setText(pendaftaran.peserta!!.nilai?.toString())
 
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {

@@ -85,12 +85,10 @@ class AdminLowonganFragment : Fragment() {
                 }
                 else{
                     Log.e("Perus Lowongan Fragment", "${response.message()}")
-                    Toast.makeText(requireActivity(), "${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<LowonganResponse>, t: Throwable) {
-                Log.e("Perus Lowongan Fragment", "${t.message}")
-                Toast.makeText(requireActivity(), "${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("Error Perus Lowongan Fragment", "${t.message}")
             }
         })
     }

@@ -95,7 +95,7 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.tvTglLahirDetAdmin.setText(peserta.tglLahir)
             binding.tvPendidikanDetAdmin.setText(peserta.pendidikan)
             binding.tvJurusanDetAdmin.setText(peserta.nama)
-            binding.tvNilaiDetAdmin.setText(peserta.nilai.toString())
+            binding.tvNilaiDetAdmin.setText(if(peserta.nilai!=null) peserta.nilai.toString() else "")
             binding.tvEmailDetAdmin.setText(peserta.email)
             binding.tvTelpDetAdmin.setText(peserta.telp)
 
@@ -123,7 +123,7 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.tvTglLahirDetAdmin.setText(user.tglLahir)
             binding.tvPendidikanDetAdmin.setText(user.pendidikan)
             binding.tvJurusanDetAdmin.setText(user.jurusan)
-            binding.tvNilaiDetAdmin.setText(user.nilai.toString())
+            binding.tvNilaiDetAdmin.setText(if(user.nilai!=null) user.nilai.toString() else "")
             binding.tvEmailDetAdmin.setText(user.email)
             binding.tvTelpDetAdmin.setText(user.telp)
 
