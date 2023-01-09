@@ -122,7 +122,7 @@ class AdminDetailPesertaFragment : Fragment() {
             binding.tvUsiaDetAdmin.setText("${user.usia} tahun")
             binding.tvTglLahirDetAdmin.setText(user.tglLahir)
             binding.tvPendidikanDetAdmin.setText(user.pendidikan)
-            binding.tvJurusanDetAdmin.setText(user.nama)
+            binding.tvJurusanDetAdmin.setText(user.jurusan)
             binding.tvNilaiDetAdmin.setText(user.nilai.toString())
             binding.tvEmailDetAdmin.setText(user.email)
             binding.tvTelpDetAdmin.setText(user.telp)

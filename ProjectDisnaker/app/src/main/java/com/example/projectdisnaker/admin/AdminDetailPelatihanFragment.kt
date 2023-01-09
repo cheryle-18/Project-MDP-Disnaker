@@ -140,7 +140,7 @@ class AdminDetailPelatihanFragment : Fragment() {
 
                                                     val btnOk = dialogBinding.findViewById<Button>(R.id.btOkDialog)
                                                     val tvDialog = dialogBinding.findViewById<TextView>(R.id.tvDialog)
-                                                    tvDialog.setText("Berhasil delete pelatihan ini!")
+                                                    tvDialog.setText("Berhasil menghapus pelatihan!")
 
                                                     btnOk.setOnClickListener {
                                                         dialog.dismiss()
