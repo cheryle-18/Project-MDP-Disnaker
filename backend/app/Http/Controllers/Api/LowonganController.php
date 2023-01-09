@@ -198,6 +198,13 @@ class LowonganController extends Controller
             }
         }
 
+        //cek sdh penuh blm
+        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->count();
+
+        if($pendaftaran <= $lowongan->kuota){ //cek kuota sdh penuh blm
+            $lowongan->status = 0;
+            $lowongan->save();
+        }
         return response()->json([
             // "lowongan" => $lowongan,
             "message" => "Berhasil mengubah lowongan"
@@ -231,12 +238,15 @@ class LowonganController extends Controller
 
     public function tutupLowongan(Request $req){
         $lowongan = Lowongan::find($req->lowongan_id);
+        $pendaftaran = PendaftaranLowongan::where('lowongan_id', $req->lowongan_id)->count();
+
         $lowongan->status = !$lowongan->status;
         $lowongan->save();
+        $message = "Berhasil menutup lowongan";
 
         return response()->json([
             // "lowongan" => $lowongan,
-            "message" => "Berhasil menutup lowongan"
+            "message" => $message
         ], 200);
     }
 
