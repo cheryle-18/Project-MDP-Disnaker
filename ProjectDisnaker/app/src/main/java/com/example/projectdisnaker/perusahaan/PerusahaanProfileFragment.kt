@@ -77,8 +77,8 @@ class PerusahaanProfileFragment : Fragment() {
         }
 
         binding.btnEditPerusahaan.setOnClickListener{
-            if (binding.etAlamatPerusahaanProfile.text.toString().isBlank()&&
-                    binding.etTelpPerusahaanProfile.text.toString().isBlank()&&
+            if (binding.etAlamatPerusahaanProfile.text.toString().isBlank() ||
+                    binding.etTelpPerusahaanProfile.text.toString().isBlank() ||
                     binding.etEmailPerusahaanProfile.text.toString().isBlank()){
                 Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
             }

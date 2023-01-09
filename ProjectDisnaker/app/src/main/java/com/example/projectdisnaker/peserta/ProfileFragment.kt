@@ -220,9 +220,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnEditProfile.setOnClickListener {
-            if ( binding.etEmailProfile.text.isBlank() &&
-                binding.etTelpProfile.text.isBlank() &&
-                binding.etKtpProfile.text.isBlank() &&
+            if ( binding.etEmailProfile.text.isBlank() ||
+                binding.etTelpProfile.text.isBlank() ||
+                binding.etKtpProfile.text.isBlank() ||
                 binding.etTglLahirProfile.text.isBlank()){
                 Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
             }

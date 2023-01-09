@@ -130,7 +130,7 @@ class PasswordFragment : Fragment() {
                 }
             }
             else{
-                Toast.makeText(requireActivity(), "Pastikan semua data terisi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Harap isi semua data", Toast.LENGTH_SHORT).show()
             }
         }
     }
